@@ -1,11 +1,9 @@
 create database db_finan;
 use db_finan;
 
-create table financiera(
-	id integer,
-	nombre varchar(50) not null
-);
+insert into financiera (nombre) values ('Naranja');
+insert into financiera (nombre) values ('Santander Rio');
+insert into financiera (nombre) values ('Galicia');
 
-insert into financiera (id,nombre) values (1,'Naranja');
 
 select * from financiera;
