@@ -45,8 +45,8 @@
 				    <tr>
 				      <th scope="row">${financiera.idFinanciera}</th>
 				      <td>${financiera.nombre}</td>
-				      <td>1 de 12</td>
-				      <td>0</td>
+				      <td>prueba(1 de 12)</td>
+				      <td>prueba(0)</td>
 				      <td><button type="button" class="btn btn-success">Pagar</button></td>
 				    </tr>
 				  </tbody>
