@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -39,37 +39,21 @@
 			      <th scope="col">Realizar</th>
 			    </tr>
 			  </thead>
-			  <tbody>
-			    <tr>
-			      <th scope="row">1</th>
-			      <td>Mark</td>
-			      <td>1 de 12</td>
-			      <td>0</td>
-			      <td><button type="button" class="btn btn-success">Pagar</button></td>
-			    </tr>
-			    <tr>
-			      <th scope="row">2</th>
-			      <td>Jacob</td>
-			      <td>1 de 12</td>
-			      <td>0</td>
-			      <td><button type="button" class="btn btn-success">Pagar</button></td>
-			    </tr>
-			    <tr>
-			      <th scope="row">3</th>
-			      <td>Larry</td>
-			      <td>1 de 12</td>
-			      <td>0</td>
-			      <td><button type="button" class="btn btn-success">Pagar</button></td>
-			    </tr>
-			  </tbody>
+			  <!-- listar todos los afiados -->
+			  <c:forEach items="${financieras}" var="financiera">
+				  <tbody>
+				    <tr>
+				      <th scope="row">${financiera.idFinanciera}</th>
+				      <td>${financiera.nombre}</td>
+				      <td>1 de 12</td>
+				      <td>0</td>
+				      <td><button type="button" class="btn btn-success">Pagar</button></td>
+				    </tr>
+				  </tbody>
+			  </c:forEach>
 			</table>
 		</div>
 		
-		<!-- Prueba para listar todas las financieras -->
-		<c:forEach items="${financieras}" var="financiera">
-	 		<h1>${financiera.nombre}</h1>
-	 		<br>
-	 	</c:forEach>
 
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>

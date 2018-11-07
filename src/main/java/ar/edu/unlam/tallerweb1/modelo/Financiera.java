@@ -14,6 +14,7 @@ public class Financiera {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idFinanciera;
 	private String nombre;
+	
 	@OneToMany
 	private List<Prestamo> pestamos;
 	

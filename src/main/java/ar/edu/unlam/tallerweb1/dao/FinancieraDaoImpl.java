@@ -21,7 +21,7 @@ public class FinancieraDaoImpl implements FinancieraDao {
 	public List<Financiera> consultarFinanciera() {
 		return (sessionFactory.getCurrentSession()
 				.createCriteria(Financiera.class)
-				.add(Restrictions.like("nombre","Galicia"))
+				.add(Restrictions.isNotNull("nombre"))
 				.list());
 	}
 }
