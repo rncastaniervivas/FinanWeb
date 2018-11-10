@@ -32,11 +32,9 @@
 			<table class="table">
 			  <thead class="thead-light">
 			    <tr>
-			      <th scope="col">Monto</th>
-			      <th scope="col">Interes</th>
-			      <th scope="col">Estado</th>
-			      <th scope="col">Fecha de Pago</th>
-			      <th scope="col">Fecha de vencimiento</th>
+			      <th scope="col">Valor</th>
+			      <th scope="col">Cuotas</th>
+			      <th scope="col">Intereces</th>
 			    </tr>
 			  </thead>
 			  <!-- listar todos los afiados -->
