@@ -1,5 +1,8 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,8 +25,8 @@ public class Prestamo {
 	@ManyToOne
 	private Afiliado afiliado;
 	
-	@OneToMany
-	private Cuota cuota;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Cuota> cuota;
 	
 	public Long getIdPrestamo() {
 		return idPrestamo;
@@ -62,10 +65,10 @@ public class Prestamo {
 	public void setInteres(Integer interes) {
 		this.interes = interes;
 	}
-	public Cuota getCuota() {
+	public List<Cuota> getCuota() {
 		return cuota;
 	}
-	public void setCuota(Cuota cuota) {
+	public void setCuota(List<Cuota> cuota) {
 		this.cuota = cuota;
 	}
 	
