@@ -22,9 +22,5 @@ public class ServicioAfiliadoImpl implements ServicioAfiliado {
 	public Afiliado consultarAfiliado (Afiliado afiliado) {
 		return servicioAfiliadoDao.consultarAfiliado(afiliado);
 	}
-	@Override
-	public List<Prestamo> listarPrestamos(Long id) {
-		return servicioAfiliadoDao.listarPrestamos(id);
-	}
 
 }
