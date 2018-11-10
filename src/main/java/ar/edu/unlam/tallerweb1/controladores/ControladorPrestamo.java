@@ -19,7 +19,7 @@ public class ControladorPrestamo {
 	private ServicioPrestamo servicioPrestamo;
 	
 	@RequestMapping("/listarprestamos")
-	public ModelAndView irAFinanapagar() {
+	public ModelAndView listarPrestamo() {
 		ModelMap modelo = new ModelMap();
 		
 		List<Prestamo> prestamos= servicioPrestamo.consultarPrestamo();

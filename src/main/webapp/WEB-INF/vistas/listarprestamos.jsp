@@ -29,7 +29,6 @@
 	
 		<div class="container">
 			<h1 class="text-center">LISTA DE PRESTAMOS</h1>
-			monto,interes,estado,fechaDePago,fechaDeVencimiento
 			<table class="table">
 			  <thead class="thead-light">
 			    <tr>
@@ -41,14 +40,13 @@
 			    </tr>
 			  </thead>
 			  <!-- listar todos los afiados -->
-			  <c:forEach items="${prestamos}" var="financiera">
+			  <c:forEach items="${prestamos}" var="prestamo">
 				  <tbody>
 				    <tr>
-				      <th scope="row">${financiera.idFinanciera}</th>
-				      <td>${financiera.nombre}</td>
-				      <td>prueba(1 de 12)</td>
-				      <td>prueba(0)</td>
-				      <td><button type="button" class="btn btn-success">Pagar</button></td>
+				      <th scope="row">${prestamo.valor}</th>
+				      <td>${prestamo.cuotas}</td>
+				      <td>${prestamo.valor}</td>
+				      <td>${prestamo.interes}</td>
 				    </tr>
 				  </tbody>
 			  </c:forEach>
