@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ar.edu.unlam.tallerweb1.dao.PrestamoDao;
 import ar.edu.unlam.tallerweb1.modelo.Prestamo;
 
-@Service("servicioFinanciera")
+@Service("servicioPrestamo")
 @Transactional
 public class ServicioPrestamoImpl implements ServicioPrestamo {
 	@Inject

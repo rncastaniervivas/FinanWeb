@@ -40,13 +40,12 @@
 			    </tr>
 			  </thead>
 			  <!-- listar todos los afiados -->
-			  <c:forEach items="${prestamos}" var="prestamo">
+			  <c:forEach items="${prestamos}" var="prestamos">
 				  <tbody>
 				    <tr>
-				      <th scope="row">${prestamo.valor}</th>
-				      <td>${prestamo.cuotas}</td>
-				      <td>${prestamo.valor}</td>
-				      <td>${prestamo.interes}</td>
+				      <th scope="row">${prestamos.valor}</th>
+				      <td>${prestamos.cuotas}</td>
+				      <td>${prestamos.interes}</td>
 				    </tr>
 				  </tbody>
 			  </c:forEach>

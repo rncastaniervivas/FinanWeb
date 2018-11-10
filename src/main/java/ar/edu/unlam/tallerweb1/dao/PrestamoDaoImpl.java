@@ -21,7 +21,6 @@ public class PrestamoDaoImpl implements PrestamoDao {
 	public List<Prestamo> consultarPrestamo() {
 		return (sessionFactory.getCurrentSession()
 				.createCriteria(Prestamo.class)
-				.add(Restrictions.isNotNull("monto"))
 				.list());
 	}
 }
