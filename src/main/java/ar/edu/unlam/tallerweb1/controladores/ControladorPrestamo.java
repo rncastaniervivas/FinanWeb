@@ -6,7 +6,9 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Prestamo;
@@ -26,5 +28,11 @@ public class ControladorPrestamo {
 		modelo.put("prestamos", prestamos);
 		
 		return new ModelAndView("listarprestamos",modelo);
+	}
+	
+	@RequestMapping("/crearprestamo")
+	public ModelAndView crearPrestamo() {
+		ModelMap modelo = new ModelMap();
+		return new ModelAndView("crearprestamo", modelo);		
 	}
 }
