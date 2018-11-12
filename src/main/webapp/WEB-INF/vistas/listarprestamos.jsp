@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Mutual</title>
+		<title>Listar todos los préstamos</title>
 		
 		<!-- Bootstrap core CSS -->
 	    <link href="css/bootstrap.min.css" rel="stylesheet" >
