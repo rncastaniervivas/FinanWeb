@@ -13,36 +13,47 @@
 	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 </head>
 <body>
-<div class = "container">
-			<div class="panel panel-default">
-			    <div class="panel-heading">Nuevo préstamo</div>
-			    <div class="panel-body">
-			    <div class="panel panel-default">
-			    	<form:form action="listarprestamos" modelAttribute="prestamo" method="POST" class="form-horizontal" role="form">
-					  
-					  <label class="col-lg-3 control-label">Cuotas:</label>
-					  	  <select id="cuotas" name="cuotas" class="form-control">
-							  <option>6</option>
-							  <option>12</option>
-							  <option>24</option>
-							  <option>36</option>
-							  <option>72</option>
-						  </select>
-					  <br>
-					  
-					  <label class="col-lg-2 control-label">Valor:</label>
-					  <input type="text" id="valor" name="valor" placeholder="Valor"  class="form-control">
-					  <br>
-					  
-					  <label class="col-lg-2 control-label">Interes:</label>
-					  <input type="text" id="interes" name="interes" placeholder="Interes"  class="form-control">
-					  <br>
-					  
-					  <button type="submit" class="btn btn-success">Crear Préstamo</button>
-					  
-					</form:form>
-					</div>
-				</div>
+	<div class = "container">
+		<div class="panel panel-default">
+		    <div class="panel-heading">Nuevo préstamo</div>
+		    <div class="panel-body">
+		    	<form:form action="crearprestamo" modelAttribute="prestamo" method="POST" role="form">
+				  <div class="form-group row">
+					  <label class="col-lg-2 control-label">Cuotas</label>
+					  <div class="col-lg-10">
+					  	  <form:select path="cuotas" id="cuotas" class="form-control">
+							  <option value="6">6</option>
+							  <option value="12">12</option>
+							  <option value="24">24</option>
+							  <option value="36">36</option>
+							  <option value="72">72</option>
+						  </form:select>
+					  </div>
+				  </div>
+				  
+				  <div class="form-group row">
+					  <label class="col-lg-2 control-label">Valor</label>
+					  <div class="col-lg-10">
+					  	<form:input path="valor" type="text" id="valor" placeholder="Valor"  class="form-control"/>
+					  </div>
+				  </div>
+				  
+				  <div class="form-group row">
+					  <label class="col-lg-2 control-label">Interes</label>
+				  	  <div class="col-lg-10">
+				  	  	<form:input path="interes" type="text" id="interes" placeholder="Interes"  class="form-control"/>
+				  	  </div>
+				  </div>
+				  
+				  <div class="form-group row">
+				  		<div class="col-lg-2"></div>
+				  		<div class="col-lg-10">
+						  <button type="submit" class="btn btn-success">Crear Préstamo</button>
+						</div>
+				  </div>
+				</form:form>
 			</div>
+		</div>
+	</div>
 </body>
 </html>
