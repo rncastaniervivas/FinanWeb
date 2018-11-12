@@ -15,16 +15,17 @@
 	<body>
 	
 		<h1>Formulario para realizar pago a la mutual</h1>
+		<h4>usando esta vista solo para probar</h4>
 		
 		<c:forEach items="${cuotas}" var="cuota">
-			<h3>Id:${cuota.idCuota} 
+			<p>Id:${cuota.idCuota} 
 				monto:${cuota.monto} 
 				interes:${cuota.interes}
 				total:${cuota.montoTotal}
 				estado:${cuota.estado} 
 				fechaPago:${cuota.fechaDePago} 
 				fechaVencimiento:${cuota.fechaDeVencimiento}
-			</h3>
+			</p>
 		</c:forEach>
 	
 		<!-- Placed at the end of the document so the pages load faster -->
