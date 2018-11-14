@@ -44,7 +44,7 @@ public class AfiliadoDaoImpl implements AfiliadoDao {
 	
 	/*
 	 * private List<Prestamo> buscarPrestamos(Long id) {
-		// TODO Auto-generated method stub
+	
 		List<Prestamo> nvaLista=getSession().createCriteria(Prestamo.class)
 				.createAlias("afiliado","afiliadojoin")
 				.add(Restrictions.eq("afiliadojoin.idAfiliado", id))

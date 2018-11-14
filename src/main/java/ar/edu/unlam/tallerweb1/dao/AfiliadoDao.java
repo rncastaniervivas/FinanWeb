@@ -1,7 +1,5 @@
 package ar.edu.unlam.tallerweb1.dao;
 
-import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 

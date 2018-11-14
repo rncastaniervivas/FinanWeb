@@ -5,21 +5,24 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import ar.edu.unlam.tallerweb1.modelo.Prestamo;
+import ar.edu.unlam.tallerweb1.modelo.Cuota;
 
-@Repository("PrestamoDao")
-public class PrestamoDaoImpl implements PrestamoDao {
-	
+@Repository("RefinanciarDao")
+public class RefinanciarDaoImpl implements RefinanciarDao {
 	@Inject
 	private SessionFactory sessionFactory;
 	
 	@SuppressWarnings("unchecked")
+
 	@Override
-	public List<Prestamo> consultarPrestamo() {
+	public List<Cuota> listaCuotas() {
 		return (sessionFactory.getCurrentSession()
-				.createCriteria(Prestamo.class)
+				.createCriteria(Cuota.class)
+				.add(Restrictions.eq("estado", 1))
 				.list());
 	}
+
 }
