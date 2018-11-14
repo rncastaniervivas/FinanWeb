@@ -16,7 +16,8 @@
 	
 		<h1>Formulario para realizar pago a la mutual</h1>
 		<h4>usando esta vista solo para probar</h4>
-		
+		<p>${afiliado.idAfiliado}</p>
+		<p>${afiliado.nombre}</p>
 		<c:forEach items="${cuotas}" var="cuota">
 			<p>Id:${cuota.idCuota} 
 				monto:${cuota.monto} 

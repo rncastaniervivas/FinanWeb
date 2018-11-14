@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -22,5 +23,15 @@ public class ServicioAfiliadoImpl implements ServicioAfiliado {
 	public Afiliado consultarAfiliado (Afiliado afiliado) {
 		return servicioAfiliadoDao.consultarAfiliado(afiliado);
 	}
+	@Override
+	public List<Afiliado> consultarListaAfiliado(){
+		
+		return servicioAfiliadoDao.consultarListaAfiliado();
+	}
+	@Override
+	public Afiliado consultarIdAfiliado(Long id) {
+		return servicioAfiliadoDao.consultarIdAfiliado(id);
+	}
+
 
 }

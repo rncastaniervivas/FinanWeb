@@ -12,10 +12,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.modelo.Afiliado;
 import ar.edu.unlam.tallerweb1.modelo.Cuota;
 import ar.edu.unlam.tallerweb1.modelo.Prestamo;
+import ar.edu.unlam.tallerweb1.servicios.ServicioAfiliado;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCuota;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPrestamo;
 
@@ -27,6 +30,9 @@ public class ControladorPrestamo {
 	
 	@Inject
 	private ServicioCuota servicioCuota;
+	
+	@Inject
+	private ServicioAfiliado servicioAfiliado;
 	
 	@RequestMapping("/listarprestamos")
 	public ModelAndView listarPrestamo() {
@@ -43,6 +49,9 @@ public class ControladorPrestamo {
 		ModelMap modelo = new ModelMap();
 		
 		Prestamo prestamo = new Prestamo();
+		
+		List<Afiliado> afiliados=servicioAfiliado.consultarListaAfiliado();
+		modelo.put("afiliados", afiliados);
 		modelo.put("prestamo", prestamo);
 		return new ModelAndView("crearprestamo", modelo);		
 	}
@@ -79,8 +88,13 @@ public class ControladorPrestamo {
 		}
 		
 		servicioCuota.insertarCuota(cuotas);
-		//servicioPrestamo.insertarPrestamo(nprestamo);
 		modelo.put("cuotas", cuotas);
+//		modelo.put("afiliadoid", prestamo.getIdAfiliado());
+		Afiliado afiliado0=servicioAfiliado.consultarIdAfiliado(prestamo.getIdAfiliado());
+		nprestamo.setAfiliado(afiliado0);
+	
+//		servicioPrestamo.insertarPrestamo(nprestamo);
+		modelo.put("afiliado", false);
 		
 		return new ModelAndView("realizarpagoafinan", modelo);		
 	}
