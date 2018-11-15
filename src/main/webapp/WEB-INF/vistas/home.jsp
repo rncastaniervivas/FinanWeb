@@ -14,13 +14,13 @@
 			<br><br>
 				<p>Elegir la acción a realizar:</p>
 				<br>
-				<ul><a href="http://localhost:8080/FinanWeb/crearprestamo">Crear préstamo</a></ul>
+				<ul><a href="crearprestamo">Crear préstamo</a></ul>
 				<br>
-				<ul><a href="http://localhost:8080/FinanWeb/finanapagar">Lista de financieras a pagar</a></ul>
+				<ul><a href="finanapagar">Lista de financieras a pagar</a></ul>
 				<br>
-				<ul><a href="http://localhost:8080/FinanWeb/listarprestamos">Lista de préstamos otorgados</a></ul>
+				<ul><a href="listarprestamos">Lista de préstamos otorgados</a></ul>
 				<br>
-				<ul><a href="http://localhost:8080/FinanWeb/realizarpagoafinan">Realizar pago a financiera</a></ul>
+				<ul><a href="realizarpagoafinan">Realizar pago a financiera</a></ul>
 				<br>
 		
 		
