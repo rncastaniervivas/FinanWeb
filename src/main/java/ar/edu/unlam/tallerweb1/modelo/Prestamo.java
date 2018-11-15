@@ -17,7 +17,7 @@ public class Prestamo {
 	private Long idPrestamo;
 	private Integer cuotas;
 	private Integer valor;
-	private Integer interes;
+	private double interes;
 	
 	@ManyToOne
 	private Financiera financiera;
@@ -59,10 +59,10 @@ public class Prestamo {
 		this.financiera = financiera;
 	}
 	
-	public Integer getInteres() {
+	public double getInteres() {
 		return interes;
 	}
-	public void setInteres(Integer interes) {
+	public void setInteres(double interes) {
 		this.interes = interes;
 	}
 	public List<Cuota> getCuota() {

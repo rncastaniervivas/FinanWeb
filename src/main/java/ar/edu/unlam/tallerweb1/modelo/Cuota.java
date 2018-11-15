@@ -14,8 +14,9 @@ public class Cuota {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCuota;
-	private Double monto;
-	private Double interes;
+	private double monto; //creo que este tiene que ser capital
+	private double montoTotal; // es la suma de capital e interes mensual
+	private double interes; // es solo el interes mensula
 	private boolean estado;
 	private Date fechaDePago;
 	private Date fechaDeVencimiento;
@@ -31,19 +32,19 @@ public class Cuota {
 		this.idCuota = idCuota;
 	}
 
-	public Double getMonto() {
+	public double getMonto() {
 		return monto;
 	}
 
-	public void setMonto(Double monto) {
+	public void setMonto(double monto) {
 		this.monto = monto;
 	}
 
-	public Double getInteres() {
+	public double getInteres() {
 		return interes;
 	}
 
-	public void setInteres(Double interes) {
+	public void setInteres(double interes) {
 		this.interes = interes;
 	}
 
@@ -77,6 +78,14 @@ public class Cuota {
 
 	public void setPrestamo(Prestamo prestamo) {
 		this.prestamo = prestamo;
+	}
+
+	public double getMontoTotal() {
+		return montoTotal;
+	}
+
+	public void setMontoTotal(double montoTotal) {
+		this.montoTotal = montoTotal;
 	}
 	
 }
