@@ -30,18 +30,7 @@
 						  </form:select>
 					  </div>
 				  </div>
-				  <div class="form-group row">
-					  <label class="col-lg-2 control-label">Afiliado</label>
-					  <div class="col-lg-10">
-					  	  <form:select path="idAfiliado" id="idAfiliado" class="form-control">
-					  	  
-					  	  <c:forEach items="${afiliados}" var="afiliados">
-							  <option value="${afiliados.idAfiliado}">Nombre: ${afiliados.nombre} / Apellido: ${afiliados.apellido}</option>
-							</c:forEach>
-							
-						  </form:select>
-					  </div>
-				  </div>
+				  
 				  <div class="form-group row">
 					  <label class="col-lg-2 control-label">Valor</label>
 					  <div class="col-lg-10">

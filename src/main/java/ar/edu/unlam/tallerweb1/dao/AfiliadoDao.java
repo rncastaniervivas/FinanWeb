@@ -11,12 +11,6 @@ import ar.edu.unlam.tallerweb1.modelo.*;
 public interface AfiliadoDao {
 	
 	Afiliado consultarAfiliado(Afiliado afiliado);
-	
-	List<Afiliado> consultarListaAfiliado();
-	
-	Afiliado consultarIdAfiliado(Long id);
-	
-	
 //	List<Prestamo> listarPrestamos(Long id);
 }
 /*
