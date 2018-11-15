@@ -14,8 +14,8 @@
 
 <h1>${cuota.fechaDeVencimiento} --- ${cuota.monto}</h1>
 </c:forEach>
-<!-- 
-<h1>se va a refinanciar en un monto de ${montoTotal} en ${cantidadCuotas} cuotas de ${nuevaCuota}</h1>
- -->
+
+<h1>se va a refinanciar en un monto de ${montototal} en ${cantidadCuotas} cuotas de ${nuevaCuota}</h1>
+
 </body>
 </html>

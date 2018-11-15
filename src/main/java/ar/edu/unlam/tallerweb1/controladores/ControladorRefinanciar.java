@@ -23,9 +23,9 @@ public class ControladorRefinanciar {
 			
 			List<Cuota> impagas=servicioCuotasImpagas.consultarCuota();
 			
-			//Double suma = 0.0;
-				//tasa de interes por 6 meses
-		/*	Double tasa=0.35;
+			Double suma = 0.0;
+			//tasa de interes por 6 meses
+			Double tasa=0.35;
 			
 		    for(Cuota i :impagas) {
 				suma+=i.getMonto();
@@ -36,14 +36,12 @@ public class ControladorRefinanciar {
 			 Integer cantidadCuotas=6;
 			 Double nuevaCuota=(Double)montoTotal/cantidadCuotas;
 				
-			
-			modelo.put("impagas", impagas);
+			modelo.put("cuotas", impagas);
+			 
 			modelo.put("montototal", montoTotal);
 			modelo.put("nuevaCuota",nuevaCuota );
 			modelo.put("cantidadCuotas", cantidadCuotas);//se extiende las cuotas? o aumenta la cuota de las restantes.
 			
-			modelo.put("cuotas", impagas);
-		*/	
 			return new ModelAndView("refinanciar",modelo);
 			
 			
