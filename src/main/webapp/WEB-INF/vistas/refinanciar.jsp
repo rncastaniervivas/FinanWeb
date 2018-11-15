@@ -6,15 +6,16 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Refinanciar</title>
 </head>
 <body>
 <h1>Ustede debe estas cuotas</h1>
-<c:forEach items="${impagas}" var="impagas">
+<c:forEach items="${cuotas}" var="cuota">
 
-<h1>${impagas.monto}</h1>
+<h1>${cuota.fechaDeVencimiento} --- ${cuota.monto}</h1>
 </c:forEach>
+<!-- 
 <h1>se va a refinanciar en un monto de ${montoTotal} en ${cantidadCuotas} cuotas de ${nuevaCuota}</h1>
-
+ -->
 </body>
 </html>

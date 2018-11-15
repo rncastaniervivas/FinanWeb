@@ -5,6 +5,6 @@ import ar.edu.unlam.tallerweb1.modelo.Cuota;
 
 public interface RefinanciarDao {
 	
-	public List<Cuota> listaCuotas();
+	List<Cuota> consultarCuota();
 
 }

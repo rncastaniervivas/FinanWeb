@@ -9,17 +9,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.RefinanciarDao;
 import ar.edu.unlam.tallerweb1.modelo.Cuota;
-@Service("servicioPrestamo")
-@Transactional
-public class ServicioCuotasImpagasImpl implements ServicioCuotasImpagas {
-	@Inject
-	private RefinanciarDao servicioRefinanciar;
-	
 
+@Service("servicioRerinanciar")
+@Transactional
+public class ServicioRefinanciarImpl implements ServicioRefinanciar {
+	@Inject
+	private RefinanciarDao servicioRefinanciarDao;
+	
 	@Override
-	public List<Cuota> cuotasImpagas() {
+	public List<Cuota> consultarCuota() {
 		
-		return servicioRefinanciar.listaCuotas();
+		return servicioRefinanciarDao.consultarCuota();
 	}
 
 }

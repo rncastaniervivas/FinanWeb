@@ -12,16 +12,16 @@ import ar.edu.unlam.tallerweb1.modelo.Cuota;
 
 @Repository("RefinanciarDao")
 public class RefinanciarDaoImpl implements RefinanciarDao {
+	
 	@Inject
 	private SessionFactory sessionFactory;
 	
 	@SuppressWarnings("unchecked")
-
 	@Override
-	public List<Cuota> listaCuotas() {
+	public List<Cuota> consultarCuota() {
 		return (sessionFactory.getCurrentSession()
 				.createCriteria(Cuota.class)
-				.add(Restrictions.eq("estado", 1))
+				.add(Restrictions.eq("estado", false))
 				.list());
 	}
 

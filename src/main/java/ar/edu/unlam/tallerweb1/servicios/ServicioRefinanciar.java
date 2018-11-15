@@ -4,8 +4,8 @@ import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.Cuota;
 
-public interface ServicioCuotasImpagas {
+public interface ServicioRefinanciar {
 	
-	public List<Cuota> cuotasImpagas();
+	List<Cuota> consultarCuota();
 
 }
