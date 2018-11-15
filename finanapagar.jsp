@@ -4,12 +4,13 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Listar todos los préstamos</title>
+		<title>Mutual</title>
 		
 		<!-- Bootstrap core CSS -->
 	    <link href="css/bootstrap.min.css" rel="stylesheet" >
 	    <!-- Bootstrap theme -->
 	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+	    <link href="${context}/css...">
 	</head>
 	<body>
 		
@@ -28,22 +29,26 @@
 		</div>
 	
 		<div class="container">
-			<h1 class="text-center">LISTA DE PRESTAMOS</h1>
+			<h1 class="text-center">LISTA DE FINANCIERAS A PAGAR</h1>
 			<table class="table">
 			  <thead class="thead-light">
 			    <tr>
-			      <th scope="col">Valor</th>
-			      <th scope="col">Cuotas</th>
-			      <th scope="col">Intereces</th>
+			      <th scope="col">#</th>
+			      <th scope="col">Nombre Financiera</th>
+			      <th scope="col">Numero de couta</th>
+			      <th scope="col">Monto a pagar</th>
+			      <th scope="col">Realizar</th>
 			    </tr>
 			  </thead>
 			  <!-- listar todos los afiados -->
-			  <c:forEach items="${prestamos}" var="prestamos">
+			  <c:forEach items="${financieras}" var="financiera">
 				  <tbody>
 				    <tr>
-				      <th scope="row">${prestamos.valor}</th>
-				      <td>${prestamos.cuotas}</td>
-				      <td>${prestamos.interes}</td>
+				      <th scope="row">${financiera.idFinanciera}</th>
+				      <td>${financiera.nombre}</td>
+				      <td>prueba(1 de 12)</td>
+				      <td>prueba(0)</td>
+				      <td><button type="button" class="btn btn-success">Pagar</button></td>
 				    </tr>
 				  </tbody>
 			  </c:forEach>

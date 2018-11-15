@@ -7,23 +7,9 @@
 	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 	</head>
 	<body>
-		<img src="/img/banner.jpg">
-			<div class = "container">
-				<h1>Bienvenidos a FinanWeb</h1>
-			</div>
-			<br><br>
-				<p>Elegir la acción a realizar:</p>
-				<br>
-				<ul><a href="crearprestamo">Crear préstamo</a></ul>
-				<br>
-				<ul><a href="finanapagar">Lista de financieras a pagar</a></ul>
-				<br>
-				<ul><a href="listarprestamos">Lista de préstamos otorgados</a></ul>
-				<br>
-				<ul><a href="realizarpagoafinan">Realizar pago a financiera</a></ul>
-				<br>
-		
-		
+		<div class = "container">
+			<h1>Bienvenidos a Taller Web 1</h1>
+		</div>
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
 		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
