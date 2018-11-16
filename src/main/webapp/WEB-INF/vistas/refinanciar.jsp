@@ -33,16 +33,16 @@
 			<h1 class="text-center">LISTA DE CUOTAS-PRESTAMO IMPAGAS</h1>
 			<table class="table">
 			  <thead class="thead-light">
-			    <tr>
+			    <tr class="bg-danger">
 			      <th scope="col">Nro Cuota</th>
-			      <th scope="col">Fecha</th>
-			      <th scope="col">Monto</th>
+			      <th scope="col">Fecha Vencimiento</th>
+			      <th scope="col">Monto Total</th>
 			    </tr>
 			  </thead>
 			  <!-- listar todos los afiados -->
 			  <c:forEach items="${cuotas}" var="cuota">
 				  <tbody>
-				    <tr>
+				    <tr class="table-danger">
 				      <th scope="row">${cuota.idCuota}</th>
 				      <td>${cuota.fechaDeVencimiento}</td>
 				      <td>${cuota.montoTotal}</td>
