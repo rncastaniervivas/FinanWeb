@@ -18,7 +18,7 @@ public class RefinanciarDaoImpl implements RefinanciarDao {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Cuota> consultarCuota() {
+	public List<Cuota> consultarCuota(Long arefinanciar) {
 		return (sessionFactory.getCurrentSession()
 				.createCriteria(Cuota.class)
 				.add(Restrictions.eq("estado", false))

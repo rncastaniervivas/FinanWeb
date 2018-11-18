@@ -17,9 +17,9 @@ public class ServicioRefinanciarImpl implements ServicioRefinanciar {
 	private RefinanciarDao servicioRefinanciarDao;
 	
 	@Override
-	public List<Cuota> consultarCuota() {
+	public List<Cuota> consultarCuota(Long arefinanciar) {
 		
-		return servicioRefinanciarDao.consultarCuota();
+		return servicioRefinanciarDao.consultarCuota(arefinanciar);
 	}
 
 }

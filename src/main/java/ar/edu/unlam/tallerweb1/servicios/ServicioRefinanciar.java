@@ -6,6 +6,6 @@ import ar.edu.unlam.tallerweb1.modelo.Cuota;
 
 public interface ServicioRefinanciar {
 	
-	List<Cuota> consultarCuota();
+	List<Cuota> consultarCuota(Long arefinanciar);
 
 }

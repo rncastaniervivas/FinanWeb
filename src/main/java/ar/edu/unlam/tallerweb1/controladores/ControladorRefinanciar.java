@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Cuota;
@@ -17,11 +18,11 @@ public class ControladorRefinanciar {
 	@Inject 
 	private ServicioRefinanciar servicioCuotasImpagas;
 	
-	@RequestMapping("/refinanciar")
-	public ModelAndView listaCuotasImp() {
+	@RequestMapping(path = "/refinanciar", method = RequestMethod.POST)
+	public ModelAndView listaCuotasImp(Long arefinanciar) {
 			ModelMap modelo=new ModelMap();
 			
-			List<Cuota> impagas=servicioCuotasImpagas.consultarCuota();
+			List<Cuota> impagas=servicioCuotasImpagas.consultarCuota(arefinanciar);
 			
 			Double suma = 0.0;
 			int cantidadCuotas = 0;
