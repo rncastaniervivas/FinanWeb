@@ -21,6 +21,8 @@ public class RefinanciarDaoImpl implements RefinanciarDao {
 	public List<Cuota> consultarCuota(Long arefinanciar) {
 		return (sessionFactory.getCurrentSession()
 				.createCriteria(Cuota.class)
+				.createAlias("prestamo", "prestamoj")
+				.add(Restrictions.eq("prestamoj.idPrestamo", arefinanciar))
 				.add(Restrictions.eq("estado", false))
 				.list());
 	}
