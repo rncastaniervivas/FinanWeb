@@ -115,6 +115,13 @@ public class ControladorPrestamo {
 			return new ModelAndView("refinanciar",modelo);
 	
 	}
+	// si ingresa por la url "/refinanciar" sin pasar por los prestamos lo redirige al home.
+	@RequestMapping("/refinanciar")
+	public ModelAndView irAHome() {
+			
+			return new ModelAndView("home");
+	
+	}
 	
 	
 }
