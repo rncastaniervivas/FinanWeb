@@ -85,5 +85,36 @@ public class ControladorPrestamo {
 		return new ModelAndView("realizarpagoafinan", modelo);		
 	}
 	
+	@RequestMapping(path = "/refinanciar", method = RequestMethod.POST)
+	public ModelAndView listaCuotasImp(Long arefinanciar) {
+			ModelMap modelo=new ModelMap();
+			
+			List<Cuota> impagas=servicioCuota.consultarCuota(arefinanciar);
+			
+			Double suma = 0.0;
+			int cantidadCuotas = 0;
+
+			Double tasa=0.35; //anual equivaldria a un 3% de interes mensual del monto prestado.
+			
+		    for(Cuota i :impagas) {
+				suma+=i.getMonto();
+				cantidadCuotas++;
+			
+			}
+		    // le extendemo dos cuotas mas.
+		    cantidadCuotas+=2;
+			double montoTotal=suma+(suma*tasa);
+			double nuevaCuota= montoTotal/cantidadCuotas;
+				
+			modelo.put("cuotas", impagas);
+			 
+			modelo.put("montototal", montoTotal);
+			modelo.put("nuevaCuota",nuevaCuota );
+			modelo.put("cantidadCuotas", cantidadCuotas);//se extiende las cuotas? o aumenta la cuota de las restantes.
+			
+			return new ModelAndView("refinanciar",modelo);
+	
+	}
+	
 	
 }

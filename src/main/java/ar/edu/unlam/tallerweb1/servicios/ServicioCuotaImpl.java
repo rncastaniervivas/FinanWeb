@@ -22,4 +22,10 @@ public class ServicioCuotaImpl implements ServicioCuota{
 		servicioCuotaDao.insertarCuota(cuotas);
 	}
 	
+	@Override
+	public List<Cuota> consultarCuota(Long arefinanciar) {
+		
+		return servicioCuotaDao.consultarCuota(arefinanciar);
+	}
+	
 }
