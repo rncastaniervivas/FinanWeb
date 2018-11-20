@@ -7,4 +7,6 @@ import ar.edu.unlam.tallerweb1.modelo.Prestamo;
 public interface PrestamoDao {
 	List<Prestamo> consultarPrestamo();
 	
+	Prestamo consultarUnPrestamo(Long idPrestamo);
+	
 }

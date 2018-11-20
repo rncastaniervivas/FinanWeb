@@ -15,6 +15,7 @@ public class Afiliado {
 	private String puesto;
 	private String antiguedad;
 	private Double sueldo;
+	private String clasificacion; // esto es para cuado refinancie el prestamo, perdera confiabilidad para proximos prestamos
 	public Long getIdAfiliado() {
 		return idAfiliado;
 	}
@@ -51,5 +52,11 @@ public class Afiliado {
 	public void setSueldo(Double sueldo) {
 		this.sueldo = sueldo;
 	}
-
+	public String getClasificacion() {
+		return clasificacion;
+	}
+	public void setCalificacion(String clasificacion) {
+		this.clasificacion = clasificacion;
+	}
+	
 }

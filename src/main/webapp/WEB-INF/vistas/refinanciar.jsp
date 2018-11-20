@@ -8,9 +8,10 @@
 		<title>Refinanciar</title>
 		
 		<!-- Bootstrap core CSS -->
-	    <link href="css/bootstrap.min.css" rel="stylesheet" >
+	    <link href="css/bootstrap.min.css" rel="stylesheet">
 	    <!-- Bootstrap theme -->
 	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+	    
 	</head>
 	
 	<body>
@@ -52,8 +53,37 @@
 			</table>
 		</div>
 		
-		<h1>se va a refinanciar en un monto de ${montototal} en ${cantidadCuotas} cuotas de ${nuevaCuota}</h1>
-		
+		<div class="container">
+			<form>
+			  <div class="form-row">
+			    <div class="form-group col-md-6">
+			      <label >Nombre</label>
+			      <input type="text" class="form-control" id="inputNombre" placeholder="Nombre">
+			    </div>
+			    <div class="form-group col-md-6">
+			      <label >Apellido</label>
+			      <input type="text" class="form-control" id="inputApellido" placeholder="Apellido">
+			    </div>
+			  </div>
+			  <div class="form-row">
+			    <div class="form-group col-md-6">
+			      <label for="inputCity">Monto Total A Refinanciar</label>
+			      <input type="text" class="form-control" id="disabledTextInput" value="${MontoARefinanciar}" placeholder="${MontoARefinanciar}" disabled>
+			    </div>
+			    <div class="form-group col-md-4">
+			      <label for="inputState">Cuotas</label>
+			      <select id="inputState" class="form-control">
+			        <c:forEach begin="1" end="12" varStatus="no">
+				        <option value="${cuotasRestante + no.count}"><c:out value="Extender a ${cuotasRestante + no.count} cuotas"/></option>
+				    </c:forEach>
+			      </select>
+			    </div>
+			  </div>
+			  <div class="form-group col-md-6">
+			  	<button type="submit" class="btn btn-primary">Aceptar</button>
+			  </div>
+			</form>
+		</div>
 		
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>

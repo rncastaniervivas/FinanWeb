@@ -86,32 +86,24 @@ public class ControladorPrestamo {
 	}
 	
 	@RequestMapping(path = "/refinanciar", method = RequestMethod.POST)
-	public ModelAndView listaCuotasImp(Long arefinanciar) {
+	public ModelAndView listaCuotasImp(Long idPrestamo) {
 			ModelMap modelo=new ModelMap();
 			
-			List<Cuota> impagas=servicioCuota.consultarCuota(arefinanciar);
+			List<Cuota> impagas=servicioCuota.consultarCuota(idPrestamo);
 			
-			Double suma = 0.0;
-			int cantidadCuotas = 0;
-
-			Double tasa=0.35; //anual equivaldria a un 3% de interes mensual del monto prestado.
+			Prestamo prestamo = servicioPrestamo.consultarUnPrestamo(idPrestamo);
+			
+			Double montoTotalARefinanciar = 0.0;
+			int cuotasRestante = 0;
 			
 		    for(Cuota i :impagas) {
-				suma+=i.getMonto();
-				cantidadCuotas++;
-			
+				montoTotalARefinanciar += i.getMontoTotal();
+				cuotasRestante++;
 			}
-		    // le extendemo dos cuotas mas.
-		    cantidadCuotas+=2;
-			double montoTotal=suma+(suma*tasa);
-			double nuevaCuota= montoTotal/cantidadCuotas;
-				
-			modelo.put("cuotas", impagas);
-			 
-			modelo.put("montototal", montoTotal);
-			modelo.put("nuevaCuota",nuevaCuota );
-			modelo.put("cantidadCuotas", cantidadCuotas);//se extiende las cuotas? o aumenta la cuota de las restantes.
-			
+		    
+			modelo.put("cuotas", impagas);	
+			modelo.put("MontoARefinanciar", montoTotalARefinanciar);
+			modelo.put("cuotasRestante",cuotasRestante);
 			return new ModelAndView("refinanciar",modelo);
 	
 	}
