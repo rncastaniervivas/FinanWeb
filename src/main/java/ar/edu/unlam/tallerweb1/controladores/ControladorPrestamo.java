@@ -94,6 +94,8 @@ public class ControladorPrestamo {
 	public ModelAndView listaCuotasImp(Long idPrestamo) {
 			ModelMap modelo=new ModelMap();
 			
+			//Prestamo prestamo = new Prestamo();
+			
 			List<Cuota> impagas=servicioCuota.consultarCuota(idPrestamo);
 			
 			Afiliado afiliado = servicioAfiliado.consultarAfiliado(idPrestamo);
@@ -105,18 +107,23 @@ public class ControladorPrestamo {
 				montoTotalARefinanciar += i.getMontoTotal();
 				cuotasRestante++;
 			}
-		    
+		    //modelo.put("prestamo", prestamo);
 		    modelo.put("afiliado", afiliado);
+		    modelo.put("idPrestamoRef", idPrestamo);
 			modelo.put("cuotas", impagas);	
 			modelo.put("MontoARefinanciar", montoTotalARefinanciar);
 			modelo.put("cuotasRestante",cuotasRestante);
 			return new ModelAndView("refinanciar",modelo);
 	
 	}
-	
-	@RequestMapping(path = "/refinanciar", method = RequestMethod.POST)
-	public ModelAndView listaCuotasImp(@ModelAttribute("prestamo") Prestamo prestamo,Long idAfiliado, Long idPrestamoRef, HttpServletRequest request) {
-		System.out.println(idAfiliado+"->"+prestamo.getIdPrestamo()+"->"+prestamo.getCuotas()+"->"+prestamo.getValor()+"-> REF: "+idPrestamoRef);
+
+	@RequestMapping(path = "/hacer-refinanciacion", method = RequestMethod.POST)
+	public ModelAndView refinanciarAlta(Long idAfiliado, Long idPrestamoRef, double newCapital, Integer cuotas, double interes) {
+		System.out.println(idAfiliado);
+		System.out.println(idPrestamoRef);
+		System.out.println(newCapital);
+		System.out.println(cuotas);
+		System.out.println(interes);
 		return new ModelAndView("home");
 	}
 	

@@ -18,9 +18,13 @@ insert into afiliado (idAfiliado,nombre,apellido,puesto,antiguedad,sueldo,clasif
 select *from afiliado;
 
 /* Insertar a la tabla prestamo */
-insert into prestamo (idPrestamo,cuotas,valor,interes,afiliado_idAfiliado) values (1,12,24000,0.35,1);
+insert into prestamo (idPrestamo,cuotas,estado,interes,valor,afiliado_idAfiliado,financiera_idFinanciera) values (1,12,null,0.35,24000,1,null);
 
 select * from prestamo;
+
+/* insert a la tabla que relaciona afiliado con prestamos */
+insert into afiliado_prestamo (Afiliado_idAfiliado,prestamo_idPrestamo) values (1,1);
+select * from afiliado_prestamo;
 
 /* Insertar a tabla cuota*/
 insert into cuota (idCuota,monto,interes,montoTotal,estado,fechaDePago,fechaDeVencimiento,prestamo_idPrestamo) values (1,'1000','70','1070',true,'2018-01-15','2018-01-30',1);
