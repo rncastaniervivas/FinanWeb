@@ -24,4 +24,31 @@ public class FinancieraDaoImpl implements FinancieraDao {
 				.add(Restrictions.isNotNull("nombre"))
 				.list());
 	}
+
+	@Override
+	public void guardarFinanciera(Financiera financiera) {
+		sessionFactory.getCurrentSession().save(financiera);
+		
+	}
+
+	@Override
+	public List<Financiera> buscarFinanciera(Financiera financiera) {
+		return (sessionFactory.getCurrentSession().createCriteria(Financiera.class)
+		.add(Restrictions.eq("nombre",financiera.getNombre()))
+		.list());
+		
+	
+	}
+
+	@Override
+	public void eliminarfinanciera(Financiera financiera) {
+		sessionFactory.getCurrentSession().delete(financiera);
+		
+	}
+
+	@Override
+	public void modificarFinanciera(Financiera financiera) {
+		sessionFactory.getCurrentSession().update(financiera);
+		
+	}
 }
