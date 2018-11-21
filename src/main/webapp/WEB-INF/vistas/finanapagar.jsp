@@ -33,7 +33,7 @@
 			  <thead class="thead-light">
 			    <tr>
 			      <th scope="col">#</th>
-			      <th scope="col">Nombre Financiera</th>
+			      <th scope="col">Nombre Financieras</th>
 			      <th scope="col">Numero de couta</th>
 			      <th scope="col">Monto a pagar</th>
 			      <th scope="col">Realizar</th>

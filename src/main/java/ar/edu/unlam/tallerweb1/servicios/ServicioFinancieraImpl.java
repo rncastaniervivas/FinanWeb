@@ -20,4 +20,28 @@ public class ServicioFinancieraImpl implements ServicioFinanciera {
 	public List<Financiera> consultarFinanciera() {
 		return servicioFinancieraDao.consultarFinanciera();
 	}
+
+	@Override
+	public void guardarFinanciera(Financiera financiera) {
+		servicioFinancieraDao.guardarFinanciera(financiera);
+		
+	}
+
+	@Override
+	public List<Financiera> buscarFinanciera(Financiera financiera) {
+		return servicioFinancieraDao.buscarFinanciera(financiera);
+		
+	}
+
+	@Override
+	public void eliminarfinanciera(Financiera financiera) {
+		servicioFinancieraDao.eliminarfinanciera(financiera);
+		
+	}
+
+	@Override
+	public void modificarFinanciera(Financiera financiera) {
+		servicioFinancieraDao.modificarFinanciera(financiera);
+		
+	}
 }
