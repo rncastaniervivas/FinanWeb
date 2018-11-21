@@ -1,9 +1,12 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Afiliado {
@@ -16,6 +19,10 @@ public class Afiliado {
 	private String antiguedad;
 	private Double sueldo;
 	private String clasificacion; // esto es para cuado refinancie el prestamo, perdera confiabilidad para proximos prestamos
+	
+	@OneToMany
+	private List<Prestamo> prestamo;
+	
 	public Long getIdAfiliado() {
 		return idAfiliado;
 	}
@@ -55,8 +62,15 @@ public class Afiliado {
 	public String getClasificacion() {
 		return clasificacion;
 	}
-	public void setCalificacion(String clasificacion) {
+	public void setClasificacion(String clasificacion) {
 		this.clasificacion = clasificacion;
 	}
+	public List<Prestamo> getPrestamo() {
+		return prestamo;
+	}
+	public void setPrestamo(List<Prestamo> prestamo) {
+		this.prestamo = prestamo;
+	}
+	
 	
 }

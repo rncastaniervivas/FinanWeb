@@ -30,6 +30,15 @@ public class AfiliadoDaoImpl implements AfiliadoDao {
 				.add(Restrictions.eq("idAfiliado", afiliado.getIdAfiliado()))
 				.uniqueResult();
 	}
+	
+	@Override
+	public Afiliado consultarAfiliado(Long idPrestamo) {
+		final Session session = sessionFactory.getCurrentSession();
+		return (Afiliado) session.createCriteria(Afiliado.class)
+				.createAlias("prestamo", "prestamoj")
+				.add(Restrictions.eq("prestamoj.idPrestamo", idPrestamo))
+				.uniqueResult();
+	}
 //	@Override
 //	public List<Prestamo> listarPrestamos(Long id) {
 //		final Session session = sessionFactory.getCurrentSession();

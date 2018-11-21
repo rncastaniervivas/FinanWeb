@@ -1,3 +1,5 @@
+drop database if exists db_finan;
+
 create database db_finan;
 use db_finan;
 

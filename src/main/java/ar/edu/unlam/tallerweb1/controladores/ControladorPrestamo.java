@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.modelo.Afiliado;
 import ar.edu.unlam.tallerweb1.modelo.Cuota;
 import ar.edu.unlam.tallerweb1.modelo.Prestamo;
+import ar.edu.unlam.tallerweb1.servicios.ServicioAfiliado;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCuota;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPrestamo;
 
@@ -27,6 +29,9 @@ public class ControladorPrestamo {
 	
 	@Inject
 	private ServicioCuota servicioCuota;
+	
+	@Inject
+	private ServicioAfiliado servicioAfiliado;
 	
 	@RequestMapping("/listarprestamos")
 	public ModelAndView listarPrestamo() {
@@ -91,7 +96,7 @@ public class ControladorPrestamo {
 			
 			List<Cuota> impagas=servicioCuota.consultarCuota(idPrestamo);
 			
-			Prestamo prestamo = servicioPrestamo.consultarUnPrestamo(idPrestamo);
+			Afiliado afiliado = servicioAfiliado.consultarAfiliado(idPrestamo);
 			
 			Double montoTotalARefinanciar = 0.0;
 			int cuotasRestante = 0;
@@ -101,12 +106,20 @@ public class ControladorPrestamo {
 				cuotasRestante++;
 			}
 		    
+		    modelo.put("afiliado", afiliado);
 			modelo.put("cuotas", impagas);	
 			modelo.put("MontoARefinanciar", montoTotalARefinanciar);
 			modelo.put("cuotasRestante",cuotasRestante);
 			return new ModelAndView("refinanciar",modelo);
 	
 	}
+	
+	@RequestMapping(path = "/refinanciar", method = RequestMethod.POST)
+	public ModelAndView listaCuotasImp(@ModelAttribute("prestamo") Prestamo prestamo,Long idAfiliado, Long idPrestamoRef, HttpServletRequest request) {
+		System.out.println(idAfiliado+"->"+prestamo.getIdPrestamo()+"->"+prestamo.getCuotas()+"->"+prestamo.getValor()+"-> REF: "+idPrestamoRef);
+		return new ModelAndView("home");
+	}
+	
 	// si ingresa por la url "/refinanciar" sin pasar por los prestamos lo redirige al home.
 	@RequestMapping("/refinanciar")
 	public ModelAndView irAHome() {

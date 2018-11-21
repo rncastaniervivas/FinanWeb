@@ -58,11 +58,11 @@
 			  <div class="form-row">
 			    <div class="form-group col-md-6">
 			      <label >Nombre</label>
-			      <input type="text" class="form-control" id="inputNombre" placeholder="Nombre">
+			      <input type="text" class="form-control" value="${afiliado.nombre}" id="inputNombre" placeholder="Nombre">
 			    </div>
 			    <div class="form-group col-md-6">
 			      <label >Apellido</label>
-			      <input type="text" class="form-control" id="inputApellido" placeholder="Apellido">
+			      <input type="text" class="form-control" value="${afiliado.apellido}" id="inputApellido" placeholder="Apellido">
 			    </div>
 			  </div>
 			  <div class="form-row">

@@ -9,6 +9,10 @@ import ar.edu.unlam.tallerweb1.modelo.*;
 public interface AfiliadoDao {
 	
 	Afiliado consultarAfiliado(Afiliado afiliado);
+	
+	Afiliado consultarAfiliado(Long idPrestamo);
+	
+	
 //	List<Prestamo> listarPrestamos(Long id);
 }
 /*
