@@ -24,11 +24,33 @@ public class AfiliadoDaoImpl implements AfiliadoDao {
     private SessionFactory sessionFactory;
 
 	@Override
-	public Afiliado consultarAfiliado(Afiliado afiliado) {
-		final Session session = sessionFactory.getCurrentSession();
-		return (Afiliado) session.createCriteria(Afiliado.class)
-				.add(Restrictions.eq("idAfiliado", afiliado.getIdAfiliado()))
-				.uniqueResult();
+	public List<Afiliado> consultarAfiliado() {
+		return (sessionFactory.getCurrentSession()
+				.createCriteria(Afiliado.class)
+				.add(Restrictions.isNotNull("nombre"))
+				.list());
+	}
+	
+	@Override
+	public void agregarAfiliado (Afiliado afiliado) {
+		sessionFactory.getCurrentSession().save(afiliado);
+	}
+	
+	@Override
+	public void modificarAfiliado(Afiliado afiliado) {
+		sessionFactory.getCurrentSession().update(afiliado);
+	}
+	
+	@Override
+	public void eliminarAfiliado(Afiliado afiliado) {
+		sessionFactory.getCurrentSession().delete(afiliado);
+	}
+	
+	@Override
+	public List<Afiliado> buscarAfiliado(Afiliado afiliado){
+		return (sessionFactory.getCurrentSession().createCriteria(Afiliado.class)
+				.add(Restrictions.eq("nombre", afiliado.getNombre()))
+				.list());
 	}
 //	@Override
 //	public List<Prestamo> listarPrestamos(Long id) {
