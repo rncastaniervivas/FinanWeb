@@ -34,4 +34,14 @@ public class CuotaDaoImpl implements CuotaDao{
 				.add(Restrictions.eq("estado", false))
 				.list());
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Cuota> consultarCuotaDelUltimoPrestamo() {
+		return (sessionFactory.getCurrentSession()
+				.createCriteria(Cuota.class)
+				.createAlias("prestamo", "prestamoj")
+				.add(Restrictions.isNull("prestamoj.estado"))
+				.list());
+	}
 }

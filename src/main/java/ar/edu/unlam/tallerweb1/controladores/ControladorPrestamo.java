@@ -161,12 +161,22 @@ public class ControladorPrestamo {
 		return new ModelAndView("home");
 	}
 	
+	// Lo uso solo para mostrar las cuotas del nuevo prestamo.
+	@RequestMapping("/ultimoprestamo")
+	public ModelAndView irAListarcuotasDeUltimoPrestamo() {
+
+		ModelMap modelo=new ModelMap();
+		List<Cuota> cuotasDelUltimoPrestamo = servicioCuota.consultarCuotaDelUltimoPrestamo();
+		modelo.put("cuotas", cuotasDelUltimoPrestamo);
+		
+		return new ModelAndView("listarcuotas",modelo);
+	}
+	
 	// si ingresa por la url "/refinanciar" sin pasar por los prestamos lo redirige al home.
 	@RequestMapping("/refinanciar")
 	public ModelAndView irAHome() {
 			
-			return new ModelAndView("home");
-	
+		return new ModelAndView("home");
 	}
 	
 	
