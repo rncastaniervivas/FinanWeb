@@ -119,11 +119,45 @@ public class ControladorPrestamo {
 
 	@RequestMapping(path = "/hacer-refinanciacion", method = RequestMethod.POST)
 	public ModelAndView refinanciarAlta(Long idAfiliado, Long idPrestamoRef, double newCapital, Integer cuotas, double interes) {
-		System.out.println(idAfiliado);
-		System.out.println(idPrestamoRef);
-		System.out.println(newCapital);
-		System.out.println(cuotas);
-		System.out.println(interes);
+
+		Integer nCapital = (int)newCapital;
+
+		
+		// aqui tiene que estar el modificar la clasificacion del Afiliado (Perdida).
+		
+		// aqui tiene que estar el modificar el estado del prestamo (Refinanciado).
+		
+		// Creo un nuevo prestamo con sus respectivos cuotas.
+		Calendar fechven = Calendar.getInstance();
+		
+		List<Cuota> cuotasRef = new ArrayList<Cuota>();
+		
+		double montoMensual = nCapital/cuotas;
+		double valorInteres = (nCapital*interes)/12;
+		double total = montoMensual + valorInteres;
+		
+		for(int i=0; i<cuotas; i++){
+			fechven.add(Calendar.DAY_OF_YEAR, 30);
+			
+			Cuota ncuota = new Cuota();
+			
+			ncuota.setMonto(montoMensual);
+			ncuota.setInteres(valorInteres);
+			ncuota.setMontoTotal(total);
+			ncuota.setEstado(false);
+			ncuota.setFechaDeVencimiento(fechven.getTime());
+
+			cuotasRef.add(ncuota);
+		}
+		
+		Prestamo prestamoRef = new Prestamo();
+		prestamoRef.setValor(nCapital);
+		prestamoRef.setCuotas(cuotas);
+		prestamoRef.setInteres(interes);
+		prestamoRef.setCuota(cuotasRef);
+
+		servicioPrestamo.crearNuevoPrestamo(prestamoRef);
+
 		return new ModelAndView("home");
 	}
 	

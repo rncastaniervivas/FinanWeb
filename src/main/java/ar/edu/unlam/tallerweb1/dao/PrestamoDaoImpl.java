@@ -32,4 +32,9 @@ public class PrestamoDaoImpl implements PrestamoDao {
 				.add(Restrictions.eq("idPrestamo", idPrestamo))
 				.uniqueResult();
 	}
+	
+	@Override
+	public void crearNuevoPrestamo(Prestamo prestmoRef) {
+		sessionFactory.getCurrentSession().save(prestmoRef);
+	}
 }

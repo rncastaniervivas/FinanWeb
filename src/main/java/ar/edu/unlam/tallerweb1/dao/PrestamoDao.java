@@ -9,4 +9,6 @@ public interface PrestamoDao {
 	
 	Prestamo consultarUnPrestamo(Long idPrestamo);
 	
+	void crearNuevoPrestamo(Prestamo prestamoRef);
+	
 }
