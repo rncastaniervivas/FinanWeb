@@ -26,4 +26,9 @@ public class ServicioPrestamoImpl implements ServicioPrestamo {
 		return servicioPrestamoDao.consultarUnPrestamo(idPrestamo);
 	}
 	
+	@Override
+	public void crearNuevoPrestamo(Prestamo prestamoRef) {
+		servicioPrestamoDao.crearNuevoPrestamo(prestamoRef);
+	}
+	
 }

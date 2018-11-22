@@ -18,6 +18,7 @@ public class Prestamo {
 	private Integer cuotas;
 	private Integer valor;
 	private double interes;
+	private String estado; // si el prestamo fue cancelado, refinanciado u otros.
 	
 	@ManyToOne
 	private Financiera financiera;
@@ -45,6 +46,13 @@ public class Prestamo {
 	}
 	public void setValor(Integer valor) {
 		this.valor = valor;
+	}
+	
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 	public Afiliado getAfiliado() {
 		return afiliado;

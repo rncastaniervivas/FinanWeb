@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.modelo.Afiliado;
 import ar.edu.unlam.tallerweb1.modelo.Cuota;
 import ar.edu.unlam.tallerweb1.modelo.Prestamo;
+import ar.edu.unlam.tallerweb1.servicios.ServicioAfiliado;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCuota;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPrestamo;
 
@@ -27,6 +29,9 @@ public class ControladorPrestamo {
 	
 	@Inject
 	private ServicioCuota servicioCuota;
+	
+	@Inject
+	private ServicioAfiliado servicioAfiliado;
 	
 	@RequestMapping("/listarprestamos")
 	public ModelAndView listarPrestamo() {
@@ -89,9 +94,11 @@ public class ControladorPrestamo {
 	public ModelAndView listaCuotasImp(Long idPrestamo) {
 			ModelMap modelo=new ModelMap();
 			
+			//Prestamo prestamo = new Prestamo();
+			
 			List<Cuota> impagas=servicioCuota.consultarCuota(idPrestamo);
 			
-			Prestamo prestamo = servicioPrestamo.consultarUnPrestamo(idPrestamo);
+			Afiliado afiliado = servicioAfiliado.consultarAfiliado(idPrestamo);
 			
 			Double montoTotalARefinanciar = 0.0;
 			int cuotasRestante = 0;
@@ -100,19 +107,76 @@ public class ControladorPrestamo {
 				montoTotalARefinanciar += i.getMontoTotal();
 				cuotasRestante++;
 			}
-		    
+		    //modelo.put("prestamo", prestamo);
+		    modelo.put("afiliado", afiliado);
+		    modelo.put("idPrestamoRef", idPrestamo);
 			modelo.put("cuotas", impagas);	
 			modelo.put("MontoARefinanciar", montoTotalARefinanciar);
 			modelo.put("cuotasRestante",cuotasRestante);
 			return new ModelAndView("refinanciar",modelo);
 	
 	}
+
+	@RequestMapping(path = "/hacer-refinanciacion", method = RequestMethod.POST)
+	public ModelAndView refinanciarAlta(Long idAfiliado, Long idPrestamoRef, double newCapital, Integer cuotas, double interes) {
+
+		Integer nCapital = (int)newCapital;
+
+		
+		// aqui tiene que estar el modificar la clasificacion del Afiliado (Perdida).
+		
+		// aqui tiene que estar el modificar el estado del prestamo (Refinanciado).
+		
+		// Creo un nuevo prestamo con sus respectivos cuotas.
+		Calendar fechven = Calendar.getInstance();
+		
+		List<Cuota> cuotasRef = new ArrayList<Cuota>();
+		
+		double montoMensual = nCapital/cuotas;
+		double valorInteres = (nCapital*interes)/12;
+		double total = montoMensual + valorInteres;
+		
+		for(int i=0; i<cuotas; i++){
+			fechven.add(Calendar.DAY_OF_YEAR, 30);
+			
+			Cuota ncuota = new Cuota();
+			
+			ncuota.setMonto(montoMensual);
+			ncuota.setInteres(valorInteres);
+			ncuota.setMontoTotal(total);
+			ncuota.setEstado(false);
+			ncuota.setFechaDeVencimiento(fechven.getTime());
+
+			cuotasRef.add(ncuota);
+		}
+		
+		Prestamo prestamoRef = new Prestamo();
+		prestamoRef.setValor(nCapital);
+		prestamoRef.setCuotas(cuotas);
+		prestamoRef.setInteres(interes);
+		prestamoRef.setCuota(cuotasRef);
+
+		servicioPrestamo.crearNuevoPrestamo(prestamoRef);
+
+		return new ModelAndView("home");
+	}
+	
+	// Lo uso solo para mostrar las cuotas del nuevo prestamo.
+	@RequestMapping("/ultimoprestamo")
+	public ModelAndView irAListarcuotasDeUltimoPrestamo() {
+
+		ModelMap modelo=new ModelMap();
+		List<Cuota> cuotasDelUltimoPrestamo = servicioCuota.consultarCuotaDelUltimoPrestamo();
+		modelo.put("cuotas", cuotasDelUltimoPrestamo);
+		
+		return new ModelAndView("listarcuotas",modelo);
+	}
+	
 	// si ingresa por la url "/refinanciar" sin pasar por los prestamos lo redirige al home.
 	@RequestMapping("/refinanciar")
 	public ModelAndView irAHome() {
 			
-			return new ModelAndView("home");
-	
+		return new ModelAndView("home");
 	}
 	
 	

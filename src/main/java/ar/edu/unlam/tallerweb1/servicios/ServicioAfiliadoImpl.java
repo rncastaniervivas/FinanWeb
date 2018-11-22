@@ -41,5 +41,10 @@ public class ServicioAfiliadoImpl implements ServicioAfiliado {
 	public List <Afiliado> buscarAfiliado (Afiliado afiliado) {
 		return servicioAfiliadoDao.buscarAfiliado(afiliado);
 	}
+	
+	@Override
+	public Afiliado consultarAfiliado (Long idPrestamo) {
+		return servicioAfiliadoDao.consultarAfiliado(idPrestamo);
+	}
 
 }

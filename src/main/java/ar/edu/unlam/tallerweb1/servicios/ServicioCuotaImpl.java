@@ -28,4 +28,9 @@ public class ServicioCuotaImpl implements ServicioCuota{
 		return servicioCuotaDao.consultarCuota(arefinanciar);
 	}
 	
+	@Override
+	public List<Cuota> consultarCuotaDelUltimoPrestamo() {
+		return servicioCuotaDao.consultarCuotaDelUltimoPrestamo();
+	}
+	
 }

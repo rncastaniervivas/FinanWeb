@@ -6,6 +6,7 @@ import ar.edu.unlam.tallerweb1.modelo.Afiliado;
 
 public interface ServicioAfiliado {
 
+
 	List<Afiliado> consultarAfiliado ();
 	
 	void agregarAfiliado (Afiliado afiliado);
