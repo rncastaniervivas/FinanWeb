@@ -68,23 +68,36 @@ public class ControladorPrestamo {
 		Calendar fechven = Calendar.getInstance();
 		
 		List<Cuota> cuotas = new ArrayList<Cuota>();
+		//// CUOTA DE PRUEBA
+		Cuota lcuota=new Cuota();
+		fechven.add(Calendar.DAY_OF_YEAR, 30);
+		lcuota.setMonto(montoMensual);
+		lcuota.setInteres(valorInteres);
+		lcuota.setMontoTotal(total);
+		lcuota.setEstado(false);
+		lcuota.setFechaDeVencimiento(fechven.getTime());
+		lcuota.setPrestamo(nprestamo);
 		
+		request.setAttribute("lcuota", lcuota);
+		///// CUOTA DE PRUEBA
 		for(int i=0; i<nprestamo.getCuotas(); i++){
-			fechven.add(Calendar.DAY_OF_YEAR, 30);
 			
 			Cuota ncuota = new Cuota();
-			
+			fechven.add(Calendar.DAY_OF_YEAR, 30);
 			ncuota.setMonto(montoMensual);
 			ncuota.setInteres(valorInteres);
 			ncuota.setMontoTotal(total);
 			ncuota.setEstado(false);
 			ncuota.setFechaDeVencimiento(fechven.getTime());
-
+			ncuota.setPrestamo(nprestamo);
+			
 			cuotas.add(ncuota);
+			
 		}
-		
 		servicioCuota.insertarCuota(cuotas);
-		//servicioPrestamo.insertarPrestamo(nprestamo);
+		
+		servicioPrestamo.crearNuevoPrestamo(nprestamo);
+		
 		modelo.put("cuotas", cuotas);
 		
 		return new ModelAndView("realizarpagoafinan", modelo);		
@@ -157,7 +170,7 @@ public class ControladorPrestamo {
 		prestamoRef.setCuota(cuotasRef);
 
 		servicioPrestamo.crearNuevoPrestamo(prestamoRef);
-
+		
 		return new ModelAndView("home");
 	}
 	

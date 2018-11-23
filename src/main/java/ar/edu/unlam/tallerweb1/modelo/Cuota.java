@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.modelo;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +22,7 @@ public class Cuota {
 	private Date fechaDePago;
 	private Date fechaDeVencimiento;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Prestamo prestamo;
 
 	public Long getIdCuota() {
