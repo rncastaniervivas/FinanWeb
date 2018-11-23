@@ -15,6 +15,8 @@ public interface ServicioAfiliado {
 	
 	void eliminarAfiliado (Afiliado afiliado);
 	
+	Afiliado consultarAfiliado(Long idPrestamo);
+	
 	List<Afiliado> buscarAfiliado (Afiliado afiliado);
 	
 	}

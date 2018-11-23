@@ -43,8 +43,8 @@ public class ServicioAfiliadoImpl implements ServicioAfiliado {
 	}
 	
 	@Override
-	public Afiliado consultarAfiliado (Long idPrestamo) {
-		return servicioAfiliadoDao.consultarAfiliado(idPrestamo);
+	public Afiliado consultarAfiliado (Long id) {
+		return servicioAfiliadoDao.consultarAfiliado(id);
 	}
 
 }
