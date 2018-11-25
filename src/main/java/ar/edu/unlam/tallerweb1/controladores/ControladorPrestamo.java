@@ -61,7 +61,7 @@ public class ControladorPrestamo {
 		// calculamos el valor de la cuota mensual.
 		double montoMensual = nprestamo.getValor()/nprestamo.getCuotas();
 		// calculamos el valor mensual de interes (el interes es igual para todos las cuotas)
-		double valorInteres = nprestamo.getValor() * (nprestamo.getInteres()/100);
+		double valorInteres = nprestamo.getValor() * nprestamo.getInteres();
 		// capturamos la fecha actual
 		double total = montoMensual + valorInteres;
 		
@@ -140,6 +140,13 @@ public class ControladorPrestamo {
 		
 		// aqui tiene que estar el modificar el estado del prestamo (Refinanciado).
 		
+		
+		Prestamo prestamoRef = new Prestamo();
+		prestamoRef.setValor(nCapital);
+		prestamoRef.setCuotas(cuotas);
+		prestamoRef.setInteres(interes);
+		//prestamoRef.setCuota(cuotasRef);
+		
 		// Creo un nuevo prestamo con sus respectivos cuotas.
 		Calendar fechven = Calendar.getInstance();
 		
@@ -159,17 +166,12 @@ public class ControladorPrestamo {
 			ncuota.setMontoTotal(total);
 			ncuota.setEstado(false);
 			ncuota.setFechaDeVencimiento(fechven.getTime());
+			ncuota.setPrestamo(prestamoRef);
 
 			cuotasRef.add(ncuota);
 		}
-		
-		Prestamo prestamoRef = new Prestamo();
-		prestamoRef.setValor(nCapital);
-		prestamoRef.setCuotas(cuotas);
-		prestamoRef.setInteres(interes);
-		prestamoRef.setCuota(cuotasRef);
-
-		servicioPrestamo.crearNuevoPrestamo(prestamoRef);
+		//servicioPrestamo.crearNuevoPrestamo(prestamoRef);
+		servicioCuota.insertarCuota(cuotasRef);
 		
 		return new ModelAndView("home");
 	}
