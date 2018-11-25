@@ -104,14 +104,14 @@ public class ControladorPrestamo {
 	}
 	
 	@RequestMapping(path = "/refinanciar", method = RequestMethod.POST)
-	public ModelAndView listaCuotasImp(Long idPrestamo) {
+	public ModelAndView listaCuotasImp(Long idPrestamo, Long dni) {
 			ModelMap modelo=new ModelMap();
 			
 			//Prestamo prestamo = new Prestamo();
 			
 			List<Cuota> impagas=servicioCuota.consultarCuota(idPrestamo);
 			
-			Afiliado afiliado = servicioAfiliado.consultarAfiliado(idPrestamo);
+			Afiliado afiliado = servicioAfiliado.consultarAfiliadoDni(dni);
 			
 			Double montoTotalARefinanciar = 0.0;
 			int cuotasRestante = 0;
@@ -131,14 +131,16 @@ public class ControladorPrestamo {
 	}
 
 	@RequestMapping(path = "/hacer-refinanciacion", method = RequestMethod.POST)
-	public ModelAndView refinanciarAlta(Long idAfiliado, Long idPrestamoRef, double newCapital, Integer cuotas, double interes) {
+	public ModelAndView refinanciarAlta(Long dni, Long idPrestamoRef, double newCapital, Integer cuotas, double interes) {
 		ModelMap modelo = new ModelMap();
 		
 		Integer nCapital = (int)newCapital;
 
-		
 		// aqui tiene que estar el modificar la clasificacion del Afiliado (Perdida).
-		
+		Afiliado afiliado = servicioAfiliado.consultarAfiliadoDni(dni);
+		afiliado.setClasificacion("Perdida");
+		servicioAfiliado.modificarAfiliado(afiliado);
+
 		// aqui tiene que estar el modificar el estado del prestamo (Refinanciado).
 		
 		

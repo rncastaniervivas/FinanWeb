@@ -49,7 +49,11 @@
 				      <th scope="row">${prestamos.valor}</th>
 				      <td>${prestamos.cuotas}</td>
 				      <td>${prestamos.interes}</td>
-				      <td><form action="refinanciar" method="POST" ><button type="submit" class="btn btn-info" name="idPrestamo" value="${prestamos.idPrestamo}">Refinanciar</button></form></td>
+				      <td><form action="refinanciar" method="POST" >
+				      	  <input type="hidden" name="dni" value="${afiliado.dni}">
+				      	  <button type="submit" class="btn btn-info" name="idPrestamo" value="${prestamos.idPrestamo}">Refinanciar</button>
+				      	  </form>
+				      </td>
 				    </tr>
 				  </tbody>
 			  </c:forEach>

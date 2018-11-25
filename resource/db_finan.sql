@@ -44,8 +44,3 @@ select * from cuota;
 
 
 
-
-
-
-
-

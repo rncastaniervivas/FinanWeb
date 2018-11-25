@@ -56,7 +56,7 @@
 		
 		<div class="container">
 			<form action="hacer-refinanciacion" method="POST">
-			  <input type="hidden" name="idAfiliado" value="${afiliado.idAfiliado}">
+			  <input type="hidden" name="dni" value="${afiliado.dni}">
 			  <input type="hidden" name="idPrestamoRef" value="${idPrestamoRef}">
 			  <div class="form-row">
 			    <div class="form-group col-md-6">
@@ -94,6 +94,7 @@
 			  </div>
 			<form>
 		</div>
+
 		
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
