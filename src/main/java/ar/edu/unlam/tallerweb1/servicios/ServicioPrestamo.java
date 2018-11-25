@@ -11,5 +11,6 @@ public interface ServicioPrestamo {
 	Prestamo consultarUnPrestamo(Long idPrestamo);
 	
 	void crearNuevoPrestamo(Prestamo prestamoRef);
-
+	
+	List<Prestamo> consultarPrestamo(Long dni);
 }

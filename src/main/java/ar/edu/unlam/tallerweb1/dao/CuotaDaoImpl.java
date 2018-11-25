@@ -38,6 +38,7 @@ public class CuotaDaoImpl implements CuotaDao{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Cuota> consultarCuotaDelUltimoPrestamo() {
+		
 		return (sessionFactory.getCurrentSession()
 				.createCriteria(Cuota.class)
 				.createAlias("prestamo", "prestamoj")

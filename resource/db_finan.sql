@@ -11,9 +11,9 @@ insert into financiera (nombre) values ('Galicia');
 select * from financiera;
 
 /* Insertar a la tabla afiliado */
-insert into afiliado (idAfiliado,nombre,apellido,puesto,antiguedad,sueldo,clasificacion) values (1,'Martin','Ale','','3',20000,null);
-insert into afiliado (idAfiliado,nombre,apellido,puesto,antiguedad,sueldo,clasificacion) values (2,'Daniel','Ramoz','','2',25000,null);
-insert into afiliado (idAfiliado,nombre,apellido,puesto,antiguedad,sueldo,clasificacion) values (3,'Alex','Diaz','','5',30000,null);
+insert into afiliado (idAfiliado,nombre,apellido,dni,puesto,antiguedad,sueldo,clasificacion) values (1,'Martin','Ale',111,'','3',20000,null);
+insert into afiliado (idAfiliado,nombre,apellido,dni,puesto,antiguedad,sueldo,clasificacion) values (2,'Daniel','Ramoz',222,'','2',25000,null);
+insert into afiliado (idAfiliado,nombre,apellido,dni,puesto,antiguedad,sueldo,clasificacion) values (3,'Alex','Diaz',333,'','5',30000,null);
 
 select *from afiliado;
 

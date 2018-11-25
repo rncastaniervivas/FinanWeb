@@ -19,4 +19,6 @@ public interface ServicioAfiliado {
 	
 	List<Afiliado> buscarAfiliado (Afiliado afiliado);
 	
-	}
+	Afiliado consultarAfiliadoDni(Long dni);
+	
+}

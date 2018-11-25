@@ -26,6 +26,11 @@
 			  </li>
 			</ul>
 		</div>
+		
+		<div class="container">
+			<h3>${afiliado.nombre} ${afiliado.apellido}</h3>
+		
+		</div>
 	
 		<div class="container">
 			<h1 class="text-center">LISTA DE PRESTAMOS</h1>

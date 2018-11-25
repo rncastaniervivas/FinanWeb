@@ -69,16 +69,16 @@ public class ControladorPrestamo {
 		
 		List<Cuota> cuotas = new ArrayList<Cuota>();
 		//// CUOTA DE PRUEBA
-		Cuota lcuota=new Cuota();
-		fechven.add(Calendar.DAY_OF_YEAR, 30);
-		lcuota.setMonto(montoMensual);
-		lcuota.setInteres(valorInteres);
-		lcuota.setMontoTotal(total);
-		lcuota.setEstado(false);
-		lcuota.setFechaDeVencimiento(fechven.getTime());
-		lcuota.setPrestamo(nprestamo);
-		
-		request.setAttribute("lcuota", lcuota);
+//		Cuota lcuota=new Cuota();
+//		fechven.add(Calendar.DAY_OF_YEAR, 30);
+//		lcuota.setMonto(montoMensual);
+//		lcuota.setInteres(valorInteres);
+//		lcuota.setMontoTotal(total);
+//		lcuota.setEstado(false);
+//		lcuota.setFechaDeVencimiento(fechven.getTime());
+//		lcuota.setPrestamo(nprestamo);
+//		
+//		request.setAttribute("lcuota", lcuota);
 		///// CUOTA DE PRUEBA
 		for(int i=0; i<nprestamo.getCuotas(); i++){
 			
@@ -96,7 +96,7 @@ public class ControladorPrestamo {
 		}
 		servicioCuota.insertarCuota(cuotas);
 		
-		servicioPrestamo.crearNuevoPrestamo(nprestamo);
+//		servicioPrestamo.crearNuevoPrestamo(nprestamo);
 		
 		modelo.put("cuotas", cuotas);
 		
@@ -132,7 +132,8 @@ public class ControladorPrestamo {
 
 	@RequestMapping(path = "/hacer-refinanciacion", method = RequestMethod.POST)
 	public ModelAndView refinanciarAlta(Long idAfiliado, Long idPrestamoRef, double newCapital, Integer cuotas, double interes) {
-
+		ModelMap modelo = new ModelMap();
+		
 		Integer nCapital = (int)newCapital;
 
 		
@@ -173,7 +174,9 @@ public class ControladorPrestamo {
 		//servicioPrestamo.crearNuevoPrestamo(prestamoRef);
 		servicioCuota.insertarCuota(cuotasRef);
 		
-		return new ModelAndView("home");
+		List<Cuota> nueCuotas = servicioCuota.consultarCuotaDelUltimoPrestamo();
+		modelo.put("cuotas", nueCuotas);
+		return new ModelAndView("listarcuotas",modelo);
 	}
 	
 	// Lo uso solo para mostrar las cuotas del nuevo prestamo.

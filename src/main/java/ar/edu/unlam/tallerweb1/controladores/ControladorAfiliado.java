@@ -12,13 +12,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Afiliado;
+import ar.edu.unlam.tallerweb1.modelo.Prestamo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAfiliado;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPrestamo;
 
 @Controller
 public class ControladorAfiliado {
 	
 	@Inject 
 	private ServicioAfiliado servicioAfiliado;
+	
+	@Inject
+	private ServicioPrestamo servicioPrestamo;
 	
 	@RequestMapping ("/agregarafiliado")
 	public ModelAndView irAAgregarAfiliado() {
@@ -86,5 +91,21 @@ public class ControladorAfiliado {
 		
 		return new ModelAndView("afiliado", modelo);
 	}
+	
+	@RequestMapping ("/buscadorafiliado")
+	public ModelAndView irABuscadorAfiliado() {
+		return new ModelAndView("buscadorafiliado");
+	}
 
+	@RequestMapping (path = "/buscarafiliado", method = RequestMethod.POST)
+	public ModelAndView irABuscarAfiliado(Long dni) {
+		ModelMap modelo = new ModelMap();
+		List<Prestamo> prestamos= servicioPrestamo.consultarPrestamo(dni);
+		Afiliado afiliado = new Afiliado();
+		afiliado = servicioAfiliado.consultarAfiliadoDni(dni);
+		modelo.put("afiliado", afiliado);
+		modelo.put("prestamos", prestamos);
+		return new ModelAndView("listarprestamos",modelo);
+	}
+	
 }

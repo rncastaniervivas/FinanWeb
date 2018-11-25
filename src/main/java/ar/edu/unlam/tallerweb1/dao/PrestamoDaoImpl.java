@@ -37,4 +37,14 @@ public class PrestamoDaoImpl implements PrestamoDao {
 	public void crearNuevoPrestamo(Prestamo prestmoRef) {
 		sessionFactory.getCurrentSession().save(prestmoRef);
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Prestamo> consultarPrestamo(Long dni) {
+		return (sessionFactory.getCurrentSession()
+				.createCriteria(Prestamo.class)
+				.createAlias("afiliado", "afiliadoj")
+				.add(Restrictions.eq("afiliadoj.dni", dni))
+				.list());
+	}
 }

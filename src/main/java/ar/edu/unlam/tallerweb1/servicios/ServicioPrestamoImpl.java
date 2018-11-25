@@ -31,4 +31,9 @@ public class ServicioPrestamoImpl implements ServicioPrestamo {
 		servicioPrestamoDao.crearNuevoPrestamo(prestamoRef);
 	}
 	
+	@Override
+	public List<Prestamo> consultarPrestamo(Long dni) {
+		return servicioPrestamoDao.consultarPrestamo(dni);
+	}
+	
 }

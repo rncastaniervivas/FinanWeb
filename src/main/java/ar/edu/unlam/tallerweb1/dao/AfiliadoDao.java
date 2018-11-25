@@ -21,9 +21,10 @@ public interface AfiliadoDao {
 	//Afiliado consultarAfiliado(Afiliado afiliado);
 	
 	Afiliado consultarAfiliado(Long idPrestamo);
-	
-	
 
+	Afiliado consultarAfiliadoDni(Long dni);
+	
+	
 //	List<Prestamo> listarPrestamos(Long id);
 }
 /*

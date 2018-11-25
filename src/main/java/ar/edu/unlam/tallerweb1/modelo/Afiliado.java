@@ -15,6 +15,7 @@ public class Afiliado {
 	private Long idAfiliado;
 	private String nombre;
 	private String apellido;
+	private Long dni;
 	private String puesto;
 	private String antiguedad;
 	private Double sueldo;
@@ -40,6 +41,13 @@ public class Afiliado {
 	}
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
+	}
+	
+	public Long getDni() {
+		return dni;
+	}
+	public void setDni(Long dni) {
+		this.dni = dni;
 	}
 	public String getPuesto() {
 		return puesto;
