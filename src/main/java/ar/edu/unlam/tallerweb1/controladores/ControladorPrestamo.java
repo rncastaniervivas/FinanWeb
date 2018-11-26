@@ -136,18 +136,21 @@ public class ControladorPrestamo {
 		
 		Integer nCapital = (int)newCapital;
 
-		// aqui tiene que estar el modificar la clasificacion del Afiliado (Perdida).
+		// Se modificar la clasificacion del Afiliado (Perdida).
 		Afiliado afiliado = servicioAfiliado.consultarAfiliadoDni(dni);
 		afiliado.setClasificacion("Perdida");
 		servicioAfiliado.modificarAfiliado(afiliado);
 
 		// aqui tiene que estar el modificar el estado del prestamo (Refinanciado).
-		
+		Prestamo prestamo = servicioPrestamo.consultarUnPrestamo(idPrestamoRef);
+		prestamo.setEstado("Refinanciado");
+		servicioPrestamo.modificarPrestamo(prestamo);
 		
 		Prestamo prestamoRef = new Prestamo();
 		prestamoRef.setValor(nCapital);
 		prestamoRef.setCuotas(cuotas);
 		prestamoRef.setInteres(interes);
+		prestamoRef.setAfiliado(afiliado);
 		//prestamoRef.setCuota(cuotasRef);
 		
 		// Creo un nuevo prestamo con sus respectivos cuotas.

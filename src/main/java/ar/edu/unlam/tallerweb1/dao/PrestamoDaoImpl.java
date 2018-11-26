@@ -47,4 +47,9 @@ public class PrestamoDaoImpl implements PrestamoDao {
 				.add(Restrictions.eq("afiliadoj.dni", dni))
 				.list());
 	}
+	
+	@Override
+	public void modificarPrestamo(Prestamo prestamo) {
+		sessionFactory.getCurrentSession().update(prestamo);
+	}
 }

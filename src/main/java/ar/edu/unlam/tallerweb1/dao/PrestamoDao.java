@@ -13,4 +13,6 @@ public interface PrestamoDao {
 	
 	List<Prestamo> consultarPrestamo(Long dni);
 	
+	void modificarPrestamo(Prestamo prestamo);
+	
 }

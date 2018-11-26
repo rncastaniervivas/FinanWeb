@@ -36,4 +36,9 @@ public class ServicioPrestamoImpl implements ServicioPrestamo {
 		return servicioPrestamoDao.consultarPrestamo(dni);
 	}
 	
+	@Override
+	public void modificarPrestamo(Prestamo prestamo) {
+		servicioPrestamoDao.modificarPrestamo(prestamo);
+	}
+	
 }
