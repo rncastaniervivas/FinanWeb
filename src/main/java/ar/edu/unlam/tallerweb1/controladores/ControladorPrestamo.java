@@ -45,11 +45,14 @@ public class ControladorPrestamo {
 	}
 	
 	@RequestMapping(path="/misprestamos")
-	public ModelAndView misprestamos(Long dni) {
+	public ModelAndView misprestamos(Long dni, HttpServletRequest request) {
 		ModelMap modelo = new ModelMap();
+		Long dni0=(Long) request.getSession().getAttribute("dni");
 		
-		List<Prestamo> prestamos= servicioPrestamo.consultarPrestamo(dni);
+		List<Prestamo> prestamos= servicioPrestamo.consultarPrestamo(dni0);
+		
 		modelo.put("prestamos", prestamos);
+
 		
 		return new ModelAndView("listarprestamos",modelo);
 	}
@@ -62,34 +65,50 @@ public class ControladorPrestamo {
 		
 		//lo que esta comentado seria pagar pero no se por que me salta error
 		
-//		List<Cuota> miscuotas= miprestamo.getCuota();
-//		int cantcuotas=0;
-//		cantcuotas=miprestamo.getCuotas();
-//		
-//		if(cantcuotas<=0) {
-//			modelo.put("error", "Prestamo Pagado");
-//			return new ModelAndView("listarprestamos", modelo);
-//		}
-//		int valorprestamo=miprestamo.getValor();		
-//		boolean estado=true;
-//		for (Cuota item : miscuotas) {
-//			if(estado) {
-//				estado=item.getEstado();
-//				if(estado==false) {
-//					item.setEstado(true);
-//					cantcuotas--;
-//					valorprestamo-=item.getMontoTotal();
-//				}
-//			}
-//			
-//		}
-//		miprestamo.setValor(valorprestamo);
+		List<Cuota> miscuotas=servicioCuota.consultarCuota(idPrestamo1);
 		
-		//modelo.put("prestamos", prestamos);
-		modelo.put("cuotas", miprestamo.getCuota());
+		int cantcuotas=0;
+
+		int valorprestamo=miprestamo.getValor();		
 		
-//		return new ModelAndView("listarprestamos",modelo);
-		return new ModelAndView("realizarpagoafinan", modelo);		
+		cantcuotas+=miprestamo.getCuotas();
+		
+		if(cantcuotas<=0) {
+			modelo.put("error", "Prestamo Pagado");
+			return new ModelAndView("listarprestamos", modelo);
+		}
+		
+		
+		boolean estado=true;
+		
+		int cont=0;
+		
+		for (Cuota item0 : miscuotas) {
+			if(item0.getEstado()) {
+				cont++;
+			}
+		}
+		cantcuotas=cantcuotas-cont;
+		
+		for (Cuota item : miscuotas) {
+			if(estado) {
+				estado=item.getEstado();
+				if(estado==false) {
+					item.setEstado(true);
+					valorprestamo-=item.getMontoTotal();
+				}
+			}
+			
+			
+		}
+		miprestamo.setValor(valorprestamo);	
+		
+		miprestamo.setCuotas(cantcuotas);
+		
+		servicioPrestamo.modificarPrestamo(miprestamo);
+
+		return new ModelAndView("redirect:/misprestamos");
+		
 	}
 	
 	
