@@ -11,8 +11,10 @@
 			<h1>Bienvenidos a Taller Web 1</h1>
 			${dni}
 			<form action="misprestamos" method="POST" >
-				      	  <input type="hidden" name="dni" value="${dni}">
 				      	  <button type="submit" class="btn btn-info" name="dni" value="${dni}">MisPrestamos</button>
+				      	  </form>
+			<form action="nuevoprestamo" method="POST" >
+				      	  <button type="submit" class="btn btn-info" >NuevoPrestamo</button>
 				      	  </form>
 		</div>
 		<!-- Placed at the end of the document so the pages load faster -->

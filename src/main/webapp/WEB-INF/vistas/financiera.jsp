@@ -23,6 +23,7 @@
 </div>
 <div class="col-md-4">
 <form:form class="form-inline d-iniline" action="agregarfinanciera">
+<br>
 <button class="btn btn-primary btn-lg" type="submit">nueva finaciera</button>
 </form:form>
 </div>

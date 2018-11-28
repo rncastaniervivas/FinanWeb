@@ -40,6 +40,9 @@
 			      <th scope="col">Valor</th>
 			      <th scope="col">Cuotas</th>
 			      <th scope="col">Intereces</th>
+			      <th scope="col">Estado</th>
+			      <th scope="col">Elegir</th>
+			      
 			    </tr>
 			  </thead>
 			  <!-- listar todos los afiados -->
@@ -49,15 +52,23 @@
 				      <th scope="row">${prestamos.valor}</th>
 				      <td>${prestamos.cuotas}</td>
 				      <td>${prestamos.interes}</td>
+				      <td>${prestamos.estado}</td>
 				      <td><form action="refinanciar" method="POST" >
 				      	  <input type="hidden" name="dni" value="${afiliado.dni}">
 				      	  <button type="submit" class="btn btn-info" name="idPrestamo" value="${prestamos.idPrestamo}">Refinanciar</button>
 				      	  </form>
 				      </td>
 				      <td><form action="pagarcuota" method="POST" >
-				      	  <button type="submit" class="btn btn-info" name="idPrestamo1" value="${prestamos.idPrestamo}">Pagar Cuotas</button>
+				      	  <input type="hidden" name="dni1" value="${afiliado.dni}">
+				      	  <button type="submit" class="btn btn-info" name="idPrestamo1" value="${prestamos.idPrestamo}">Pagar</button>
 				      	  </form>
 				      </td>
+				      <td>
+				      <c:if test="${not empty error}">
+			        	<span>${error}</span>
+			        	<br>
+		        		</c:if>	
+		        	</td>
 				    </tr>
 				  </tbody>
 			  </c:forEach>
