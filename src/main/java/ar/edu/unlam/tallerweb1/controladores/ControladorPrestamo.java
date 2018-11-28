@@ -43,6 +43,16 @@ public class ControladorPrestamo {
 		return new ModelAndView("listarprestamos",modelo);
 	}
 	
+	@RequestMapping(path="/misprestamos", method=RequestMethod.POST)
+	public ModelAndView misprestamos(HttpServletRequest request,Long dni) {
+		ModelMap modelo = new ModelMap();
+		
+		List<Prestamo> prestamos= servicioPrestamo.consultarPrestamo(dni);
+		modelo.put("prestamos", prestamos);
+		
+		return new ModelAndView("listarprestamos",modelo);
+	}
+	
 	@RequestMapping("/nuevoprestamo")
 	public ModelAndView nuevoPrestamo() {
 ModelMap modelo = new ModelMap();
@@ -80,7 +90,7 @@ ModelMap modelo = new ModelMap();
 		
 		
 		Prestamo nprestamo = prestamo;
-		
+		nprestamo.setInteres(cantcuotas*interesCuota);
 		Afiliado afiliado0=servicioAfiliado.consultarAfiliadoDni(prestamo.getDni());
 		
 		double montoMensual = nprestamo.getValor()/nprestamo.getCuotas();

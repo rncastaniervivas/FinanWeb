@@ -54,6 +54,11 @@
 				      	  <button type="submit" class="btn btn-info" name="idPrestamo" value="${prestamos.idPrestamo}">Refinanciar</button>
 				      	  </form>
 				      </td>
+				      <td><form action="pagar" method="POST" >
+				      	  <input type="hidden" name="dni" value="${afiliado.dni}">
+				      	  <button type="submit" class="btn btn-info" name="idPrestamo" value="${prestamos.idPrestamo}">Pagar Cuotas</button>
+				      	  </form>
+				      </td>
 				    </tr>
 				  </tbody>
 			  </c:forEach>
