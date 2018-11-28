@@ -23,8 +23,8 @@ public class ServicioAfiliadoImpl implements ServicioAfiliado {
 	}
 	
 	@Override
-	public void agregarAfiliado (Afiliado afiliado) {
-		servicioAfiliadoDao.agregarAfiliado(afiliado);
+	public void guardarAfiliado (Afiliado afiliado) {
+		servicioAfiliadoDao.guardarAfiliado(afiliado);
 	}
 	
 	@Override

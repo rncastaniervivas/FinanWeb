@@ -40,13 +40,13 @@ public class ControladorAfiliado {
 		ModelMap modelo = new ModelMap();
 		Afiliado afiliado = new Afiliado();
 		modelo.put("afiliado", afiliado);
-		List<Afiliado> listafiliado = servicioAfiliado.buscarAfiliado(agregarafiliado);
+		List<Afiliado> miafiliado = servicioAfiliado.buscarAfiliado(agregarafiliado);
 		
-		if(listafiliado.size() == 0) {
-			servicioAfiliado.agregarAfiliado(agregarafiliado);
+		if(miafiliado.size() == 0) {
+			servicioAfiliado.guardarAfiliado(agregarafiliado);
 			List<Afiliado> lista = servicioAfiliado.consultarAfiliado();
-			modelo.put("afiliado", lista);
-			return new ModelAndView("afiliado", modelo);
+			modelo.put("afiliados", lista);
+			return new ModelAndView("listarafiliados", modelo);
 		}
 		else {
 			modelo.put("error", "El afiliado que desea crear ya existe");
@@ -55,10 +55,10 @@ public class ControladorAfiliado {
 	}
 	
 	@RequestMapping (path ="/modificarafiliado", method = RequestMethod.POST)
-	public ModelAndView afiliadoAModificar(@ModelAttribute ("afiliado") Afiliado afiliadoM) {
+	public ModelAndView afiliadoAModificar(@ModelAttribute ("afiliado") Afiliado amAfil) {
 		ModelMap modelo = new ModelMap();
 		Afiliado afiliado = new Afiliado();
-		Afiliado afiliam = afiliadoM;
+		Afiliado afiliam = amAfil;
 		
 		modelo.put("afili", afiliam);
 		modelo.put("afiliado", afiliado);

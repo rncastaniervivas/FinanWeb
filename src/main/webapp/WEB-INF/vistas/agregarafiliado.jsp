@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -14,54 +15,54 @@
 <div class="panel panel-default">
 		    <div class="panel-heading">Nuevo afiliado</div>
 		    <div class="panel-body">
-		    	<form id="afiliado" role="form" action="listarafiliados" method="POST" modelAttribute="afiliado">
+		    	<form:form action="afiliadoagregado" modelAttribute="afiliado" method="POST" role="form">
 				  			  
 				  <div class="form-group row">
 					  <label class="col-lg-2 control-label">Nombre:</label>
 					  <div class="col-lg-10">
-					  	<input id="nombre" name="nombre" placeholder="Nombre" type="text" class="form-control" value="">
+					  	<form:input path="nombre" type="text" id="nombre" placeholder="Nombre"  class="form-control"/>
 					  </div>
 				  </div>
 				  
 				  <div class="form-group row">
 					  <label class="col-lg-2 control-label">Apellido:</label>
 					  <div class="col-lg-10">
-					  	<input id="apellido" name="apellido" placeholder="Apellido" type="text" class="form-control" value="">
+					  	<form:input path="apellido" type="text" id="apellido" placeholder="Apellido" class="form-control"/>
 					  </div>
 				  </div>
 				  
 				  <div class="form-group row">
 					  <label class="col-lg-2 control-label">Dni:</label>
 				  	  <div class="col-lg-10">
-				  	  	<input id="dni" name="dni" placeholder="Dni" type="text" class="form-control" value="">
+				  	  	<form:input path="dni" type="text" id="dni" placeholder="Dni" class="form-control"/>
 				  	  </div>
 				  </div>
 				  
 				   <div class="form-group row">
 					  <label class="col-lg-2 control-label">Puesto:</label>
 				  	  <div class="col-lg-10">
-				  	  	<input id="puedo" name="puesto" placeholder="Puesto" type="text" class="form-control" value="">
+				  	  	<form:input path="puesto" type="text" id="puesto" placeholder="Puesto" class="form-control"/>
 				  	  </div>
 				  </div>
 				  
 				   <div class="form-group row">
 					  <label class="col-lg-2 control-label">Antiguedad:</label>
 				  	  <div class="col-lg-10">
-				  	  	<input id="antiguedad" name="antiguedad" placeholder="Antiguedad(en años)" type="text" class="form-control" value="">
+				  	  	<form:input path="antiguedad" type="text" id="antiguedad" placeholder="Antiguedad" class="form-control"/>
 				  	  </div>
 				  </div>
 				  
 				   <div class="form-group row">
 					  <label class="col-lg-2 control-label">Sueldo:</label>
 				  	  <div class="col-lg-10">
-				  	  	<input id="sueldo" name="sueldo" placeholder="Sueldo" type="text" class="form-control" value="">
+				  	  	<form:input path="sueldo" type="text" id="sueldo" placeholder="Sueldo" class="form-control"/>
 				  	  </div>
 				  </div>
 				  
 				   <div class="form-group row">
 					  <label class="col-lg-2 control-label">Clasificación:</label>
 				  	  <div class="col-lg-10">
-				  	  	<input id="clasificacion" name="clasificacion" placeholder="Clasificación" type="text" class="form-control" value="">
+				  	  	<form:input path="clasificacion" type="text" id="clasificacion" placeholder="Clasificacion" class="form-control"/>
 				  	  </div>
 				  </div>
 				  
@@ -71,7 +72,7 @@
 						  <button type="submit" class="btn btn-success">Agregar nuevo afiliado</button>
 						</div>
 				  </div>
-				</form>
+				</form:form>
 			</div>
 		<div>
 	</div>

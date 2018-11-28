@@ -22,18 +22,22 @@
 			      <th scope="col">Puesto</th>
 			      <th scope="col">Antiguedad</th>
 			      <th scope="col">Sueldo</th>
+			      <th></th>
+			      <th></th>
 			    </tr>
 			  </thead>
 			  <!-- listar todos los afiliados -->
-			  <c:forEach items="${afiliado}" var="afiliado">
+			  <c:forEach items="${afiliados}" var="lista">
 				  <tbody>
 				    <tr>
-				      <th scope="row">${afiliado.nombre}</th>
-				      <td scope="row">${afiliado.apellido}</td>
-				      <td scope="row">${afiliado.dni}</td>
-				      <td scope="row">${afiliado.puesto}</td>
-				      <td scope="row">${afiliado.antiguedad}</td>
-				      <td scope="row">${afiliado.sueldo}</td>
+				      <th scope="row">${lista.nombre}</th>
+				      <td scope="row">${lista.apellido}</td>
+				      <td scope="row">${lista.dni}</td>
+				      <td scope="row">${lista.puesto}</td>
+				      <td scope="row">${lista.antiguedad}</td>
+				      <td scope="row">${lista.sueldo}</td>
+				      <td><button class="btn btn-info" type="submit" formaction="modificarafiliado"><span class="glyphicon glyphicon-align-justify"></span> Modificar</button></td>
+				      <td><button class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-remove"></span> Eliminar</button></td>
 				    </tr>
 				  </tbody>
 			  </c:forEach>

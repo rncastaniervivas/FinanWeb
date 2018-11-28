@@ -41,7 +41,7 @@ public class AfiliadoDaoImpl implements AfiliadoDao {
 	
 	
 	@Override
-	public void agregarAfiliado (Afiliado afiliado) {
+	public void guardarAfiliado (Afiliado afiliado) {
 		sessionFactory.getCurrentSession().save(afiliado);
 	}
 	

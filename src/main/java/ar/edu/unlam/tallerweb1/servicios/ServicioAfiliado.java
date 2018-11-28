@@ -9,7 +9,7 @@ public interface ServicioAfiliado {
 
 	List<Afiliado> consultarAfiliado ();
 	
-	void agregarAfiliado (Afiliado afiliado);
+	void guardarAfiliado (Afiliado afiliado);
 	
 	void modificarAfiliado (Afiliado afiliado);
 	
