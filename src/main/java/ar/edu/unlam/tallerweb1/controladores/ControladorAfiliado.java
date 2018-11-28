@@ -108,4 +108,14 @@ public class ControladorAfiliado {
 		return new ModelAndView("listarprestamos",modelo);
 	}
 	
+	@RequestMapping ("/listarafiliados")
+	public ModelAndView listarAfiliado() {
+		ModelMap modelo = new ModelMap();
+		
+		List<Afiliado> afiliados = servicioAfiliado.consultarAfiliado();
+		modelo.put("afiliados", afiliados);
+		
+		return new ModelAndView("listarafiliados", modelo);
+	}
+	
 }
