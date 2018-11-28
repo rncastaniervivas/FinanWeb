@@ -12,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Afiliado;
@@ -43,8 +44,8 @@ public class ControladorPrestamo {
 		return new ModelAndView("listarprestamos",modelo);
 	}
 	
-	@RequestMapping(path="/misprestamos", method=RequestMethod.POST)
-	public ModelAndView misprestamos(HttpServletRequest request,Long dni) {
+	@RequestMapping(path="/misprestamos")
+	public ModelAndView misprestamos(Long dni) {
 		ModelMap modelo = new ModelMap();
 		
 		List<Prestamo> prestamos= servicioPrestamo.consultarPrestamo(dni);
@@ -52,6 +53,45 @@ public class ControladorPrestamo {
 		
 		return new ModelAndView("listarprestamos",modelo);
 	}
+	
+	@RequestMapping(path = "/pagarcuota", method = RequestMethod.POST)
+	public ModelAndView pagarcuota(Long idPrestamo1, Long dni1) {
+		ModelMap modelo = new ModelMap();
+		
+		Prestamo miprestamo= servicioPrestamo.consultarUnPrestamo(idPrestamo1);
+		
+		//lo que esta comentado seria pagar pero no se por que me salta error
+		
+//		List<Cuota> miscuotas= miprestamo.getCuota();
+//		int cantcuotas=0;
+//		cantcuotas=miprestamo.getCuotas();
+//		
+//		if(cantcuotas<=0) {
+//			modelo.put("error", "Prestamo Pagado");
+//			return new ModelAndView("listarprestamos", modelo);
+//		}
+//		int valorprestamo=miprestamo.getValor();		
+//		boolean estado=true;
+//		for (Cuota item : miscuotas) {
+//			if(estado) {
+//				estado=item.getEstado();
+//				if(estado==false) {
+//					item.setEstado(true);
+//					cantcuotas--;
+//					valorprestamo-=item.getMontoTotal();
+//				}
+//			}
+//			
+//		}
+//		miprestamo.setValor(valorprestamo);
+		
+		//modelo.put("prestamos", prestamos);
+		modelo.put("cuotas", miprestamo.getCuota());
+		
+//		return new ModelAndView("listarprestamos",modelo);
+		return new ModelAndView("realizarpagoafinan", modelo);		
+	}
+	
 	
 	@RequestMapping("/nuevoprestamo")
 	public ModelAndView nuevoPrestamo() {
@@ -97,7 +137,7 @@ ModelMap modelo = new ModelMap();
 		// calculamos el valor mensual de interes (el interes es igual para todos las cuotas)
 		//double valorInteres = nprestamo.getValor() * nprestamo.getInteres();
 		// capturamos la fecha actual
-		double total = montoMensual; //+ valorInteres;
+		double total = montoMensual + interesCuota;
 		
 		double sueldo=afiliado0.getSueldo();
 		sueldo=sueldo*0.3;

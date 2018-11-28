@@ -54,9 +54,8 @@
 				      	  <button type="submit" class="btn btn-info" name="idPrestamo" value="${prestamos.idPrestamo}">Refinanciar</button>
 				      	  </form>
 				      </td>
-				      <td><form action="pagar" method="POST" >
-				      	  <input type="hidden" name="dni" value="${afiliado.dni}">
-				      	  <button type="submit" class="btn btn-info" name="idPrestamo" value="${prestamos.idPrestamo}">Pagar Cuotas</button>
+				      <td><form action="pagarcuota" method="POST" >
+				      	  <button type="submit" class="btn btn-info" name="idPrestamo1" value="${prestamos.idPrestamo}">Pagar Cuotas</button>
 				      	  </form>
 				      </td>
 				    </tr>
