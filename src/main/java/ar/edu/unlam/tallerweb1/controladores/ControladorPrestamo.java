@@ -67,35 +67,27 @@ public class ControladorPrestamo {
 		
 		List<Cuota> miscuotas=servicioCuota.consultarCuota(idPrestamo1);
 		
-		int cantcuotas=0;
+		int cantcuotas;
 
 		int valorprestamo=miprestamo.getValor();		
 		
-		cantcuotas+=miprestamo.getCuotas();
-		
-		if(cantcuotas<=0) {
-			modelo.put("error", "Prestamo Pagado");
-			return new ModelAndView("listarprestamos", modelo);
-		}
-		
+		cantcuotas=miprestamo.getCuotas();
 		
 		boolean estado=true;
 		
-		int cont=0;
-		
-		for (Cuota item0 : miscuotas) {
-			if(item0.getEstado()) {
-				cont++;
-			}
-		}
-		cantcuotas=cantcuotas-cont;
-		
 		for (Cuota item : miscuotas) {
 			if(estado) {
+				if(cantcuotas==1) {
+					item.setEstado(true);
+					valorprestamo=0;
+					miprestamo.setEstado("Pagado");
+				}
+				
 				estado=item.getEstado();
 				if(estado==false) {
 					item.setEstado(true);
 					valorprestamo-=item.getMontoTotal();
+					cantcuotas--;
 				}
 			}
 			
@@ -107,7 +99,7 @@ public class ControladorPrestamo {
 		
 		servicioPrestamo.modificarPrestamo(miprestamo);
 
-		return new ModelAndView("redirect:/misprestamos");
+		return new ModelAndView("redirect:/misprestamos",modelo);
 		
 	}
 	
@@ -198,7 +190,7 @@ ModelMap modelo = new ModelMap();
 		
 		modelo.put("cuotas", cuotas);
 		
-		return new ModelAndView("realizarpagoafinan", modelo);		
+		return new ModelAndView("redirect:/misprestamos");
 	}
 	
 	@RequestMapping(path = "/refinanciar", method = RequestMethod.POST)

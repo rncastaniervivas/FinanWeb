@@ -8,5 +8,5 @@ INSERT INTO `db_finan`.`usuario`(`email`,`password`,`rol`,`dni`)VALUES("usuario1
 INSERT INTO `db_finan`.`usuario`(`email`,`password`,`rol`,`dni`)VALUES("usuario2@usuario.com",12345,"cliente",87654321);
 INSERT INTO `db_finan`.`usuario`(`email`,`password`,`rol`,`dni`)VALUES("usuario3@usuario.com",12345,"cliente",99654321);
 INSERT INTO `db_finan`.`usuario`(`email`,`password`,`rol`,`dni`)VALUES("mutual@mutual.com",12345,"mutual",90000000);
-
+select * from prestamo;
 
