@@ -16,7 +16,7 @@
 	
 		<h1>Formulario para realizar pago a la mutual</h1>
 		<h4>usando esta vista solo para probar</h4>
-		Valor del prestamo: ${lcuota.prestamo.valor}
+		Valor del prestamo: ${la}
 		<c:forEach items="${cuotas}" var="cuota">
 			<p>Id:${cuota.idCuota}
 				monto:${cuota.monto} 

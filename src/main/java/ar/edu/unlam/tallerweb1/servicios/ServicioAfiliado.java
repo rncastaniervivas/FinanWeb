@@ -21,4 +21,6 @@ public interface ServicioAfiliado {
 	
 	Afiliado consultarAfiliadoDni(Long dni);
 	
+	Afiliado consultarIdAfiliado(Long id);
+	
 }

@@ -51,5 +51,9 @@ public class ServicioAfiliadoImpl implements ServicioAfiliado {
 	public Afiliado consultarAfiliadoDni (Long dni) {
 		return servicioAfiliadoDao.consultarAfiliadoDni(dni);
 	}
+	@Override
+	public Afiliado consultarIdAfiliado(Long id) {
+		return servicioAfiliadoDao.consultarIdAfiliado(id);
+	}
 
 }

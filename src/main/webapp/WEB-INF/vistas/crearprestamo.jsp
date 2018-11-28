@@ -30,19 +30,13 @@
 						  </form:select>
 					  </div>
 				  </div>
-				  
+				  	  	<form:input path="dni" type="text" id="dni" class="form-control" value="${dni}" style="display:none"/>
+				  	  
 				  <div class="form-group row">
 					  <label class="col-lg-2 control-label">Valor</label>
 					  <div class="col-lg-10">
 					  	<form:input path="valor" type="text" id="valor" placeholder="Valor"  class="form-control"/>
 					  </div>
-				  </div>
-				  
-				  <div class="form-group row">
-					  <label class="col-lg-2 control-label">Interes</label>
-				  	  <div class="col-lg-10">
-				  	  	<form:input path="interes" type="text" id="interes" placeholder="Interes"  class="form-control"/>
-				  	  </div>
 				  </div>
 				  
 				  <div class="form-group row">
@@ -52,6 +46,11 @@
 						</div>
 				  </div>
 				</form:form>
+				
+				<c:if test="${not empty error}">
+			        <h4><span>${error}</span></h4>
+			        <br>
+		        </c:if>	
 			</div>
 		</div>
 	</div>

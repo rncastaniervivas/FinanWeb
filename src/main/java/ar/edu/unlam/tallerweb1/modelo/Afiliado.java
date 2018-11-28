@@ -62,7 +62,7 @@ public class Afiliado {
 		this.antiguedad = antiguedad;
 	}
 	public Double getSueldo() {
-		return sueldo;
+		return this.sueldo;
 	}
 	public void setSueldo(Double sueldo) {
 		this.sueldo = sueldo;

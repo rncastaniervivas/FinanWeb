@@ -20,7 +20,7 @@ public class Usuario {
 	private String email;
 	private String password;
 	private String rol;
-	
+	private Long dni;
 	public Long getId() {
 		return id;
 	}
@@ -46,5 +46,11 @@ public class Usuario {
 
 	public void setRol(String rol) {
 		this.rol = rol;
+	}
+	public Long getDni() {
+		return dni;
+	}
+	public void setDni(Long dni) {
+		this.dni = dni;
 	}
 }

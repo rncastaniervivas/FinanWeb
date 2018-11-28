@@ -17,8 +17,9 @@ public class Prestamo {
 	private Long idPrestamo;
 	private Integer cuotas;
 	private Integer valor;
+	private Long dni;
 	private double interes;
-	private String estado; // si el prestamo fue cancelado, refinanciado u otros.
+	private String estado; // si el prestamo fue cancelado, refinanciado u otros.pen aprob ref
 	
 	@ManyToOne
 	private Financiera financiera;
@@ -78,6 +79,12 @@ public class Prestamo {
 	}
 	public void setCuota(List<Cuota> cuota) {
 		this.cuota = cuota;
+	}
+	public Long getDni() {
+		return dni;
+	}
+	public void setDni(Long dni) {
+		this.dni = dni;
 	}
 	
 }

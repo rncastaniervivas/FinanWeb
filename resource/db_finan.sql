@@ -1,27 +1,29 @@
-drop database if exists db_finan;
 
-create database db_finan;
-use db_finan;
-
-/* Insertar a tabla financiera */
+/* Insertar a tabla financiera 
 insert into financiera (nombre) values ('Naranja');
 insert into financiera (nombre) values ('Santander Rio');
 insert into financiera (nombre) values ('Galicia');
 
 select * from financiera;
-
+*/
 /* Insertar a la tabla afiliado */
-insert into afiliado (idAfiliado,nombre,apellido,dni,puesto,antiguedad,sueldo,clasificacion) values (1,'Martin','Ale',111,'','3',20000,null);
-insert into afiliado (idAfiliado,nombre,apellido,dni,puesto,antiguedad,sueldo,clasificacion) values (2,'Daniel','Ramoz',222,'','2',25000,null);
-insert into afiliado (idAfiliado,nombre,apellido,dni,puesto,antiguedad,sueldo,clasificacion) values (3,'Alex','Diaz',333,'','5',30000,null);
+insert into afiliado (idAfiliado,nombre,apellido,dni,puesto,antiguedad,sueldo,clasificacion) values (1,'Martin','Ale',12345678,'','3',10000,null);
+insert into afiliado (idAfiliado,nombre,apellido,dni,puesto,antiguedad,sueldo,clasificacion) values (2,'Daniel','Ramoz',87654321,'','2',10000,null);
+insert into afiliado (idAfiliado,nombre,apellido,dni,puesto,antiguedad,sueldo,clasificacion) values (3,'Alex','Diaz',99654321,'','5',10000,null);
+-- insert into afiliado (idAfiliado,nombre,apellido,dni,puesto,antiguedad,sueldo,clasificacion) values (3,'Mutual','Mutual',90000000,'','1',10000,null);
 
-select *from afiliado;
+INSERT INTO `db_finan`.`usuario`(`email`,`password`,`rol`,`dni`)VALUES("mutual@mutual.com",12345,"mutual",90000000);
+INSERT INTO `db_finan`.`usuario`(`email`,`password`,`rol`,`dni`)VALUES("usuario1@usuario.com",12345,"cliente",12345678);
+INSERT INTO `db_finan`.`usuario`(`email`,`password`,`rol`,`dni`)VALUES("usuario2@usuario.com",12345,"cliente",87654321);
+INSERT INTO `db_finan`.`usuario`(`email`,`password`,`rol`,`dni`)VALUES("usuario3@usuario.com",12345,"cliente",99654321);
+
+select *from prestamo;
 
 /* Insertar a la tabla prestamo */
 insert into prestamo (idPrestamo,cuotas,estado,interes,valor,afiliado_idAfiliado,financiera_idFinanciera) values (1,12,null,0.35,24000,1,null);
 
+-- select * from prestamo;
 select * from prestamo;
-
 /* insert a la tabla que relaciona afiliado con prestamos */
 insert into afiliado_prestamo (Afiliado_idAfiliado,prestamo_idPrestamo) values (1,1);
 select * from afiliado_prestamo;

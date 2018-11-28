@@ -45,58 +45,87 @@ public class ControladorPrestamo {
 	
 	@RequestMapping("/nuevoprestamo")
 	public ModelAndView nuevoPrestamo() {
-		ModelMap modelo = new ModelMap();
+ModelMap modelo = new ModelMap();
 		
 		Prestamo prestamo = new Prestamo();
 		modelo.put("prestamo", prestamo);
-		return new ModelAndView("crearprestamo", modelo);		
+		return new ModelAndView("crearprestamo", modelo);			
 	}
 	
 	@RequestMapping(path = "/crearprestamo", method=RequestMethod.POST)
 	public ModelAndView crearPrestamo(@ModelAttribute("prestamo") Prestamo prestamo, HttpServletRequest request) {
 		ModelMap modelo = new ModelMap();
 		
+		int cantcuotas=prestamo.getCuotas();
+		
+		double interesCuota=0;
+		
+		switch(cantcuotas) {
+		case 6:interesCuota=2.0;
+		break;
+		case 12:interesCuota=4.0;
+		break;
+		case 24:interesCuota=8.0;
+		break;
+		case 32:interesCuota=16.0;
+		break;
+		case 72:interesCuota=32.0;
+		break;
+		default:{
+			modelo.put("error", "Error en Cantidad Cuota");
+			return new ModelAndView("crearprestamo", modelo);
+		}
+		}
+		
+		
+		
 		Prestamo nprestamo = prestamo;
 		
-		// calculamos el valor de la cuota mensual.
+		Afiliado afiliado0=servicioAfiliado.consultarAfiliadoDni(prestamo.getDni());
+		
 		double montoMensual = nprestamo.getValor()/nprestamo.getCuotas();
 		// calculamos el valor mensual de interes (el interes es igual para todos las cuotas)
-		double valorInteres = nprestamo.getValor() * nprestamo.getInteres();
+		//double valorInteres = nprestamo.getValor() * nprestamo.getInteres();
 		// capturamos la fecha actual
-		double total = montoMensual + valorInteres;
+		double total = montoMensual; //+ valorInteres;
+		
+		double sueldo=afiliado0.getSueldo();
+		sueldo=sueldo*0.3;
+		if(sueldo<total) {
+			modelo.put("error", "Cada cuota excede el 30% del sueldo");
+			return new ModelAndView("crearprestamo", modelo);
+		}
+		nprestamo.setDni(prestamo.getDni());
+		
+		nprestamo.setAfiliado(afiliado0);
+		nprestamo.setEstado("pendiente");
+		
+		// calculamos el valor de la cuota mensual.
+		
 		
 		Calendar fechven = Calendar.getInstance();
 		
-		List<Cuota> cuotas = new ArrayList<Cuota>();
-		//// CUOTA DE PRUEBA
-//		Cuota lcuota=new Cuota();
-//		fechven.add(Calendar.DAY_OF_YEAR, 30);
-//		lcuota.setMonto(montoMensual);
-//		lcuota.setInteres(valorInteres);
-//		lcuota.setMontoTotal(total);
-//		lcuota.setEstado(false);
-//		lcuota.setFechaDeVencimiento(fechven.getTime());
-//		lcuota.setPrestamo(nprestamo);
-//		
-//		request.setAttribute("lcuota", lcuota);
-		///// CUOTA DE PRUEBA
+		List<Cuota> cuotas = new ArrayList<Cuota>();	
+		
+		
 		for(int i=0; i<nprestamo.getCuotas(); i++){
 			
 			Cuota ncuota = new Cuota();
 			fechven.add(Calendar.DAY_OF_YEAR, 30);
 			ncuota.setMonto(montoMensual);
-			ncuota.setInteres(valorInteres);
+			ncuota.setInteres(interesCuota);
 			ncuota.setMontoTotal(total);
 			ncuota.setEstado(false);
 			ncuota.setFechaDeVencimiento(fechven.getTime());
-			ncuota.setPrestamo(nprestamo);
-			
+			ncuota.setPrestamo(nprestamo);	
 			cuotas.add(ncuota);
 			
 		}
 		servicioCuota.insertarCuota(cuotas);
 		
-//		servicioPrestamo.crearNuevoPrestamo(nprestamo);
+		
+		
+		//servicioPrestamo.crearNuevoPrestamo(nprestamo);
 		
 		modelo.put("cuotas", cuotas);
 		

@@ -7,7 +7,6 @@ import ar.edu.unlam.tallerweb1.modelo.*;
 // Interface que define los metodos del DAO de Usuarios.
 public interface AfiliadoDao {
 	
-
 	List<Afiliado> consultarAfiliado();
 	
 	void agregarAfiliado (Afiliado afiliado);
@@ -23,6 +22,8 @@ public interface AfiliadoDao {
 	Afiliado consultarAfiliado(Long idPrestamo);
 
 	Afiliado consultarAfiliadoDni(Long dni);
+	
+	Afiliado consultarIdAfiliado(Long id);
 	
 	
 //	List<Prestamo> listarPrestamos(Long id);
