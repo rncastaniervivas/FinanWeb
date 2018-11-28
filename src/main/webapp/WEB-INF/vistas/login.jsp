@@ -7,6 +7,7 @@
 	    <link href="css/bootstrap.min.css" rel="stylesheet" >
 	    <!-- Bootstrap theme -->
 	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+	    <link href="css/stylelogin.css" rel="stylesheet">
 	</head>
 	<body>
 		<div class = "container">
@@ -15,14 +16,21 @@
 				<%--debe referenciar con el nombre usuario, spring mapea los elementos de la vista con los atributos de dicho objeto--%>
 					<%--para eso debe coincidir el valor del elemento path de cada input con el nombre de un atributo del objeto --%>
 				<form:form action="validar-login" method="POST" modelAttribute="usuario">
-			    	<h3 class="form-signin-heading">Taller Web I</h3>
+			    	<h3 class="form-signin-heading">Iniciar Sesion</h3>
 					<hr class="colorgraph"><br>
 
 					<%--Elementos de entrada de datos, el elemento path debe indicar en que atributo del objeto usuario se guardan los datos ingresados--%>
-					<form:input path="email" id="email" type="email" class="form-control" />
-					<form:input path="password" type="password" id="password" class="form-control"/>     		  
+					<div class="form-group">
+    					<label for="email">Email</label>
+						<form:input path="email" id="email" type="email" class="form-control" />
+					</div>
 					
-					<button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Login</button>
+					<div class="form-group">
+    					<label for="password">Contrase�a</label>
+						<form:input path="password" type="password" id="password" class="form-control"/>     		  
+					</div>
+					
+					<button class="btn btn-lg btn-primary btn-block" type="Submit"/>Ingresar</button>
 				</form:form>
 
 				<%--Bloque que es visible si el elemento error no está vacío	--%>

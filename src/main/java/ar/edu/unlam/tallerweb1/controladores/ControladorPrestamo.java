@@ -184,28 +184,28 @@ ModelMap modelo = new ModelMap();
 	
 	@RequestMapping(path = "/refinanciar", method = RequestMethod.POST)
 	public ModelAndView listaCuotasImp(Long idPrestamo, Long dni) {
-			ModelMap modelo=new ModelMap();
-			
-			//Prestamo prestamo = new Prestamo();
-			
-			List<Cuota> impagas=servicioCuota.consultarCuota(idPrestamo);
-			
-			Afiliado afiliado = servicioAfiliado.consultarAfiliadoDni(dni);
-			
-			Double montoTotalARefinanciar = 0.0;
-			int cuotasRestante = 0;
-			
-		    for(Cuota i :impagas) {
-				montoTotalARefinanciar += i.getMontoTotal();
-				cuotasRestante++;
-			}
-		    //modelo.put("prestamo", prestamo);
-		    modelo.put("afiliado", afiliado);
-		    modelo.put("idPrestamoRef", idPrestamo);
-			modelo.put("cuotas", impagas);	
-			modelo.put("MontoARefinanciar", montoTotalARefinanciar);
-			modelo.put("cuotasRestante",cuotasRestante);
-			return new ModelAndView("refinanciar",modelo);
+		ModelMap modelo=new ModelMap();
+		
+		//Prestamo prestamo = new Prestamo();
+		
+		List<Cuota> impagas=servicioCuota.consultarCuota(idPrestamo);
+		
+		Afiliado afiliado = servicioAfiliado.consultarAfiliadoDni(dni);
+		
+		Double montoTotalARefinanciar = 0.0;
+		int cuotasRestante = 0;
+		
+	    for(Cuota i :impagas) {
+			montoTotalARefinanciar += i.getMontoTotal();
+			cuotasRestante++;
+		}
+	    //modelo.put("prestamo", prestamo);
+	    modelo.put("afiliado", afiliado);
+	    modelo.put("idPrestamoRef", idPrestamo);
+		modelo.put("cuotas", impagas);	
+		modelo.put("MontoARefinanciar", montoTotalARefinanciar);
+		modelo.put("cuotasRestante",cuotasRestante);
+		return new ModelAndView("refinanciar",modelo);
 	
 	}
 
