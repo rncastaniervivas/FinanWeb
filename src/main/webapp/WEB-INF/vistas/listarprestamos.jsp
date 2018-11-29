@@ -59,8 +59,11 @@
 				      	  </form>
 				      </td>
 				      <td><form action="pagarcuota" method="POST" >
-				      	  <input type="hidden" name="dni1" value="${afiliado.dni}">
 				      	  <button type="submit" class="btn btn-info" name="idPrestamo1" value="${prestamos.idPrestamo}">Pagar</button>
+				      	  </form>
+				      </td>
+				       <td><form action="cancelarprestamo" method="POST" >
+				      	  <button type="submit" class="btn btn-info" name="idPrestamo2" value="${prestamos.idPrestamo}">Cancelar</button>
 				      	  </form>
 				      </td>
 				      <td>

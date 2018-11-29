@@ -48,17 +48,29 @@ public class ControladorPrestamo {
 	public ModelAndView misprestamos(Long dni, HttpServletRequest request) {
 		ModelMap modelo = new ModelMap();
 		Long dni0=(Long) request.getSession().getAttribute("dni");
-		
 		List<Prestamo> prestamos= servicioPrestamo.consultarPrestamo(dni0);
-		
 		modelo.put("prestamos", prestamos);
 
 		
 		return new ModelAndView("listarprestamos",modelo);
 	}
-	
+	@RequestMapping(path = "/cancelarprestamo", method = RequestMethod.POST)
+	public ModelAndView cancelarprestamo(Long idPrestamo2) {
+		
+		Prestamo miprestamo= servicioPrestamo.consultarUnPrestamo(idPrestamo2);
+
+		miprestamo.setEstado("pagado");
+		miprestamo.setCuotas(0);
+		miprestamo.setInteres(0);
+		miprestamo.setValor(0);
+		
+		servicioPrestamo.modificarPrestamo(miprestamo);
+
+		return new ModelAndView("redirect:/misprestamos");
+		
+	}
 	@RequestMapping(path = "/pagarcuota", method = RequestMethod.POST)
-	public ModelAndView pagarcuota(Long idPrestamo1, Long dni1) {
+	public ModelAndView pagarcuota(Long idPrestamo1) {
 		ModelMap modelo = new ModelMap();
 		
 		Prestamo miprestamo= servicioPrestamo.consultarUnPrestamo(idPrestamo1);
