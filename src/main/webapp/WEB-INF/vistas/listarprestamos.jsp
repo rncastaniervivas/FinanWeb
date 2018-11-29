@@ -54,7 +54,6 @@
 				      <td>${prestamos.interes}</td>
 				      <td>${prestamos.estado}</td>
 				      <td><form action="refinanciar" method="POST" >
-				      	  <input type="hidden" name="dni" value="${afiliado.dni}">
 				      	  <button type="submit" class="btn btn-info" name="idPrestamo" value="${prestamos.idPrestamo}">Refinanciar</button>
 				      	  </form>
 				      </td>

@@ -206,14 +206,14 @@ ModelMap modelo = new ModelMap();
 	}
 	
 	@RequestMapping(path = "/refinanciar", method = RequestMethod.POST)
-	public ModelAndView listaCuotasImp(Long idPrestamo, Long dni) {
+	public ModelAndView listaCuotasImp(Long idPrestamo) {
 		ModelMap modelo=new ModelMap();
 		
 		//Prestamo prestamo = new Prestamo();
 		
 		List<Cuota> impagas=servicioCuota.consultarCuota(idPrestamo);
 		
-		Afiliado afiliado = servicioAfiliado.consultarAfiliadoDni(dni);
+		Afiliado afiliado = servicioAfiliado.consultarAfiliado(idPrestamo);
 		
 		Double montoTotalARefinanciar = 0.0;
 		int cuotasRestante = 0;
