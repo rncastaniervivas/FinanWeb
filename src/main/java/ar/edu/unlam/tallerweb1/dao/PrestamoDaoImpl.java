@@ -52,4 +52,19 @@ public class PrestamoDaoImpl implements PrestamoDao {
 	public void modificarPrestamo(Prestamo prestamo) {
 		sessionFactory.getCurrentSession().update(prestamo);
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean consultarPorFinanciera(Long idFinanciera) {
+		List<Prestamo> consulta=sessionFactory.getCurrentSession().createCriteria(Prestamo.class)
+				.createAlias("financiera", "financierajoin")
+				.add(Restrictions.eq("financierajoin.idFinanciera", idFinanciera))
+				.list();
+		if(consulta.size() != 0) {
+			return true;
+		}else {
+		
+		return false;}
+
+	}
 }

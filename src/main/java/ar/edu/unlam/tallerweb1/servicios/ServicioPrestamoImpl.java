@@ -25,6 +25,12 @@ public class ServicioPrestamoImpl implements ServicioPrestamo {
 	public Prestamo consultarUnPrestamo(Long idPrestamo) {
 		return servicioPrestamoDao.consultarUnPrestamo(idPrestamo);
 	}
+
+	@Override
+	public boolean consultarPorFinanciera(Long idFinanciera) {
+		return servicioPrestamoDao.consultarPorFinanciera(idFinanciera);
+		
+	}
 	
 	@Override
 	public void crearNuevoPrestamo(Prestamo prestamoRef) {

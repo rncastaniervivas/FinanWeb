@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.CuotaDao;
 import ar.edu.unlam.tallerweb1.modelo.Cuota;
+import ar.edu.unlam.tallerweb1.modelo.Financiera;
 
 @Service("servicioCuota")
 @Transactional
@@ -26,6 +27,17 @@ public class ServicioCuotaImpl implements ServicioCuota{
 	public List<Cuota> consultarCuota(Long arefinanciar) {
 		
 		return servicioCuotaDao.consultarCuota(arefinanciar);
+	}
+
+	@Override
+	public List<Cuota> consultarPorFinanciera(Financiera financiera) {
+		return servicioCuotaDao.consultarPorFinanciera(financiera);
+	}
+
+	@Override
+	public void modificarCubierto(Cuota cuota) {
+		servicioCuotaDao.modificarElCubierto(cuota);
+		
 	}
 	
 	@Override

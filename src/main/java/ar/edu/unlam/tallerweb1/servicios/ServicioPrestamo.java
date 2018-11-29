@@ -15,4 +15,8 @@ public interface ServicioPrestamo {
 	List<Prestamo> consultarPrestamo(Long dni);
 	
 	void modificarPrestamo(Prestamo prestamo);
+	
+	boolean consultarPorFinanciera(Long idFinanciera);
+
+
 }

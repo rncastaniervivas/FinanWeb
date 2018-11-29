@@ -25,6 +25,8 @@
 </div>
 <form:input path="idFinanciera" id="idFinanciera" type="hidden" value="${finan.idFinanciera}" />
 <button type="submit" class="btn btn-success">Guardar Cambios</button>
+<p>${error}</p>
 </form:form>
+
 </body>
 </html>

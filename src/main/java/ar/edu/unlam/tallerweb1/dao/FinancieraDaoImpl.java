@@ -51,4 +51,5 @@ public class FinancieraDaoImpl implements FinancieraDao {
 		sessionFactory.getCurrentSession().update(financiera);
 		
 	}
+	
 }

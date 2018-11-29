@@ -21,6 +21,7 @@ public class Cuota {
 	private boolean estado;
 	private Date fechaDePago;
 	private Date fechaDeVencimiento;
+	private boolean cubierto;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Prestamo prestamo;
@@ -91,5 +92,14 @@ public class Cuota {
 	public void setMontoTotal(double montoTotal) {
 		this.montoTotal = montoTotal;
 	}
+
+	public boolean isCubierto() {
+		return cubierto;
+	}
+
+	public void setCubierto(boolean cubierto) {
+		this.cubierto = cubierto;
+	}
+
 	
 }
