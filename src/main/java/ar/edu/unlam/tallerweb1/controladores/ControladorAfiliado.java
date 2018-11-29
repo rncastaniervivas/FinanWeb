@@ -51,7 +51,7 @@ public class ControladorAfiliado {
 		else {
 			modelo.put("error", "El afiliado que desea crear ya existe");
 		}
-		return new ModelAndView("agregarafiliado", modelo);
+		return new ModelAndView("listarafiliados", modelo);
 	}
 	
 	@RequestMapping (path ="/modificarafiliado", method = RequestMethod.POST)
@@ -74,8 +74,8 @@ public class ControladorAfiliado {
 		modelo.put("afiliados", lista);
 		
 		Afiliado afiliado = new Afiliado();
-		modelo.put("afiliado", afiliado);
-		return new ModelAndView("afiliado", modelo);
+		modelo.put("listarafiliados", afiliado);
+		return new ModelAndView("listarafiliados", modelo);
 	}
 	
 	@RequestMapping (path = "/eliminarafiliado", method = RequestMethod.POST)
@@ -89,7 +89,7 @@ public class ControladorAfiliado {
 		modelo.put("afiliados", lista);
 		modelo.put("afiliado", afiliado);
 		
-		return new ModelAndView("afiliado", modelo);
+		return new ModelAndView("listarafiliados", modelo);
 	}
 	
 	@RequestMapping ("/buscadorafiliado")

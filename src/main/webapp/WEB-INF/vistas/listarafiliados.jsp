@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,34 +17,52 @@
 			<table class="table">
 			  <thead class="thead-light">
 			    <tr>
+			      <th scope="col">Id</th>
 			      <th scope="col">Nombre</th>
 			      <th scope="col">Apellido</th>
 			      <th scope="col">Dni</th>
 			      <th scope="col">Puesto</th>
 			      <th scope="col">Antiguedad</th>
 			      <th scope="col">Sueldo</th>
-			      <th></th>
-			      <th></th>
+			      <th schope="col">Opciones</th>
+			      
 			    </tr>
 			  </thead>
 			  <!-- listar todos los afiliados -->
 			  <c:forEach items="${afiliados}" var="lista">
 				  <tbody>
 				    <tr>
-				      <th scope="row">${lista.nombre}</th>
-				      <td scope="row">${lista.apellido}</td>
-				      <td scope="row">${lista.dni}</td>
-				      <td scope="row">${lista.puesto}</td>
-				      <td scope="row">${lista.antiguedad}</td>
-				      <td scope="row">${lista.sueldo}</td>
-				      <td><button class="btn btn-info" type="submit" formaction="modificarafiliado"><span class="glyphicon glyphicon-align-justify"></span> Modificar</button></td>
-				      <td><button class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-remove"></span> Eliminar</button></td>
+				      <td scope="col">${lista.idAfiliado}</td>
+				      <td scope="col">${lista.nombre}</td>
+				      <td scope="col">${lista.apellido}</td>
+				      <td scope="col">${lista.dni}</td>
+				      <td scope="col">${lista.puesto}</td>
+				      <td scope="col">${lista.antiguedad}</td>
+				      <td scope="col">${lista.sueldo}</td>
+				      <td scope="row">
+				      	<form:form action="eliminarafiliado" method="POST" modelAttribute="afiliado">
+					      	<form:input path="idAfiliado" id="idAfiliado" type="hidden" value="${lista.idAfiliado}"/>
+							<form:input path="nombre" id="nombre" readonly="readonly" type="hidden" value="${lista.nombre}" />
+							<form:input path="apellido" id="apellido" readonly="readonly" type="hidden" value="${lista.apellido}" />
+							<form:input path="dni" id="dni" readonly="readonly" type="hidden" value="${lista.dni}" />
+							<form:input path="puesto" id="puesto" readonly="readonly" type="hidden" value="${lista.puesto}" />
+							<form:input path="antiguedad" id="antiguedad" readonly="readonly" type="hidden" value="${lista.antiguedad}" />
+							<form:input path="sueldo" id="sueldo" readonly="readonly" type="hidden" value="${lista.sueldo}" />
+							
+							<button class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-remove"></span>Eliminar</button>
+							<button class="btn btn-info" type="submit" formaction="modificarafiliado"><span class="glyphicon glyphicon-align-justify"></span>Modificar</button>
+						</form:form>
+					  </td>
 				    </tr>
 				  </tbody>
 			  </c:forEach>
 			</table>
 		</div>
-		
+		<br>
+		<form:form class="form-inline d-iniline" action="agregarafiliado">
+			<br>
+			<button class="btn btn-primary btn-lg" type="submit">Nuevo afiliado</button>
+		</form:form>
 		
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>

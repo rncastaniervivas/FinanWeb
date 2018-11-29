@@ -17,7 +17,7 @@
 		<div class="panel panel-default">
 		    <div class="panel-heading">Modificar afiliado</div>
 		    <div class="panel-body">
-		    	<form:form action="afiliadomodificado" modelAttribute="afiliado" method="POST" role="form">
+		    	<form:form role="form" action="afiliadomodificado" method="POST" modelAttribute="afiliado">
 		    	
 				  <div class="form-group row">
 					  <label class="col-lg-2 control-label">Nombre:</label>
