@@ -55,6 +55,7 @@
 </tbody>
 </c:forEach>
 </table>
+<p>${erroeliminar}</p>
 </div>
 <!-- iconos https://www.glyphicons.com/  -->
 		<!-- Placed at the end of the document so the pages load faster -->

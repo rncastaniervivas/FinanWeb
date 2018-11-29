@@ -9,6 +9,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Cuota;
+import ar.edu.unlam.tallerweb1.modelo.Financiera;
 
 @Repository("CuotaDao")
 public class CuotaDaoImpl implements CuotaDao{
@@ -34,4 +35,25 @@ public class CuotaDaoImpl implements CuotaDao{
 				.add(Restrictions.eq("estado", false))
 				.list());
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Cuota> consultarPorFinanciera(Financiera financiera) {
+		return (sessionFactory.getCurrentSession().createCriteria(Cuota.class)
+		.createAlias("prestamo","prestamojoin" )
+		.createAlias("prestamojoin.financiera", "financierajoin")
+		.add(Restrictions.eq("financierajoin.nombre", financiera.getNombre()))
+		.add(Restrictions.eq("cubierto",false))
+		.list());
+		
+		
+	}
+
+	@Override
+	public void modificarElCubierto(Cuota cuota) {
+		sessionFactory.getCurrentSession().update(cuota);
+		
+	}
+	
+	
 }

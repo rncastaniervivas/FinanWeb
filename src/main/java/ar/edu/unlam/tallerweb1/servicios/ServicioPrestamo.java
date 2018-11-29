@@ -9,5 +9,7 @@ public interface ServicioPrestamo {
 	List<Prestamo> consultarPrestamo();
 	
 	Prestamo consultarUnPrestamo(Long idPrestamo);
+	
+	boolean consultarPorFinanciera(Long idFinanciera);
 
 }
