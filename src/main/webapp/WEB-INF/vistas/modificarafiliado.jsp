@@ -22,42 +22,42 @@
 				  <div class="form-group row">
 					  <label class="col-lg-2 control-label">Nombre:</label>
 					  <div class="col-lg-10">
-					  	<form:input path="nombre" type="text" id="nombre" placeholder="${afil.nombre}"  class="form-control"/>
+					  	<form:input path="nombre" id="nombre" class="" type="text" placeholder="${afili.nombre}"/>
 					  </div>
 				  </div>
 				  				  
 				  <div class="form-group row">
 					  <label class="col-lg-2 control-label">Apellido:</label>
 					  <div class="col-lg-10">
-					  	<form:input path="apellido" type="text" id="apellido" placeholder="${afil.apellido}"  class="form-control"/>
+					  	<form:input path="apellido" id="apellido" class="" type="text" placeholder="${afili.apellido}"/>
 					  </div>
 				  </div>
 				  
 				  <div class="form-group row">
 					  <label class="col-lg-2 control-label">Dni:</label>
 					  <div class="col-lg-10">
-					  	<form:input path="dni" type="text" id="dni" placeholder="${afil.dni}"  class="form-control"/>
+					  	<form:input path="dni" id="dni" class="" type="text" placeholder="${afili.dni}"/>
 					  </div>
 				  </div>
 				  
 				  <div class="form-group row">
 					  <label class="col-lg-2 control-label">Puesto:</label>
 					  <div class="col-lg-10">
-					  	<form:input path="puesto" type="text" id="puesto" placeholder="${afil.puesto}"  class="form-control"/>
+					  	<form:input path="puesto" id="puesto" class="" type="text" placeholder="${afili.puesto}"/>
 					  </div>
 				  </div>
 				  
 				  <div class="form-group row">
 					  <label class="col-lg-2 control-label">Antiguedad:</label>
 					  <div class="col-lg-10">
-					  	<form:input path="antiguedad" type="text" id="antiguedad" placeholder="${afil.antiguedad}"  class="form-control"/>
+					  	<form:input path="antiguedad" id="antiguedad" class="" type="text" placeholder="${afili.antiguedad}"/>
 					  </div>
 				  </div>
 				  
 				  <div class="form-group row">
 					  <label class="col-lg-2 control-label">Sueldo:</label>
 					  <div class="col-lg-10">
-					  	<form:input path="sueldo" type="text" id="sueldo" placeholder="${afil.sueldo}"  class="form-control"/>
+					  	<form:input path="sueldo" id="sueldo" class="" type="text" placeholder="${afili.sueldo}"/>
 					  </div>
 				  </div>
 				  
