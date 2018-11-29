@@ -50,7 +50,7 @@
 	        <h1 class="display-3">Tené tu préstamo hoy!</h1>
 	        <p class="lead">El único requisito para acceder a la suma de dinero elegido es demostrar que con el 30% 
 	        de tus ingresos los podés pagar la cuota.</p>
-	        <a href="#" class="btn btn-primary btn-lg">Pedir Prestamo!</a>
+	        <a href="${context}/agregarafiliado" class="btn btn-primary btn-lg">Pedir Prestamo!</a>
 	      </header>
 	
 	      <!-- Page Features -->
