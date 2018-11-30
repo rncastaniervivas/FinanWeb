@@ -86,8 +86,11 @@ public class ControladorPrestamo {
 		
 		afiliado0=servicioAfiliado.consultarAfiliado(idPrestamo1);
 		
-		modelo.put("prestamo", prestamo0);
+//		String codigohtml="";
+//		codigohtml+=
 		
+		modelo.put("prestamo", prestamo0);
+//		modelo.put("codigohtml", codigohtml);
 		modelo.put("afiliado", afiliado0);
 		
 		modelo.put("cuotaspagas", cuotaspagas);
@@ -98,8 +101,16 @@ public class ControladorPrestamo {
 		
 	}
 
-	@RequestMapping(path = "/totalapagarcuota", method=RequestMethod.POST)
-	public ModelAndView totalapagarcuota(@ModelAttribute("confirm") Confirmpagocuota confirm,HttpServletRequest request) {
+	@RequestMapping(path = "/finalizarpagocuota", method=RequestMethod.POST)
+	public ModelAndView finalizarpagocuota(@ModelAttribute("confirm") Confirmpagocuota confirm,HttpServletRequest request) {
+		ModelMap modelo= new ModelMap();
+		
+		
+		
+		return new ModelAndView("listarprestamos",modelo);
+	}
+		@RequestMapping(path = "/totalapagarcuota", method=RequestMethod.POST)
+		public ModelAndView totalapagarcuota(@ModelAttribute("confirm") Confirmpagocuota confirm,HttpServletRequest request) {
 		ModelMap modelo = new ModelMap();
 		List<Long> idCuotas = new ArrayList<Long>();
 		List<Cuota> cuotasnopagas= new ArrayList<Cuota>();
@@ -118,7 +129,6 @@ public class ControladorPrestamo {
 		
 		Afiliado afiliado0=servicioAfiliado.consultarAfiliadoDni(confirm.getDni());
 		Prestamo prestamo0=servicioPrestamo.consultarUnPrestamo(confirm.getIdPrestamo());
-		
 		
 		modelo.put("cuotasnopagas", cuotasnopagas);
 		modelo.put("idCuotas", idCuotas);

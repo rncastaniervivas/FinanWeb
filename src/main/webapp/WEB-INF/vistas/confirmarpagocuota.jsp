@@ -25,11 +25,10 @@
 		<form:form action="totalapagarcuota" modelAttribute="confirm" method="POST" role="form">
 		<div class="container">
 			<h1 class="text-center">LISTA DE CUOTAS</h1>
-
+			${codigohtml}
 			<table class="table">
 			  <thead class="thead-light">
 			    <tr>
-			      <th scope="col">Numero de Cuota</th>
 			      <th scope="col">Fecha de Vencimiento</th>
 			      <th scope="col">Valor</th>
 			      <th scope="col">Fecha De Pago</th>
@@ -39,11 +38,12 @@
 			  </thead>
 			  <!-- listar todos los afiados -->
 				  <tbody>
-				  <c:forEach items="${idCuotas}" var="idCuotas">
+				  <c:forEach items="${cuotaspagas}" var="cuotaspagas">
 				    <tr>				    
 			  
-				      <td scope="row">X</td>
-				      <td>${idCuotas}</td>
+				      <td scope="row">${cuotaspagas.fechaDeVencimiento}</td>
+				      <td>${cuotaspagas.monto}</td>
+				      <td>${cuotaspagas.fechaDePago}</td>
 				      <td>
 				      Pagada
 				      </td>
@@ -53,13 +53,11 @@
 			  
 			  <c:forEach items="${cuotasnopagas}" var="cuotasnopagas">
 			  <tr>
-				      <td scope="row">X</td>
-				      <td>${cuotasnopagas.fechaDeVencimiento}</td>
+				      <td scope="row">${cuotasnopagas.fechaDeVencimiento}</td>
 				      <td>${cuotasnopagas.monto}</td>
 				      <td>Sin Pagar</td>
 				      <td>
 				      <input type="checkbox" id="check" name="check" value="${cuotasnopagas.idCuota}">
-		      		  
 				      </td>
 				        </tr>
 			  </c:forEach>
