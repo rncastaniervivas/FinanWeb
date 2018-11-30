@@ -9,7 +9,7 @@
 	<body>
 		<div class = "container">
 			<h1>FinanWeb</h1>
-			
+			${dni}
 			<div>
 				<h3>Prestamos</h3>
 					<form action="listarprestamos" method="POST">
@@ -22,10 +22,7 @@
 					</form>
 					<br>
 					
-					<form action="crearprestamo" method="POST" >
-					  <button type="submit" class="btn btn-info" name="dni" value="${dni}">Nuevo Prestamo</button>
-					 </form>
-					<br>
+					
 			</div>
 			
 			<div>
