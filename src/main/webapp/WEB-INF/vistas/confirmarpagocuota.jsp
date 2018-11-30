@@ -5,7 +5,7 @@
 <html>
 <head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Listar todos los préstamos</title>
+		<title>Listar Cuotas</title>
 		
 		<!-- Bootstrap core CSS -->
 	    <link href="css/bootstrap.min.css" rel="stylesheet" >
@@ -15,16 +15,16 @@
 	<body>
 		
 		<div class="container">
-			<h5>Datos del Afiliado</h5>
-			<h5>Nombre : ${afiliado.nombre}</h5>
-			<h5>Apellido : ${afiliado.apellido}</h5>
-			<h5>DNI : ${afiliado.dni}</h5>
-			<h5>Valor Total del prestamo: ${prestamo.valor}</h5>
+			<h4>Datos del Afiliado</h4>
+			<h4>Nombre : ${afiliado.nombre}</h4>
+			<h4>Apellido : ${afiliado.apellido}</h4>
+			<h4>DNI : ${afiliado.dni}</h4>
+			<h4>Valor Total del prestamo: ${prestamo.valor}</h4>
 		
 		</div>
 		<form:form action="totalapagarcuota" modelAttribute="confirm" method="POST" role="form">
 		<div class="container">
-			<h1 class="text-center">LISTA DE PRESTAMOS</h1>
+			<h1 class="text-center">LISTA DE CUOTAS</h1>
 			<table class="table">
 			  <thead class="thead-light">
 			    <tr>
@@ -67,8 +67,8 @@
 			</table>
 		</div>
 		<input path="dni" type="text" id="dni" name="dni"class="form-control" value="${afiliado.dni}" style="display:none"/>
-		<input path="idPrestamo" type="text" id="idPrestamo" name="idPrestamo"class="form-control" value="${prestamo.idPrestamo}"/>
-		<button type="submit" class="btn btn-primary mb-2">Confirmar Pago</button>
+		<input path="idPrestamo" type="text" id="idPrestamo" name="idPrestamo"class="form-control" value="${prestamo.idPrestamo}" style="display:none"/>
+		<button type="submit" class="btn btn-success mb-2">Confirmar Pago</button>
 </form:form>
 		
 

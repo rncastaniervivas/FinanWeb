@@ -15,11 +15,11 @@
 	<body>
 		
 		<div class="container">
-			<h5>Se va a relealizar el pago del afiliado:</h5>
-			<h5>Nombre : ${afiliado.nombre}</h5>
-			<h5>Apellido : ${afiliado.apellido}</h5>
-			<h5>DNI : ${afiliado.dni}</h5>
-			<h5>Valor total Prestamo : ${montoprestamo}</h5>
+			<h4>Se va a relealizar el pago del afiliado:</h4>
+			<h4>Nombre : ${afiliado.nombre}</h4>
+			<h4>Apellido : ${afiliado.apellido}</h4>
+			<h4>DNI : ${afiliado.dni}</h4>
+			<h4>Valor total Prestamo : ${montoprestamo}</h4>
 		
 		</div>
 		<form:form action="totalapagarcuota" modelAttribute="confirm" method="POST" role="form">
@@ -44,7 +44,9 @@
 				      <td>${cuotasnopagas.monto}</td>
 				        </tr>
 			  </c:forEach>
-				  
+				  <td>Total</td>
+				  <td></td>
+				  <td>${totalcuota}</td>
 				  </tbody>
 			</table>
 		</div>
@@ -53,7 +55,7 @@
 			        <h4><span>${error}</span></h4>
 			        <br>
 		        </c:if>	
-		<button type="submit" class="btn btn-primary mb-2">Confirmar Pago</button>
+		<button type="submit" class="btn btn-success mb-2">Confirmar Pago</button>
 </form:form>
 		
 

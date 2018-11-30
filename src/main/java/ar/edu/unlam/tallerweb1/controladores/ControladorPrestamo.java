@@ -103,12 +103,17 @@ public class ControladorPrestamo {
 		ModelMap modelo = new ModelMap();
 		List<Long> idCuotas = new ArrayList<Long>();
 		List<Cuota> cuotasnopagas= new ArrayList<Cuota>();
+		double contcuota=0.0;
+		Cuota cuotaitem= new Cuota();
+		
 		for(String item: confirm.getCheck()) {
 			idCuotas.add(Long.parseLong(item));
 			
 		}
 		for(Long item2: idCuotas) {
-			cuotasnopagas.add(servicioCuota.consultarCuotaporId(item2));
+			cuotaitem=servicioCuota.consultarCuotaporId(item2);
+			cuotasnopagas.add(cuotaitem);
+			contcuota+=cuotaitem.getMonto();
 		}
 		
 		Afiliado afiliado0=servicioAfiliado.consultarAfiliadoDni(confirm.getDni());
@@ -118,6 +123,7 @@ public class ControladorPrestamo {
 		modelo.put("cuotasnopagas", cuotasnopagas);
 		modelo.put("idCuotas", idCuotas);
 		modelo.put("afiliado", afiliado0);
+		modelo.put("totalcuota", contcuota);
 		modelo.put("montoprestamo", prestamo0.getValor());
 		modelo.put("dnitot", confirm.getDni());
 		
