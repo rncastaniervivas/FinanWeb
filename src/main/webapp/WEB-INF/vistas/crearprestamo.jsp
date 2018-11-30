@@ -13,7 +13,8 @@
 	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 </head>
 <body>
-	<div class = "container">
+	<h1>vista perdida</h1>
+	<!--div class = "container">
 		<div class="panel panel-default">
 		    <div class="panel-heading">Nuevo préstamo</div>
 		    <div class="panel-body">
@@ -57,6 +58,6 @@
 		        </c:if>	
 			</div>
 		</div>
-	</div>
+	</div-->
 </body>
 </html>

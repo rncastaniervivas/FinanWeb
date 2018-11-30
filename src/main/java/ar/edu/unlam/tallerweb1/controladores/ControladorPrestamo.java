@@ -1,7 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -131,86 +130,86 @@ public class ControladorPrestamo {
 		
 		
 	}
-	@RequestMapping(path = "/crearprestamo", method=RequestMethod.POST)
-	public ModelAndView crearPrestamo(@ModelAttribute("prestamo") Prestamo prestamo, HttpServletRequest request) {
-		ModelMap modelo = new ModelMap();
-		
-		int cantcuotas=prestamo.getCuotas();
-		
-		double interesCuota=0;
-		
-		switch(cantcuotas) {
-		case 6:interesCuota=2.0;
-		break;
-		case 12:interesCuota=4.0;
-		break;
-		case 24:interesCuota=8.0;
-		break;
-		case 32:interesCuota=16.0;
-		break;
-		case 72:interesCuota=32.0;
-		break;
-		default:{
-			modelo.put("error", "Error en Cantidad Cuota");
-			return new ModelAndView("crearprestamo", modelo);
-		}
-		}
-		
-		
-		
-		Prestamo nprestamo = prestamo;
-		nprestamo.setInteres(cantcuotas*interesCuota);
-		Long midni = (long) 123456789;
-		Afiliado afiliado0=servicioAfiliado.consultarAfiliadoDni(midni);
-		
-		double montoMensual = nprestamo.getValor()/nprestamo.getCuotas();
-		// calculamos el valor mensual de interes (el interes es igual para todos las cuotas)
-		//double valorInteres = nprestamo.getValor() * nprestamo.getInteres();
-		// capturamos la fecha actual
-		double total = montoMensual + interesCuota;
-		
-		double sueldo=afiliado0.getSueldo();
-		sueldo=sueldo*0.3;
-		if(sueldo<total) {
-			modelo.put("error", "Cada cuota excede el 30% del sueldo");
-			return new ModelAndView("crearprestamo", modelo);
-		}
-		nprestamo.setDni(prestamo.getDni());
-		
-		nprestamo.setAfiliado(afiliado0);
-		nprestamo.setEstado("pendiente");
-		
-		// calculamos el valor de la cuota mensual.
-		
-		
-		Calendar fechven = Calendar.getInstance();
-		
-		List<Cuota> cuotas = new ArrayList<Cuota>();	
-		
-		
-		for(int i=0; i<nprestamo.getCuotas(); i++){
-			
-			Cuota ncuota = new Cuota();
-			fechven.add(Calendar.DAY_OF_YEAR, 30);
-			ncuota.setMonto(montoMensual);
-			ncuota.setInteres(interesCuota);
-			ncuota.setMontoTotal(total);
-			ncuota.setEstado(false);
-			ncuota.setFechaDeVencimiento(fechven.getTime());
-			ncuota.setPrestamo(nprestamo);	
-			cuotas.add(ncuota);
-			
-		}
-		servicioCuota.insertarCuota(cuotas);
-		
-		
-		
-		//servicioPrestamo.crearNuevoPrestamo(nprestamo);
-		
-		modelo.put("cuotas", cuotas);
-		
-		return new ModelAndView("redirect:/misprestamos");
-	}
+//	@RequestMapping(path = "/crearprestamo", method=RequestMethod.POST)
+//	public ModelAndView crearPrestamo(@ModelAttribute("prestamo") Prestamo prestamo) {
+//		ModelMap modelo = new ModelMap();
+//		
+//		int cantcuotas=prestamo.getCuotas();
+//		
+//		double interesCuota=0;
+//		
+//		switch(cantcuotas) {
+//		case 6:interesCuota=2.0;
+//		break;
+//		case 12:interesCuota=4.0;
+//		break;
+//		case 24:interesCuota=8.0;
+//		break;
+//		case 32:interesCuota=16.0;
+//		break;
+//		case 72:interesCuota=32.0;
+//		break;
+//		default:{
+//			modelo.put("error", "Error en Cantidad Cuota");
+//			return new ModelAndView("crearprestamo", modelo);
+//		}
+//		}
+//		
+//		
+//		
+//		Prestamo nprestamo = prestamo;
+//		nprestamo.setInteres(cantcuotas*interesCuota);
+//		Long midni = (long) 123456789;
+//		Afiliado afiliado0=servicioAfiliado.consultarAfiliadoDni(midni);
+//		
+//		double montoMensual = nprestamo.getValor()/nprestamo.getCuotas();
+//		// calculamos el valor mensual de interes (el interes es igual para todos las cuotas)
+//		//double valorInteres = nprestamo.getValor() * nprestamo.getInteres();
+//		// capturamos la fecha actual
+//		double total = montoMensual + interesCuota;
+//		
+//		double sueldo=afiliado0.getSueldo();
+//		sueldo=sueldo*0.3;
+//		if(sueldo<total) {
+//			modelo.put("error", "Cada cuota excede el 30% del sueldo");
+//			return new ModelAndView("crearprestamo", modelo);
+//		}
+//		nprestamo.setDni(prestamo.getDni());
+//		
+//		nprestamo.setAfiliado(afiliado0);
+//		nprestamo.setEstado("pendiente");
+//		
+//		// calculamos el valor de la cuota mensual.
+//		
+//		
+//		Calendar fechven = Calendar.getInstance();
+//		
+//		List<Cuota> cuotas = new ArrayList<Cuota>();	
+//		
+//		
+//		for(int i=0; i<nprestamo.getCuotas(); i++){
+//			
+//			Cuota ncuota = new Cuota();
+//			fechven.add(Calendar.DAY_OF_YEAR, 30);
+//			ncuota.setMonto(montoMensual);
+//			ncuota.setInteres(interesCuota);
+//			ncuota.setMontoTotal(total);
+//			ncuota.setEstado(false);
+//			ncuota.setFechaDeVencimiento(fechven.getTime());
+//			ncuota.setPrestamo(nprestamo);	
+//			cuotas.add(ncuota);
+//			
+//		}
+//		servicioCuota.insertarCuota(cuotas);
+//		
+//		
+//		
+//		//servicioPrestamo.crearNuevoPrestamo(nprestamo);
+//		
+//		modelo.put("cuotas", cuotas);
+//		
+//		return new ModelAndView("redirect:/misprestamos");
+//	}
 	
 	@RequestMapping(path = "/refinanciar", method = RequestMethod.POST)
 	public ModelAndView listaCuotasImpag(Long idPrestamo) {
@@ -263,7 +262,6 @@ public class ControladorPrestamo {
 	public ModelAndView irANuevoPrestamo(@ModelAttribute("afiliado") Afiliado afiliado) {
 		ModelMap modelo=new ModelMap();
 		Afiliado miAfiliado = servicioAfiliado.consultarAfiliadoDni(afiliado.getDni());
-		Prestamo prestamo = new Prestamo();
 		List<Prestamo> prestamos = servicioPrestamo.consultarPrestamo(miAfiliado.getDni());
 		
 		double prestamoDisponible = servicioPrestamo.prestamoDisponible(afiliado);
@@ -271,24 +269,32 @@ public class ControladorPrestamo {
 		modelo.put("disponible", prestamoDisponible);
 		modelo.put("prestamos", prestamos);
 		modelo.put("afiliado", afiliado);
-		modelo.put("prestamo", prestamo);
 		return new ModelAndView("nuevoprestamo",modelo);
 	}
 	
 	@RequestMapping(path = "/validar-nuevo-prestamo", method=RequestMethod.POST)
-	public ModelAndView irValidarNuevoPrestamo(@ModelAttribute("afiliado") Afiliado afiliado, double valor, Integer cuotas) {
+	public ModelAndView irValidarNuevoPrestamo(@ModelAttribute("afiliado") Afiliado afiliado, Integer valor, Integer cuotas) {
 		
 		ModelMap modelo=new ModelMap();
 		
 		if(valor <= servicioPrestamo.prestamoDisponible(afiliado)){
-			return new ModelAndView("listarprestamos");
+			Afiliado miafiliado = servicioAfiliado.consultarAfiliadoDni(afiliado.getDni());
+			servicioPrestamo.crearNuevoPrestamo(afiliado, valor, cuotas);
+			List<Prestamo> prestamos = servicioPrestamo.consultarPrestamoActivos(miafiliado);
+			modelo.put("afiliado", miafiliado);
+			modelo.put("prestamos", prestamos);
+			return new ModelAndView("/listarprestamos",modelo);
 		}else{
 			Afiliado miAfiliado = servicioAfiliado.consultarAfiliadoDni(afiliado.getDni());
+			List<Prestamo> prestamos = servicioPrestamo.consultarPrestamo(miAfiliado.getDni());
+			double prestamoDisponible = servicioPrestamo.prestamoDisponible(miAfiliado);
+			
+			modelo.put("disponible", prestamoDisponible);
+			modelo.put("prestamos", prestamos);
 			modelo.put("afiliado", miAfiliado);
-			return new ModelAndView("nuevoprestamo",modelo);
+			modelo.put("error", "Error monto excedido");
+			return new ModelAndView("/nuevoprestamo",modelo);
 		}
-		
-		
 		
 	}
 		

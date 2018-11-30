@@ -22,5 +22,9 @@ public interface ServicioPrestamo {
 	double salarioAfectado(Afiliado afiliado);
 	
 	double prestamoDisponible(Afiliado afiliado);
+	
+	void crearNuevoPrestamo(Afiliado afiliado, Integer valor, Integer cuotas);
+	
+	List<Prestamo> consultarPrestamoActivos(Afiliado afiliado);
 
 }

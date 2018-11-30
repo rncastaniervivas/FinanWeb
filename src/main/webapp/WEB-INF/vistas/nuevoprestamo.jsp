@@ -42,9 +42,15 @@
 					</select>
 				</div>
 		    </div>
-		    <div class="form-group col-md-6">
+		    <div class="form-group col-md-8">
 		      <label >Nuevo Monto</label>
 		      <input name="valor" type="text" class="form-control" id="inputMonto">
+		    </div>
+		    <div class="form-group col-md-8">
+			    <c:if test="${not empty error}">
+			        <h4><span>${error}</span></h4>
+			        <br>
+		        </c:if>
 		    </div>
 		    <div class="form-group col-md-8">
 		    	<button class="btn btn-info" type="submit">Dar Prestamo</button>
