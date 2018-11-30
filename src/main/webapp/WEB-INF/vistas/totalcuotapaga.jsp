@@ -28,7 +28,7 @@
 			<table class="table">
 			  <thead class="thead-light">
 			    <tr>
-			      <th scope="col">Numero de Cuota</th>
+			      <th scope="col">Valor</th>
 			      <th scope="col">Fecha De Vencimiento</th>
 			      <th scope="col">Valor</th>
 			      
@@ -39,7 +39,7 @@
 				  			  
 			  <c:forEach items="${cuotasnopagas}" var="cuotasnopagas">
 			  <tr>
-				      <td scope="row">X</td>
+				      <td scope="row">${cuotasnopagas.monto}</td>
 				      <td>${cuotasnopagas.fechaDeVencimiento}</td>
 				      <td>${cuotasnopagas.monto}</td>
 				        </tr>
