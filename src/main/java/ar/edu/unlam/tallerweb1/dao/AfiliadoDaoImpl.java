@@ -1,7 +1,6 @@
 package ar.edu.unlam.tallerweb1.dao;
 
 import ar.edu.unlam.tallerweb1.modelo.Afiliado;
-import ar.edu.unlam.tallerweb1.modelo.Prestamo;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -23,6 +22,7 @@ public class AfiliadoDaoImpl implements AfiliadoDao {
 	@Inject
     private SessionFactory sessionFactory;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Afiliado> consultarAfiliado() {
 		return (sessionFactory.getCurrentSession()
@@ -55,6 +55,7 @@ public class AfiliadoDaoImpl implements AfiliadoDao {
 		sessionFactory.getCurrentSession().delete(afiliado);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Afiliado> buscarAfiliado(Afiliado afiliado){
 		return (sessionFactory.getCurrentSession().createCriteria(Afiliado.class)

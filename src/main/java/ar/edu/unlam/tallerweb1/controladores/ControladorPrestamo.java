@@ -12,7 +12,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Afiliado;
@@ -21,6 +20,7 @@ import ar.edu.unlam.tallerweb1.modelo.Prestamo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAfiliado;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCuota;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPrestamo;
+import ar.edu.unlam.tallerweb1.servicios.ServicioRefinanciar;
 
 @Controller
 public class ControladorPrestamo {
@@ -33,6 +33,9 @@ public class ControladorPrestamo {
 	
 	@Inject
 	private ServicioAfiliado servicioAfiliado;
+	
+	@Inject
+	private ServicioRefinanciar servicioRefinanciar;
 	
 	@RequestMapping("/listarprestamos")
 	public ModelAndView listarPrestamo() {
@@ -154,7 +157,8 @@ ModelMap modelo = new ModelMap();
 		
 		Prestamo nprestamo = prestamo;
 		nprestamo.setInteres(cantcuotas*interesCuota);
-		Afiliado afiliado0=servicioAfiliado.consultarAfiliadoDni(prestamo.getDni());
+		Long midni = (long) 123456789;
+		Afiliado afiliado0=servicioAfiliado.consultarAfiliadoDni(midni);
 		
 		double montoMensual = nprestamo.getValor()/nprestamo.getCuotas();
 		// calculamos el valor mensual de interes (el interes es igual para todos las cuotas)
@@ -206,23 +210,14 @@ ModelMap modelo = new ModelMap();
 	}
 	
 	@RequestMapping(path = "/refinanciar", method = RequestMethod.POST)
-	public ModelAndView listaCuotasImp(Long idPrestamo) {
+	public ModelAndView listaCuotasImpag(Long idPrestamo) {
 		ModelMap modelo=new ModelMap();
-		
-		//Prestamo prestamo = new Prestamo();
-		
-		List<Cuota> impagas=servicioCuota.consultarCuota(idPrestamo);
-		
+		List<Cuota> impagas=servicioRefinanciar.consultaCuota(idPrestamo);
 		Afiliado afiliado = servicioAfiliado.consultarAfiliado(idPrestamo);
+		Double montoTotalARefinanciar = servicioRefinanciar.montoARefinanciar(idPrestamo);
 		
-		Double montoTotalARefinanciar = 0.0;
-		int cuotasRestante = 0;
+		int cuotasRestante = impagas.size();
 		
-	    for(Cuota i :impagas) {
-			montoTotalARefinanciar += i.getMontoTotal();
-			cuotasRestante++;
-		}
-	    //modelo.put("prestamo", prestamo);
 	    modelo.put("afiliado", afiliado);
 	    modelo.put("idPrestamoRef", idPrestamo);
 		modelo.put("cuotas", impagas);	
@@ -236,50 +231,7 @@ ModelMap modelo = new ModelMap();
 	public ModelAndView refinanciarAlta(Long dni, Long idPrestamoRef, double newCapital, Integer cuotas, double interes) {
 		ModelMap modelo = new ModelMap();
 		
-		Integer nCapital = (int)newCapital;
-
-		// Se modificar la clasificacion del Afiliado (Perdida).
-		Afiliado afiliado = servicioAfiliado.consultarAfiliadoDni(dni);
-		afiliado.setClasificacion("Perdida");
-		servicioAfiliado.modificarAfiliado(afiliado);
-
-		// aqui tiene que estar el modificar el estado del prestamo (Refinanciado).
-		Prestamo prestamo = servicioPrestamo.consultarUnPrestamo(idPrestamoRef);
-		prestamo.setEstado("Refinanciado");
-		servicioPrestamo.modificarPrestamo(prestamo);
-		
-		Prestamo prestamoRef = new Prestamo();
-		prestamoRef.setValor(nCapital);
-		prestamoRef.setCuotas(cuotas);
-		prestamoRef.setInteres(interes);
-		prestamoRef.setAfiliado(afiliado);
-		//prestamoRef.setCuota(cuotasRef);
-		
-		// Creo un nuevo prestamo con sus respectivos cuotas.
-		Calendar fechven = Calendar.getInstance();
-		
-		List<Cuota> cuotasRef = new ArrayList<Cuota>();
-		
-		double montoMensual = nCapital/cuotas;
-		double valorInteres = (nCapital*interes)/12;
-		double total = montoMensual + valorInteres;
-		
-		for(int i=0; i<cuotas; i++){
-			fechven.add(Calendar.DAY_OF_YEAR, 30);
-			
-			Cuota ncuota = new Cuota();
-			
-			ncuota.setMonto(montoMensual);
-			ncuota.setInteres(valorInteres);
-			ncuota.setMontoTotal(total);
-			ncuota.setEstado(false);
-			ncuota.setFechaDeVencimiento(fechven.getTime());
-			ncuota.setPrestamo(prestamoRef);
-
-			cuotasRef.add(ncuota);
-		}
-		//servicioPrestamo.crearNuevoPrestamo(prestamoRef);
-		servicioCuota.insertarCuota(cuotasRef);
+		servicioRefinanciar.refinanciar(dni, idPrestamoRef, newCapital, cuotas, interes);
 		
 		List<Cuota> nueCuotas = servicioCuota.consultarCuotaDelUltimoPrestamo();
 		modelo.put("cuotas", nueCuotas);
