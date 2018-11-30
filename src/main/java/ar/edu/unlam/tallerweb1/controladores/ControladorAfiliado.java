@@ -91,11 +91,6 @@ public class ControladorAfiliado {
 		
 		return new ModelAndView("listarafiliados", modelo);
 	}
-	
-	@RequestMapping ("/buscadorafiliado")
-	public ModelAndView irABuscadorAfiliado() {
-		return new ModelAndView("buscadorafiliado");
-	}
 
 	@RequestMapping (path = "/buscarafiliado", method = RequestMethod.POST)
 	public ModelAndView irABuscarAfiliado(Long dni) {
@@ -111,9 +106,11 @@ public class ControladorAfiliado {
 	@RequestMapping ("/listarafiliados")
 	public ModelAndView listarAfiliado() {
 		ModelMap modelo = new ModelMap();
+		Afiliado afiliado = new Afiliado();
 		
 		List<Afiliado> afiliados = servicioAfiliado.consultarAfiliado();
-		modelo.put("afiliados", afiliados);
+		modelo.put("afiliado", afiliado);
+		modelo.put("afiliados",afiliados);
 		
 		return new ModelAndView("listarafiliados", modelo);
 	}

@@ -16,6 +16,11 @@
 			<form action="nuevoprestamo" method="POST" >
 				      	  <button type="submit" class="btn btn-info" >NuevoPrestamo</button>
 				      	  </form>
+			<h2>Buscar Afiliado</h2>
+			<form action="buscarafiliado" method="POST" >
+				<input type="text" name="dni" placeholder="dni">
+				<button type="submit">Buscar</button>
+			</form>
 		</div>
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>

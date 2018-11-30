@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Prestamo {
@@ -29,6 +30,9 @@ public class Prestamo {
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Cuota> cuota;
+	
+	@OneToOne
+	private Prestamo prestamoRef;
 	
 	public Long getIdPrestamo() {
 		return idPrestamo;
@@ -85,6 +89,12 @@ public class Prestamo {
 	}
 	public void setDni(Long dni) {
 		this.dni = dni;
+	}
+	public Prestamo getPrestamoRef() {
+		return prestamoRef;
+	}
+	public void setPrestamoRef(Prestamo prestamoRef) {
+		this.prestamoRef = prestamoRef;
 	}
 	
 }
