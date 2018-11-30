@@ -21,7 +21,6 @@
 			      <th scope="col">Nombre</th>
 			      <th scope="col">Apellido</th>
 			      <th scope="col">Dni</th>
-			      <th scope="col">Puesto</th>
 			      <th scope="col">Antiguedad</th>
 			      <th scope="col">Sueldo</th>
 			      <th schope="col">Opciones</th>
@@ -36,7 +35,6 @@
 				      <td scope="col">${lista.nombre}</td>
 				      <td scope="col">${lista.apellido}</td>
 				      <td scope="col">${lista.dni}</td>
-				      <td scope="col">${lista.puesto}</td>
 				      <td scope="col">${lista.antiguedad}</td>
 				      <td scope="col">${lista.sueldo}</td>
 				      <td scope="row">
@@ -45,12 +43,12 @@
 							<form:input path="nombre" id="nombre" readonly="readonly" type="hidden" value="${lista.nombre}" />
 							<form:input path="apellido" id="apellido" readonly="readonly" type="hidden" value="${lista.apellido}" />
 							<form:input path="dni" id="dni" readonly="readonly" type="hidden" value="${lista.dni}" />
-							<form:input path="puesto" id="puesto" readonly="readonly" type="hidden" value="${lista.puesto}" />
 							<form:input path="antiguedad" id="antiguedad" readonly="readonly" type="hidden" value="${lista.antiguedad}" />
 							<form:input path="sueldo" id="sueldo" readonly="readonly" type="hidden" value="${lista.sueldo}" />
 							
 							<button class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-remove"></span>Eliminar</button>
 							<button class="btn btn-info" type="submit" formaction="modificarafiliado"><span class="glyphicon glyphicon-align-justify"></span>Modificar</button>
+							<button class="btn btn-success" type="submit" formaction="nuevoprestamo">Nuevo Prestamo</button>
 						</form:form>
 					  </td>
 				    </tr>
@@ -63,6 +61,10 @@
 			<br>
 			<button class="btn btn-primary btn-lg" type="submit">Nuevo afiliado</button>
 		</form:form>
+		
+		<br>
+		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
+		<br>
 		
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>

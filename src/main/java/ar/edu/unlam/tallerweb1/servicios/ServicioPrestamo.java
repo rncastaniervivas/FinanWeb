@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 import java.util.List;
 
+import ar.edu.unlam.tallerweb1.modelo.Afiliado;
 import ar.edu.unlam.tallerweb1.modelo.Prestamo;
 
 public interface ServicioPrestamo {
@@ -17,6 +18,9 @@ public interface ServicioPrestamo {
 	void modificarPrestamo(Prestamo prestamo);
 	
 	boolean consultarPorFinanciera(Long idFinanciera);
-
+	
+	double salarioAfectado(Afiliado afiliado);
+	
+	double prestamoDisponible(Afiliado afiliado);
 
 }

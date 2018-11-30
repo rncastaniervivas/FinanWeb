@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.dao;
 
 import java.util.List;
 
+import ar.edu.unlam.tallerweb1.modelo.Afiliado;
 import ar.edu.unlam.tallerweb1.modelo.Prestamo;
 
 public interface PrestamoDao {
@@ -16,6 +17,8 @@ public interface PrestamoDao {
 	void modificarPrestamo(Prestamo prestamo);
 
 	boolean consultarPorFinanciera(Long idFinanciera);
+	
+	List<Prestamo> consultarPrestamoActivo(Afiliado afiliado);
 
 	
 }

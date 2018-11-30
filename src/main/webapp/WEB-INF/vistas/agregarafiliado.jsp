@@ -59,13 +59,6 @@
 				  	  </div>
 				  </div>
 				  
-				   <div class="form-group row">
-					  <label class="col-lg-2 control-label">Clasificación:</label>
-				  	  <div class="col-lg-10">
-				  	  	<form:input path="clasificacion" type="text" id="clasificacion" placeholder="Clasificacion" class="form-control"/>
-				  	  </div>
-				  </div>
-				  
 				  <div class="form-group row">
 				  		<div class="col-lg-2"></div>
 				  		<div class="col-lg-10">

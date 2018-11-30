@@ -25,6 +25,7 @@
 		<form:form action="totalapagarcuota" modelAttribute="confirm" method="POST" role="form">
 		<div class="container">
 			<h1 class="text-center">LISTA DE CUOTAS</h1>
+
 			<table class="table">
 			  <thead class="thead-light">
 			    <tr>
