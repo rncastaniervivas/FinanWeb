@@ -43,7 +43,7 @@
 				      <td>${cuotasnopagas.fechaDeVencimiento}</td>
 				      <td>${cuotasnopagas.monto}</td>
 				        </tr>
-				      <input type="text" id="check" name="check" value="${cuotasnopagas.idCuota}">
+				      <input type="text" id="check" name="check" value="${cuotasnopagas.idCuota}" style="display:none">
 			  </c:forEach>
 				  <td>Total</td>
 				  <td></td>
@@ -52,6 +52,7 @@
 			</table>
 		</div>
 		<input path="dni" type="text" id="dni" name="dni"class="form-control" value="${afiliado.dni}" style="display:none"/>
+		<input path="idPrestamo" type="text" id="idPrestamo" name="idPrestamo"class="form-control" value="${prestamo.idPrestamo}" style="display:none"/>
 				<c:if test="${not empty error}">
 			        <h4><span>${error}</span></h4>
 			        <br>
