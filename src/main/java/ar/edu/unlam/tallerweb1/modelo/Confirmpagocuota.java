@@ -6,10 +6,12 @@ public class Confirmpagocuota {
 	private List<String> check;
 	private Long dni;
 	private Long idPrestamo;
+	
+	
 	public List<String> getCheck() {
 		return check;
 	}
-
+	
 	public void setCheck(List<String> check) {
 		this.check = check;
 	}

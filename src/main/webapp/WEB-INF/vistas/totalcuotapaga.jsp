@@ -22,14 +22,14 @@
 			<h4>Valor total Prestamo : ${montoprestamo}</h4>
 		
 		</div>
-		<form:form action="totalapagarcuota" modelAttribute="confirm" method="POST" role="form">
+		<form:form action="finalizarpagocuota" modelAttribute="confirm" method="POST" role="form">
 		<div class="container">
 			<h1 class="text-center">LISTA DE PRESTAMOS</h1>
 			<table class="table">
 			  <thead class="thead-light">
 			    <tr>
 			      <th scope="col">Numero de Cuota</th>
-			      <th scope="col">¿Esta Vencida?</th>
+			      <th scope="col">Fecha De Vencimiento</th>
 			      <th scope="col">Valor</th>
 			      
 			    </tr>
@@ -43,6 +43,7 @@
 				      <td>${cuotasnopagas.fechaDeVencimiento}</td>
 				      <td>${cuotasnopagas.monto}</td>
 				        </tr>
+				      <input type="text" id="check" name="check" value="${cuotasnopagas.idCuota}" style="display:none">
 			  </c:forEach>
 				  <td>Total</td>
 				  <td></td>
@@ -51,6 +52,7 @@
 			</table>
 		</div>
 		<input path="dni" type="text" id="dni" name="dni"class="form-control" value="${afiliado.dni}" style="display:none"/>
+		<input path="idPrestamo" type="text" id="idPrestamo" name="idPrestamo"class="form-control" value="${prestamo.idPrestamo}" style="display:none"/>
 				<c:if test="${not empty error}">
 			        <h4><span>${error}</span></h4>
 			        <br>

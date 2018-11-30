@@ -1,6 +1,8 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -42,8 +44,8 @@ public class ControladorPrestamo {
 		ModelMap modelo = new ModelMap();
 		
 		List<Prestamo> prestamos= servicioPrestamo.consultarPrestamo();
-		modelo.put("prestamos", prestamos);
 		
+		modelo.put("prestamos", prestamos);
 		return new ModelAndView("listarprestamos",modelo);
 	}
 	
@@ -85,8 +87,11 @@ public class ControladorPrestamo {
 		
 		afiliado0=servicioAfiliado.consultarAfiliado(idPrestamo1);
 		
-		modelo.put("prestamo", prestamo0);
+//		String codigohtml="";
+//		codigohtml+=
 		
+		modelo.put("prestamo", prestamo0);
+//		modelo.put("codigohtml", codigohtml);
 		modelo.put("afiliado", afiliado0);
 		
 		modelo.put("cuotaspagas", cuotaspagas);
@@ -97,11 +102,42 @@ public class ControladorPrestamo {
 		
 	}
 
-	@RequestMapping(path = "/totalapagarcuota", method=RequestMethod.POST)
-	public ModelAndView totalapagarcuota(@ModelAttribute("confirm") Confirmpagocuota confirm,HttpServletRequest request) {
+	@RequestMapping(path = "/finalizarpagocuota", method=RequestMethod.POST)
+	public ModelAndView finalizarpagocuota(@ModelAttribute("confirm") Confirmpagocuota confirm,HttpServletRequest request) {
+		ModelMap modelo= new ModelMap();
+		
+		List<Long> idCuotas = new ArrayList<Long>();
+		
+		Cuota cuotaitem= new Cuota();
+		
+		for(String item: confirm.getCheck()) {
+			idCuotas.add(Long.parseLong(item));
+			
+		}
+		
+		for(Long item2: idCuotas) {
+			cuotaitem=servicioCuota.consultarCuotaporId(item2);
+			cuotaitem.setEstado(true);
+			cuotaitem.setFechaDePago(new Date());
+			servicioCuota.modificarCubierto(cuotaitem);
+		}
+		
+		Prestamo prestamo0=servicioPrestamo.consultarUnPrestamo(confirm.getIdPrestamo());
+		int cont=0;
+		cont=prestamo0.getCuotas();
+		cont-=idCuotas.size();
+		prestamo0.setCuotas(cont);
+		servicioPrestamo.modificarPrestamo(prestamo0);
+		return new ModelAndView("redirect:/listarprestamos");
+	}
+		@RequestMapping(path = "/totalapagarcuota", method=RequestMethod.POST)
+		public ModelAndView totalapagarcuota(@ModelAttribute("confirm") Confirmpagocuota confirm,HttpServletRequest request) {
+			
 		ModelMap modelo = new ModelMap();
+		
 		List<Long> idCuotas = new ArrayList<Long>();
 		List<Cuota> cuotasnopagas= new ArrayList<Cuota>();
+		
 		double contcuota=0.0;
 		Cuota cuotaitem= new Cuota();
 		
@@ -118,8 +154,8 @@ public class ControladorPrestamo {
 		Afiliado afiliado0=servicioAfiliado.consultarAfiliadoDni(confirm.getDni());
 		Prestamo prestamo0=servicioPrestamo.consultarUnPrestamo(confirm.getIdPrestamo());
 		
-		
 		modelo.put("cuotasnopagas", cuotasnopagas);
+		modelo.put("prestamo", prestamo0);
 		modelo.put("idCuotas", idCuotas);
 		modelo.put("afiliado", afiliado0);
 		modelo.put("totalcuota", contcuota);
