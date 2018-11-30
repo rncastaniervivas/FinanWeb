@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Afiliado;
+import ar.edu.unlam.tallerweb1.modelo.Confirmpagocuota;
 import ar.edu.unlam.tallerweb1.modelo.Cuota;
 import ar.edu.unlam.tallerweb1.modelo.Prestamo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAfiliado;

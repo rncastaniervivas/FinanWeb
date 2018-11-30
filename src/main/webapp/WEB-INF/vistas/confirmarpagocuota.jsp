@@ -23,7 +23,7 @@
 		</div>
 		<form:form action="totalapagarcuota" modelAttribute="confirm" method="POST" role="form">
 		<div class="container">
-			<h1 class="text-center">LISTA DE PRESTAMOS</h1>
+			<h1 class="text-center">Lista de prestamo</h1>
 			<table class="table">
 			  <thead class="thead-light">
 			    <tr>

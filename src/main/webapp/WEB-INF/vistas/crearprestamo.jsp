@@ -47,6 +47,10 @@
 				  </div>
 				</form:form>
 				
+				<br>
+				<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
+				<br>
+				
 				<c:if test="${not empty error}">
 			        <h4><span>${error}</span></h4>
 			        <br>

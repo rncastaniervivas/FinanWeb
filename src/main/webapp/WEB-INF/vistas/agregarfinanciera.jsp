@@ -38,6 +38,10 @@
 				</form:form>
 			</div>
 		</div>
+		
+		<br>
+		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
+		<br>
 	</div>
 
 </body>

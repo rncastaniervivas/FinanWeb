@@ -10,11 +10,11 @@ public class ControladorVistas {
 	
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView inicio() {
-		return new ModelAndView("redirect:/index");
+		return new ModelAndView("redirect:/home");
 	}
 	
-	@RequestMapping("/index")
-	public ModelAndView irAIndex() {
-		return new ModelAndView("index");
+	@RequestMapping("/home")
+	public ModelAndView irAHome() {
+		return new ModelAndView("home");
 	}
 }
