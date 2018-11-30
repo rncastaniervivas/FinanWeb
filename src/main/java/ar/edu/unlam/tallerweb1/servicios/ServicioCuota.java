@@ -18,5 +18,7 @@ public interface ServicioCuota {
 	List<Cuota> consultarCuotaPagada(Long arefinanciar);
 	
 	void modificarCubierto(Cuota cuota);
+	
+	Cuota consultarCuotaporId(Long idCuota);
 
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Afiliado;
+import ar.edu.unlam.tallerweb1.modelo.Confirmpagocuota;
 import ar.edu.unlam.tallerweb1.modelo.Cuota;
 import ar.edu.unlam.tallerweb1.modelo.Prestamo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAfiliado;
@@ -79,12 +80,13 @@ public class ControladorPrestamo {
 		
 		List<Cuota> cuotasnopagas=servicioCuota.consultarCuota(idPrestamo1);
 		List<Cuota> cuotaspagas=servicioCuota.consultarCuotaPagada(idPrestamo1);
+		Prestamo prestamo0=servicioPrestamo.consultarUnPrestamo(idPrestamo1);
 		
 		Afiliado afiliado0= new Afiliado();
 		
 		afiliado0=servicioAfiliado.consultarAfiliado(idPrestamo1);
 		
-		
+		modelo.put("prestamo", prestamo0);
 		
 		modelo.put("afiliado", afiliado0);
 		
@@ -97,13 +99,28 @@ public class ControladorPrestamo {
 	}
 
 	@RequestMapping(path = "/totalapagarcuota", method=RequestMethod.POST)
-	public ModelAndView totalapagarcuota(@ModelAttribute("confirm") Confirmpagocuota confirm, HttpServletRequest request) {
+	public ModelAndView totalapagarcuota(@ModelAttribute("confirm") Confirmpagocuota confirm,HttpServletRequest request) {
 		ModelMap modelo = new ModelMap();
-		double montototal=0.0;
+		List<Long> idCuotas = new ArrayList<Long>();
+		List<Cuota> cuotasnopagas= new ArrayList<Cuota>();
 		for(String item: confirm.getCheck()) {
-			montototal+=Double.parseDouble(item);
+			idCuotas.add(Long.parseLong(item));
+			
 		}
-		modelo.put("valor", montototal);
+		for(Long item2: idCuotas) {
+			cuotasnopagas.add(servicioCuota.consultarCuotaporId(item2));
+		}
+		
+		Afiliado afiliado0=servicioAfiliado.consultarAfiliadoDni(confirm.getDni());
+		Prestamo prestamo0=servicioPrestamo.consultarUnPrestamo(confirm.getIdPrestamo());
+		
+		
+		modelo.put("cuotasnopagas", cuotasnopagas);
+		modelo.put("idCuotas", idCuotas);
+		modelo.put("afiliado", afiliado0);
+		modelo.put("montoprestamo", prestamo0.getValor());
+		modelo.put("dnitot", confirm.getDni());
+		
 		return new ModelAndView("totalcuotapaga",modelo);
 		
 		

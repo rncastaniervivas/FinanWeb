@@ -15,10 +15,11 @@
 	<body>
 		
 		<div class="container">
-			<h3>Datos del Afiliado</h3>
-			<h3>Nombre : ${afiliado.nombre}</h3>
-			<h3>Apellido : ${afiliado.apellido}</h3>
-			<h3>DNI : ${afiliado.dni}</h3>
+			<h5>Datos del Afiliado</h5>
+			<h5>Nombre : ${afiliado.nombre}</h5>
+			<h5>Apellido : ${afiliado.apellido}</h5>
+			<h5>DNI : ${afiliado.dni}</h5>
+			<h5>Valor Total del prestamo: ${prestamo.valor}</h5>
 		
 		</div>
 		<form:form action="totalapagarcuota" modelAttribute="confirm" method="POST" role="form">
@@ -37,13 +38,11 @@
 			  </thead>
 			  <!-- listar todos los afiados -->
 				  <tbody>
-				  <c:forEach items="${cuotaspagas}" var="cuotaspagas">
+				  <c:forEach items="${idCuotas}" var="idCuotas">
 				    <tr>				    
 			  
 				      <td scope="row">X</td>
-				      <td>${cuotaspagas.fechaDeVencimiento}</td>
-				      <td>${cuotaspagas.monto}</td>
-				      <td>${cuotaspagas.fechaDePago }</td>
+				      <td>${idCuotas}</td>
 				      <td>
 				      Pagada
 				      </td>
@@ -58,7 +57,8 @@
 				      <td>${cuotasnopagas.monto}</td>
 				      <td>Sin Pagar</td>
 				      <td>
-				      <input type="checkbox" id="check" name="check" value="${cuotasnopagas.monto}">
+				      <input type="checkbox" id="check" name="check" value="${cuotasnopagas.idCuota}">
+		      		  
 				      </td>
 				        </tr>
 			  </c:forEach>
@@ -66,6 +66,8 @@
 				  </tbody>
 			</table>
 		</div>
+		<input path="dni" type="text" id="dni" name="dni"class="form-control" value="${afiliado.dni}" style="display:none"/>
+		<input path="idPrestamo" type="text" id="idPrestamo" name="idPrestamo"class="form-control" value="${prestamo.idPrestamo}"/>
 		<button type="submit" class="btn btn-primary mb-2">Confirmar Pago</button>
 </form:form>
 		

@@ -19,4 +19,6 @@ public interface CuotaDao {
 	List<Cuota> consultarCuotaPagada(Long arefinanciar);
 	
 	List<Cuota> consultarCuotaImpagas(Long idPrestamo);
+	
+	Cuota consultarCuotaporId(Long idCuota);
 }

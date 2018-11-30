@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Cuota;
 import ar.edu.unlam.tallerweb1.modelo.Financiera;
+import ar.edu.unlam.tallerweb1.modelo.Prestamo;
 
 @Repository("CuotaDao")
 public class CuotaDaoImpl implements CuotaDao{
@@ -86,6 +88,15 @@ public class CuotaDaoImpl implements CuotaDao{
 				.add(Restrictions.eq("prestamoj.idPrestamo", idPrestamo))
 				.add(Restrictions.eq("estado", false))
 				.list());
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Cuota consultarCuotaporId(Long idCuota) {
+		final Session session = sessionFactory.getCurrentSession();
+		return (Cuota) session.createCriteria(Cuota.class)
+				.add(Restrictions.eq("idCuota", idCuota))
+				.uniqueResult();
 	}
 	
 	
