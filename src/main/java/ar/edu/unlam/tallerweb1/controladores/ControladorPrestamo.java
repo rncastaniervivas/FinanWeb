@@ -97,7 +97,15 @@ public class ControladorPrestamo {
 	}
 
 	@RequestMapping(path = "/totalapagarcuota", method=RequestMethod.POST)
-	public void totalapagarcuota(@ModelAttribute("prestamo") Prestamo prestamo, HttpServletRequest request) {
+	public ModelAndView totalapagarcuota(@ModelAttribute("confirm") Confirmpagocuota confirm, HttpServletRequest request) {
+		ModelMap modelo = new ModelMap();
+		double montototal=0.0;
+		for(String item: confirm.getCheck()) {
+			montototal+=Double.parseDouble(item);
+		}
+		modelo.put("valor", montototal);
+		return new ModelAndView("totalcuotapaga",modelo);
+		
 		
 	}
 	@RequestMapping(path = "/crearprestamo", method=RequestMethod.POST)
