@@ -50,11 +50,11 @@ public class Cuota {
 		this.interes = interes;
 	}
 
-	public boolean isEstado() {
+	public boolean setEstado() {
 		return estado;
 	}
 	public boolean getEstado() {
-		return estado;
+		return this.estado;
 	}
 
 	public void setEstado(boolean estado) {

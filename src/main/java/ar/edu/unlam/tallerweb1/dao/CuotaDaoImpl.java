@@ -35,6 +35,16 @@ public class CuotaDaoImpl implements CuotaDao{
 				.add(Restrictions.eq("estado", false))
 				.list());
 	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Cuota> consultarCuotaPagada(Long arefinanciar) {
+		return (sessionFactory.getCurrentSession()
+				.createCriteria(Cuota.class)
+				.createAlias("prestamo", "prestamoj")
+				.add(Restrictions.eq("prestamoj.idPrestamo", arefinanciar))
+				.add(Restrictions.eq("estado", true))
+				.list());
+	}
 
 	
 	@SuppressWarnings("unchecked")

@@ -72,59 +72,31 @@ public class ControladorPrestamo {
 	@RequestMapping(path = "/pagarcuota", method = RequestMethod.POST)
 	public ModelAndView pagarcuota(Long idPrestamo1) {
 		ModelMap modelo = new ModelMap();
+//		prestamo con afiliado si no es nulo ahi si lo trae
 		
-		Prestamo miprestamo= servicioPrestamo.consultarUnPrestamo(idPrestamo1);
+		List<Cuota> cuotasnopagas=servicioCuota.consultarCuota(idPrestamo1);
+		List<Cuota> cuotaspagas=servicioCuota.consultarCuotaPagada(idPrestamo1);
 		
-		//lo que esta comentado seria pagar pero no se por que me salta error
+		Afiliado afiliado0= new Afiliado();
 		
-		List<Cuota> miscuotas=servicioCuota.consultarCuota(idPrestamo1);
+		afiliado0=servicioAfiliado.consultarAfiliado(idPrestamo1);
 		
-		int cantcuotas;
+		
+		
+		modelo.put("afiliado", afiliado0);
+		
+		modelo.put("cuotaspagas", cuotaspagas);
+		
+		modelo.put("cuotasnopagas", cuotasnopagas);		
 
-		int valorprestamo=miprestamo.getValor();		
-		
-		cantcuotas=miprestamo.getCuotas();
-		
-		boolean estado=true;
-		
-		for (Cuota item : miscuotas) {
-			if(estado) {
-				if(cantcuotas==1) {
-					item.setEstado(true);
-					valorprestamo=0;
-					miprestamo.setEstado("Pagado");
-				}
-				
-				estado=item.getEstado();
-				if(estado==false) {
-					item.setEstado(true);
-					valorprestamo-=item.getMontoTotal();
-					cantcuotas--;
-				}
-			}
-			
-			
-		}
-		miprestamo.setValor(valorprestamo);	
-		
-		miprestamo.setCuotas(cantcuotas);
-		
-		servicioPrestamo.modificarPrestamo(miprestamo);
-
-		return new ModelAndView("redirect:/misprestamos",modelo);
+		return new ModelAndView("confirmarpagocuota",modelo);
 		
 	}
-	
-	
-	@RequestMapping("/nuevoprestamo")
-	public ModelAndView nuevoPrestamo() {
-ModelMap modelo = new ModelMap();
+
+	@RequestMapping(path = "/totalapagarcuota", method=RequestMethod.POST)
+	public void totalapagarcuota(@ModelAttribute("prestamo") Prestamo prestamo, HttpServletRequest request) {
 		
-		Prestamo prestamo = new Prestamo();
-		modelo.put("prestamo", prestamo);
-		return new ModelAndView("crearprestamo", modelo);			
 	}
-	
 	@RequestMapping(path = "/crearprestamo", method=RequestMethod.POST)
 	public ModelAndView crearPrestamo(@ModelAttribute("prestamo") Prestamo prestamo, HttpServletRequest request) {
 		ModelMap modelo = new ModelMap();

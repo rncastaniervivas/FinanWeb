@@ -28,7 +28,10 @@ public class ServicioCuotaImpl implements ServicioCuota{
 		
 		return servicioCuotaDao.consultarCuota(arefinanciar);
 	}
-
+	@Override
+	public List<Cuota> consultarCuotaPagada(Long arefinanciar){
+		return servicioCuotaDao.consultarCuotaPagada(arefinanciar);
+	}
 	@Override
 	public List<Cuota> consultarPorFinanciera(Financiera financiera) {
 		return servicioCuotaDao.consultarPorFinanciera(financiera);
