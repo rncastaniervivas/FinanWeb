@@ -227,6 +227,40 @@ public class ControladorPrestamo {
 			
 		return new ModelAndView("home");
 	}
+
+	@RequestMapping(path = "/nuevoprestamo", method=RequestMethod.POST)
+	public ModelAndView irANuevoPrestamo(@ModelAttribute("afiliado") Afiliado afiliado) {
+		ModelMap modelo=new ModelMap();
+		Afiliado miAfiliado = servicioAfiliado.consultarAfiliadoDni(afiliado.getDni());
+		Prestamo prestamo = new Prestamo();
+		List<Prestamo> prestamos = servicioPrestamo.consultarPrestamo(miAfiliado.getDni());
+		
+		double prestamoDisponible = servicioPrestamo.prestamoDisponible(afiliado);
+		
+		modelo.put("disponible", prestamoDisponible);
+		modelo.put("prestamos", prestamos);
+		modelo.put("afiliado", afiliado);
+		modelo.put("prestamo", prestamo);
+		return new ModelAndView("nuevoprestamo",modelo);
+	}
+	
+	@RequestMapping(path = "/validar-nuevo-prestamo", method=RequestMethod.POST)
+	public ModelAndView irValidarNuevoPrestamo(@ModelAttribute("afiliado") Afiliado afiliado, double valor, Integer cuotas) {
+		
+		ModelMap modelo=new ModelMap();
+		
+		if(valor <= servicioPrestamo.prestamoDisponible(afiliado)){
+			return new ModelAndView("listarprestamos");
+		}else{
+			Afiliado miAfiliado = servicioAfiliado.consultarAfiliadoDni(afiliado.getDni());
+			modelo.put("afiliado", miAfiliado);
+			return new ModelAndView("nuevoprestamo",modelo);
+		}
+		
+		
+		
+	}
+		
 	
 	
 }

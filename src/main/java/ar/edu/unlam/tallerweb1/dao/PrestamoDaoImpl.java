@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import ar.edu.unlam.tallerweb1.modelo.Afiliado;
 import ar.edu.unlam.tallerweb1.modelo.Prestamo;
 
 @Repository("PrestamoDao")
@@ -67,4 +68,18 @@ public class PrestamoDaoImpl implements PrestamoDao {
 		return false;}
 
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Prestamo> consultarPrestamoActivo(Afiliado afiliado) {
+		
+		return (sessionFactory.getCurrentSession()
+				.createCriteria(Prestamo.class)
+				.createAlias("afiliado", "afiliadoj")
+				.add(Restrictions.eq("afiliadoj.idAfiliado", afiliado.getIdAfiliado()))
+				.add(Restrictions.like("estado", "activo"))
+				.list());
+	}
+	
+	
 }
