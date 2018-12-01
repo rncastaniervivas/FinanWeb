@@ -1,38 +1,64 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
 import java.sql.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Caja {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idAfiliado;
+	private Long idCaja;
 	private Double monto;
-	private Date fecha;
 	
-	public Long getIdAfiliado() {
-		return idAfiliado;
+	@OneToMany (cascade=CascadeType.ALL)
+	private List<Registro> registros;
+
+	public Long getIdCaja() {
+		return idCaja;
 	}
-	public void setIdAfiliado(Long idAfiliado) {
-		this.idAfiliado = idAfiliado;
+
+	public void setIdCaja(Long idCaja) {
+		this.idCaja = idCaja;
 	}
+
 	public Double getMonto() {
 		return monto;
 	}
+
 	public void setMonto(Double monto) {
 		this.monto = monto;
 	}
-	public Date getFecha() {
-		return fecha;
+
+	public List<Registro> getRegistros() {
+		return registros;
 	}
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+
+	public void setRegistros(List<Registro> registros) {
+		this.registros = registros;
 	}
+	
+	@SuppressWarnings("null")
+	public Double consultarMontoCaja(List<Registro> registro) {
+		Double ingresos = null;
+		Double egresos = null;
+		for(Registro i: registro) {
+			ingresos+=i.getIngreso();
+			egresos+=i.getEgreso();
+		}
+	
+	return ingresos-egresos;
+	
+	}
+	
+	
+	
 	
 	
 	
