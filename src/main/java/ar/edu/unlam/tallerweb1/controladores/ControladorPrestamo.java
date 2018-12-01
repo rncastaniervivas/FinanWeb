@@ -53,8 +53,7 @@ public class ControladorPrestamo {
 	@RequestMapping(path="/misprestamos")
 	public ModelAndView misprestamos(Long dni, HttpServletRequest request) {
 		ModelMap modelo = new ModelMap();
-		Long dni0=(Long) request.getSession().getAttribute("dni");
-		List<Prestamo> prestamos= servicioPrestamo.consultarPrestamo(dni0);
+		List<Prestamo> prestamos= servicioPrestamo.consultarPrestamo(dni);
 		modelo.put("prestamos", prestamos);
 
 		

@@ -49,6 +49,7 @@
 							<button class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-remove"></span>Eliminar</button>
 							<button class="btn btn-info" type="submit" formaction="modificarafiliado"><span class="glyphicon glyphicon-align-justify"></span>Modificar</button>
 							<button class="btn btn-success" type="submit" formaction="nuevoprestamo">Nuevo Prestamo</button>
+							 <button class="btn btn-info" name="dni" formaction="misprestamos" value="${lista.dni}">Mis Prestamos</button>
 						</form:form>
 					  </td>
 				    </tr>
