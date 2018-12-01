@@ -35,7 +35,6 @@ public class ServicioPrestamoImpl implements ServicioPrestamo {
 	public List<Prestamo> consultarPrestamoTodosLosAfiliados() {
 		List<Prestamo> prestamo= servicioPrestamoDao.consultarPrestamo();
 		List<Prestamo> prestamoresult= new ArrayList<Prestamo>();
-		Long obj= (long) 0;
 		for(Prestamo item: prestamo) {
 			if(item.getFinanciera()==null) {
 				prestamoresult.add(item);
@@ -108,6 +107,7 @@ public class ServicioPrestamoImpl implements ServicioPrestamo {
 		nprestamo.setInteres(0.35);
 		nprestamo.setEstado("activo");
 		nprestamo.setAfiliado(miAfiliado);
+		nprestamo.setDni(afiliado.getDni());
 		
 		double montoMensual = valor/cuotas;
 		double interesCuota = (valor*0.35)/12;

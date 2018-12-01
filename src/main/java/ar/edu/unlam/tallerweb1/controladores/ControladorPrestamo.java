@@ -46,6 +46,7 @@ public class ControladorPrestamo {
 		List<Prestamo> prestamos= servicioPrestamo.consultarPrestamoTodosLosAfiliados();
 		
 		modelo.put("prestamos", prestamos);
+		
 		return new ModelAndView("listarprestamos",modelo);
 	}
 	

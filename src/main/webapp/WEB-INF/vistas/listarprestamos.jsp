@@ -37,7 +37,8 @@
 			<table class="table">
 			  <thead class="thead-light">
 			    <tr>
-			      <th scope="col">Valor</th>
+			      <th scope="col">DNI Afiliado</th>
+			      <th scope="col">Valor Del Prestamo</th>
 			      <th scope="col">Cuotas</th>
 			      <th scope="col">Intereces</th>
 			      <th scope="col">Estado</th>
@@ -49,7 +50,8 @@
 			  <c:forEach items="${prestamos}" var="prestamos">
 				  <tbody>
 				    <tr>
-				      <th scope="row">${prestamos.valor}</th>
+				      <th scope="row">${prestamos.dni}</th>
+				      <th>${prestamos.valor}</th>
 				      <td>${prestamos.cuotas}</td>
 				      <td>${prestamos.interes}</td>
 				      <td>${prestamos.estado}</td>
@@ -65,12 +67,7 @@
 				      	  <button type="submit" class="btn btn-info" name="idPrestamo2" value="${prestamos.idPrestamo}">Cancelar</button>
 				      	  </form>
 				      </td>
-				      <td>
-				      <c:if test="${not empty error}">
-			        	<span>${error}</span>
-			        	<br>
-		        		</c:if>	
-		        	</td>
+				      
 				    </tr>
 				  </tbody>
 			  </c:forEach>
