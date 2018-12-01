@@ -1,10 +1,12 @@
 package ar.edu.unlam.tallerweb1.dao;
 
+import ar.edu.unlam.tallerweb1.modelo.Cuota;
+
 public interface CajaDao {
 	
-	public void agregarCaja(Double agregar);
+	public void agregarCaja(Cuota cuotai);
 	
-	public void sacarCaja(Double sacar);
+	public void sacarCaja(Cuota cuotae);
 	
 	public Double consultarCaja();
 

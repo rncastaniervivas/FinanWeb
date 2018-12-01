@@ -21,7 +21,7 @@ public class Registro {
 	private String destino;
 	private String origen;
 	private Long prestamo;
-	private Integer cuota;
+	private Long cuota;
 	
 	@ManyToOne (cascade=CascadeType.ALL)
 	private Caja caja;
@@ -90,11 +90,11 @@ public class Registro {
 		this.prestamo = prestamo;
 	}
 
-	public Integer getCuota() {
+	public Long getCuota() {
 		return cuota;
 	}
 
-	public void setCuota(Integer cuota) {
+	public void setCuota(Long cuota) {
 		this.cuota = cuota;
 	}
 

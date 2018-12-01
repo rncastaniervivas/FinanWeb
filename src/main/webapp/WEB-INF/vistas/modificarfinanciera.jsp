@@ -21,7 +21,7 @@
 <form:form role="form" action="modificado" method="Post" modelAttribute="financiera">
 <div class="form-group">
 <label class="text-left">nombre:</label><br>
-<form:input path="nombre" id="nombre" class="" type="text" placeholder="${finan.nombre}"/>
+<form:input path="nombre" id="nombre" class="" type="text" placeholder="${finan.nombre}" />
 </div>
 <form:input path="idFinanciera" id="idFinanciera" type="hidden" value="${finan.idFinanciera}" />
 <button type="submit" class="btn btn-success">Guardar Cambios</button>

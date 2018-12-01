@@ -8,13 +8,13 @@ public interface ServicioFinanciera {
 	
 	List<Financiera> consultarFinanciera();
 	
-	void guardarFinanciera(Financiera financiera);
+	boolean guardarFinanciera(Financiera financiera);
 	
 	List<Financiera> buscarFinanciera(Financiera financiera);
 	
-	void eliminarfinanciera(Financiera financiera);
+	boolean eliminarfinanciera(Financiera financiera);
 	
-	void modificarFinanciera(Financiera financiera);
+	boolean modificarFinanciera(Financiera financiera);
 	
 	
 }

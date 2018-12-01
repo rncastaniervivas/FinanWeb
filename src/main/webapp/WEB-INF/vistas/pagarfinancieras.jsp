@@ -50,10 +50,11 @@
 			      <th scope="col">${cuotas.prestamo.afiliado.getIdAfiliado()}</th>
 			      <th scope="col">${cuotas.idCuota}</th>
 			      <th scope="col">${cuotas.fechaDeVencimiento}</th>
-			      <th scope="col">${cuotas.monto }</th>
+			      <th scope="col">${cuotas.monto}</th>
 			      <th scope="col">
 			      			<form:form action="restarsaldo" modelAttribute="cuota">
 							<form:input path="idCuota" id="idCuota" value="${cuotas.idCuota}" type="hidden"/>
+							<form:input path="prestamo.setIdPrestamo" value="${cuotas.prestamo.getIdPrestamo()}" type="hidden"/>
 							<form:input path="monto" id="monto"  type="hidden" value="${cuotas.monto}"/>
 							<button type="submit" class="btn btn-info">pagar</button>
 			      			</form:form>

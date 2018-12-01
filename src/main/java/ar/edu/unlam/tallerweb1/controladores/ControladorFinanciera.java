@@ -30,6 +30,7 @@ public class ControladorFinanciera {
 	@Inject
 	private ServicioPrestamo servicioPrestamo;
 	
+	// realizar pago a financieras
 	@RequestMapping("/pagarfinancieras")
 	public ModelAndView irAFinanapagar() {
 		ModelMap modelo = new ModelMap();
@@ -90,15 +91,13 @@ public class ControladorFinanciera {
 		ModelMap modelo=new ModelMap();
 		Financiera financiera=new Financiera();
 		modelo.put("financiera", financiera);
-		List<Financiera> mifinanciera=servicioFinanciera.buscarFinanciera(agregarfinanciera);
-		if(mifinanciera.size() == 0) {
-		servicioFinanciera.guardarFinanciera(agregarfinanciera);
+		
+		if(servicioFinanciera.guardarFinanciera(agregarfinanciera) == true ) {
 		List<Financiera> lista =servicioFinanciera.consultarFinanciera();
 		modelo.put("financieras", lista);
 		return new ModelAndView("financiera",modelo);
 		}else {
 			modelo.put("error", "Ya existe financiera");
-			
 		}
 		return new ModelAndView ("agregarfinanciera",modelo);
 	}
@@ -139,10 +138,7 @@ public class ControladorFinanciera {
 		ModelMap modelo=new ModelMap();
 		Financiera financiera=new Financiera();
 		// escribir para que pregunte si tiene un prestamo antes de elminar
-		boolean tienePrestamo=servicioPrestamo.consultarPorFinanciera(finan.getIdFinanciera());
-		if(tienePrestamo == false) {
-	servicioFinanciera.eliminarfinanciera(finan);
-		}else {
+		if(servicioFinanciera.eliminarfinanciera(finan) == false) {
 			modelo.put("erroeliminar", "No se puede eliminar debido a que tiene prestamo");
 		}
 	List<Financiera> lista=servicioFinanciera.consultarFinanciera();
@@ -165,20 +161,18 @@ public class ControladorFinanciera {
 	@RequestMapping(path="/modificado", method=RequestMethod.POST)
 	public ModelAndView financieramodificada(@ModelAttribute("financiera")Financiera mfinanciera) {
 		ModelMap modelo=new ModelMap();
-		List<Financiera> miFinan=servicioFinanciera.buscarFinanciera(mfinanciera);
 		Financiera financiera=new Financiera();
 		modelo.put("financiera", financiera);
-		if(miFinan.size() != 0) {
+		
+		if(servicioFinanciera.modificarFinanciera(mfinanciera)==false) {
 		modelo.put("error","ya existe financiera");
 		return new ModelAndView ("modificarfinanciera",modelo);
-		}else {
-		
-		servicioFinanciera.modificarFinanciera(mfinanciera);
+		}
 		List<Financiera> lista=servicioFinanciera.consultarFinanciera();
 		modelo.put("financieras",lista);
 		return new ModelAndView("financiera",modelo);	
 		
-	}
+	
 	
 	}
 }
