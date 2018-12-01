@@ -43,7 +43,7 @@ public class ControladorPrestamo {
 	public ModelAndView listarPrestamo() {
 		ModelMap modelo = new ModelMap();
 		
-		List<Prestamo> prestamos= servicioPrestamo.consultarPrestamo();
+		List<Prestamo> prestamos= servicioPrestamo.consultarPrestamoTodosLosAfiliados();
 		
 		modelo.put("prestamos", prestamos);
 		return new ModelAndView("listarprestamos",modelo);

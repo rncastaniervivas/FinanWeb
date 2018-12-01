@@ -26,5 +26,6 @@ public interface ServicioPrestamo {
 	void crearNuevoPrestamo(Afiliado afiliado, Integer valor, Integer cuotas);
 	
 	List<Prestamo> consultarPrestamoActivos(Afiliado afiliado);
-
+	
+	List<Prestamo> consultarPrestamoTodosLosAfiliados();
 }
