@@ -108,6 +108,17 @@ public class ServicioPrestamoImpl implements ServicioPrestamo {
 		}
 		return prestamoresult;
 	}
+	@Override
+	public List<Prestamo> consultarPrestamoOrdenadoAsc() {
+		List<Prestamo> prestamo= servicioPrestamoDao.consultarPrestamoOrdenadoAsc();
+		List<Prestamo> prestamoresult= new ArrayList<Prestamo>();
+		for(Prestamo item: prestamo) {
+			if(item.getFinanciera()==null) {
+				prestamoresult.add(item);
+			}
+		}
+		return prestamoresult;
+	}
 
 	@Override
 	public void crearNuevoPrestamo(Afiliado afiliado, Integer valor, Integer cuotas) {

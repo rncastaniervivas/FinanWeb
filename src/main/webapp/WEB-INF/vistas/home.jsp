@@ -9,7 +9,7 @@
 	<body>
 		<div class = "container">
 			<h1>FinanWeb</h1>
-			${dni}
+			
 			<div>
 				<h3>Prestamos</h3>
 					<form action="listarprestamos" method="POST">
@@ -17,8 +17,14 @@
 					</form>
 					<br>
 				
-					<form action="misprestamos" method="POST" >
-					  <button type="submit" class="btn btn-info" name="dni" value="${dni}">Mis Prestamos</button>
+					<form action="top5afiliados" method="POST" >
+					  <button type="submit" class="btn btn-info" name="opcion" value="1">Top5AfiliadosConMayorPrestamo</button>
+					</form>
+					<br>
+					
+					
+					<form action="top5afiliados" method="POST" >
+					  <button type="submit" class="btn btn-info" name="opcion" value="2">Top5AfiliadosConMenorPrestamo</button>
 					</form>
 					<br>
 					

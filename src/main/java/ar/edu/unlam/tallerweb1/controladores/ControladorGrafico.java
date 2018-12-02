@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -25,16 +26,20 @@ public class ControladorGrafico {
 	private ServicioAfiliado servicioAfiliado;
 	
 	@Inject
-	private ServicioRefinanciar servicioRefinanciar;
-
-
+	private ServicioRefinanciar servicioRefinanciar;	
 	
-	
-	@RequestMapping(path="/grafica")
-	public ModelAndView grafica() {
-	ModelMap modelo = new ModelMap();
+	@RequestMapping(path="/top5afiliados")
+	public ModelAndView grafica(Integer opcion) {
+		ModelMap modelo = new ModelMap();
+		List<Prestamo> prestamos= new ArrayList<Prestamo>();
+		if(opcion==1) {
+			prestamos= servicioPrestamo.consultarPrestamoOrdenadoDesc();			
+		}
+		else {
+			prestamos= servicioPrestamo.consultarPrestamoOrdenadoAsc();
+		}
 	//nomafil1
-	List<Prestamo> prestamos= servicioPrestamo.consultarPrestamoOrdenadoDesc();
+
 		int aux=0,numafil1=0,numafil2=0,numafil3=0,numafil4=0,numafil5=0;
 		String nomafil1="",nomafil2="",nomafil3="",nomafil4="",nomafil5="";
 		Afiliado afil= new Afiliado();
@@ -86,8 +91,12 @@ public class ControladorGrafico {
 		modelo.put("nomafil3", nomafil3);
 		modelo.put("nomafil2", nomafil2);
 		modelo.put("nomafil1", nomafil1);
-		
-		return new ModelAndView("grafica",modelo);
+		if(opcion==1) {			
+			return new ModelAndView("top5afiliados",modelo);
+		}
+		else {
+			return new ModelAndView("top5afiliadosmenorprestamo",modelo);
+		}
 	
 	}
 }

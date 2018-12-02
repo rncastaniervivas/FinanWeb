@@ -34,6 +34,14 @@ public class PrestamoDaoImpl implements PrestamoDao {
 				.addOrder(Order.desc("valor"))
 				.list());
 	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Prestamo> consultarPrestamoOrdenadoAsc() {
+		return (sessionFactory.getCurrentSession()
+				.createCriteria(Prestamo.class)
+				.addOrder(Order.asc("valor"))
+				.list());
+	}
 	
 	@Override
 	public Prestamo consultarUnPrestamo(Long idPrestamo){

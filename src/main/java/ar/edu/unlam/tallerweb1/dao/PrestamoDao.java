@@ -22,5 +22,7 @@ public interface PrestamoDao {
 
 	List<Prestamo> consultarPrestamoOrdenadoDesc();
 
+	List<Prestamo> consultarPrestamoOrdenadoAsc();
+
 	
 }
