@@ -21,10 +21,16 @@
 					  <button type="submit" class="btn btn-info" name="opcion" value="1">Top5AfiliadosConMayorPrestamo</button>
 					</form>
 					<br>
-					
-					
 					<form action="top5afiliados" method="POST" >
 					  <button type="submit" class="btn btn-info" name="opcion" value="2">Top5AfiliadosConMenorPrestamo</button>
+					</form>
+					<br>
+					<form action="top5financieras" method="POST" >
+					  <button type="submit" class="btn btn-info" name="opcion" value="3">Top5FinancierasConMayorPrestamo</button>
+					</form>
+					<br>
+					<form action="top5financieras" method="POST" >
+					  <button type="submit" class="btn btn-info" name="opcion" value="4">Top5FinancierasConMenorPrestamo</button>
 					</form>
 					<br>
 					

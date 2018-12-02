@@ -32,4 +32,8 @@ public interface ServicioPrestamo {
 	List<Prestamo> consultarPrestamoOrdenadoDesc();
 
 	List<Prestamo> consultarPrestamoOrdenadoAsc();
+
+	List<Prestamo> consultarPrestamoFinanOrdenadoDesc();
+
+	List<Prestamo> consultarPrestamoFinanOrdenadoAsc();
 }

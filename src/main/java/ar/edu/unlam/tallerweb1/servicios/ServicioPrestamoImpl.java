@@ -109,6 +109,28 @@ public class ServicioPrestamoImpl implements ServicioPrestamo {
 		return prestamoresult;
 	}
 	@Override
+	public List<Prestamo> consultarPrestamoFinanOrdenadoDesc() {
+		List<Prestamo> prestamo= servicioPrestamoDao.consultarPrestamoOrdenadoDesc();
+		List<Prestamo> prestamoresult= new ArrayList<Prestamo>();
+		for(Prestamo item: prestamo) {
+			if(item.getFinanciera()!=null) {
+				prestamoresult.add(item);
+			}
+		}
+		return prestamoresult;
+	}
+	@Override
+	public List<Prestamo> consultarPrestamoFinanOrdenadoAsc() {
+		List<Prestamo> prestamo= servicioPrestamoDao.consultarPrestamoOrdenadoAsc();
+		List<Prestamo> prestamoresult= new ArrayList<Prestamo>();
+		for(Prestamo item: prestamo) {
+			if(item.getFinanciera()!=null) {
+				prestamoresult.add(item);
+			}
+		}
+		return prestamoresult;
+	}
+	@Override
 	public List<Prestamo> consultarPrestamoOrdenadoAsc() {
 		List<Prestamo> prestamo= servicioPrestamoDao.consultarPrestamoOrdenadoAsc();
 		List<Prestamo> prestamoresult= new ArrayList<Prestamo>();
