@@ -51,7 +51,7 @@ public class ControladorPrestamo {
 	}
 	
 	@RequestMapping(path="/misprestamos")
-	public ModelAndView misprestamos(Long dni, HttpServletRequest request) {
+	public ModelAndView misprestamos(Long dni) {
 		ModelMap modelo = new ModelMap();
 		List<Prestamo> prestamos= servicioPrestamo.consultarPrestamo(dni);
 		modelo.put("prestamos", prestamos);
@@ -76,18 +76,15 @@ public class ControladorPrestamo {
 	@RequestMapping(path = "/pagarcuota", method = RequestMethod.POST)
 	public ModelAndView pagarcuota(Long idPrestamo1) {
 		ModelMap modelo = new ModelMap();
-//		prestamo con afiliado si no es nulo ahi si lo trae
 		
 		List<Cuota> cuotasnopagas=servicioCuota.consultarCuota(idPrestamo1);
 		List<Cuota> cuotaspagas=servicioCuota.consultarCuotaPagada(idPrestamo1);
 		Prestamo prestamo0=servicioPrestamo.consultarUnPrestamo(idPrestamo1);
 		Afiliado afiliado0=prestamo0.getAfiliado();
-		
-//		String codigohtml="";
-//		codigohtml+=
+	
 		
 		modelo.put("prestamo", prestamo0);
-//		modelo.put("codigohtml", codigohtml);
+		
 		modelo.put("afiliado", afiliado0);
 		
 		modelo.put("cuotaspagas", cuotaspagas);
@@ -99,8 +96,7 @@ public class ControladorPrestamo {
 	}
 
 	@RequestMapping(path = "/finalizarpagocuota", method=RequestMethod.POST)
-	public ModelAndView finalizarpagocuota(@ModelAttribute("confirm") Confirmpagocuota confirm,HttpServletRequest request) {
-		ModelMap modelo= new ModelMap();
+	public ModelAndView finalizarpagocuota(@ModelAttribute("confirm") Confirmpagocuota confirm) {
 		
 		List<Long> idCuotas = new ArrayList<Long>();
 		
@@ -128,7 +124,7 @@ public class ControladorPrestamo {
 		return new ModelAndView("redirect:/listarprestamos");
 	}
 		@RequestMapping(path = "/totalapagarcuota", method=RequestMethod.POST)
-		public ModelAndView totalapagarcuota(@ModelAttribute("confirm") Confirmpagocuota confirm,HttpServletRequest request) {
+		public ModelAndView totalapagarcuota(@ModelAttribute("confirm") Confirmpagocuota confirm) {
 			
 		ModelMap modelo = new ModelMap();
 		
@@ -249,6 +245,38 @@ public class ControladorPrestamo {
 			return new ModelAndView("/nuevoprestamo",modelo);
 		}
 		
+	}
+
+	public ServicioPrestamo getServicioPrestamo() {
+		return servicioPrestamo;
+	}
+
+	public void setServicioPrestamo(ServicioPrestamo servicioPrestamo) {
+		this.servicioPrestamo = servicioPrestamo;
+	}
+
+	public ServicioCuota getServicioCuota() {
+		return servicioCuota;
+	}
+
+	public void setServicioCuota(ServicioCuota servicioCuota) {
+		this.servicioCuota = servicioCuota;
+	}
+
+	public ServicioAfiliado getServicioAfiliado() {
+		return servicioAfiliado;
+	}
+
+	public void setServicioAfiliado(ServicioAfiliado servicioAfiliado) {
+		this.servicioAfiliado = servicioAfiliado;
+	}
+
+	public ServicioRefinanciar getServicioRefinanciar() {
+		return servicioRefinanciar;
+	}
+
+	public void setServicioRefinanciar(ServicioRefinanciar servicioRefinanciar) {
+		this.servicioRefinanciar = servicioRefinanciar;
 	}
 		
 	
