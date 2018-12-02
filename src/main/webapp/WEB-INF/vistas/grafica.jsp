@@ -14,51 +14,38 @@
 	<body>
 		
 		<div id="canvas-container" style="width:50%;">
-		<canvas id="chart" width="500" height="350"></canvas>
+		<canvas id="bar-chart" width="500" height="350"></canvas>
 		</div>
-
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
 		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 		<script src="js/bootstrap.min.js" type="text/javascript"></script>
+
 	<script type="text/javascript" src="js/Chart.bundle.min.js"></script>
 	
-	<script type="text/javascript">
+<script type="text/javascript">
 	$(document).ready(function(){
-		var datos = {
-			type: "pie",
-			data : {
-				datasets :[{
-					data : [
-						5,
-						10,
-						40,
-						12,
-						23,
-					],
-					backgroundColor: [
-						"#F7464A",
-						"#46BFBD",
-						"#FDB45C",
-						"#949FB1",
-						"#4D5360",
-					],
-				}],
-				labels : [
-					"Datos 1",
-					"Datos 2",
-					"Datos 3",
-					"Datos 4",
-					"Datos 5",
-				]
-			},
-			options : {
-				responsive : true,
-			}
-		};
-
-		var canvas = document.getElementById('chart').getContext('2d');
-		window.pie = new Chart(canvas, datos);
+		//los 5 afiliados que sacaron el mayor prestamo
+		new Chart(document.getElementById("bar-chart"), {
+		    type: 'bar',
+		    data: {
+		      labels: ["${nomafil1}", "${nomafil2}", "${nomafil3}", "${nomafil4}", "${nomafil5}"],
+		      datasets: [
+		        {
+		          label: "Dinero",
+		          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+		          data: [${numafil1},${numafil2},${numafil3},${numafil4},${numafil5}]
+		        }
+		      ]
+		    },
+		    options: {
+		      legend: { display: false },
+		      title: {
+		        display: true,
+		        text: 'Los 5 Afiliados con el prestamo mas alto registrado'
+		      }
+		    }
+		});
 	});
 	</script>
 	</body>

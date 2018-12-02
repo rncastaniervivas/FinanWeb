@@ -49,17 +49,6 @@ public class ControladorPrestamo {
 		
 		return new ModelAndView("listarprestamos",modelo);
 	}
-	@RequestMapping(path="/grafica")
-	public ModelAndView grafica() {
-	ModelMap modelo = new ModelMap();
-		
-		List<Prestamo> prestamos= servicioPrestamo.consultarPrestamoTodosLosAfiliados();
-		
-		modelo.put("prestamos", prestamos);
-		
-		return new ModelAndView("grafica",modelo);
-	
-	}
 	
 	@RequestMapping(path="/misprestamos")
 	public ModelAndView misprestamos(Long dni, HttpServletRequest request) {

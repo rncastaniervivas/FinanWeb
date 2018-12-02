@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -23,6 +24,14 @@ public class PrestamoDaoImpl implements PrestamoDao {
 	public List<Prestamo> consultarPrestamo() {
 		return (sessionFactory.getCurrentSession()
 				.createCriteria(Prestamo.class)
+				.list());
+	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Prestamo> consultarPrestamoOrdenadoDesc() {
+		return (sessionFactory.getCurrentSession()
+				.createCriteria(Prestamo.class)
+				.addOrder(Order.desc("valor"))
 				.list());
 	}
 	
