@@ -13,22 +13,9 @@
 	</head>
 	
 	<body>
+		
 		<div class="container">
-			<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-			  <li class="nav-item">
-			    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
-			  </li>
-			  <li class="nav-item">
-			    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
-			  </li>
-			  <li class="nav-item">
-			    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</a>
-			  </li>
-			</ul>
-		</div>
-	
-		<div class="container">
-			<h1 class="text-center">LISTA DE CUOTAS</h1>
+			<h1 class="text-center">Lista de cuotas</h1>
 			<table class="table">
 			  <thead class="thead-light">
 			    <tr class="bg-danger">
@@ -49,7 +36,9 @@
 			  </c:forEach>
 			</table>
 		</div>
-		
+		<br>
+		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
+		<br>
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
 		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>

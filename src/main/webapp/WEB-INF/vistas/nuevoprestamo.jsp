@@ -60,7 +60,7 @@
 	</div>
 	
 	<div class="container">
-		<h1 class="text-center">LISTA DE PRESTAMOS EXISTENTES</h1>
+		<h1 class="text-center">Lista de préstamos existentes</h1>
 		<table class="table">
 		  <thead class="thead-light">
 		    <tr>

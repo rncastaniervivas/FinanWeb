@@ -28,6 +28,10 @@
 				
 			</p>
 		</c:forEach>
+		
+		<br>
+		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
+		<br>
 	
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>

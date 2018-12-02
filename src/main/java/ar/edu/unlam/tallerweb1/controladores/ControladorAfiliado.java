@@ -65,7 +65,7 @@ public class ControladorAfiliado {
 		return new ModelAndView("modificarafiliado", modelo);
 	}
 	
-	@RequestMapping (path = "/afiliadomodificado", method = RequestMethod.POST)
+	@RequestMapping (path = "/amodificado", method = RequestMethod.POST)
 	public ModelAndView afiliadoModificado(@ModelAttribute("afiliado") Afiliado mafiliado) {
 		ModelMap modelo = new ModelMap();
 		List<Afiliado> miAfiliado = servicioAfiliado.buscarAfiliado(mafiliado);
