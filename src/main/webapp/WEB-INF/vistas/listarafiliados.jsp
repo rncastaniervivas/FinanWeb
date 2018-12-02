@@ -43,13 +43,14 @@
 							<form:input path="nombre" id="nombre" readonly="readonly" type="hidden" value="${lista.nombre}" />
 							<form:input path="apellido" id="apellido" readonly="readonly" type="hidden" value="${lista.apellido}" />
 							<form:input path="dni" id="dni" readonly="readonly" type="hidden" value="${lista.dni}" />
+							<form:input path="puesto" id="puesto" readonly="readonly" type="hidden" value="${lista.puesto}" />
 							<form:input path="antiguedad" id="antiguedad" readonly="readonly" type="hidden" value="${lista.antiguedad}" />
 							<form:input path="sueldo" id="sueldo" readonly="readonly" type="hidden" value="${lista.sueldo}" />
 							
 							<button class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-remove"></span>Eliminar</button>
 							<button class="btn btn-info" type="submit" formaction="modificarafiliado"><span class="glyphicon glyphicon-align-justify"></span>Modificar</button>
 							<button class="btn btn-success" type="submit" formaction="nuevoprestamo">Nuevo Prestamo</button>
-							 <button class="btn btn-info" name="dni" formaction="misprestamos" value="${lista.dni}">Mis Prestamos</button>
+							<button class="btn btn-info" name="dni" formaction="misprestamos" value="${lista.dni}">Mis Prestamos</button>
 						</form:form>
 					  </td>
 				    </tr>
@@ -62,7 +63,9 @@
 			<br>
 			<button class="btn btn-primary btn-lg" type="submit">Nuevo afiliado</button>
 		</form:form>
-		
+		<br>
+		<h3>${erroreliminar}</h3>
+		<br>
 		<br>
 		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
 		<br>

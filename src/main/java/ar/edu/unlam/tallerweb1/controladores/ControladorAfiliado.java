@@ -67,15 +67,20 @@ public class ControladorAfiliado {
 	
 	@RequestMapping (path = "/afiliadomodificado", method = RequestMethod.POST)
 	public ModelAndView afiliadoModificado(@ModelAttribute("afiliado") Afiliado mafiliado) {
-		servicioAfiliado.modificarAfiliado(mafiliado);
-		
-		List<Afiliado> lista = servicioAfiliado.consultarAfiliado();
 		ModelMap modelo = new ModelMap();
-		modelo.put("afiliados", lista);
-		
+		List<Afiliado> miAfiliado = servicioAfiliado.buscarAfiliado(mafiliado);
 		Afiliado afiliado = new Afiliado();
-		modelo.put("listarafiliados", afiliado);
-		return new ModelAndView("listarafiliados", modelo);
+		modelo.put("afiliado", afiliado);
+		
+		if(miAfiliado.size() != 0) {
+			modelo.put("error", "No se puede modificar el afiliado");
+			return new ModelAndView("modificarafiliado", modelo);
+		} else {
+			servicioAfiliado.modificarAfiliado(mafiliado);
+			List<Afiliado> lista = servicioAfiliado.consultarAfiliado();
+			modelo.put("afiliados", lista);
+			return new ModelAndView("listarafiliados", modelo);
+		}
 	}
 	
 	@RequestMapping (path = "/eliminarafiliado", method = RequestMethod.POST)
@@ -83,7 +88,14 @@ public class ControladorAfiliado {
 		ModelMap modelo = new ModelMap();
 		Afiliado afiliado = new Afiliado();
 		
-		servicioAfiliado.eliminarAfiliado(afiliaeliminar);
+		//pregunto si el afiliado a eliminar tiene algun prestamo activo
+		boolean tienePrestamo = servicioPrestamo.consultarPrestamoActivoAfiliado(afiliaeliminar.getIdAfiliado());
+		
+		if(tienePrestamo == false) {
+			servicioAfiliado.eliminarAfiliado(afiliaeliminar);
+		}else {
+			modelo.put("erroreliminar", "El afiliado posee un prestamo activo y no se puede eliminar");
+		}
 		
 		List<Afiliado> lista = servicioAfiliado.consultarAfiliado();
 		modelo.put("afiliados", lista);

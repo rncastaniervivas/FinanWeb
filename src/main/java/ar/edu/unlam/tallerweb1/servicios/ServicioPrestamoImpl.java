@@ -72,6 +72,11 @@ public class ServicioPrestamoImpl implements ServicioPrestamo {
 	public List<Prestamo> consultarPrestamoActivos(Afiliado afiliado) {
 		return servicioPrestamoDao.consultarPrestamoActivo(afiliado);
 	}
+	
+	@Override
+	public boolean consultarPrestamoActivoAfiliado (Long idAfiliado) {
+		return servicioPrestamoDao.consultarPrestamoActivoAfiliado(idAfiliado);
+	}
 
 	@Override
 	public double salarioAfectado(Afiliado afiliado) {

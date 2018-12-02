@@ -23,6 +23,8 @@ public interface PrestamoDao {
 	List<Prestamo> consultarPrestamoOrdenadoDesc();
 
 	List<Prestamo> consultarPrestamoOrdenadoAsc();
+	
+	boolean consultarPrestamoActivoAfiliado(Long idAfiliado);
 
 	
 }

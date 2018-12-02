@@ -12,36 +12,22 @@
 	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 	</head>
 	<body>
-		
-		<div class="container">
-			<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-			  <li class="nav-item">
-			    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
-			  </li>
-			  <li class="nav-item">
-			    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
-			  </li>
-			  <li class="nav-item">
-			    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</a>
-			  </li>
-			</ul>
-		</div>
-		
 		<div class="container">
 			<h3>${afiliado.nombre} ${afiliado.apellido}</h3>
 		
 		</div>
 	
 		<div class="container">
-			<h1 class="text-center">LISTA DE PRESTAMOS</h1>
+			<h1 class="text-center">Lista de préstamos</h1>
 			<table class="table">
 			  <thead class="thead-light">
 			    <tr>
 			      <th scope="col">DNI Afiliado</th>
 			      <th scope="col">Valor Del Prestamo</th>
 			      <th scope="col">Cuotas</th>
-			      <th scope="col">Intereces</th>
+			      <th scope="col">Intereses</th>
 			      <th scope="col">Estado</th>
+			      <th scope="col">Opciones</th>
 			      
 			    </tr>
 			  </thead>
@@ -72,7 +58,10 @@
 			  </c:forEach>
 			</table>
 		</div>
-		
+		<br>
+		<br>
+		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
+		<br>
 
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>

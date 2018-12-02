@@ -99,4 +99,18 @@ public class PrestamoDaoImpl implements PrestamoDao {
 	}
 	
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean consultarPrestamoActivoAfiliado(Long idAfiliado) {
+		List<Prestamo> tienePrestamo = sessionFactory.getCurrentSession().createCriteria(Prestamo.class)
+				.createAlias("afiliado", "afiliadojoin")
+				.add(Restrictions.eq("afiliadojoin.idAfiliado", idAfiliado))
+				.list();
+		if (tienePrestamo.size() != 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 }

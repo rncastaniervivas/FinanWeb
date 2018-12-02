@@ -61,12 +61,15 @@
 					  </div>
 				  </div>
 				  
+				  <form:input path="idAfiliado" id="idAfiliado" type="hidden" value="${afili.idAfiliado}" />
+				  
 				  <div class="form-group row">
 				  		<div class="col-lg-2"></div>
 				  		<div class="col-lg-10">
 						  <button type="submit" class="btn btn-success">Guardar cambios</button>
 						</div>
 				  </div>
+				  <p>${error}</p>
 				</form:form>
 			</div>
 		</div>
