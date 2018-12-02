@@ -32,35 +32,10 @@ public class PrestamoTest {
 	public void testPruebaQueSeCreoUnPrestamo() {
 		
 		ControladorPrestamo controlador = new ControladorPrestamo();
+		
 		ServicioPrestamo servicioPrestamoMock=mock(ServicioPrestamo.class);
 		ServicioAfiliado servicioAfiliadoMock=mock(ServicioAfiliado.class);
 		
-		controlador.setServicioAfiliado(servicioAfiliadoMock);
-		controlador.setServicioPrestamo(servicioPrestamoMock);
-		
-		Afiliado afiliadoMock=mock(Afiliado.class);
-		
-		afiliadoMock.setApellido("ApellidoMock");
-		afiliadoMock.setAntiguedad("10años");
-		afiliadoMock.setDni(9L);
-		afiliadoMock.setSueldo(10000.00);
-		afiliadoMock.setClasificacion("cliente");
-		afiliadoMock.setNombre("NombreMock");
-		
-		ModelAndView modelo=controlador.irANuevoPrestamo(afiliadoMock);
-		
-		assertThat(modelo.getViewName()).isEqualTo("nuevoprestamo");
-		
-		
-	}
-	@Test
-	@Transactional
-	@Rollback (true)
-	public void testPruebaQueSeCreoUnPrestamo2() {
-		
-		ControladorPrestamo controlador = new ControladorPrestamo();
-		ServicioPrestamo servicioPrestamoMock=mock(ServicioPrestamo.class);
-		ServicioAfiliado servicioAfiliadoMock=mock(ServicioAfiliado.class);
 		controlador.setServicioAfiliado(servicioAfiliadoMock);
 		controlador.setServicioPrestamo(servicioPrestamoMock);
 		Afiliado afiliadoMock=mock(Afiliado.class);
