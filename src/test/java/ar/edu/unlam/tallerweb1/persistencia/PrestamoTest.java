@@ -4,13 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-package ar.edu.unlam.tallerweb1.persistencia;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.SessionFactory;
-import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -20,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.controladores.*;
+import ar.edu.unlam.tallerweb1.dao.*;
 import ar.edu.unlam.tallerweb1.modelo.*;
 import ar.edu.unlam.tallerweb1.servicios.*;
 
@@ -32,22 +30,24 @@ public class PrestamoTest {
 		
 		ControladorPrestamo controlador = new ControladorPrestamo();
 		
-		HttpSession httpMock = mock (HttpSession.class);
-		
-		HttpServletRequest httpRequestMock = mock(HttpServletRequest.class);
-		
-//		ServicioLogin servicioLoginMock = mock(ServicioLogin.class);
 		ServicioPrestamo servicioPrestamoMock=mock(ServicioPrestamo.class);
 		
-//		Usuario usuarioMock = mock(Usuario.class);
-		Prestamo prestamoMock=mock(Prestamo.class);
+		Afiliado afiliadoMock=mock(Afiliado.class);
+		
+		afiliadoMock.setApellido("ApellidoMock");
+		afiliadoMock.setAntiguedad("10años");
+		afiliadoMock.setDni(9L);
+		afiliadoMock.setSueldo(10000.00);
+		afiliadoMock.setClasificacion("cliente");
+		afiliadoMock.setNombre("NombreMock");
+		afiliadoMock.setIdAfiliado(1L);
 
+		when(servicioPrestamoMock.prestamoDisponible(afiliadoMock)).thenReturn(3000.00);
 		
+		ModelAndView modelo= controlador.irValidarNuevoPrestamo(afiliadoMock, 500,6);
 		
+		assertThat(modelo.getViewName()).isEqualTo("nuevoprestamo");
 		
-//		ModelAndView modelo = controlador.validarLogin(usuarioMock, httpRequestMock);
-		
-//		assertThat(modelo.getViewName()).isEqualTo("login");
 		
 	}
 

@@ -26,14 +26,15 @@ public class UsuarioTest {
 		//genero un controller para usarlo NO MOCKEAR
 		ControladorLogin controlador = new ControladorLogin();
 		
-		HttpSession httpMock = mock (HttpSession.class);
-		HttpServletRequest httpRequestMock = mock(HttpServletRequest.class); 
+		HttpServletRequest httpRequestMock = mock(HttpServletRequest.class);
+		
 		ServicioLogin servicioLoginMock = mock(ServicioLogin.class);
 		Usuario usuarioMock = mock(Usuario.class);
 				
+		when(servicioLoginMock.consultarUsuario(usuarioMock)).thenReturn(null);
+		
 		controlador.setServicioLogin(servicioLoginMock);
 		
-		when(servicioLoginMock.consultarUsuario(usuarioMock)).thenReturn(null);
 		
 		ModelAndView modelo = controlador.validarLogin(usuarioMock, httpRequestMock);
 		
