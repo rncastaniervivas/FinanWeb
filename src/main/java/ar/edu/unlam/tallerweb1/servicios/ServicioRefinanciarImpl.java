@@ -67,6 +67,7 @@ public class ServicioRefinanciarImpl implements ServicioRefinanciar{
 		prestamoRef.setAfiliado(afiliado);
 		prestamoRef.setPrestamoRef(prestamo);
 		prestamoRef.setEstado("activo");
+		prestamoRef.setDni(afiliado.getDni());
 		//prestamoRef.setCuota(cuotasRef);
 		
 		// Creo un nuevo prestamo con sus respectivos cuotas.
