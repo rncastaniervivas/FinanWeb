@@ -15,18 +15,22 @@
 	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 
 </head>
-<body class="text-center">
+<body class="container">
 <h2>Modificar Financiera</h2>
-
+<div class="col-lg-6">
 <form:form role="form" action="modificado" method="Post" modelAttribute="financiera">
-<div class="form-group">
-<label class="text-left">nombre:</label><br>
-<form:input path="nombre" id="nombre" class="" type="text" placeholder="${finan.nombre}" />
-</div>
+			<div class="form-group">
+			<label>nombre:</label><br>
+			<form:input path="nombre" id="nombre" class="form-control" type="text" placeholder="${finan.nombre}" />
+			</div>
+			<div class="form-group">
+			<label>Monto Capital:</label><br>
+			<form:input path="montoCapital" id="nombre" class="form-control" type="text" placeholder="${finan.montoCapital}" />
+			</div>
 <form:input path="idFinanciera" id="idFinanciera" type="hidden" value="${finan.idFinanciera}" />
 <button type="submit" class="btn btn-success">Guardar Cambios</button>
 <p>${error}</p>
 </form:form>
-
+</div>
 </body>
 </html>

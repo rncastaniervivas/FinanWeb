@@ -14,4 +14,6 @@ public interface ServicioCuota {
 	List<Cuota> consultarPorFinanciera(Financiera financiera);
 	
 	void modificarCubierto(Cuota cuota);
+	
+	Cuota buscarCuota(Cuota cuota);
 }

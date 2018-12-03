@@ -24,8 +24,8 @@ public class Caja {
 		return idCaja;
 	}
 
-	public void setIdCaja(Long idCaja) {
-		this.idCaja = idCaja;
+	public void setIdCaja(long i) {
+		this.idCaja = i;
 	}
 
 	public Double getMonto() {

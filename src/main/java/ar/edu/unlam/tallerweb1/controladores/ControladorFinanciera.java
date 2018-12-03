@@ -17,6 +17,8 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioCaja;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCuota;
 import ar.edu.unlam.tallerweb1.servicios.ServicioFinanciera;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPrestamo;
+import ar.edu.unlam.tallerweb1.servicios.ServicioRegistro;
+
 
 @Controller
 public class ControladorFinanciera {
@@ -29,6 +31,8 @@ public class ControladorFinanciera {
 	private ServicioCaja servicioCaja;
 	@Inject
 	private ServicioPrestamo servicioPrestamo;
+	@Inject
+	private ServicioRegistro servicioRegistro;
 	
 	// realizar pago a financieras
 	@RequestMapping("/pagarfinancieras")
@@ -37,8 +41,8 @@ public class ControladorFinanciera {
 		Financiera financiera =new Financiera();
 		modelo.put("financiera", financiera);
 		List<Financiera> financieras = servicioFinanciera.consultarFinanciera();
-		Double montocaja=servicioCaja.consultarCaja();
-		modelo.put("montocaja", montocaja);
+//		Double montocaja=servicioCaja.consultarCaja();
+//		modelo.put("montocaja", montocaja);
 		modelo.put("financieras", financieras);
 		
 		return new ModelAndView("pagarfinancieras",modelo);
@@ -49,8 +53,8 @@ public class ControladorFinanciera {
 		List<Cuota> cuotas=servicioCuota.consultarPorFinanciera(financierac);
 		ModelMap modelo =new ModelMap();
 		modelo.put("cuotas", cuotas);
-		Double montocaja=servicioCaja.consultarCaja();
-		modelo.put("montocaja", montocaja);
+//		Double montocaja=servicioCaja.consultarCaja();
+//		modelo.put("montocaja", montocaja);
 		Cuota cuota=new Cuota();
 		modelo.put("cuota", cuota);
 		Financiera financiera =new Financiera();
@@ -62,14 +66,15 @@ public class ControladorFinanciera {
 	
 	@RequestMapping(path="restarsaldo",method=RequestMethod.POST)
 	public ModelAndView restarSaldo(@ModelAttribute("cuota")Cuota cuotar) {
-	servicioCaja.sacarCaja(cuotar.getMonto());//resta de la caja
+	//servicioCaja.sacarCaja(cuotar.getMonto());//resta de la caja
 	servicioCuota.modificarCubierto(cuotar);//modifica si la cuota esta cubierta
+	servicioRegistro.insertarEgresos(cuotar);
 	ModelMap modelo =new ModelMap();
 	Financiera financiera =new Financiera();
 	modelo.put("financiera", financiera);
 	List<Financiera> financieras = servicioFinanciera.consultarFinanciera();
-	Double montocaja=servicioCaja.consultarCaja();
-	modelo.put("montocaja", montocaja);
+	// Double montocaja=servicioCaja.consultarCaja();
+	//modelo.put("montocaja", montocaja);
 	modelo.put("financieras", financieras);
 	Cuota cuota=new Cuota();
 	modelo.put("cuota", cuota);

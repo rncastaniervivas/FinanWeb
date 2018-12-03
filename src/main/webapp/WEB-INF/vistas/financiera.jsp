@@ -36,6 +36,7 @@
 			    <tr>
 			      <th scope="col"><h4>Id Financiera</h4></th>
 			      <th scope= "col"><h4>Nombre</h4></th>
+			      <th scope= "col"><h4>Monto Capital</h4></th>
 			      <th scope= "row"><h4>Opciones</h4></th>
 			    </tr>
 </thead>
@@ -44,9 +45,11 @@
 				    <tr>
 				      <th scope= "col">${lista.idFinanciera}</th>
 				      <th scope= "col">${lista.nombre }</th>
+				      <th scope= "col">${lista.montoCapital}</th>
 				      <th scope= "row"><form:form action="eliminado" method="Post" modelAttribute="financiera">
 						<form:input path="idFinanciera" id="idFinanciera" type="hidden" value="${lista.idFinanciera}"/>
 						<form:input path="nombre" id="nombre" readonly="readonly" type="hidden" value="${lista.nombre}" />
+						<form:input path="montoCapital" id="montoCapital" readonly="readonly" type="hidden" value="${lista.montoCapital}" />
 							<button class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-remove"></span> eliminar</button>
 							<button class="btn btn-info" type="submit" formaction="modificarfinanciera"><span class="glyphicon glyphicon-align-justify"></span> modificar</button>
 								</form:form>

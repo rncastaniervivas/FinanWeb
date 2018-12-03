@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import ar.edu.unlam.tallerweb1.modelo.Cuota;
 import ar.edu.unlam.tallerweb1.modelo.Prestamo;
 
 @Repository("PrestamoDao")
@@ -45,5 +46,13 @@ public class PrestamoDaoImpl implements PrestamoDao {
 		}else {
 		
 		return false;}
+	}
+
+	@Override
+	public Prestamo consultarPrestamoPorCuota(Cuota cuota) {
+		
+		return (Prestamo) (sessionFactory.getCurrentSession().createCriteria(Prestamo.class)
+				.add(Restrictions.eq("idPrestamo", cuota.getIdCuota()))
+				.uniqueResult());
 	}
 }

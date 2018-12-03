@@ -14,14 +14,24 @@
 	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 
 </head>
-<body class="text-center">
+<body class="container">
 <h2>Agregar Nueva Financiera</h2>
-<form:form class="form-inline d-iniline" action="agregado" method="Post" modelAttribute="financiera">
-<form:input path="nombre" id="nombre" type="text" class="form-control"/>
-<button type="submit" class="btn btn-success">Agregar</button>
-<p>${error}</p>
+<div class="col-lg-6">
+	<form:form role="form" action="agregado" method="Post" modelAttribute="financiera">
+		<div class="form-group">
+		<label>nombre:</label>
+		<form:input path="nombre" id="nombre" type="text" class="form-control"/>
+		</div>
+		<div>
+			<label>Monto Capital:</label>
+			<form:input path="montoCapital" id="montoCapital" type="text" class="form-control"/>
+		</div>
+			<div>
+			<button type="submit" class="btn btn-success">Agregar</button>
+			</div>
+	<p>${error}</p>
 
-</form:form>
-
+	</form:form>
+</div>
 </body>
 </html>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.PrestamoDao;
+import ar.edu.unlam.tallerweb1.modelo.Cuota;
 import ar.edu.unlam.tallerweb1.modelo.Prestamo;
 
 @Service("servicioPrestamo")
@@ -29,6 +30,12 @@ public class ServicioPrestamoImpl implements ServicioPrestamo {
 	@Override
 	public boolean consultarPorFinanciera(Long idFinanciera) {
 		return servicioPrestamoDao.consultarPorFinanciera(idFinanciera);
+		
+	}
+
+	@Override
+	public Prestamo consutaPrestamoPorCuota(Cuota cuota) {
+		return servicioPrestamoDao.consultarPrestamoPorCuota(cuota);
 		
 	}
 	

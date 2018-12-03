@@ -54,6 +54,14 @@ public class CuotaDaoImpl implements CuotaDao{
 		sessionFactory.getCurrentSession().update(cuota);
 		
 	}
+
+	@Override
+	public Cuota buscarCuota(Cuota cuota) {
+		
+		return (Cuota) (sessionFactory.getCurrentSession().createCriteria(Cuota.class)
+				.add(Restrictions.eq("idCuota",cuota.getIdCuota()))
+				.uniqueResult());
+	}
 	
 	
 }

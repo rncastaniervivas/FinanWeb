@@ -21,20 +21,7 @@ public class ServicioCajaImpl implements ServicioCaja {
 	
 	@Override
 	public void agregarCaja(Cuota cuotai) {
-		Caja miCaja= (Caja) sessionFactory.getCurrentSession().createCriteria(Caja.class)
-				.uniqueResult();
-		if(miCaja == null) {
-			Caja cajaCero=new Caja();
-			sessionFactory.getCurrentSession().save(cajaCero);//crea caja 
-			
-			Caja miCaja2= (Caja) sessionFactory.getCurrentSession().createCriteria(Caja.class)
-					.uniqueResult();
-			
-			Registro nuevoReg=new Registro();
-			nuevoReg.setCaja(cuotai);
-			nuevoReg.setCuota(cuotai.getIdCuota());
-			nuevoReg.setIngreso(cuotai.getMontoTotal());
-			
+		
 		
 	}
 	@Override
@@ -43,9 +30,19 @@ public class ServicioCajaImpl implements ServicioCaja {
 		
 	}
 	@Override
-	public Double consultarCaja() {
+	public Caja consultarCaja() {
+		
+		return servicioCajaDao.consultarCaja();
+	}
+	@Override
+	public void agregarCaja(Double agregar) {
 		// TODO Auto-generated method stub
-		return null;
+		
+	}
+	@Override
+	public void sacarCaja(Double sacar) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

@@ -71,5 +71,12 @@ public class Prestamo {
 	public void setCuota(List<Cuota> cuota) {
 		this.cuota = cuota;
 	}
+	@Override
+	public String toString() {
+		return "Prestamo [idPrestamo=" + idPrestamo + ", cuotas=" + cuotas + ", valor=" + valor + ", interes=" + interes
+				+ ", financiera=" + financiera + ", afiliado=" + afiliado + ", cuota=" + cuota + "]";
+	}
+	
+	
 	
 }

@@ -19,10 +19,6 @@ public class CajaDaoImpl implements CajaDao {
 	public void agregarCaja(Cuota cuotai) {
 		
 			
-			}else {
-		Double sumandoSaldo=agregar+miCaja.getMonto();
-		miCaja.setMonto(sumandoSaldo);
-			}
 		
 	}
 
@@ -30,28 +26,31 @@ public class CajaDaoImpl implements CajaDao {
 	public void sacarCaja(Cuota cuotae) {
 		Caja miCaja= (Caja) sessionFactory.getCurrentSession().createCriteria(Caja.class)
 				.uniqueResult();
-		Double restandoSaldo=(-1*sacar)+miCaja.getMonto();
-		miCaja.setMonto(restandoSaldo);
+		
+		
 
 	}
 
 	@Override
-	public Double consultarCaja() {
+	public Caja consultarCaja() {
 	
-		Caja miCaja=(Caja) sessionFactory.getCurrentSession().createCriteria(Caja.class)
-			.uniqueResult();
+//		Caja miCaja=(Caja) sessionFactory.getCurrentSession().createCriteria(Caja.class)
+//			.uniqueResult();
+//		
+//		if(miCaja == null) {
+//			Caja cajaCero =new Caja();
+//			cajaCero.setMonto(0.0);
+//			sessionFactory.getCurrentSession().save(cajaCero);
+//			Caja miCaja2=(Caja) sessionFactory.getCurrentSession().createCriteria(Caja.class)
+//					.uniqueResult();
+//			return miCaja2.getMonto();
+//		
+//		}else {
+//
+//		return miCaja.getMonto();
+//	}
 		
-		if(miCaja == null) {
-			Caja cajaCero =new Caja();
-			cajaCero.setMonto(0.0);
-			sessionFactory.getCurrentSession().save(cajaCero);
-			Caja miCaja2=(Caja) sessionFactory.getCurrentSession().createCriteria(Caja.class)
-					.uniqueResult();
-			return miCaja2.getMonto();
-		
-		}else {
-
-		return miCaja.getMonto();
-	}
+		return (Caja) sessionFactory.getCurrentSession().createCriteria(Caja.class)
+				.uniqueResult();
 	}
 }
