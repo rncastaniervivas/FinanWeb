@@ -11,9 +11,16 @@ public interface ServicioCuota {
 	
 	List<Cuota> consultarCuota(Long arefinanciar);
 	
+	List<Cuota> consultarCuotaDelUltimoPrestamo();
+
 	List<Cuota> consultarPorFinanciera(Financiera financiera);
 	
-	void modificarCubierto(Cuota cuota);
+	List<Cuota> consultarCuotaPagada(Long arefinanciar);
 	
+	void modificarCubierto(Cuota cuota);
+
 	Cuota buscarCuota(Cuota cuota);
+	
+	Cuota consultarCuotaporId(Long idCuota);
+
 }

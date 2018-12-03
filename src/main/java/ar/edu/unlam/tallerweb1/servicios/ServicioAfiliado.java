@@ -1,8 +1,26 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import java.util.List;
+
 import ar.edu.unlam.tallerweb1.modelo.Afiliado;
 
 public interface ServicioAfiliado {
 
-	Afiliado consultarAfiliado(Afiliado afiliado);
-	}
+
+	List<Afiliado> consultarAfiliado ();
+	
+	void guardarAfiliado (Afiliado afiliado);
+	
+	void modificarAfiliado (Afiliado afiliado);
+	
+	void eliminarAfiliado (Afiliado afiliado);
+	
+	Afiliado consultarAfiliado(Long idPrestamo);
+	
+	List<Afiliado> buscarAfiliado (Afiliado afiliado);
+	
+	Afiliado consultarAfiliadoDni(Long dni);
+	
+	Afiliado consultarIdAfiliado(Long id);
+	
+}

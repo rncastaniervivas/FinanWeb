@@ -10,9 +10,18 @@ public interface CuotaDao {
 	
 	List<Cuota> consultarCuota(Long arefinanciar);
 	
+	List<Cuota> consultarCuotaDelUltimoPrestamo();
+ 
 	List<Cuota> consultarPorFinanciera(Financiera financiera);
 	
 	void modificarElCubierto(Cuota cuota);
-	
+
 	Cuota buscarCuota(Cuota cuota);
+
+	List<Cuota> consultarCuotaPagada(Long arefinanciar);
+	
+	List<Cuota> consultarCuotaImpagas(Long idPrestamo);
+	
+	Cuota consultarCuotaporId(Long idCuota);
+
 }

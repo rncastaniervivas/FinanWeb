@@ -1,7 +1,6 @@
 package ar.edu.unlam.tallerweb1.dao;
 
 import ar.edu.unlam.tallerweb1.modelo.Afiliado;
-import ar.edu.unlam.tallerweb1.modelo.Prestamo;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -23,13 +22,64 @@ public class AfiliadoDaoImpl implements AfiliadoDao {
 	@Inject
     private SessionFactory sessionFactory;
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Afiliado consultarAfiliado(Afiliado afiliado) {
+	public List<Afiliado> consultarAfiliado() {
+		return (sessionFactory.getCurrentSession()
+				.createCriteria(Afiliado.class)
+				.add(Restrictions.isNotNull("nombre"))
+				.list());
+	}
+	
+	@Override
+	public Afiliado consultarIdAfiliado(Long id) {
 		final Session session = sessionFactory.getCurrentSession();
 		return (Afiliado) session.createCriteria(Afiliado.class)
-				.add(Restrictions.eq("idAfiliado", afiliado.getIdAfiliado()))
+				.add(Restrictions.eq("idAfiliado", id))
 				.uniqueResult();
 	}
+	
+	
+	@Override
+	public void guardarAfiliado (Afiliado afiliado) {
+		sessionFactory.getCurrentSession().save(afiliado);
+	}
+	
+	@Override
+	public void modificarAfiliado(Afiliado afiliado) {
+		sessionFactory.getCurrentSession().update(afiliado);
+	}
+	
+	@Override
+	public void eliminarAfiliado(Afiliado afiliado) {
+		sessionFactory.getCurrentSession().delete(afiliado);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Afiliado> buscarAfiliado(Afiliado afiliado){
+		return (sessionFactory.getCurrentSession().createCriteria(Afiliado.class)
+				.add(Restrictions.eq("nombre", afiliado.getNombre()))
+				.list());
+	}
+	
+	@Override
+	public Afiliado consultarAfiliado(Long idPrestamo) {
+		final Session session = sessionFactory.getCurrentSession();
+		return (Afiliado) session.createCriteria(Afiliado.class)
+				.createAlias("prestamo", "prestamoj")
+				.add(Restrictions.eq("prestamoj.idPrestamo", idPrestamo))
+				.uniqueResult();
+	}
+	
+	@Override
+	public Afiliado consultarAfiliadoDni(Long dni) {
+		final Session session = sessionFactory.getCurrentSession();
+		return (Afiliado) session.createCriteria(Afiliado.class)
+				.add(Restrictions.eq("dni", dni))
+				.uniqueResult();
+	}
+	
 //	@Override
 //	public List<Prestamo> listarPrestamos(Long id) {
 //		final Session session = sessionFactory.getCurrentSession();

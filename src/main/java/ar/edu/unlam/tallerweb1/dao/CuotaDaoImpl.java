@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Cuota;
 import ar.edu.unlam.tallerweb1.modelo.Financiera;
+import ar.edu.unlam.tallerweb1.modelo.Prestamo;
 
 @Repository("CuotaDao")
 public class CuotaDaoImpl implements CuotaDao{
@@ -33,6 +35,28 @@ public class CuotaDaoImpl implements CuotaDao{
 				.createAlias("prestamo", "prestamoj")
 				.add(Restrictions.eq("prestamoj.idPrestamo", arefinanciar))
 				.add(Restrictions.eq("estado", false))
+				.list());
+	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Cuota> consultarCuotaPagada(Long arefinanciar) {
+		return (sessionFactory.getCurrentSession()
+				.createCriteria(Cuota.class)
+				.createAlias("prestamo", "prestamoj")
+				.add(Restrictions.eq("prestamoj.idPrestamo", arefinanciar))
+				.add(Restrictions.eq("estado", true))
+				.list());
+	}
+
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Cuota> consultarCuotaDelUltimoPrestamo() {
+		
+		return (sessionFactory.getCurrentSession()
+				.createCriteria(Cuota.class)
+				.createAlias("prestamo", "prestamoj")
+				.add(Restrictions.isNull("prestamoj.estado"))
 				.list());
 	}
 
@@ -61,6 +85,26 @@ public class CuotaDaoImpl implements CuotaDao{
 		return (Cuota) (sessionFactory.getCurrentSession().createCriteria(Cuota.class)
 				.add(Restrictions.eq("idCuota",cuota.getIdCuota()))
 				.uniqueResult());
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Cuota> consultarCuotaImpagas(Long idPrestamo) {
+		return (sessionFactory.getCurrentSession()
+				.createCriteria(Cuota.class)
+				.createAlias("prestamo", "prestamoj")
+				.add(Restrictions.eq("prestamoj.idPrestamo", idPrestamo))
+				.add(Restrictions.eq("estado", false))
+				.list());
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Cuota consultarCuotaporId(Long idCuota) {
+		final Session session = sessionFactory.getCurrentSession();
+		return (Cuota) session.createCriteria(Cuota.class)
+				.add(Restrictions.eq("idCuota", idCuota))
+				.uniqueResult();
 	}
 	
 	

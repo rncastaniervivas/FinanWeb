@@ -37,7 +37,7 @@ public class ServicioFinancieraImpl implements ServicioFinanciera {
 	}
 
 	@Override
-	public List<Financiera> buscarFinanciera(Financiera financiera) {
+	public List<Financiera> buscarFinanciera (Financiera financiera) {
 		return servicioFinancieraDao.buscarFinanciera(financiera);
 		
 	}

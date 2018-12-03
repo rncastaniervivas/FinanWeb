@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -16,8 +18,42 @@ public class ServicioAfiliadoImpl implements ServicioAfiliado {
 	private AfiliadoDao servicioAfiliadoDao;
 
 	@Override
-	public Afiliado consultarAfiliado (Afiliado afiliado) {
-		return servicioAfiliadoDao.consultarAfiliado(afiliado);
+	public List<Afiliado> consultarAfiliado () {
+		return servicioAfiliadoDao.consultarAfiliado();
+	}
+	
+	@Override
+	public void guardarAfiliado (Afiliado afiliado) {
+		servicioAfiliadoDao.guardarAfiliado(afiliado);
+	}
+	
+	@Override
+	public void modificarAfiliado(Afiliado afiliado) {
+		servicioAfiliadoDao.modificarAfiliado(afiliado);
+	}
+	
+	@Override
+	public void eliminarAfiliado (Afiliado afiliado) {
+		servicioAfiliadoDao.eliminarAfiliado(afiliado);
+	}
+	
+	@Override
+	public List <Afiliado> buscarAfiliado (Afiliado afiliado) {
+		return servicioAfiliadoDao.buscarAfiliado(afiliado);
+	}
+	
+	@Override
+	public Afiliado consultarAfiliado (Long id) {
+		return servicioAfiliadoDao.consultarAfiliado(id);
+	}
+	
+	@Override
+	public Afiliado consultarAfiliadoDni (Long dni) {
+		return servicioAfiliadoDao.consultarAfiliadoDni(dni);
+	}
+	@Override
+	public Afiliado consultarIdAfiliado(Long id) {
+		return servicioAfiliadoDao.consultarIdAfiliado(id);
 	}
 
 }

@@ -64,6 +64,10 @@
 		</table>
 </div>
 <div><p class="lead">Estado de la caja ${montocaja}</p></div>
+
+		<br>
+		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
+		<br>
 <!-- iconos https://www.glyphicons.com/  -->
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>

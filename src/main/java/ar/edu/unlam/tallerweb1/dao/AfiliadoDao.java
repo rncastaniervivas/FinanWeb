@@ -1,14 +1,31 @@
 package ar.edu.unlam.tallerweb1.dao;
 
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
+import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.*;
 
 // Interface que define los metodos del DAO de Usuarios.
 public interface AfiliadoDao {
 	
-	Afiliado consultarAfiliado(Afiliado afiliado);
+	List<Afiliado> consultarAfiliado();
+	
+	void guardarAfiliado (Afiliado afiliado);
+	
+	void modificarAfiliado(Afiliado afiliado);
+	
+	void eliminarAfiliado(Afiliado afiliado);
+	
+	List<Afiliado> buscarAfiliado(Afiliado afiliado);
+
+	//Afiliado consultarAfiliado(Afiliado afiliado);
+	
+	Afiliado consultarAfiliado(Long idPrestamo);
+
+	Afiliado consultarAfiliadoDni(Long dni);
+	
+	Afiliado consultarIdAfiliado(Long id);
+	
+	
 //	List<Prestamo> listarPrestamos(Long id);
 }
 /*

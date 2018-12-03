@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Prestamo {
@@ -17,7 +18,9 @@ public class Prestamo {
 	private Long idPrestamo;
 	private Integer cuotas;
 	private Integer valor;
+	private Long dni;
 	private double interes;
+	private String estado; // si el prestamo fue cancelado, refinanciado u otros.pen aprob ref
 	
 	@ManyToOne
 	private Financiera financiera;
@@ -27,6 +30,9 @@ public class Prestamo {
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Cuota> cuota;
+	
+	@OneToOne
+	private Prestamo prestamoRef;
 	
 	public Long getIdPrestamo() {
 		return idPrestamo;
@@ -45,6 +51,13 @@ public class Prestamo {
 	}
 	public void setValor(Integer valor) {
 		this.valor = valor;
+	}
+	
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 	public Afiliado getAfiliado() {
 		return afiliado;
@@ -71,12 +84,19 @@ public class Prestamo {
 	public void setCuota(List<Cuota> cuota) {
 		this.cuota = cuota;
 	}
-	@Override
-	public String toString() {
-		return "Prestamo [idPrestamo=" + idPrestamo + ", cuotas=" + cuotas + ", valor=" + valor + ", interes=" + interes
-				+ ", financiera=" + financiera + ", afiliado=" + afiliado + ", cuota=" + cuota + "]";
+	
+	public Long getDni() {
+		return dni;
 	}
-	
-	
+	public void setDni(Long dni) {
+		this.dni = dni;
+	}
+	public Prestamo getPrestamoRef() {
+		return prestamoRef;
+	}
+	public void setPrestamoRef(Prestamo prestamoRef) {
+		this.prestamoRef = prestamoRef;
+	}
+
 	
 }

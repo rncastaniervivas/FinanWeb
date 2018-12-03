@@ -16,17 +16,22 @@
 	
 		<h1>Formulario para realizar pago a la mutual</h1>
 		<h4>usando esta vista solo para probar</h4>
-		
+		Valor del prestamo: ${dni3}
 		<c:forEach items="${cuotas}" var="cuota">
-			<p>Id:${cuota.idCuota} 
+			<p>Id:${cuota.idCuota}
 				monto:${cuota.monto} 
 				interes:${cuota.interes}
 				total:${cuota.montoTotal}
 				estado:${cuota.estado} 
 				fechaPago:${cuota.fechaDePago} 
 				fechaVencimiento:${cuota.fechaDeVencimiento}
+				
 			</p>
 		</c:forEach>
+		
+		<br>
+		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
+		<br>
 	
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>

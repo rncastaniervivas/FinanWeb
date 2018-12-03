@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Financiera</title>
+<title>Buscar financiera</title>
         <!-- Bootstrap core CSS -->
 	    <link href="css/bootstrap.min.css" rel="stylesheet" >
 	    <!-- Bootstrap theme -->
@@ -23,6 +23,7 @@
 </div>
 <div class="col-md-4">
 <form:form class="form-inline d-iniline" action="agregarfinanciera">
+<br>
 <button class="btn btn-primary btn-lg" type="submit">nueva finaciera</button>
 </form:form>
 </div>
@@ -60,6 +61,10 @@
 </table>
 <p>${erroeliminar}</p>
 </div>
+
+		<br>
+		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
+		<br>
 <!-- iconos https://www.glyphicons.com/  -->
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>

@@ -7,13 +7,14 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Agregar nueva financiera</title>
 <!-- Bootstrap core CSS -->
 	    <link href="css/bootstrap.min.css" rel="stylesheet" >
 	    <!-- Bootstrap theme -->
 	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 
 </head>
+
 <body class="container">
 <h2>Agregar Nueva Financiera</h2>
 <div class="col-lg-6">
@@ -30,6 +31,9 @@
 			<button type="submit" class="btn btn-success">Agregar</button>
 			</div>
 	<p>${error}</p>
+	<br>
+		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
+		<br>
 
 	</form:form>
 </div>
