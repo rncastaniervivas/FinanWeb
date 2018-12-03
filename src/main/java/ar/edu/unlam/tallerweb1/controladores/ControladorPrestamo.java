@@ -175,7 +175,6 @@ public class ControladorPrestamo {
 		modelo.put("MontoARefinanciar", montoTotalARefinanciar);
 		modelo.put("cuotasRestante",cuotasRestante);
 		return new ModelAndView("refinanciar",modelo);
-	
 	}
 
 	@RequestMapping(path = "/hacer-refinanciacion", method = RequestMethod.POST)
@@ -184,9 +183,10 @@ public class ControladorPrestamo {
 		
 		servicioRefinanciar.refinanciar(dni, idPrestamoRef, newCapital, cuotas, interes);
 		
-		List<Cuota> nueCuotas = servicioCuota.consultarCuotaDelUltimoPrestamo();
-		modelo.put("cuotas", nueCuotas);
-		return new ModelAndView("listarcuotas",modelo);
+		List<Prestamo> prestamos= servicioPrestamo.consultarPrestamo(dni);
+		modelo.put("prestamos", prestamos);
+		
+		return new ModelAndView("listarprestamos",modelo);
 	}
 	
 	// Lo uso solo para mostrar las cuotas del nuevo prestamo.
