@@ -61,16 +61,27 @@ public class ControladorPrestamo {
 	@RequestMapping(path = "/cancelarprestamo", method = RequestMethod.POST)
 	public ModelAndView cancelarprestamo(Long idPrestamo2) {
 		
-		Prestamo miprestamo= servicioPrestamo.consultarUnPrestamo(idPrestamo2);
-
-		miprestamo.setEstado("pagado");
-		miprestamo.setCuotas(0);
-		miprestamo.setInteres(0);
-		miprestamo.setValor(0);
+		ModelMap modelo = new ModelMap(); 
+		Prestamo miprestamo=servicioPrestamo.consultarUnPrestamo(idPrestamo2);
+		List<Cuota> cuotas=new ArrayList<Cuota>(); 
+		cuotas=servicioCuota.consultarCuotaImpagas(idPrestamo2);		
+		int valor=0;
+		for(Cuota item:cuotas) {
+			if((item.getFechaDeVencimiento().compareTo(new Date()))<0 && valor<1) {
+				
+				modelo.put("error", "El prestamo elegido para cancelar adeuda una o mas cuotas por favor pague primero la cuota vencida");
+				
+				return new ModelAndView("listarprestamos",modelo);
+			}
+			valor++;
+		}
+		modelo.put("afiliado", miprestamo.getAfiliado());
+		modelo.put("prestamo", miprestamo);
 		
-		servicioPrestamo.modificarPrestamo(miprestamo);
+		modelo.put("cuotasnopagas", cuotas);		
 
-		return new ModelAndView("redirect:/misprestamos");
+		return new ModelAndView("confirmarpagocancelacion",modelo);
+		
 		
 	}
 	@RequestMapping(path = "/pagarcuota", method = RequestMethod.POST)

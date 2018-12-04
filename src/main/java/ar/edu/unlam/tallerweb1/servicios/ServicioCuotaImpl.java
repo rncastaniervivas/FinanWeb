@@ -51,5 +51,9 @@ public class ServicioCuotaImpl implements ServicioCuota{
 	public Cuota consultarCuotaporId(Long idCuota){
 		return servicioCuotaDao.consultarCuotaporId(idCuota);
 	}
+	@Override
+	public List<Cuota> consultarCuotaImpagas(Long idPrestamo){
+		return servicioCuotaDao.consultarCuotaImpagas(idPrestamo);
+	}
 	
 }

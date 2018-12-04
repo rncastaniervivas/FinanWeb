@@ -21,4 +21,6 @@ public interface ServicioCuota {
 	
 	Cuota consultarCuotaporId(Long idCuota);
 
+	List<Cuota> consultarCuotaImpagas(Long idPrestamo);
+
 }
