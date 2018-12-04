@@ -14,7 +14,7 @@ public class Financiera {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idFinanciera;
 	private String nombre;
-	private Double montoCapital;
+	private Integer montoCapital;
 	
 	@OneToMany
 	private List<Prestamo> pestamos;
@@ -37,10 +37,10 @@ public class Financiera {
 	public void setPestamos(List<Prestamo> pestamos) {
 		this.pestamos = pestamos;
 	}
-	public Double getMontoCapital() {
+	public Integer getMontoCapital() {
 		return montoCapital;
 	}
-	public void setMontoCapital(Double montoCapital) {
+	public void setMontoCapital(Integer montoCapital) {
 		this.montoCapital = montoCapital;
 	}
 	

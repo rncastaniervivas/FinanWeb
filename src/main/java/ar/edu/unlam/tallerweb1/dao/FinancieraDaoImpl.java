@@ -31,6 +31,7 @@ public class FinancieraDaoImpl implements FinancieraDao {
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Financiera> buscarFinanciera(Financiera financiera) {
 		return (sessionFactory.getCurrentSession().createCriteria(Financiera.class)
@@ -50,6 +51,14 @@ public class FinancieraDaoImpl implements FinancieraDao {
 	public void modificarFinanciera(Financiera financiera) {
 		sessionFactory.getCurrentSession().update(financiera);
 		
+	}
+
+	@Override
+	public Financiera buscarFinancieraPorNombre(String nombreF) {
+		
+		return (Financiera) sessionFactory.getCurrentSession().createCriteria(Financiera.class)
+				.add(Restrictions.eq("nombre", nombreF))
+				.uniqueResult();
 	}
 	
 }

@@ -67,7 +67,7 @@
 						<button type="submit" class="btn btn-info">Agregar financiera</button>
 					</form>
 				<br>
-					<form action="finanapagar" method="POST">
+					<form action="pagarfinancieras" method="POST">
 						<button type="submit" class="btn btn-info">Pagar a financiera</button>
 					</form>
 				<br>
@@ -79,6 +79,14 @@
 			<div>
 				<h3>Cuotas</h3>
 				
+			
+			</div>
+			<div>
+				<h3>Caja</h3>
+				<br>
+					<form action= "caja" method="POST">
+						<button type ="submit" class="btn btn-info">registros de Caja</button>
+					</form>
 			
 			</div>
 		</div>

@@ -41,8 +41,8 @@ public class ControladorFinanciera {
 		Financiera financiera =new Financiera();
 		modelo.put("financiera", financiera);
 		List<Financiera> financieras = servicioFinanciera.consultarFinanciera();
-//		Double montocaja=servicioCaja.consultarCaja();
-//		modelo.put("montocaja", montocaja);
+		Double montocaja=servicioRegistro.montoCaja();
+		modelo.put("montocaja", montocaja);
 		modelo.put("financieras", financieras);
 		
 		return new ModelAndView("pagarfinancieras",modelo);
@@ -53,8 +53,8 @@ public class ControladorFinanciera {
 		List<Cuota> cuotas=servicioCuota.consultarPorFinanciera(financierac);
 		ModelMap modelo =new ModelMap();
 		modelo.put("cuotas", cuotas);
-//		Double montocaja=servicioCaja.consultarCaja();
-//		modelo.put("montocaja", montocaja);
+		Double montocaja=servicioRegistro.montoCaja();
+		modelo.put("montocaja", montocaja);
 		Cuota cuota=new Cuota();
 		modelo.put("cuota", cuota);
 		Financiera financiera =new Financiera();
@@ -65,16 +65,16 @@ public class ControladorFinanciera {
 	}
 	
 	@RequestMapping(path="restarsaldo",method=RequestMethod.POST)
-	public ModelAndView restarSaldo(@ModelAttribute("cuota")Cuota cuotar) {
-	//servicioCaja.sacarCaja(cuotar.getMonto());//resta de la caja
+	public ModelAndView restarSaldo(@ModelAttribute("cuota")Cuota cuotar, Long idPrestamo,String nombreFinanciera) {
+	
 	servicioCuota.modificarCubierto(cuotar);//modifica si la cuota esta cubierta
-	servicioRegistro.insertarEgresos(cuotar);
+	servicioRegistro.insertarEgresos(cuotar,idPrestamo,nombreFinanciera);// inserta registro
 	ModelMap modelo =new ModelMap();
 	Financiera financiera =new Financiera();
 	modelo.put("financiera", financiera);
 	List<Financiera> financieras = servicioFinanciera.consultarFinanciera();
-	// Double montocaja=servicioCaja.consultarCaja();
-	//modelo.put("montocaja", montocaja);
+	Double montocaja=servicioRegistro.montoCaja();
+	modelo.put("montocaja", montocaja);
 	modelo.put("financieras", financieras);
 	Cuota cuota=new Cuota();
 	modelo.put("cuota", cuota);

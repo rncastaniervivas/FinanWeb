@@ -31,11 +31,12 @@
 			<button type="submit" class="btn btn-success">Agregar</button>
 			</div>
 	<p>${error}</p>
+	
+
+	</form:form>
 	<br>
 		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
 		<br>
-
-	</form:form>
 </div>
 </body>
 </html>

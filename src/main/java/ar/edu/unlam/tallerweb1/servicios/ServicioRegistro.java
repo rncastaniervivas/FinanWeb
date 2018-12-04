@@ -7,9 +7,9 @@ import ar.edu.unlam.tallerweb1.modelo.Registro;
 
 public interface ServicioRegistro {
 	
-	public void insertarIngresos(Cuota cuotai);
+	public void insertarIngresos(Cuota cuotai, Long idPrestamo, String nombreAfiliado);
 	
-	public void insertarEgresos(Cuota cuotae);
+	public void insertarEgresos(Cuota cuotae,Long idPrestamo,String nombreFinanciera);
 	
 	public List<Registro> consultarTodosRegistros();
 	
@@ -18,6 +18,8 @@ public interface ServicioRegistro {
 	public Double montoDeEgresos();
 	
 	public List<Registro> consultarIngresos();
+	
+	public Double montoCaja();
 
 
 	

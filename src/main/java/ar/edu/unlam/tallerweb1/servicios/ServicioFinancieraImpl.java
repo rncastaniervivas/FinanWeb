@@ -66,6 +66,17 @@ public class ServicioFinancieraImpl implements ServicioFinanciera {
 		return true;
 			}
 		}
+
+	@Override
+	public Financiera buscarFinancieraPorNombre(String nombreF) {
+		return servicioFinancieraDao.buscarFinancieraPorNombre(nombreF);
+	}
+
+	@Override
+	public void descontarMontoFinanciera(Integer valor) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

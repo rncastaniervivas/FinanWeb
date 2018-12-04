@@ -16,5 +16,9 @@ public interface ServicioFinanciera {
 	
 	boolean modificarFinanciera(Financiera financiera);
 	
+	Financiera buscarFinancieraPorNombre(String nombreF);
+	
+	void descontarMontoFinanciera(Integer valor);
+	
 	
 }

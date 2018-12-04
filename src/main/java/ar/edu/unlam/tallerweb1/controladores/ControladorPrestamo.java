@@ -18,11 +18,14 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unlam.tallerweb1.modelo.Afiliado;
 import ar.edu.unlam.tallerweb1.modelo.Confirmpagocuota;
 import ar.edu.unlam.tallerweb1.modelo.Cuota;
+import ar.edu.unlam.tallerweb1.modelo.Financiera;
 import ar.edu.unlam.tallerweb1.modelo.Prestamo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAfiliado;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCuota;
+import ar.edu.unlam.tallerweb1.servicios.ServicioFinanciera;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPrestamo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioRefinanciar;
+import ar.edu.unlam.tallerweb1.servicios.ServicioRegistro;
 
 @Controller
 public class ControladorPrestamo {
@@ -38,6 +41,10 @@ public class ControladorPrestamo {
 	
 	@Inject
 	private ServicioRefinanciar servicioRefinanciar;
+	@Inject
+	private ServicioRegistro servicioRegistro;
+	@Inject
+	private ServicioFinanciera servicioFinanciera;
 	
 	@RequestMapping("/listarprestamos")
 	public ModelAndView listarPrestamo() {
@@ -113,7 +120,10 @@ public class ControladorPrestamo {
 			cuotaitem.setFechaDePago(new Date());
 			servicioCuota.modificarCubierto(cuotaitem);
 		}
-		
+		///registra pago
+		String doc= Long.toString(confirm.getDni());
+		servicioRegistro.insertarIngresos(cuotaitem, confirm.getIdPrestamo(), doc);
+		//
 		Prestamo prestamo0=servicioPrestamo.consultarUnPrestamo(confirm.getIdPrestamo());
 		
 		List<Cuota> cuotaspagas=servicioCuota.consultarCuotaPagada(prestamo0.getIdPrestamo());
@@ -218,17 +228,21 @@ public class ControladorPrestamo {
 		modelo.put("disponible", prestamoDisponible);
 		modelo.put("prestamos", prestamos);
 		modelo.put("afiliado", afiliado);
+		//enviar financiera con disponible
+		List<Financiera> financieras=servicioFinanciera.consultarFinanciera();
+		modelo.put("financieras",financieras);
+		////
 		return new ModelAndView("nuevoprestamo",modelo);
 	}
 	
 	@RequestMapping(path = "/validar-nuevo-prestamo", method=RequestMethod.POST)
-	public ModelAndView irValidarNuevoPrestamo(@ModelAttribute("afiliado") Afiliado afiliado, Integer valor, Integer cuotas) {
+	public ModelAndView irValidarNuevoPrestamo(@ModelAttribute("afiliado") Afiliado afiliado, Integer valor, Integer cuotas,String nombreF) {
 		
 		ModelMap modelo=new ModelMap();
 		
 		if(valor <= servicioPrestamo.prestamoDisponible(afiliado)){
 			Afiliado miafiliado = servicioAfiliado.consultarAfiliadoDni(afiliado.getDni());
-			servicioPrestamo.crearNuevoPrestamo(afiliado, valor, cuotas);
+			servicioPrestamo.crearNuevoPrestamo(afiliado, valor, cuotas,nombreF);
 			List<Prestamo> prestamos = servicioPrestamo.consultarPrestamoActivos(miafiliado);
 			modelo.put("afiliado", miafiliado);
 			modelo.put("prestamos", prestamos);
@@ -242,6 +256,10 @@ public class ControladorPrestamo {
 			modelo.put("prestamos", prestamos);
 			modelo.put("afiliado", miAfiliado);
 			modelo.put("error", "Error monto excedido");
+			//enviar financiera con disponible
+			List<Financiera> financieras=servicioFinanciera.consultarFinanciera();
+			modelo.put("financieras",financieras);
+			////
 			return new ModelAndView("/nuevoprestamo",modelo);
 		}
 		

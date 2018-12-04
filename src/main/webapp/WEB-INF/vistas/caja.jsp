@@ -6,18 +6,65 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<!-- Bootstrap core CSS -->
+	    <link href="css/bootstrap.min.css" rel="stylesheet" >
+	    <!-- Bootstrap theme -->
+	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="container">
+<div class="page-header">
 <h1>lista registro</h1>
-<c:forEach items="${registros}" var="lista">
-<p>la ${lista.idRegistro} as ${lista.ingreso}</p>
+</div>
+ <div class="table-responsive">
+      <table class="table table-bordered table-hover table-striped">
+             <thead>
+                <tr>
+                   <th>Fecha</th>
+                   <th>origen Dni Afiliado</th>
+                   <th>Ingreso</th>
+                   <th>Consepto</th>
+                   <th>Prestamo</th>
+                   <th>Cuota</th>
+                   <th>Destino</th>
+                   <th>Egreso</th>                                                                                                                                                  
+                </tr>
+              </thead>
+           		<c:forEach items="${registros}" var="lista">          		
+           		<tbody>
+                   <tr>
+                      <td> ${lista.fecha} </td>
+                      <td> ${lista.origen} </td>
+                      <td> ${lista.ingreso} $</td>
+                      <td> ${lista.concepto} </td>
+                      <td> ${lista.prestamo} </td>
+                      <td> ${lista.cuota} </td>
+                      <td> ${lista.destino} </td>
+                      <td> ${lista.egreso} $</td>
+                   </tr>               
+              </c:forEach> 
+              <tr>
+                      <td> </td>
+                      <td>  </td>
+                      <td> ${montoI} </td>
+                      <td>  </td>
+                      <td>  </td>
+                      <td>  </td>
+                      <td>  </td>
+                      <td> ${montoE} </td>
+                   </tr> 
+              </tbody>
+       </table>
+</div>
 
+<div class="row show-grid">
+<div class="col-md-6">
+<h2>Total en caja ${caja} </h2>
+</div>
+</div>                                
+                                
 
-</c:forEach>
-<h1>el saldo en caj es  ${caja}</h1>
-
-
-
-
+		<br>
+		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
+		<br>
 </body>
 </html>

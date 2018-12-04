@@ -22,10 +22,14 @@ public class ControladorCaja {
 	public ModelAndView irAFinanapagar() {
 		ModelMap modelo = new ModelMap();
 		
-		List<Registro> misReg=servicioRegistro.consultarIngresos();
+		List<Registro> misReg=servicioRegistro.consultarTodosRegistros();
 		modelo.put("registros", misReg);
 		Double miCaja=servicioRegistro.montoDeIngresos();
 		modelo.put("caja", miCaja);
+		Double montoI=servicioRegistro.montoDeIngresos();
+		Double montoE=servicioRegistro.montoDeEgresos();
+		modelo.put("montoI", montoI);
+		modelo.put("montoE", montoE);
 		return new ModelAndView("caja",modelo);
 	}
 
