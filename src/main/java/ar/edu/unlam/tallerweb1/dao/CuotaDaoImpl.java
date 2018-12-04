@@ -92,6 +92,21 @@ public class CuotaDaoImpl implements CuotaDao{
 	
 	@SuppressWarnings("unchecked")
 	@Override
+	public boolean consultarCuotaPendiente(Long idPrestamo) {
+		List<Cuota> cuotasImpagas = sessionFactory.getCurrentSession().createCriteria(Cuota.class)
+				.createAlias("cuotaPendiente", "cuotajoin")
+				.add(Restrictions.eq("cuotajoin.idPrestamo", idPrestamo))
+				.list();
+		
+		if (cuotasImpagas.size() != 0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
 	public Cuota consultarCuotaporId(Long idCuota) {
 		final Session session = sessionFactory.getCurrentSession();
 		return (Cuota) session.createCriteria(Cuota.class)

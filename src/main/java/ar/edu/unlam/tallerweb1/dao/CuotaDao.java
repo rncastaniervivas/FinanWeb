@@ -21,4 +21,6 @@ public interface CuotaDao {
 	List<Cuota> consultarCuotaImpagas(Long idPrestamo);
 	
 	Cuota consultarCuotaporId(Long idCuota);
+	
+	boolean consultarCuotaPendiente(Long idPrestamo);
 }

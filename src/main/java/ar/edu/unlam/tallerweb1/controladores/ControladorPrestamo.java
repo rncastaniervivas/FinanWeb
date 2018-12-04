@@ -61,6 +61,11 @@ public class ControladorPrestamo {
 	@RequestMapping(path = "/cancelarprestamo", method = RequestMethod.POST)
 	public ModelAndView cancelarprestamo(Long idPrestamo2) {
 		
+		//pregunto si el prestamo a cancelar posee cuotas pendientes
+		/*boolean debeCuotas = servicioCuota.consultarCuotaPendiente(idPrestamo2);
+		 * */
+		
+		
 		Prestamo miprestamo= servicioPrestamo.consultarUnPrestamo(idPrestamo2);
 
 		miprestamo.setEstado("pagado");
@@ -163,10 +168,10 @@ public class ControladorPrestamo {
 	@RequestMapping(path = "/refinanciar", method = RequestMethod.POST)
 	public ModelAndView listaCuotasImpag(Long idPrestamo) {
 		ModelMap modelo=new ModelMap();
+		Prestamo prestamo = servicioPrestamo.consultarUnPrestamo(idPrestamo);
 		List<Cuota> impagas=servicioRefinanciar.consultaCuota(idPrestamo);
-		Afiliado afiliado = servicioAfiliado.consultarAfiliado(idPrestamo);
+		Afiliado afiliado = servicioAfiliado.consultarAfiliadoDni(prestamo.getDni());
 		Double montoTotalARefinanciar = servicioRefinanciar.montoARefinanciar(idPrestamo);
-		
 		int cuotasRestante = impagas.size();
 		
 	    modelo.put("afiliado", afiliado);
@@ -175,7 +180,6 @@ public class ControladorPrestamo {
 		modelo.put("MontoARefinanciar", montoTotalARefinanciar);
 		modelo.put("cuotasRestante",cuotasRestante);
 		return new ModelAndView("refinanciar",modelo);
-	
 	}
 
 	@RequestMapping(path = "/hacer-refinanciacion", method = RequestMethod.POST)
@@ -184,9 +188,10 @@ public class ControladorPrestamo {
 		
 		servicioRefinanciar.refinanciar(dni, idPrestamoRef, newCapital, cuotas, interes);
 		
-		List<Cuota> nueCuotas = servicioCuota.consultarCuotaDelUltimoPrestamo();
-		modelo.put("cuotas", nueCuotas);
-		return new ModelAndView("listarcuotas",modelo);
+		List<Prestamo> prestamos= servicioPrestamo.consultarPrestamo(dni);
+		modelo.put("prestamos", prestamos);
+		
+		return new ModelAndView("listarprestamos",modelo);
 	}
 	
 	// Lo uso solo para mostrar las cuotas del nuevo prestamo.
@@ -201,11 +206,11 @@ public class ControladorPrestamo {
 	}
 	
 	// si ingresa por la url "/refinanciar" sin pasar por los prestamos lo redirige al home.
-	@RequestMapping("/refinanciar")
-	public ModelAndView irAHome() {
-			
-		return new ModelAndView("home");
-	}
+//	@RequestMapping("/refinanciar")
+//	public ModelAndView irAHome() {
+//			
+//		return new ModelAndView("home");
+//	}
 
 	@RequestMapping(path = "/nuevoprestamo", method=RequestMethod.POST)
 	public ModelAndView irANuevoPrestamo(@ModelAttribute("afiliado") Afiliado afiliado) {

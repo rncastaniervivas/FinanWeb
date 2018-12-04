@@ -112,5 +112,4 @@ public class PrestamoDaoImpl implements PrestamoDao {
 			return false;
 		}
 	}
-	
 }
