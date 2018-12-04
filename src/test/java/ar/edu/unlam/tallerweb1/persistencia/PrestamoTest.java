@@ -35,7 +35,10 @@ public class PrestamoTest {
 		
 		ServicioPrestamo servicioPrestamoMock=mock(ServicioPrestamo.class);
 		ServicioAfiliado servicioAfiliadoMock=mock(ServicioAfiliado.class);
-		
+		//
+		ServicioFinanciera servicioFinancieraMock=mock(ServicioFinanciera.class);
+		controlador.setServicioFinanciera(servicioFinancieraMock);
+		//
 		controlador.setServicioAfiliado(servicioAfiliadoMock);
 		controlador.setServicioPrestamo(servicioPrestamoMock);
 		
@@ -75,7 +78,12 @@ public class PrestamoTest {
 		Afiliado afiliadoMock=mock(Afiliado.class);
 		
 		Prestamo prestamoMock=mock(Prestamo.class);
-		
+		//
+		Financiera financieraMock=mock(Financiera.class);
+		financieraMock.setIdFinanciera(1l);
+		financieraMock.setNombre("Naranja");
+		financieraMock.setMontoCapital(1000000);
+		//
 		prestamoMock.setAfiliado(afiliadoMock);
 		prestamoMock.setCuotas(6);
 		prestamoMock.setDni(9L);
@@ -83,6 +91,8 @@ public class PrestamoTest {
 		prestamoMock.setInteres(2.00);
 		prestamoMock.setValor(200);
 		prestamoMock.setCuota(null);
+		//
+		prestamoMock.setFinanciera(financieraMock);
 		
 		List<Prestamo> prestamos=new ArrayList<Prestamo>();
 		
@@ -103,7 +113,7 @@ public class PrestamoTest {
 		
 		when(servicioPrestamoMock.prestamoDisponible(afiliadoMock)).thenReturn(3000.00);
 		
-		ModelAndView modelo= controlador.irValidarNuevoPrestamo(afiliadoMock, 500,6);
+		ModelAndView modelo= controlador.irValidarNuevoPrestamo(afiliadoMock, 500,6, "Naranja");
 		
 		
 		assertThat(modelo.getViewName()).isEqualTo("/listarprestamos");

@@ -296,7 +296,23 @@ public class ControladorPrestamo {
 	public void setServicioRefinanciar(ServicioRefinanciar servicioRefinanciar) {
 		this.servicioRefinanciar = servicioRefinanciar;
 	}
-		
+//
+	public ServicioRegistro getServicioRegistro() {
+		return servicioRegistro;
+	}
+
+	public void setServicioRegistro(ServicioRegistro servicioRegistro) {
+		this.servicioRegistro = servicioRegistro;
+	}
+
+	public ServicioFinanciera getServicioFinanciera() {
+		return servicioFinanciera;
+	}
+
+	public void setServicioFinanciera(ServicioFinanciera servicioFinanciera) {
+		this.servicioFinanciera = servicioFinanciera;
+	}
+//		
 	
 	
 }
