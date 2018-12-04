@@ -126,5 +126,14 @@ public class ControladorAfiliado {
 		
 		return new ModelAndView("listarafiliados", modelo);
 	}
+
+	public ServicioAfiliado getServicioAfiliado() {
+		return servicioAfiliado;
+	}
+
+	public void setServicioAfiliado(ServicioAfiliado servicioAfiliado) {
+		this.servicioAfiliado = servicioAfiliado;
+	}
+	
 	
 }
