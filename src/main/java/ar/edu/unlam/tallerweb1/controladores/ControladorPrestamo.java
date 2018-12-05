@@ -68,16 +68,27 @@ public class ControladorPrestamo {
 	@RequestMapping(path = "/cancelarprestamo", method = RequestMethod.POST)
 	public ModelAndView cancelarprestamo(Long idPrestamo2) {
 		
-		Prestamo miprestamo= servicioPrestamo.consultarUnPrestamo(idPrestamo2);
-
-		miprestamo.setEstado("pagado");
-		miprestamo.setCuotas(0);
-		miprestamo.setInteres(0);
-		miprestamo.setValor(0);
+		ModelMap modelo = new ModelMap(); 
+		Prestamo miprestamo=servicioPrestamo.consultarUnPrestamo(idPrestamo2);
+		List<Cuota> cuotas=new ArrayList<Cuota>(); 
+		cuotas=servicioCuota.consultarCuotaImpagas(idPrestamo2);		
+		int valor=0;
+		for(Cuota item:cuotas) {
+			if((item.getFechaDeVencimiento().compareTo(new Date()))<0 && valor<1) {
+				
+				modelo.put("error", "El prestamo elegido para cancelar adeuda una o mas cuotas por favor pague primero la cuota vencida");
+				
+				return new ModelAndView("listarprestamos",modelo);
+			}
+			valor++;
+		}
+		modelo.put("afiliado", miprestamo.getAfiliado());
+		modelo.put("prestamo", miprestamo);
 		
-		servicioPrestamo.modificarPrestamo(miprestamo);
+		modelo.put("cuotasnopagas", cuotas);		
 
-		return new ModelAndView("redirect:/misprestamos");
+		return new ModelAndView("confirmarpagocancelacion",modelo);
+		
 		
 	}
 	@RequestMapping(path = "/pagarcuota", method = RequestMethod.POST)
@@ -173,10 +184,10 @@ public class ControladorPrestamo {
 	@RequestMapping(path = "/refinanciar", method = RequestMethod.POST)
 	public ModelAndView listaCuotasImpag(Long idPrestamo) {
 		ModelMap modelo=new ModelMap();
+		Prestamo prestamo = servicioPrestamo.consultarUnPrestamo(idPrestamo);
 		List<Cuota> impagas=servicioRefinanciar.consultaCuota(idPrestamo);
-		Afiliado afiliado = servicioAfiliado.consultarAfiliado(idPrestamo);
+		Afiliado afiliado = servicioAfiliado.consultarAfiliadoDni(prestamo.getDni());
 		Double montoTotalARefinanciar = servicioRefinanciar.montoARefinanciar(idPrestamo);
-		
 		int cuotasRestante = impagas.size();
 		
 	    modelo.put("afiliado", afiliado);
@@ -185,7 +196,6 @@ public class ControladorPrestamo {
 		modelo.put("MontoARefinanciar", montoTotalARefinanciar);
 		modelo.put("cuotasRestante",cuotasRestante);
 		return new ModelAndView("refinanciar",modelo);
-	
 	}
 
 	@RequestMapping(path = "/hacer-refinanciacion", method = RequestMethod.POST)
@@ -194,9 +204,10 @@ public class ControladorPrestamo {
 		
 		servicioRefinanciar.refinanciar(dni, idPrestamoRef, newCapital, cuotas, interes);
 		
-		List<Cuota> nueCuotas = servicioCuota.consultarCuotaDelUltimoPrestamo();
-		modelo.put("cuotas", nueCuotas);
-		return new ModelAndView("listarcuotas",modelo);
+		List<Prestamo> prestamos= servicioPrestamo.consultarPrestamo(dni);
+		modelo.put("prestamos", prestamos);
+		
+		return new ModelAndView("listarprestamos",modelo);
 	}
 	
 	// Lo uso solo para mostrar las cuotas del nuevo prestamo.
@@ -211,11 +222,11 @@ public class ControladorPrestamo {
 	}
 	
 	// si ingresa por la url "/refinanciar" sin pasar por los prestamos lo redirige al home.
-	@RequestMapping("/refinanciar")
-	public ModelAndView irAHome() {
-			
-		return new ModelAndView("home");
-	}
+//	@RequestMapping("/refinanciar")
+//	public ModelAndView irAHome() {
+//			
+//		return new ModelAndView("home");
+//	}
 
 	@RequestMapping(path = "/nuevoprestamo", method=RequestMethod.POST)
 	public ModelAndView irANuevoPrestamo(@ModelAttribute("afiliado") Afiliado afiliado) {
