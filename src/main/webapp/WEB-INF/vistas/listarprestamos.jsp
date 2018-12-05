@@ -40,7 +40,7 @@
 				      <td>${prestamos.cuotas}</td>
 				      <td>${prestamos.interes}</td>
 				      <td>${prestamos.estado}</td>
-				      <td><form action="refinanciar" method="POST" >
+				      <!-- >td><form action="refinanciar" method="POST" >
 				      	  <button type="submit" class="btn btn-info ${prestamos.estado}" name="idPrestamo" value="${prestamos.idPrestamo}" >Refinanciar</button>
 				      	  </form>
 				      </td>
@@ -51,6 +51,17 @@
 				       <td><form action="cancelarprestamo" method="POST" >
 				      	  <button type="submit" class="btn btn-info ${prestamos.estado}" name="idPrestamo2" value="${prestamos.idPrestamo}">Cancelar</button>
 				      	  </form>
+				      </td -->
+				      
+				      <!-- pongo esto porqeu lo de arriba no funcionaba -->
+				      <td>
+				      	<c:if test = "${prestamos.estado !='refinanciado'}">
+					       <form method="POST" >
+				      	  	 <button type="submit" class="btn btn-info" name="idPrestamo" value="${prestamos.idPrestamo}" formaction="refinanciar">Refinanciar</button>
+				      	  	 <button type="submit" class="btn btn-success" name="idPrestamo1" value="${prestamos.idPrestamo}" formaction="pagarcuota">Pagar</button>
+				      	  	 <button type="submit" class="btn btn-info" name="idPrestamo2" value="${prestamos.idPrestamo}" formaction="cancelarprestamo">Cancelar</button>
+				      	   </form>
+					    </c:if>
 				      </td>
 				      
 				    </tr>

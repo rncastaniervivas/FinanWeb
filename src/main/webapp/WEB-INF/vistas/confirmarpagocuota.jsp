@@ -67,7 +67,7 @@
 		</div>
 		<input path="dni" type="text" id="dni" name="dni"class="form-control" value="${afiliado.dni}" style="display:none"/>
 		<input path="idPrestamo" type="text" id="idPrestamo" name="idPrestamo"class="form-control" value="${prestamo.idPrestamo}" style="display:none"/>
-		<button type="submit" class="btn btn-success mb-2">Confirmar Pago</button>
+		<button type="submit" class="btn btn-success mb-2">Realizar Pago</button>
 </form:form>
 		
 
