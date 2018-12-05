@@ -103,6 +103,24 @@ public class ControladorAfiliado {
 		
 		return new ModelAndView("listarafiliados", modelo);
 	}
+	
+	/*@RequestMapping(path ="/confirmareliminarafiliado", method= RequestMethod.POST)
+	public ModelAndView confirmarEliminar(@ModelAttribute ("afiliado") Afiliado eafiliado) {
+		ModelMap modelo = new ModelMap();
+		List <Afiliado> miAfiliadoE = servicioAfiliado.buscarAfiliado(eafiliado);
+		Afiliado afiliado = new Afiliado();
+		modelo.put("afiliado", afiliado);
+		
+		if(miAfiliadoE.size() != 0) {
+			modelo.put("erroreliminar", "El afiliado posee un prestamo activo y no se puede eliminar");
+			return new ModelAndView("eliminarafiliado", modelo);
+		} else {
+			servicioAfiliado.eliminarAfiliado(eafiliado);
+			List<Afiliado> lista = servicioAfiliado.consultarAfiliado();
+			modelo.put("afiliados", lista);
+			return new ModelAndView("listarafiliados", modelo);
+		}
+	}*/
 
 	@RequestMapping (path = "/buscarafiliado", method = RequestMethod.POST)
 	public ModelAndView irABuscarAfiliado(Long dni) {

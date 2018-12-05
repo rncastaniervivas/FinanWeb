@@ -48,5 +48,12 @@
 		});
 	});
 	</script>
+	
+		<br>
+		<a href="javascript:window.history.go(-1);"><button class="btn btn-primary btn-lg">Regresar</button></a>
+		<br>
+		<br>
+		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
+		<br>
 	</body>
 </html>

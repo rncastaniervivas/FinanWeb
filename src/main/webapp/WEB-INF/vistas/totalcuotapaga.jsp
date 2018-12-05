@@ -15,16 +15,32 @@
 	<body>
 		
 		<div class="container">
-			<h4>Se va a relealizar el pago del afiliado:</h4>
-			<h4>Nombre : ${afiliado.nombre}</h4>
-			<h4>Apellido : ${afiliado.apellido}</h4>
-			<h4>DNI : ${afiliado.dni}</h4>
-			<h4>Valor total Prestamo : ${montoprestamo}</h4>
-		
+			<ul class="list-group">
+				<h3 class="list-group-item">Datos del Afiliado</h3>
+				
+				<div class="input-group input-group-sm">
+  					<span class="input-group-addon">Nombre:</span>
+  					<li class="list-group-item">${afiliado.nombre}</li>
+				</div>
+				
+				<div class="input-group input-group-sm">
+  					<span class="input-group-addon">Apellido:</span>
+  					<li class="list-group-item">${afiliado.apellido}</li>
+				</div>
+				
+				<div class="input-group input-group-sm">
+  					<span class="input-group-addon">Dni:</span>
+  					<li class="list-group-item">${afiliado.dni}</li>
+				</div>
+				<div class="input-group input-group-sm">
+  					<span class="input-group-addon">Valor Total del prestamo:</span>
+  					<li class="list-group-item">${prestamo.valor}</li>
+				</div>
+			</ul>
 		</div>
 		<form:form action="finalizarpagocuota" modelAttribute="confirm" method="POST" role="form">
 		<div class="container">
-			<h1 class="text-center">LISTA DE PRESTAMOS</h1>
+			<h1 class="text-center">Lista de préstamos</h1>
 			<table class="table">
 			  <thead class="thead-light">
 			    <tr>
@@ -59,8 +75,9 @@
 		        </c:if>	
 		<button type="submit" class="btn btn-success mb-2">Confirmar Pago</button>
 </form:form>
-		
-		
+		<br>
+		<a href="javascript:window.history.go(-1);"><button class="btn btn-primary btn-lg">Regresar</button></a>
+		<br>
 		<br>
 		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
 		<br>

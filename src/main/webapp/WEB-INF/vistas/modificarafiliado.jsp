@@ -13,60 +13,67 @@
 <title>Modificar afiliado</title>
 </head>
 	<body>
-			<div class = "container">
-		<div class="panel panel-default">
-		    <div class="panel-heading">Modificar afiliado</div>
-		    <div class="panel-body">
-		    	<form:form role="form" action="amodificado" method="POST" modelAttribute="afiliado">
-		    	
-				  <div class="form-group">
-					  <label class="col-lg-2 control-label">Nombre:</label>
-					  <div class="col-lg-10">
-					  	<form:input path="nombre" id="nombre" class="" type="text" placeholder="${afili.nombre}"/>
+		<div class = "container">
+			<div class="panel panel-default">
+			    <div class="panel-heading">Modificar afiliado</div>
+			    <div class="panel-body">
+			    	<form:form role="form" action="amodificado" class="" method="POST" modelAttribute="afiliado">
+			    	
+			    	 <form:input path="idAfiliado" id="idAfiliado" type="hidden" value="${afili.idAfiliado}" />
+					  <div class="form-group">
+						  <label class="col-lg-2 control-label">Nombre:</label>
+						  <div class="col-lg-10">
+						  	<form:input path="nombre" id="nombre" class="" type="text" placeholder="${afili.nombre}"/>
+						  </div>
 					  </div>
-				  </div>
-				  				  
-				  <div class="form-group">
-					  <label class="col-lg-2 control-label">Apellido:</label>
-					  <div class="col-lg-10">
-					  	<form:input path="apellido" id="apellido" class="" type="text" placeholder="${afili.apellido}"/>
+					  				  
+					  <div class="form-group">
+						  <label class="col-lg-2 control-label">Apellido:</label>
+						  <div class="col-lg-10">
+						  	<form:input path="apellido" id="apellido" class="" type="text" placeholder="${afili.apellido}"/>
+						  </div>
 					  </div>
-				  </div>
-				  
-				  <div class="form-group">
-					  <label class="col-lg-2 control-label">Dni:</label>
-					  <div class="col-lg-10">
-					  	<form:input path="dni" id="dni" class="" type="text" placeholder="${afili.dni}"/>
+					  
+					  <div class="form-group">
+						  <label class="col-lg-2 control-label">Dni:</label>
+						  <div class="col-lg-10">
+						  	<form:input path="dni" id="dni" class="" type="text" placeholder="${afili.dni}"/>
+						  </div>
 					  </div>
-				  </div>
-				  
-				  <div class="form-group">
-					  <label class="col-lg-2 control-label">Puesto:</label>
-					  <div class="col-lg-10">
-					  	<form:input path="puesto" id="puesto" class="" type="text" placeholder="${afili.puesto}"/>
+					  
+					  <div class="form-group">
+						  <label class="col-lg-2 control-label">Puesto:</label>
+						  <div class="col-lg-10">
+						  	<form:input path="puesto" id="puesto" class="" type="text" placeholder="${afili.puesto}"/>
+						  </div>
 					  </div>
-				  </div>
-				  
-				  <div class="form-group">
-					  <label class="col-lg-2 control-label">Antiguedad:</label>
-					  <div class="col-lg-10">
-					  	<form:input path="antiguedad" id="antiguedad" class="" type="text" placeholder="${afili.antiguedad}"/>
+					  
+					  <div class="form-group">
+						  <label class="col-lg-2 control-label">Antiguedad:</label>
+						  <div class="col-lg-10">
+						  	<form:input path="antiguedad" id="antiguedad" class="" type="text" placeholder="${afili.antiguedad}"/>
+						  </div>
 					  </div>
-				  </div>
-				  
-				  <div class="form-group">
-					  <label class="col-lg-2 control-label">Sueldo:</label>
-					  <div class="col-lg-10">
-					  	<form:input path="sueldo" id="sueldo" class="" type="text" placeholder="${afili.sueldo}"/>
+					  
+					  <div class="form-group">
+						  <label class="col-lg-2 control-label">Sueldo:</label>
+						  <div class="col-lg-10">
+						  	<form:input path="sueldo" id="sueldo" class="" type="text" placeholder="${afili.sueldo}"/>
+						  </div>
 					  </div>
-				  </div>
-				  
-				  <form:input path="idAfiliado" id="idAfiliado" type="hidden" value="${afili.idAfiliado}" />
-				  <button type="submit" class="btn btn-success">Modificar Afiliado</button>
-				  <p>${error}</p>
-				</form:form>
+					  
+					  <button type="submit" class="btn btn-success">Modificar Afiliado</button>
+					  <p>${error}</p>
+					</form:form>
+				</div>
 			</div>
 		</div>
-	</div>
+		
+		<br>
+		<a href="javascript:window.history.go(-1);"><button class="btn btn-primary btn-lg">Regresar</button></a>
+		<br>
+		<br>
+		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
+		<br>
 	</body>
 </html>
