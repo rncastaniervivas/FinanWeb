@@ -1,12 +1,10 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -175,17 +173,23 @@ public class ControladorPrestamo {
 	public ModelAndView listaCuotasImpag(Long idPrestamo) {
 		ModelMap modelo=new ModelMap();
 		Prestamo prestamo = servicioPrestamo.consultarUnPrestamo(idPrestamo);
-		List<Cuota> impagas=servicioRefinanciar.consultaCuota(idPrestamo);
 		Afiliado afiliado = servicioAfiliado.consultarAfiliadoDni(prestamo.getDni());
-		Double montoTotalARefinanciar = servicioRefinanciar.montoARefinanciar(idPrestamo);
-		int cuotasRestante = impagas.size();
-		
-	    modelo.put("afiliado", afiliado);
-	    modelo.put("idPrestamoRef", idPrestamo);
-		modelo.put("cuotas", impagas);	
-		modelo.put("MontoARefinanciar", montoTotalARefinanciar);
-		modelo.put("cuotasRestante",cuotasRestante);
-		return new ModelAndView("refinanciar",modelo);
+		if (prestamo.getEstado().contentEquals("refinanciado")) {
+			modelo.put("afiliado", afiliado);
+			modelo.put("prestamo", prestamo);
+			return new ModelAndView("refinanciarerror",modelo);
+		}else{
+			List<Cuota> impagas=servicioRefinanciar.consultaCuota(idPrestamo);
+			Double montoTotalARefinanciar = servicioRefinanciar.montoARefinanciar(idPrestamo);
+			int cuotasRestante = impagas.size();
+			
+		    modelo.put("afiliado", afiliado);
+		    modelo.put("idPrestamoRef", idPrestamo);
+			modelo.put("cuotas", impagas);	
+			modelo.put("MontoARefinanciar", montoTotalARefinanciar);
+			modelo.put("cuotasRestante",cuotasRestante);
+			return new ModelAndView("refinanciar",modelo);
+		}
 	}
 
 	@RequestMapping(path = "/hacer-refinanciacion", method = RequestMethod.POST)
