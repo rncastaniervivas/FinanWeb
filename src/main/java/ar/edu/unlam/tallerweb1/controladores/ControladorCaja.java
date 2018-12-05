@@ -19,18 +19,24 @@ public class ControladorCaja {
 	@Inject
 	private ServicioRegistro servicioRegistro;
 	@RequestMapping("/caja")
-	public ModelAndView irAFinanapagar() {
+	public ModelAndView mostrarRegistrosCaja() {
 		ModelMap modelo = new ModelMap();
 		
 		List<Registro> misReg=servicioRegistro.consultarTodosRegistros();
 		modelo.put("registros", misReg);
-		Double miCaja=servicioRegistro.montoDeIngresos();
+		Double miCaja=servicioRegistro.montoCaja();
 		modelo.put("caja", miCaja);
 		Double montoI=servicioRegistro.montoDeIngresos();
 		Double montoE=servicioRegistro.montoDeEgresos();
 		modelo.put("montoI", montoI);
 		modelo.put("montoE", montoE);
 		return new ModelAndView("caja",modelo);
+	}
+	public ServicioRegistro getServicioRegistro() {
+		return servicioRegistro;
+	}
+	public void setServicioRegistro(ServicioRegistro servicioRegistro) {
+		this.servicioRegistro = servicioRegistro;
 	}
 
 }

@@ -176,8 +176,48 @@ public class ControladorFinanciera {
 		List<Financiera> lista=servicioFinanciera.consultarFinanciera();
 		modelo.put("financieras",lista);
 		return new ModelAndView("financiera",modelo);	
-		
-	
 	
 	}
+
+	public ServicioFinanciera getServicioFinanciera() {
+		return servicioFinanciera;
+	}
+
+	public void setServicioFinanciera(ServicioFinanciera servicioFinanciera) {
+		this.servicioFinanciera = servicioFinanciera;
+	}
+
+	public ServicioCuota getServicioCuota() {
+		return servicioCuota;
+	}
+
+	public void setServicioCuota(ServicioCuota servicioCuota) {
+		this.servicioCuota = servicioCuota;
+	}
+
+	public ServicioCaja getServicioCaja() {
+		return servicioCaja;
+	}
+
+	public void setServicioCaja(ServicioCaja servicioCaja) {
+		this.servicioCaja = servicioCaja;
+	}
+
+	public ServicioPrestamo getServicioPrestamo() {
+		return servicioPrestamo;
+	}
+
+	public void setServicioPrestamo(ServicioPrestamo servicioPrestamo) {
+		this.servicioPrestamo = servicioPrestamo;
+	}
+
+	public ServicioRegistro getServicioRegistro() {
+		return servicioRegistro;
+	}
+
+	public void setServicioRegistro(ServicioRegistro servicioRegistro) {
+		this.servicioRegistro = servicioRegistro;
+	}
+	
+	
 }

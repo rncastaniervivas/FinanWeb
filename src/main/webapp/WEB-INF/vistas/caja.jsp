@@ -29,8 +29,8 @@
                    <th>Egreso</th>                                                                                                                                                  
                 </tr>
               </thead>
-           		<c:forEach items="${registros}" var="lista">          		
-           		<tbody>
+           	<c:forEach items="${registros}" var="lista" >          		
+           			<tbody>
                    <tr>
                       <td> ${lista.fecha} </td>
                       <td> ${lista.origen} </td>
