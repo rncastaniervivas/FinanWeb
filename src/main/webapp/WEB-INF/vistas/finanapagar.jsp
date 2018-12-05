@@ -28,13 +28,13 @@
 		</div>
 	
 		<div class="container">
-			<h1 class="text-center">LISTA DE FINANCIERAS A PAGAR</h1>
+			<h1 class="text-center">Lista de financieras a pagar</h1>
 			<table class="table">
 			  <thead class="thead-light">
 			    <tr>
 			      <th scope="col">#</th>
-			      <th scope="col">Nombre Financieras</th>
-			      <th scope="col">Numero de couta</th>
+			      <th scope="col">Nombre </th>
+			      <th scope="col">Numero de cuota</th>
 			      <th scope="col">Monto a pagar</th>
 			      <th scope="col">Realizar</th>
 			    </tr>

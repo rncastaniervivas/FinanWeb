@@ -5,6 +5,7 @@
 	    <link href="css/bootstrap.min.css" rel="stylesheet" >
 	    <!-- Bootstrap theme -->
 	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+	    <link href="css/style.css" rel="stylesheet">
 	</head>
 	<body>
 		<div class = "container">
@@ -74,12 +75,6 @@
 					<form action= "financiera" method="POST">
 						<button type ="submit" class="btn btn-info">Listado de Financieras</button>
 					</form>
-			</div>
-			
-			<div>
-				<h3>Cuotas</h3>
-				
-			
 			</div>
 		</div>
 		<!-- Placed at the end of the document so the pages load faster -->

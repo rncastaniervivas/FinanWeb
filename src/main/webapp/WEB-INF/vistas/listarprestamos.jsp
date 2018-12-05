@@ -23,7 +23,7 @@
 			  <thead class="thead-light">
 			    <tr>
 			      <th scope="col">DNI Afiliado</th>
-			      <th scope="col">Valor Del Prestamo</th>
+			      <th scope="col">Valor Del Préstamo</th>
 			      <th scope="col">Cuotas</th>
 			      <th scope="col">Intereses</th>
 			      <th scope="col">Estado</th>
@@ -58,6 +58,8 @@
 			  </c:forEach>
 			</table>
 		</div>
+		<br>
+		<a href="javascript:window.history.go(-1);"><button class="btn btn-primary btn-lg">Regresar</button></a>
 		<br>
 		<br>
 		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
