@@ -74,6 +74,7 @@ public class ControladorAfiliado {
 		
 		if(miAfiliado.size() != 0) {
 			modelo.put("error", "No se puede modificar el afiliado");
+			modelo.put("afiliado", mafiliado);
 			return new ModelAndView("modificarafiliado", modelo);
 		} else {
 			servicioAfiliado.modificarAfiliado(mafiliado);

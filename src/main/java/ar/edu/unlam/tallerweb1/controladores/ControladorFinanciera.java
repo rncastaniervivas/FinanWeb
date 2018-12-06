@@ -171,6 +171,7 @@ public class ControladorFinanciera {
 		
 		if(servicioFinanciera.modificarFinanciera(mfinanciera)==false) {
 		modelo.put("error","ya existe financiera");
+		modelo.put("financiera", mfinanciera);
 		return new ModelAndView ("modificarfinanciera",modelo);
 		}
 		List<Financiera> lista=servicioFinanciera.consultarFinanciera();
