@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
+<c:set var="context" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -42,7 +42,7 @@
 		</div>
 		
 		<div class="container">
-			<form action="hacer-refinanciacion" method="POST">
+			<form method="POST">
 			  <input type="hidden" name="dni" value="${afiliado.dni}">
 			  <input type="hidden" name="idPrestamoRef" value="${idPrestamoRef}">
 			  <div class="form-row">
@@ -77,16 +77,16 @@
 				</div>
 			  </div>
 			  <div class="form-group col-md-6">
-			  	<button type="submit" class="btn btn-primary">Aceptar</button>
+			  	<button type="submit" class="btn btn-primary" formaction="hacer-refinanciacion">Aceptar</button>
 			  </div>
 			<form>
 		</div>
 
 		<br>
-		<a href="javascript:window.history.go(-1);"><button class="btn btn-primary btn-lg">Regresar</button></a>
+		<form><button type="submit" class="btn btn-primary  btn-lg" formaction="listarprestamos">Regresar</button></form>
 		<br>
 		<br>
-		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
+		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg">Home</button></a>
 		<br>
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
