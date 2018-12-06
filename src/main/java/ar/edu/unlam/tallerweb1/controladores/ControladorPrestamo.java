@@ -126,6 +126,7 @@ public class ControladorPrestamo {
 		for(Long item2: idCuotas) {
 			cuotaitem=servicioCuota.consultarCuotaporId(item2);
 			cuotaitem.setEstado(true);
+			cuotaitem.setCubierto(true);
 			cuotaitem.setFechaDePago(new Date());
 			servicioCuota.modificarCubierto(cuotaitem);
 		}

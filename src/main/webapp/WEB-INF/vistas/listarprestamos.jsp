@@ -55,7 +55,7 @@
 				      
 				      <!-- pongo esto porqeu lo de arriba no funcionaba -->
 				      <td>
-				      	<c:if test = "${prestamos.estado !='refinanciado'}">
+				      	<c:if test = "${prestamos.estado == 'activo'}">
 					       <form method="POST" >
 				      	  	 <button type="submit" class="btn btn-info" name="idPrestamo" value="${prestamos.idPrestamo}" formaction="refinanciar">Refinanciar</button>
 				      	  	 <button type="submit" class="btn btn-success" name="idPrestamo1" value="${prestamos.idPrestamo}" formaction="pagarcuota">Pagar</button>
@@ -68,6 +68,12 @@
 				  </tbody>
 			  </c:forEach>
 			</table>
+			
+			<c:if test="${not empty error}">
+		        <h4><span>${error}</span></h4>
+		        <br>
+	        </c:if>
+			
 		</div>
 		<br>
 		<a href="javascript:window.history.go(-1);"><button class="btn btn-primary btn-lg">Regresar</button></a>

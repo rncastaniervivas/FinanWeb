@@ -39,9 +39,7 @@ public class ServicioCuotaImpl implements ServicioCuota{
 
 	@Override
 	public void modificarCubierto(Cuota cuota) {
-		Cuota miCuota=servicioCuotaDao.buscarCuota(cuota);
-		miCuota.setCubierto(true);
-		servicioCuotaDao.modificarElCubierto(miCuota);
+		servicioCuotaDao.modificarElCubierto(cuota);
 		
 	}
 
