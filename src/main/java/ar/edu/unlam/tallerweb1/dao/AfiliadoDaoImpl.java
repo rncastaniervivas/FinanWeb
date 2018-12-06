@@ -59,7 +59,7 @@ public class AfiliadoDaoImpl implements AfiliadoDao {
 	@Override
 	public List<Afiliado> buscarAfiliado(Afiliado afiliado){
 		return (sessionFactory.getCurrentSession().createCriteria(Afiliado.class)
-				.add(Restrictions.eq("nombre", afiliado.getNombre()))
+				.add(Restrictions.eq("sueldo", afiliado.getSueldo()))
 				.list());
 	}
 	
