@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.FinancieraDao;
+import ar.edu.unlam.tallerweb1.dao.PrestamoDao;
 import ar.edu.unlam.tallerweb1.modelo.Financiera;
 
 @Service("servicioFinanciera")
@@ -15,6 +16,8 @@ import ar.edu.unlam.tallerweb1.modelo.Financiera;
 public class ServicioFinancieraImpl implements ServicioFinanciera {
 	@Inject
 	private FinancieraDao servicioFinancieraDao;
+	@Inject
+	private PrestamoDao servicioPrestamoDao;
 	
 	@Override
 	public List<Financiera> consultarFinanciera() {
@@ -22,8 +25,14 @@ public class ServicioFinancieraImpl implements ServicioFinanciera {
 	}
 
 	@Override
-	public void guardarFinanciera(Financiera financiera) {
-		servicioFinancieraDao.guardarFinanciera(financiera);
+	public boolean guardarFinanciera(Financiera financiera) {
+		List<Financiera> mifinanciera=servicioFinancieraDao.buscarFinanciera(financiera);
+		if(mifinanciera.size() == 0) {
+			servicioFinancieraDao.guardarFinanciera(financiera);
+			return true;
+		}else {
+			return false;
+		}
 		
 	}
 
@@ -33,15 +42,42 @@ public class ServicioFinancieraImpl implements ServicioFinanciera {
 		
 	}
 
+
 	@Override
-	public void eliminarfinanciera(Financiera financiera) {
-		servicioFinancieraDao.eliminarfinanciera(financiera);
+	public boolean eliminarfinanciera(Financiera financiera) {
+		boolean tienePrestamo=servicioPrestamoDao.consultarPorFinanciera(financiera.getIdFinanciera());
+		if(tienePrestamo==true) {
+		return false;
+		}else
+		{
+			servicioFinancieraDao.eliminarfinanciera(financiera);
+			return true;
+		}
 		
 	}
 
 	@Override
-	public void modificarFinanciera(Financiera financiera) {
+	public boolean modificarFinanciera(Financiera financiera) {
+		List<Financiera> miFinan=servicioFinancieraDao.buscarFinanciera(financiera);
+		if(miFinan.size() != 0) {
+			return false;
+			}else {
 		servicioFinancieraDao.modificarFinanciera(financiera);
+		return true;
+			}
+		}
+
+	@Override
+	public Financiera buscarFinancieraPorNombre(String nombreF) {
+		return servicioFinancieraDao.buscarFinancieraPorNombre(nombreF);
+	}
+
+	@Override
+	public void descontarMontoFinanciera(Integer valor) {
+		// TODO Auto-generated method stub
 		
 	}
+	
+	
+	
 }

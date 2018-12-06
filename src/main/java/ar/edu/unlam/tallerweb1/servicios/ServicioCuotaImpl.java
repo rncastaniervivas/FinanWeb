@@ -39,9 +39,19 @@ public class ServicioCuotaImpl implements ServicioCuota{
 
 	@Override
 	public void modificarCubierto(Cuota cuota) {
-		servicioCuotaDao.modificarElCubierto(cuota);
+		Cuota miCuota=servicioCuotaDao.buscarCuota(cuota);
+		miCuota.setCubierto(true);
+		servicioCuotaDao.modificarElCubierto(miCuota);
 		
 	}
+
+	@Override
+	public Cuota buscarCuota(Cuota cuota) {
+		servicioCuotaDao.buscarCuota(cuota);
+		return null;
+	}
+	
+	
 	
 	@Override
 	public List<Cuota> consultarCuotaDelUltimoPrestamo() {

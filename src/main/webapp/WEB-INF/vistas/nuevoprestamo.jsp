@@ -30,6 +30,8 @@
 		      <label >Prestamo maximo disponible</label>
 		      <input type="text" class="form-control" value="${disponible}" id="inputApellido" disabled>
 		    </div>
+		    <div class="form-group col-md-4"></div>
+		    <div class="form-group col-md-4"></div>
 		    <div class="form-group col-md-6">
 		    	<label class="col-lg-2 control-label">Cuotas</label>
 				<div class="col-lg-10">
@@ -42,17 +44,35 @@
 					</select>
 				</div>
 		    </div>
-		    <div class="form-group col-md-8">
+		    <div class="form-group col-md-6">
 		      <label >Nuevo Monto</label>
 		      <input name="valor" type="text" class="form-control" id="inputMonto">
 		    </div>
-		    <div class="form-group col-md-8">
+		     <div class="form-group col-md-6"></div>
+		     <div class="form-group col-md-6"></div>
+		     <div class="form-group col-md-6">
+		    	<label class="col-lg-2 control-label">Financieras</label>
+				<div class="col-lg-10">
+					<select name="nombreF" id="nombreF" class="form-control">
+						
+						<c:forEach items="${financieras}" var="lista">
+						<option value="${lista.nombre}">${lista.nombre} (${lista.montoCapital})</option>
+						</c:forEach>
+					
+					</select>
+				</div>
+			    </div>
+		    
+		    
+		    <div class="form-group col-md-10">
 			    <c:if test="${not empty error}">
 			        <h4><span>${error}</span></h4>
 			        <br>
 		        </c:if>
 		    </div>
-		    <div class="form-group col-md-8">
+			    
+			   
+		    <div class="form-group col-md-4">
 		    	<button class="btn btn-info" type="submit">Dar Prestamo</button>
 			</div>
 		  </div>

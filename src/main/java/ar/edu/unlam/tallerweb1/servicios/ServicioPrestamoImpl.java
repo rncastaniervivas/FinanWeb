@@ -11,9 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.AfiliadoDao;
 import ar.edu.unlam.tallerweb1.dao.CuotaDao;
+import ar.edu.unlam.tallerweb1.dao.FinancieraDao;
 import ar.edu.unlam.tallerweb1.dao.PrestamoDao;
 import ar.edu.unlam.tallerweb1.modelo.Afiliado;
 import ar.edu.unlam.tallerweb1.modelo.Cuota;
+import ar.edu.unlam.tallerweb1.modelo.Financiera;
 import ar.edu.unlam.tallerweb1.modelo.Prestamo;
 
 @Service("servicioPrestamo")
@@ -26,6 +28,8 @@ public class ServicioPrestamoImpl implements ServicioPrestamo {
 	
 	@Inject
 	private CuotaDao servicioCuotaDao;
+	@Inject
+	private FinancieraDao servicioFinancieraDao;
 	
 	@Override
 	public List<Prestamo> consultarPrestamo() {
@@ -50,6 +54,12 @@ public class ServicioPrestamoImpl implements ServicioPrestamo {
 	@Override
 	public boolean consultarPorFinanciera(Long idFinanciera) {
 		return servicioPrestamoDao.consultarPorFinanciera(idFinanciera);
+		
+	}
+
+	@Override
+	public Prestamo consutaPrestamoPorCuota(Cuota cuota) {
+		return servicioPrestamoDao.consultarPrestamoPorCuota(cuota);
 		
 	}
 	
@@ -148,8 +158,11 @@ public class ServicioPrestamoImpl implements ServicioPrestamo {
 	}
 
 	@Override
-	public void crearNuevoPrestamo(Afiliado afiliado, Integer valor, Integer cuotas) {
+	public void crearNuevoPrestamo(Afiliado afiliado, Integer valor, Integer cuotas,String nombreF) {
 		Afiliado miAfiliado = servicioAfiliadoDao.consultarAfiliadoDni(afiliado.getDni());
+		//busca financiera
+		Financiera miFinanciera=servicioFinancieraDao.buscarFinancieraPorNombre(nombreF);
+		//
 		Prestamo nprestamo = new Prestamo();
 		nprestamo.setValor(valor);
 		nprestamo.setCuotas(cuotas);
@@ -157,7 +170,12 @@ public class ServicioPrestamoImpl implements ServicioPrestamo {
 		nprestamo.setEstado("activo");
 		nprestamo.setAfiliado(miAfiliado);
 		nprestamo.setDni(afiliado.getDni());
-		
+		//guarda la financiera del prestamo y modifica el monto capital
+		nprestamo.setFinanciera(miFinanciera);
+		Integer montoCapital=miFinanciera.getMontoCapital();
+		miFinanciera.setMontoCapital(montoCapital-valor);
+		servicioFinancieraDao.modificarFinanciera(miFinanciera);
+		//
 		double montoMensual = valor/cuotas;
 		double interesCuota = (valor*0.35)/12;
 		double total = montoMensual+interesCuota;

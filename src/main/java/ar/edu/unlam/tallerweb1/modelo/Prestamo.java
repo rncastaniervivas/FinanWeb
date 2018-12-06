@@ -84,6 +84,7 @@ public class Prestamo {
 	public void setCuota(List<Cuota> cuota) {
 		this.cuota = cuota;
 	}
+	
 	public Long getDni() {
 		return dni;
 	}
@@ -96,5 +97,6 @@ public class Prestamo {
 	public void setPrestamoRef(Prestamo prestamoRef) {
 		this.prestamoRef = prestamoRef;
 	}
+
 	
 }

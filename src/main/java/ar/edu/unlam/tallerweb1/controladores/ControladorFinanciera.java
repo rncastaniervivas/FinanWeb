@@ -17,6 +17,8 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioCaja;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCuota;
 import ar.edu.unlam.tallerweb1.servicios.ServicioFinanciera;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPrestamo;
+import ar.edu.unlam.tallerweb1.servicios.ServicioRegistro;
+
 
 @Controller
 public class ControladorFinanciera {
@@ -29,14 +31,17 @@ public class ControladorFinanciera {
 	private ServicioCaja servicioCaja;
 	@Inject
 	private ServicioPrestamo servicioPrestamo;
+	@Inject
+	private ServicioRegistro servicioRegistro;
 	
+	// realizar pago a financieras
 	@RequestMapping("/pagarfinancieras")
 	public ModelAndView irAFinanapagar() {
 		ModelMap modelo = new ModelMap();
 		Financiera financiera =new Financiera();
 		modelo.put("financiera", financiera);
 		List<Financiera> financieras = servicioFinanciera.consultarFinanciera();
-		Double montocaja=servicioCaja.consultarCaja();
+		Double montocaja=servicioRegistro.montoCaja();
 		modelo.put("montocaja", montocaja);
 		modelo.put("financieras", financieras);
 		
@@ -48,7 +53,7 @@ public class ControladorFinanciera {
 		List<Cuota> cuotas=servicioCuota.consultarPorFinanciera(financierac);
 		ModelMap modelo =new ModelMap();
 		modelo.put("cuotas", cuotas);
-		Double montocaja=servicioCaja.consultarCaja();
+		Double montocaja=servicioRegistro.montoCaja();
 		modelo.put("montocaja", montocaja);
 		Cuota cuota=new Cuota();
 		modelo.put("cuota", cuota);
@@ -60,14 +65,15 @@ public class ControladorFinanciera {
 	}
 	
 	@RequestMapping(path="restarsaldo",method=RequestMethod.POST)
-	public ModelAndView restarSaldo(@ModelAttribute("cuota")Cuota cuotar) {
-	servicioCaja.sacarCaja(cuotar.getMonto());//resta de la caja
+	public ModelAndView restarSaldo(@ModelAttribute("cuota")Cuota cuotar, Long idPrestamo,String nombreFinanciera) {
+	
 	servicioCuota.modificarCubierto(cuotar);//modifica si la cuota esta cubierta
+	servicioRegistro.insertarEgresos(cuotar,idPrestamo,nombreFinanciera);// inserta registro
 	ModelMap modelo =new ModelMap();
 	Financiera financiera =new Financiera();
 	modelo.put("financiera", financiera);
 	List<Financiera> financieras = servicioFinanciera.consultarFinanciera();
-	Double montocaja=servicioCaja.consultarCaja();
+	Double montocaja=servicioRegistro.montoCaja();
 	modelo.put("montocaja", montocaja);
 	modelo.put("financieras", financieras);
 	Cuota cuota=new Cuota();
@@ -90,15 +96,13 @@ public class ControladorFinanciera {
 		ModelMap modelo=new ModelMap();
 		Financiera financiera=new Financiera();
 		modelo.put("financiera", financiera);
-		List<Financiera> mifinanciera=servicioFinanciera.buscarFinanciera(agregarfinanciera);
-		if(mifinanciera.size() == 0) {
-		servicioFinanciera.guardarFinanciera(agregarfinanciera);
+		
+		if(servicioFinanciera.guardarFinanciera(agregarfinanciera) == true ) {
 		List<Financiera> lista =servicioFinanciera.consultarFinanciera();
 		modelo.put("financieras", lista);
 		return new ModelAndView("financiera",modelo);
 		}else {
 			modelo.put("error", "Ya existe financiera");
-			
 		}
 		return new ModelAndView ("agregarfinanciera",modelo);
 	}
@@ -139,10 +143,7 @@ public class ControladorFinanciera {
 		ModelMap modelo=new ModelMap();
 		Financiera financiera=new Financiera();
 		// escribir para que pregunte si tiene un prestamo antes de elminar
-		boolean tienePrestamo=servicioPrestamo.consultarPorFinanciera(finan.getIdFinanciera());
-		if(tienePrestamo == false) {
-	servicioFinanciera.eliminarfinanciera(finan);
-		}else {
+		if(servicioFinanciera.eliminarfinanciera(finan) == false) {
 			modelo.put("erroeliminar", "No se puede eliminar debido a que tiene prestamo");
 		}
 	List<Financiera> lista=servicioFinanciera.consultarFinanciera();
@@ -165,20 +166,58 @@ public class ControladorFinanciera {
 	@RequestMapping(path="/modificado", method=RequestMethod.POST)
 	public ModelAndView financieramodificada(@ModelAttribute("financiera")Financiera mfinanciera) {
 		ModelMap modelo=new ModelMap();
-		List<Financiera> miFinan=servicioFinanciera.buscarFinanciera(mfinanciera);
 		Financiera financiera=new Financiera();
 		modelo.put("financiera", financiera);
-		if(miFinan.size() != 0) {
+		
+		if(servicioFinanciera.modificarFinanciera(mfinanciera)==false) {
 		modelo.put("error","ya existe financiera");
 		return new ModelAndView ("modificarfinanciera",modelo);
-		}else {
-		
-		servicioFinanciera.modificarFinanciera(mfinanciera);
+		}
 		List<Financiera> lista=servicioFinanciera.consultarFinanciera();
 		modelo.put("financieras",lista);
 		return new ModelAndView("financiera",modelo);	
-		
-	}
 	
 	}
+
+	public ServicioFinanciera getServicioFinanciera() {
+		return servicioFinanciera;
+	}
+
+	public void setServicioFinanciera(ServicioFinanciera servicioFinanciera) {
+		this.servicioFinanciera = servicioFinanciera;
+	}
+
+	public ServicioCuota getServicioCuota() {
+		return servicioCuota;
+	}
+
+	public void setServicioCuota(ServicioCuota servicioCuota) {
+		this.servicioCuota = servicioCuota;
+	}
+
+	public ServicioCaja getServicioCaja() {
+		return servicioCaja;
+	}
+
+	public void setServicioCaja(ServicioCaja servicioCaja) {
+		this.servicioCaja = servicioCaja;
+	}
+
+	public ServicioPrestamo getServicioPrestamo() {
+		return servicioPrestamo;
+	}
+
+	public void setServicioPrestamo(ServicioPrestamo servicioPrestamo) {
+		this.servicioPrestamo = servicioPrestamo;
+	}
+
+	public ServicioRegistro getServicioRegistro() {
+		return servicioRegistro;
+	}
+
+	public void setServicioRegistro(ServicioRegistro servicioRegistro) {
+		this.servicioRegistro = servicioRegistro;
+	}
+	
+	
 }

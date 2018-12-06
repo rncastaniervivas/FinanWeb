@@ -68,14 +68,34 @@
 						<button type="submit" class="btn btn-info">Agregar financiera</button>
 					</form>
 				<br>
-					<form action="finanapagar" method="POST">
+					<form action="pagarfinancieras" method="POST">
 						<button type="submit" class="btn btn-info">Pagar a financiera</button>
 					</form>
 				<br>
 					<form action= "financiera" method="POST">
 						<button type ="submit" class="btn btn-info">Listado de Financieras</button>
 					</form>
+			</div>			
+			<div>
+				<h3>Cuotas</h3>		
 			</div>
+			<div>
+				<h3>Caja</h3>
+				<br>
+					<form action= "caja" method="POST">
+						<button type ="submit" class="btn btn-info">registros de Caja</button>
+					</form>
+					<br>
+					<form action="graficocaja" method="POST" >
+					  <button type="submit" class="btn btn-info" name="opcion" value="1">Grafico de Ingresos</button>
+					</form>
+					<br>
+					<form action="graficocaja" method="POST" >
+					  <button type="submit" class="btn btn-info" name="opcion" value="2">Grafico de Egresos</button>
+					</form>
+			
+			</div>
+
 		</div>
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>

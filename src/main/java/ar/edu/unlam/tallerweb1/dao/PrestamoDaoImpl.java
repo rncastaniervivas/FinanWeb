@@ -10,6 +10,8 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+
+import ar.edu.unlam.tallerweb1.modelo.Cuota;
 import ar.edu.unlam.tallerweb1.modelo.Afiliado;
 import ar.edu.unlam.tallerweb1.modelo.Prestamo;
 
@@ -84,6 +86,15 @@ public class PrestamoDaoImpl implements PrestamoDao {
 		
 		return false;}
 
+	}
+
+
+	@Override
+	public Prestamo consultarPrestamoPorCuota(Cuota cuota) {
+		
+		return (Prestamo) (sessionFactory.getCurrentSession().createCriteria(Prestamo.class)
+				.add(Restrictions.eq("idPrestamo", cuota.getIdCuota()))
+				.uniqueResult());
 	}
 
 	@SuppressWarnings("unchecked")

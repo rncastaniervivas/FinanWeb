@@ -16,9 +16,12 @@ public interface CuotaDao {
 	
 	void modificarElCubierto(Cuota cuota);
 
+	Cuota buscarCuota(Cuota cuota);
+
 	List<Cuota> consultarCuotaPagada(Long arefinanciar);
 	
 	List<Cuota> consultarCuotaImpagas(Long idPrestamo);
 	
 	Cuota consultarCuotaporId(Long idCuota);
+
 }

@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-      <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>pagar a Financieras</title>
 <!-- Bootstrap core CSS -->
 	    <link href="css/bootstrap.min.css" rel="stylesheet" >
@@ -47,14 +47,16 @@
 		<c:forEach items="${cuotas}" var="cuotas">
 				<tr>
 			      <th scope="col">${cuotas.prestamo.getIdPrestamo()}</th>
-			      <th scope="col">${cuotas.prestamo.afiliado.getIdAfiliado()}</th>
+			      <th scope="col">${cuotas.prestamo.afiliado.getNombre()}</th>
 			      <th scope="col">${cuotas.idCuota}</th>
 			      <th scope="col">${cuotas.fechaDeVencimiento}</th>
-			      <th scope="col">${cuotas.monto }</th>
+			      <th scope="col">${cuotas.monto}</th>
 			      <th scope="col">
 			      			<form:form action="restarsaldo" modelAttribute="cuota">
 							<form:input path="idCuota" id="idCuota" value="${cuotas.idCuota}" type="hidden"/>
 							<form:input path="monto" id="monto"  type="hidden" value="${cuotas.monto}"/>
+							<input name="nombreFinanciera" id="monto"  type="hidden" value="${cuotas.prestamo.financiera.getNombre()}"/>
+							<input name="idPrestamo" id="prestamoId" type="hidden" value="${cuotas.prestamo.getIdPrestamo()}"/>
 							<button type="submit" class="btn btn-info">pagar</button>
 			      			</form:form>
 			      		

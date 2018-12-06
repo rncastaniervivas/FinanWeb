@@ -2,6 +2,8 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 import java.util.List;
 
+import ar.edu.unlam.tallerweb1.modelo.Cuota;
+
 import ar.edu.unlam.tallerweb1.modelo.Afiliado;
 import ar.edu.unlam.tallerweb1.modelo.Prestamo;
 
@@ -19,11 +21,14 @@ public interface ServicioPrestamo {
 	
 	boolean consultarPorFinanciera(Long idFinanciera);
 	
+
+	Prestamo consutaPrestamoPorCuota(Cuota cuota);
+
 	double salarioAfectado(Afiliado afiliado);
 	
 	double prestamoDisponible(Afiliado afiliado);
 	
-	void crearNuevoPrestamo(Afiliado afiliado, Integer valor, Integer cuotas);
+	void crearNuevoPrestamo(Afiliado afiliado, Integer valor, Integer cuotas,String nombreF);
 	
 	boolean consultarPrestamoActivoAfiliado(Long idAfiliado);
 	

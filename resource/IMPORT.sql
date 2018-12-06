@@ -5,7 +5,7 @@ select * from cuota;
 select * from afiliado_prestamo;
 select * from financiera_prestamo;
 
-insert into financiera (idFinanciera,nombre) values (1,'Naranja');
+insert into financiera (idFinanciera,nombre,montoCapital) values (1,'Naranja',100000);
 insert into afiliado (idAfiliado,nombre,apellido,dni,puesto,antiguedad,sueldo,clasificacion) values (1,'Martin','Ale',123456789,null,9,20000,null);
 insert into prestamo (idPrestamo,cuotas,estado,interes,valor,afiliado_idAfiliado,financiera_idFinanciera) values (1,6,'activo',0.35,5000,1,null),(2,6,'activo',0.20,5000,null,1);
 

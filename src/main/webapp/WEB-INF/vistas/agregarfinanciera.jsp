@@ -14,38 +14,31 @@
 	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 
 </head>
-<body>
-	<div class = "container">
-		<div class="panel panel-default">
-		    <div class="panel-heading">Nueva financiera</div>
-		    <div class="panel-body">
-		    	<form:form action="agregado" modelAttribute="financiera" method="POST" role="form">
-				  			  
-				  <div class="form-group row">
-					  <label class="col-lg-2 control-label">Nombre:</label>
-					  <div class="col-lg-10">
-					  	<form:input path="nombre" type="text" id="nombre" placeholder="Nombre"  class="form-control"/>
-					  </div>
-				  </div>
-				  
-				  <div class="form-group row">
-				  		<div class="col-lg-2"></div>
-				  		<div class="col-lg-10">
-						  <button type="submit" class="btn btn-success">Agregar financiera</button>
-						</div>
-				  </div>
-				  <p>${error}</p>
-				</form:form>
-			</div>
+
+<body class="container">
+<h2>Agregar Nueva Financiera</h2>
+<div class="col-lg-6">
+	<form:form role="form" action="agregado" method="Post" modelAttribute="financiera">
+		<div class="form-group">
+		<label>nombre:</label>
+		<form:input path="nombre" id="nombre" type="text" class="form-control"/>
 		</div>
-		
-		<br>
-		<a href="javascript:window.history.go(-1);"><button class="btn btn-primary btn-lg">Regresar</button></a>
-		<br>
-		<br>
+
+		<div>
+			<label>Monto Capital:</label>
+			<form:input path="montoCapital" id="montoCapital" type="text" class="form-control"/>
+		</div>
+			<div>
+			<button type="submit" class="btn btn-success">Agregar</button>
+			</div>
+	<p>${error}</p>
+	
+
+	</form:form>
+	<br>
+
 		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
 		<br>
-	</div>
-
+</div>
 </body>
 </html>
