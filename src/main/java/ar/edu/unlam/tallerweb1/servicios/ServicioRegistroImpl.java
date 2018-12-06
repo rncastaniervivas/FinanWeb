@@ -96,4 +96,10 @@ public class ServicioRegistroImpl implements ServicioRegistro {
 		return this.montoDeIngresos()-this.montoDeEgresos();
 	}
 
+	@Override
+	public List<Registro> consultarEgresos() {
+		
+		return servicioRegistroDao.consultarEgresos();
+	}
+
 }

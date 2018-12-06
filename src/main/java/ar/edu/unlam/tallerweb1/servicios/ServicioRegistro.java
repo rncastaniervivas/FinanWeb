@@ -19,6 +19,8 @@ public interface ServicioRegistro {
 	
 	public List<Registro> consultarIngresos();
 	
+	public List<Registro> consultarEgresos();
+	
 	public Double montoCaja();
 
 

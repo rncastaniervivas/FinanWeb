@@ -87,6 +87,14 @@
 					<form action= "caja" method="POST">
 						<button type ="submit" class="btn btn-info">registros de Caja</button>
 					</form>
+					<br>
+					<form action="graficocaja" method="POST" >
+					  <button type="submit" class="btn btn-info" name="opcion" value="1">Grafico de Ingresos</button>
+					</form>
+					<br>
+					<form action="graficocaja" method="POST" >
+					  <button type="submit" class="btn btn-info" name="opcion" value="2">Grafico de Egresos</button>
+					</form>
 			
 			</div>
 		</div>
