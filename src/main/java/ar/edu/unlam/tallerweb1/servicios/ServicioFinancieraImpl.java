@@ -46,7 +46,7 @@ public class ServicioFinancieraImpl implements ServicioFinanciera {
 	@Override
 	public boolean eliminarfinanciera(Financiera financiera) {
 		boolean tienePrestamo=servicioPrestamoDao.consultarPorFinanciera(financiera.getIdFinanciera());
-		if(tienePrestamo==true) {
+		if(tienePrestamo) {
 		return false;
 		}else
 		{

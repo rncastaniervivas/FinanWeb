@@ -9,18 +9,18 @@ public interface ServicioAfiliado {
 
 	List<Afiliado> consultarAfiliado ();
 	
-	void guardarAfiliado (Afiliado afiliado);
+	boolean guardarAfiliado (Afiliado afiliado);
 	
-	void modificarAfiliado (Afiliado afiliado);
+	boolean modificarAfiliado (Afiliado afiliado);
 	
-	void eliminarAfiliado (Afiliado afiliado);
+	boolean eliminarAfiliado (Afiliado afiliado);
 	
 	Afiliado consultarAfiliado(Long idPrestamo);
-	
-	List<Afiliado> buscarAfiliado (Afiliado afiliado);
 	
 	Afiliado consultarAfiliadoDni(Long dni);
 	
 	Afiliado consultarIdAfiliado(Long id);
+
+	Boolean existeAfiliado(Afiliado afiliado);
 	
 }

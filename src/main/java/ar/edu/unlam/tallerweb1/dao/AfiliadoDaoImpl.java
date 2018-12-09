@@ -1,12 +1,15 @@
 package ar.edu.unlam.tallerweb1.dao;
 
 import ar.edu.unlam.tallerweb1.modelo.Afiliado;
+import ar.edu.unlam.tallerweb1.modelo.Prestamo;
+import ar.edu.unlam.tallerweb1.servicios.ServicioAfiliado;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -59,7 +62,7 @@ public class AfiliadoDaoImpl implements AfiliadoDao {
 	@Override
 	public List<Afiliado> buscarAfiliado(Afiliado afiliado){
 		return (sessionFactory.getCurrentSession().createCriteria(Afiliado.class)
-				.add(Restrictions.eq("sueldo", afiliado.getSueldo()))
+				.add(Restrictions.eq("dni", afiliado.getDni()))
 				.list());
 	}
 	
@@ -79,6 +82,18 @@ public class AfiliadoDaoImpl implements AfiliadoDao {
 				.add(Restrictions.eq("dni", dni))
 				.uniqueResult();
 	}
+
+		/*
+		 List<Prestamo> prestamo= servicioPrestamoDao.consultarPrestamo();
+		List<Prestamo> prestamoresult= new ArrayList<Prestamo>();
+		for(Prestamo item: prestamo) {
+			if(item.getFinanciera()==null) {
+				prestamoresult.add(item);
+			}
+		}
+		return prestamoresult;
+		 */
+	
 	
 //	@Override
 //	public List<Prestamo> listarPrestamos(Long id) {

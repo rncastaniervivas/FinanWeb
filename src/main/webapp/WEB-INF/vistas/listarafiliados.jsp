@@ -63,9 +63,10 @@
 			<br>
 			<button class="btn btn-primary btn-lg" type="submit">Nuevo afiliado</button>
 		</form:form>
-		<br>
-		<h3>${erroreliminar}</h3>
-		
+			<c:if test="${not empty error}">
+		        <h4><span>${error}</span></h4>
+		        <br>
+	        </c:if>	
 		
 		<br>
 		<a href="javascript:window.history.go(-1);"><button class="btn btn-primary btn-lg">Regresar</button></a>

@@ -24,6 +24,8 @@ public interface AfiliadoDao {
 	Afiliado consultarAfiliadoDni(Long dni);
 	
 	Afiliado consultarIdAfiliado(Long id);
+
+//	List<Afiliado> buscarAfiliadoPorDni(Afiliado afil);
 	
 	
 //	List<Prestamo> listarPrestamos(Long id);

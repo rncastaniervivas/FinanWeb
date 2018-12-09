@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Afiliado;
+import ar.edu.unlam.tallerweb1.modelo.Financiera;
 import ar.edu.unlam.tallerweb1.modelo.Prestamo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAfiliado;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPrestamo;
@@ -29,7 +30,6 @@ public class ControladorAfiliado {
 	public ModelAndView irAAgregarAfiliado() {
 		ModelMap modelo = new ModelMap();
 		Afiliado afiliado = new Afiliado();
-		
 		modelo.put("afiliado", afiliado);
 		return new ModelAndView("agregarafiliado", modelo);
 		
@@ -37,21 +37,24 @@ public class ControladorAfiliado {
 	
 	@RequestMapping (path = "/afiliadoagregado", method = RequestMethod.POST)
 	public ModelAndView agregadoExitosamente (@ModelAttribute("afiliado") Afiliado agregarafiliado) {
-		ModelMap modelo = new ModelMap();
-		Afiliado afiliado = new Afiliado();
+		ModelMap modelo=new ModelMap();
+		Afiliado afiliado=new Afiliado();
 		modelo.put("afiliado", afiliado);
-		List<Afiliado> miafiliado = servicioAfiliado.buscarAfiliado(agregarafiliado);
 		
-		if(miafiliado.size() == 0) {
-			servicioAfiliado.guardarAfiliado(agregarafiliado);
-			List<Afiliado> lista = servicioAfiliado.consultarAfiliado();
-			modelo.put("afiliados", lista);
-			return new ModelAndView("listarafiliados", modelo);
+		if(servicioAfiliado.guardarAfiliado(agregarafiliado)) {
+			
+		List<Afiliado> lista =servicioAfiliado.consultarAfiliado();
+		
+		modelo.put("afiliados", lista);
+		
+		return new ModelAndView("listarafiliados",modelo);
+		
+		}else {
+			
+			modelo.put("error", "Ya El Afiliado con ese DNI");
+			
 		}
-		else {
-			modelo.put("error", "El afiliado que desea crear ya existe");
-		}
-		return new ModelAndView("listarafiliados", modelo);
+		return new ModelAndView ("agregarafiliado",modelo);
 	}
 	
 	@RequestMapping (path ="/modificarafiliado", method = RequestMethod.POST)
@@ -64,38 +67,41 @@ public class ControladorAfiliado {
 		modelo.put("afiliado", afiliado);
 		return new ModelAndView("modificarafiliado", modelo);
 	}
+//	@RequestMapping(path="/modificarafiliado", method=RequestMethod.POST)
+//	public ModelAndView amodificar(@ModelAttribute("afiliado")Afiliado amAfiliado){
+//		ModelMap modelo=new ModelMap();
+//		Afiliado afiliado=new Afiliado();
+//		Afiliado amfinan=amAfiliado;
+//		modelo.put("afil", amfinan);
+//		modelo.put("afiliado", afiliado);
+//		return new ModelAndView("modificarfinanciera",modelo);
+//	}
 	
-	@RequestMapping (path = "/amodificado", method = RequestMethod.POST)
-	public ModelAndView afiliadoModificado(@ModelAttribute("afiliado") Afiliado mafiliado) {
-		ModelMap modelo = new ModelMap();
-		List<Afiliado> miAfiliado = servicioAfiliado.buscarAfiliado(mafiliado);
-		Afiliado afiliado = new Afiliado();
+	@RequestMapping(path="/amodificado", method=RequestMethod.POST)
+	public ModelAndView financieramodificada(@ModelAttribute("afiliado")Afiliado mafiliado) {
+		ModelMap modelo=new ModelMap();
+		Afiliado afiliado=new Afiliado();
 		modelo.put("afiliado", afiliado);
 		
-		if(miAfiliado.size() != 0) {
-			modelo.put("error", "No se puede modificar el afiliado");
-			modelo.put("afiliado", mafiliado);
-			return new ModelAndView("modificarafiliado", modelo);
-		} else {
-			servicioAfiliado.modificarAfiliado(mafiliado);
-			List<Afiliado> lista = servicioAfiliado.consultarAfiliado();
-			modelo.put("afiliados", lista);
-			return new ModelAndView("listarafiliados", modelo);
+		if(servicioAfiliado.modificarAfiliado(mafiliado)==false) {
+		modelo.put("error","ya existe Afiliado");
+		modelo.put("afiliado", mafiliado);
+		return new ModelAndView ("modificarafiliado",modelo);
 		}
+		
+		List<Afiliado> lista =servicioAfiliado.consultarAfiliado();
+		modelo.put("afiliados", lista);		
+		return new ModelAndView("listarafiliados",modelo);	
+	
 	}
 	
 	@RequestMapping (path = "/eliminarafiliado", method = RequestMethod.POST)
 	public ModelAndView afiliadoEliminado(@ModelAttribute ("afiliado") Afiliado afiliaeliminar) {
 		ModelMap modelo = new ModelMap();
 		Afiliado afiliado = new Afiliado();
-		
-		//pregunto si el afiliado a eliminar tiene algun prestamo activo
-		boolean tienePrestamo = servicioPrestamo.consultarPrestamoActivoAfiliado(afiliaeliminar.getIdAfiliado());
-		
-		if(tienePrestamo == false) {
-			servicioAfiliado.eliminarAfiliado(afiliaeliminar);
-		}else {
-			modelo.put("erroreliminar", "El afiliado posee un prestamo activo y no se puede eliminar");
+
+		if(servicioAfiliado.eliminarAfiliado(afiliaeliminar) == false) {
+			modelo.put("error", "No se puede eliminar debido a que el afiliado tiene prestamo asignado");
 		}
 		
 		List<Afiliado> lista = servicioAfiliado.consultarAfiliado();
@@ -105,23 +111,6 @@ public class ControladorAfiliado {
 		return new ModelAndView("listarafiliados", modelo);
 	}
 	
-	/*@RequestMapping(path ="/confirmareliminarafiliado", method= RequestMethod.POST)
-	public ModelAndView confirmarEliminar(@ModelAttribute ("afiliado") Afiliado eafiliado) {
-		ModelMap modelo = new ModelMap();
-		List <Afiliado> miAfiliadoE = servicioAfiliado.buscarAfiliado(eafiliado);
-		Afiliado afiliado = new Afiliado();
-		modelo.put("afiliado", afiliado);
-		
-		if(miAfiliadoE.size() != 0) {
-			modelo.put("erroreliminar", "El afiliado posee un prestamo activo y no se puede eliminar");
-			return new ModelAndView("eliminarafiliado", modelo);
-		} else {
-			servicioAfiliado.eliminarAfiliado(eafiliado);
-			List<Afiliado> lista = servicioAfiliado.consultarAfiliado();
-			modelo.put("afiliados", lista);
-			return new ModelAndView("listarafiliados", modelo);
-		}
-	}*/
 
 	@RequestMapping (path = "/buscarafiliado", method = RequestMethod.POST)
 	public ModelAndView irABuscarAfiliado(Long dni) {
