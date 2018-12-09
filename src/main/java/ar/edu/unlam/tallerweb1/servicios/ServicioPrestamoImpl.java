@@ -163,42 +163,59 @@ public class ServicioPrestamoImpl implements ServicioPrestamo {
 		//busca financiera
 		Financiera miFinanciera=servicioFinancieraDao.buscarFinancieraPorNombre(nombreF);
 		//
-		Prestamo nprestamo = new Prestamo();
-		nprestamo.setValor(valor);
-		nprestamo.setCuotas(cuotas);
-		nprestamo.setInteres(0.35);
-		nprestamo.setEstado("activo");
-		nprestamo.setAfiliado(miAfiliado);
-		nprestamo.setDni(afiliado.getDni());
+		Prestamo newPrestamo = new Prestamo();
+		newPrestamo.setValor(valor);
+		newPrestamo.setCuotas(cuotas);
+		newPrestamo.setInteres(0.35);
+		newPrestamo.setEstado("activo");
+		newPrestamo.setAfiliado(miAfiliado);
+		newPrestamo.setDni(afiliado.getDni());
+		newPrestamo.setSaldo(valor);
 		//guarda la financiera del prestamo y modifica el monto capital
-		nprestamo.setFinanciera(miFinanciera);
+		newPrestamo.setFinanciera(miFinanciera);
 		Integer montoCapital=miFinanciera.getMontoCapital();
 		miFinanciera.setMontoCapital(montoCapital-valor);
 		servicioFinancieraDao.modificarFinanciera(miFinanciera);
 		//
-		double montoMensual = valor/cuotas;
-		double interesCuota = (valor*0.35)/12;
-		double total = montoMensual+interesCuota;
+		double cuota = fijarNumero(valor*((0.35*Math.pow(1.35, cuotas))/(Math.pow(1.35, cuotas)-1)),2);
+		double salini=valor;
+		double interes = fijarNumero(salini*0.35,2);
+		double amortizacion = fijarNumero(cuota-interes,2);
+		double salfin = salini-amortizacion;
+		
 		
 		Calendar fechven = Calendar.getInstance();
 		
-		List<Cuota> ncuotas = new ArrayList<Cuota>();	
+		List<Cuota> newCuotas = new ArrayList<Cuota>();	
 		
-		for(int i=0; i<nprestamo.getCuotas(); i++){
+		for(int i=0; i<newPrestamo.getCuotas(); i++){
 			
-			Cuota ncuota = new Cuota();
+			Cuota newCuota = new Cuota();
 			fechven.add(Calendar.DAY_OF_YEAR, 30);
-			ncuota.setMonto(montoMensual);
-			ncuota.setInteres(interesCuota);
-			ncuota.setMontoTotal(total);
-			ncuota.setEstado(false);
-			ncuota.setFechaDeVencimiento(fechven.getTime());
-			ncuota.setPrestamo(nprestamo);	
-			ncuotas.add(ncuota);
+			newCuota.setMonto(cuota);
+			newCuota.setInteres(interes);
+			newCuota.setMontoTotal(amortizacion);
+			newCuota.setEstado(false);
+			newCuota.setFechaDeVencimiento(fechven.getTime());
+			newCuota.setPrestamo(newPrestamo);	
+			newCuotas.add(newCuota);
+			
+			salini=salfin;
+			interes = fijarNumero(salini*0.35,2);
+			amortizacion = fijarNumero(cuota-interes,2);
+			salfin = fijarNumero(salini-amortizacion,2);
 			
 		}
-		servicioCuotaDao.insertarCuota(ncuotas);
+		servicioCuotaDao.insertarCuota(newCuotas);
 	}
+	
+	public static double fijarNumero(double numero, int digitos) {
+        double resultado;
+        resultado = numero * Math.pow(10, digitos);
+        resultado = Math.round(resultado);
+        resultado = resultado/Math.pow(10, digitos);
+        return resultado;
+    }
 
 
 }
