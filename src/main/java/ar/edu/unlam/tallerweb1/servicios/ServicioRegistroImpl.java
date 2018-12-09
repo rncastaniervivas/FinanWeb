@@ -8,11 +8,11 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ar.edu.unlam.tallerweb1.dao.CajaDao;
 import ar.edu.unlam.tallerweb1.dao.CuotaDao;
 import ar.edu.unlam.tallerweb1.dao.RegistroDao;
 import ar.edu.unlam.tallerweb1.modelo.Caja;
 import ar.edu.unlam.tallerweb1.modelo.Cuota;
-import ar.edu.unlam.tallerweb1.modelo.Prestamo;
 import ar.edu.unlam.tallerweb1.modelo.Registro;
 
 @Service("servicioRegistro")
@@ -24,6 +24,8 @@ public class ServicioRegistroImpl implements ServicioRegistro {
 	@Inject
 	private CuotaDao servicioCuotaDao;
 	
+	@Inject
+	private CajaDao servicioCajaDao;
 
 	@Override
 	public void insertarIngresos(Cuota cuotai ,Long idPrestamo, String nombreAfiliado) {
@@ -92,8 +94,9 @@ public class ServicioRegistroImpl implements ServicioRegistro {
 
 	@Override
 	public Double montoCaja() {
-		
-		return this.montoDeIngresos()-this.montoDeEgresos();
+		Caja caja = servicioCajaDao.consultarCaja();
+		double montoCaja = caja.getMonto();
+		return montoCaja + this.montoDeIngresos()-this.montoDeEgresos();
 	}
 
 	@Override

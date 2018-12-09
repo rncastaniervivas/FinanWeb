@@ -21,6 +21,7 @@ public class Prestamo {
 	private Long dni;
 	private double interes;
 	private String estado; // si el prestamo fue cancelado, refinanciado u otros.pen aprob ref
+	private double saldo; // esto se va ir modificando cuado page cuota o adelenta.
 	
 	@ManyToOne
 	private Financiera financiera;
@@ -97,6 +98,11 @@ public class Prestamo {
 	public void setPrestamoRef(Prestamo prestamoRef) {
 		this.prestamoRef = prestamoRef;
 	}
-
+	public double getSaldo() {
+		return saldo;
+	}
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;
+	}
 	
 }

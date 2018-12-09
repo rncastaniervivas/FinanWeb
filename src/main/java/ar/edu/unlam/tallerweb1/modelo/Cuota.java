@@ -15,9 +15,9 @@ public class Cuota {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCuota;
-	private double monto; //es el fraccionado del capital de prestamo en la cantidad de cuotas que fue establecido.
-	private double montoTotal; // capital fraccionado + interes faccionado.
-	private double interes; // es el nomto del interes de prestamo pero fraccionado en cuotas.
+	private double monto; //pago
+	private double montoTotal; // amortizacion.
+	private double interes; // interes.
 	private boolean estado;
 	private Date fechaDePago;
 	private Date fechaDeVencimiento;
@@ -100,6 +100,5 @@ public class Cuota {
 	public void setCubierto(boolean cubierto) {
 		this.cubierto = cubierto;
 	}
-
 	
 }

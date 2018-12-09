@@ -75,9 +75,6 @@
 					<form action= "financiera" method="POST">
 						<button type ="submit" class="btn btn-info">Listado de Financieras</button>
 					</form>
-			</div>			
-			<div>
-				<h3>Cuotas</h3>		
 			</div>
 			<div>
 				<h3>Caja</h3>
