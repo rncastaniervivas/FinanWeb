@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 import java.util.List;
 
+import ar.edu.unlam.tallerweb1.modelo.Confirmpagocuota;
 import ar.edu.unlam.tallerweb1.modelo.Cuota;
 import ar.edu.unlam.tallerweb1.modelo.Financiera;
 
@@ -24,5 +25,7 @@ public interface ServicioCuota {
 	Cuota consultarCuotaporId(Long idCuota);
 
 	List<Cuota> consultarCuotaImpagas(Long idPrestamo);
+
+	void pagarCuota(Confirmpagocuota confirm);
 
 }

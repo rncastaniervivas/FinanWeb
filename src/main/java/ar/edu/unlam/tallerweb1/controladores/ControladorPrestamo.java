@@ -114,33 +114,7 @@ public class ControladorPrestamo {
 	@RequestMapping(path = "/finalizarpagocuota", method=RequestMethod.POST)
 	public ModelAndView finalizarpagocuota(@ModelAttribute("confirm") Confirmpagocuota confirm) {
 		
-		List<Long> idCuotas = new ArrayList<Long>();
-		
-		Cuota cuotaitem= new Cuota();
-		
-		for(String item: confirm.getCheck()) {
-			idCuotas.add(Long.parseLong(item));
-			
-		}
-		
-		for(Long item2: idCuotas) {
-			cuotaitem=servicioCuota.consultarCuotaporId(item2);
-			cuotaitem.setEstado(true);
-			cuotaitem.setCubierto(true);
-			cuotaitem.setFechaDePago(new Date());
-			servicioCuota.modificarCubierto(cuotaitem);
-		}
-		///registra pago
-		String doc= Long.toString(confirm.getDni());
-		servicioRegistro.insertarIngresos(cuotaitem, confirm.getIdPrestamo(), doc);
-		//
-		Prestamo prestamo0=servicioPrestamo.consultarUnPrestamo(confirm.getIdPrestamo());
-		
-		List<Cuota> cuotaspagas=servicioCuota.consultarCuotaPagada(prestamo0.getIdPrestamo());
-		if(cuotaspagas.size()==prestamo0.getCuotas()) {
-			prestamo0.setEstado("pagado");
-		}
-		servicioPrestamo.modificarPrestamo(prestamo0);
+		servicioCuota.pagarCuota(confirm);
 		return new ModelAndView("redirect:/listarprestamos");
 	}
 		@RequestMapping(path = "/totalapagarcuota", method=RequestMethod.POST)
