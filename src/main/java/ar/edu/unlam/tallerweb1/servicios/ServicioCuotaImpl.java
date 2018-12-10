@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -9,12 +10,8 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ar.edu.unlam.tallerweb1.dao.CuotaDao;
-import ar.edu.unlam.tallerweb1.dao.PrestamoDao;
-import ar.edu.unlam.tallerweb1.modelo.Confirmpagocuota;
-import ar.edu.unlam.tallerweb1.modelo.Cuota;
-import ar.edu.unlam.tallerweb1.modelo.Financiera;
-import ar.edu.unlam.tallerweb1.modelo.Prestamo;
+import ar.edu.unlam.tallerweb1.dao.*;
+import ar.edu.unlam.tallerweb1.modelo.*;
 
 @Service("servicioCuota")
 @Transactional
@@ -23,8 +20,13 @@ public class ServicioCuotaImpl implements ServicioCuota{
 	@Inject
 	private CuotaDao servicioCuotaDao;
 	@Inject
+	private ServicioRegistro servicioRegistro;
+	@Inject
 	private PrestamoDao servicioPrestamoDao;
-	
+	@Inject
+	private AfiliadoDao servicioAfiliadoDao;
+	@Inject
+	private FinancieraDao servicioFinancieraDao;
 	@Override
 	public Cuota consultarCuotaporId(Long idCuota){
 		return servicioCuotaDao.consultarCuotaporId(idCuota);
@@ -44,7 +46,57 @@ public class ServicioCuotaImpl implements ServicioCuota{
 			idCuotas.add(Long.parseLong(item));
 			
 		}
-		
+		if(idCuotas.size()>1) {
+			Afiliado miAfiliado = servicioAfiliadoDao.consultarAfiliadoDni(confirm.getDni());
+			//busca financiera
+			Prestamo miPrestamo=servicioPrestamoDao.consultarUnPrestamo(confirm.getIdPrestamo());
+			Financiera miFinanciera=miPrestamo.getFinanciera();
+			//
+//			Prestamo miPrestamo = new Prestamo();
+//			miPrestamo.setValor(valor);
+//			miPrestamo.setCuotas(cuotas);
+//			miPrestamo.setInteres(0.35);
+//			miPrestamo.setEstado("activo");
+//			miPrestamo.setAfiliado(miAfiliado);
+//			miPrestamo.setDni(afiliado.getDni());
+//			miPrestamo.setSaldo(valor);
+//			//guarda la financiera del prestamo y modifica el monto capital
+//			miPrestamo.setFinanciera(miFinanciera);
+			Integer montoCapital=miFinanciera.getMontoCapital();
+			miFinanciera.setMontoCapital(montoCapital-valor);
+			servicioFinancieraDao.modificarFinanciera(miFinanciera);
+			//
+			double cuota = fijarNumero(valor*((0.35*Math.pow(1.35, cuotas))/(Math.pow(1.35, cuotas)-1)),2);
+			double salini=valor;
+			double interes = fijarNumero(salini*0.35,2);
+			double amortizacion = fijarNumero(cuota-interes,2);
+			double salfin = salini-amortizacion;
+			
+			
+			Calendar fechven = Calendar.getInstance();
+			
+			List<Cuota> newCuotas = new ArrayList<Cuota>();	
+			
+			for(int i=0; i<miPrestamo.getCuotas(); i++){
+				
+				Cuota newCuota = new Cuota();
+				fechven.add(Calendar.DAY_OF_YEAR, 30);
+				newCuota.setMonto(cuota);
+				newCuota.setInteres(interes);
+				newCuota.setMontoTotal(amortizacion);
+				newCuota.setEstado(false);
+				newCuota.setFechaDeVencimiento(fechven.getTime());
+				newCuota.setPrestamo(miPrestamo);	
+				newCuotas.add(newCuota);
+				
+				salini=salfin;
+				interes = fijarNumero(salini*0.35,2);
+				amortizacion = fijarNumero(cuota-interes,2);
+				salfin = fijarNumero(salini-amortizacion,2);
+				
+			}
+			servicioCuotaDao.insertarCuota(newCuotas);
+		}
 		for(Long item2: idCuotas) {
 			cuotaitem=servicioCuotaDao.consultarCuotaporId(item2);
 			cuotaitem.setEstado(true);
@@ -53,8 +105,8 @@ public class ServicioCuotaImpl implements ServicioCuota{
 			servicioCuotaDao.modificarElCubierto(cuotaitem);
 		}
 		///registra pago
-//		String doc= Long.toString(confirm.getDni());
-//		servicioRegistroDao.insertarIngresos(cuotaitem, confirm.getIdPrestamo(), doc);
+		String doc= Long.toString(confirm.getDni());
+		servicioRegistro.insertarIngresos(cuotaitem, confirm.getIdPrestamo(), doc);
 		//
 		Prestamo prestamo0=servicioPrestamoDao.consultarUnPrestamo(confirm.getIdPrestamo());
 		
@@ -94,9 +146,7 @@ public class ServicioCuotaImpl implements ServicioCuota{
 		servicioCuotaDao.buscarCuota(cuota);
 		return null;
 	}
-	
-	
-	
+		
 	@Override
 	public List<Cuota> consultarCuotaDelUltimoPrestamo() {
 		return servicioCuotaDao.consultarCuotaDelUltimoPrestamo();
@@ -107,5 +157,11 @@ public class ServicioCuotaImpl implements ServicioCuota{
 		return servicioCuotaDao.consultarCuotaImpagas(idPrestamo);
 	}
 
-	
+	public static double fijarNumero(double numero, int digitos) {
+        double resultado;
+        resultado = numero * Math.pow(10, digitos);
+        resultado = Math.round(resultado);
+        resultado = resultado/Math.pow(10, digitos);
+        return resultado;
+    }	
 }
