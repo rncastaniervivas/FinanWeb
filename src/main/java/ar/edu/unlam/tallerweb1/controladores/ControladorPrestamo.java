@@ -110,13 +110,14 @@ public class ControladorPrestamo {
 		return new ModelAndView("confirmarpagocuota",modelo);
 		
 	}
-
+///////////////////////////////////////////////////////////////7
 	@RequestMapping(path = "/finalizarpagocuota", method=RequestMethod.POST)
 	public ModelAndView finalizarpagocuota(@ModelAttribute("confirm") Confirmpagocuota confirm) {
 		
 		servicioCuota.pagarCuota(confirm);
 		return new ModelAndView("redirect:/listarprestamos");
 	}
+	
 		@RequestMapping(path = "/totalapagarcuota", method=RequestMethod.POST)
 		public ModelAndView totalapagarcuota(@ModelAttribute("confirm") Confirmpagocuota confirm) {
 			

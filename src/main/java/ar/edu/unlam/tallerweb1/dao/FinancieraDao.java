@@ -16,5 +16,7 @@ public interface FinancieraDao {
 	void modificarFinanciera(Financiera financiera);
 	
 	Financiera buscarFinancieraPorNombre(String nombreF);
+
+	Financiera buscarFinancieraPorIdPrestamo(Long idPrestamo);
 	
 }
