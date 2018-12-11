@@ -110,11 +110,18 @@ public class ControladorPrestamo {
 		return new ModelAndView("confirmarpagocuota",modelo);
 		
 	}
+	
 ///////////////////////////////////////////////////////////////7
+	@RequestMapping(path = "/pagarporvalor", method=RequestMethod.POST)
+	public ModelAndView pagarporvalor(Long pago) {
+		
+		boolean result=servicioCuota.pagarporinput(pago);
+		return new ModelAndView("redirect:/listarprestamos");
+	}
 	@RequestMapping(path = "/finalizarpagocuota", method=RequestMethod.POST)
 	public ModelAndView finalizarpagocuota(@ModelAttribute("confirm") Confirmpagocuota confirm) {
 		
-		servicioCuota.pagarCuota(confirm);
+		servicioCuota.pagarCuotaSeleccionada(confirm);
 		return new ModelAndView("redirect:/listarprestamos");
 	}
 	

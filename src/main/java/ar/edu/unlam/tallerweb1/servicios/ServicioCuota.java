@@ -26,6 +26,8 @@ public interface ServicioCuota {
 
 	List<Cuota> consultarCuotaImpagas(Long idPrestamo);
 
-	void pagarCuota(Confirmpagocuota confirm);
+	void pagarCuotaSeleccionada(Confirmpagocuota confirm);
+
+	boolean pagarporinput(Long pago);
 
 }
