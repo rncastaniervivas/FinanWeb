@@ -134,31 +134,20 @@ public class ServicioCuotaImpl implements ServicioCuota{
 		}
 		if(saldo>pago1) {			
 			saldo-=pago1;
-			Afiliado miAfiliado = servicioAfiliadoDao.consultarAfiliadoDni(prestamo.getDni());
-			//busca financiera
-//			Financiera miFinanciera=servicioFinancieraDao.buscarFinancieraPorNombre(nombreF);
-			//
 			prestamo.setSaldo(saldo);
-			//guarda la financiera del prestamo y modifica el monto capital
-//			Integer montoCapital=miFinanciera.getMontoCapital();
-//			miFinanciera.setMontoCapital(montoCapital-valor);
-//			servicioFinancieraDao.modificarFinanciera(miFinanciera);
-			//
-			double cuota = fijarNumero(prestamo.getValor()*((0.35*Math.pow(1.35, prestamo.getCuotas()))/(Math.pow(1.35, prestamo.getCuotas())-1)),2);
-			double salini=prestamo.getSaldo();
-			double interes = fijarNumero(salini*0.35,2);
-			double amortizacion = fijarNumero(cuota-interes,2);
-//			double salfin = salini-amortizacion;	
+			
+			double interes=0.35;
+			double meses=(double)listCuotas.size();
+			double v=(1+(interes/12));
+			double t=(-(meses/12)*12);
+			double cuota=(saldo*(interes/12))/(1-Math.pow(v, t));
+			
+			cuota=Math.round(cuota*100d)/100d;//redondear a dos decimales
 			
 			for(Cuota cuotaitem:listCuotas){
+				cuotaitem.setInteres(cuota*0.35);
 				cuotaitem.setMonto(cuota);
-				cuotaitem.setInteres(interes);
-				cuotaitem.setMontoTotal(amortizacion);
-				cuotaitem.setPrestamo(prestamo);
-//				salini=salfin;
-				interes = fijarNumero(salini*0.35,2);
-				amortizacion = fijarNumero(cuota-interes,2);
-//				salfin = fijarNumero(salini-amortizacion,2);
+				cuotaitem.setMontoTotal(cuota-cuotaitem.getInteres());//amortizacion
 				
 				servicioCuotaDao.modificarElCubierto(cuotaitem);
 			}
