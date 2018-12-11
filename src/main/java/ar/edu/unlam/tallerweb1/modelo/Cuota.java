@@ -15,9 +15,9 @@ public class Cuota {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCuota;
-	private double monto; //pago
-	private double montoTotal; // amortizacion.
-	private double interes; // interes.
+	private double monto; //funcion pago de excel
+	private double montoTotal; // amortizacion(monto-intereses).
+	private double interes; // interes(prestamo.saldo * 0.35).
 	private boolean estado;
 	private Date fechaDePago;
 	private Date fechaDeVencimiento;

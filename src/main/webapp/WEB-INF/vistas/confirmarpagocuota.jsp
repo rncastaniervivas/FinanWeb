@@ -48,7 +48,7 @@
 				<form:form role="form" action="pagarporvalor" method="Post" modelAttribute="prestamo">
 					<div class="form-group">
 						<label>Insertar valor a pagar:</label>
-						<form:input path="idPrestamo" id="idPrestamo" type="text" class="form-control" value="${prestamo.idPrestamo}"/>
+						<form:input path="idPrestamo" id="idPrestamo" type="text" class="form-control" value="${prestamo.idPrestamo}" style="display:none"/>
 						<form:input path="saldo" id="saldo" type="text" class="form-control" value="0.0" />
 					</div>
 					<div>
