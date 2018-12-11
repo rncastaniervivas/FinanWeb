@@ -37,19 +37,19 @@
 				<span class="input-group-addon">Valor Total del prestamo:</span>
 				<li class="list-group-item">${prestamo.valor}</li>
 			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon">Valor restante a pagar:</span>
+				<li class="list-group-item">${prestamo.saldo}</li>
+			</div>
 		</ul>
 	</div>
-	<form:form action="totalapagarcuota" modelAttribute="confirm"
-		method="POST" role="form">
-		<div class="container">
-			<h1 class="text-center">LISTA DE CUOTAS</h1>
+	<h1 class="text-center">LISTA DE CUOTAS</h1>
 			<div>
-				<form:form role="form" action="pagarporvalor" method="Post"
-					modelAttribute="financiera">
+				<form:form role="form" action="pagarporvalor" method="Post" modelAttribute="prestamo">
 					<div class="form-group">
 						<label>Insertar valor a pagar:</label>
-						<form:input path="pago" id="pago" type="text" class="form-control" />
-						<form:input path="idPrestamo" id="idPrestamo" type="text" class="form-control" value="${prestamo.idPrestamo} }"/>
+						<form:input path="idPrestamo" id="idPrestamo" type="text" class="form-control" value="${prestamo.idPrestamo}"/>
+						<form:input path="saldo" id="saldo" type="text" class="form-control" value="0.0" />
 					</div>
 					<div>
 						<button type="submit" class="btn btn-success">Pagar</button>
@@ -58,6 +58,9 @@
 
 				</form:form>
 			</div>
+	<form:form action="totalapagarcuota" modelAttribute="confirm"
+		method="POST" role="form">
+		<div class="container">
 			<table class="table">
 				<thead class="thead-light">
 					<tr>

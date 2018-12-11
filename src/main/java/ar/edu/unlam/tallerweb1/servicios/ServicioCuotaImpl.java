@@ -104,25 +104,18 @@ public class ServicioCuotaImpl implements ServicioCuota{
 		return servicioCuotaDao.consultarCuotaImpagas(idPrestamo);
 	}
 
-	public static double fijarNumero(double numero, int digitos) {
-        double resultado;
-        resultado = numero * Math.pow(10, digitos);
-        resultado = Math.round(resultado);
-        resultado = resultado/Math.pow(10, digitos);
-        return resultado;
-    }
 
 	@Override
-	public boolean pagarporinput(Integer pago, Long idPrestamo) {
+	public boolean pagarporinput(double pago, Long idPrestamo) {
 		Prestamo prestamo=servicioPrestamoDao.consultarUnPrestamo(idPrestamo);
 		
-		List<Cuota> cuotas=servicioCuotaDao.consultarCuotaImpagas(idPrestamo);
+		List<Cuota> listCuotas=servicioCuotaDao.consultarCuotaImpagas(idPrestamo);
 		
 		double saldo=prestamo.getSaldo();
 		
-		double pago1=pago.doubleValue();
+		double pago1=pago;
 		
-		String doc= Long.toString(prestamo.getDni());
+//		String doc= Long.toString(prestamo.getDni());
 //				servicioRegistro.insertarIngresos(cuotaitem, confirm.getIdPrestamo(), doc);
 		
 		if(saldo<pago1) {
@@ -131,7 +124,7 @@ public class ServicioCuotaImpl implements ServicioCuota{
 		if(saldo==pago1) {
 			prestamo.setSaldo(0.0);
 			prestamo.setEstado("pagado");
-			for(Cuota cuotaitem: cuotas) {
+			for(Cuota cuotaitem: listCuotas) {
 				cuotaitem.setEstado(true);
 				cuotaitem.setCubierto(true);
 				cuotaitem.setFechaDePago(new Date());
@@ -141,10 +134,32 @@ public class ServicioCuotaImpl implements ServicioCuota{
 		}
 		if(saldo>pago1) {			
 			saldo-=pago1;
-			for(Cuota cuotaitem: cuotas) {
-				cuotaitem.setEstado(true);
-				cuotaitem.setCubierto(true);
-				cuotaitem.setFechaDePago(new Date());
+			Afiliado miAfiliado = servicioAfiliadoDao.consultarAfiliadoDni(prestamo.getDni());
+			//busca financiera
+//			Financiera miFinanciera=servicioFinancieraDao.buscarFinancieraPorNombre(nombreF);
+			//
+			prestamo.setSaldo(saldo);
+			//guarda la financiera del prestamo y modifica el monto capital
+//			Integer montoCapital=miFinanciera.getMontoCapital();
+//			miFinanciera.setMontoCapital(montoCapital-valor);
+//			servicioFinancieraDao.modificarFinanciera(miFinanciera);
+			//
+			double cuota = fijarNumero(prestamo.getValor()*((0.35*Math.pow(1.35, prestamo.getCuotas()))/(Math.pow(1.35, prestamo.getCuotas())-1)),2);
+			double salini=prestamo.getSaldo();
+			double interes = fijarNumero(salini*0.35,2);
+			double amortizacion = fijarNumero(cuota-interes,2);
+//			double salfin = salini-amortizacion;	
+			
+			for(Cuota cuotaitem:listCuotas){
+				cuotaitem.setMonto(cuota);
+				cuotaitem.setInteres(interes);
+				cuotaitem.setMontoTotal(amortizacion);
+				cuotaitem.setPrestamo(prestamo);
+//				salini=salfin;
+				interes = fijarNumero(salini*0.35,2);
+				amortizacion = fijarNumero(cuota-interes,2);
+//				salfin = fijarNumero(salini-amortizacion,2);
+				
 				servicioCuotaDao.modificarElCubierto(cuotaitem);
 			}
 			return true;
@@ -152,6 +167,14 @@ public class ServicioCuotaImpl implements ServicioCuota{
 		
 		return false;
 	}
+
+	public static double fijarNumero(double numero, int digitos) {
+        double resultado;
+        resultado = numero * Math.pow(10, digitos);
+        resultado = Math.round(resultado);
+        resultado = resultado/Math.pow(10, digitos);
+        return resultado;
+    }
 
 	
 }
