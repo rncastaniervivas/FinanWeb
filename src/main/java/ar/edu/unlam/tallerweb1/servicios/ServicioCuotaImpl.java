@@ -113,8 +113,45 @@ public class ServicioCuotaImpl implements ServicioCuota{
     }
 
 	@Override
-	public boolean pagarporinput(Long pago) {
-		// TODO Auto-generated method stub
+	public boolean pagarporinput(Integer pago, Long idPrestamo) {
+		Prestamo prestamo=servicioPrestamoDao.consultarUnPrestamo(idPrestamo);
+		
+		List<Cuota> cuotas=servicioCuotaDao.consultarCuotaImpagas(idPrestamo);
+		
+		double saldo=prestamo.getSaldo();
+		
+		double pago1=pago.doubleValue();
+		
+		String doc= Long.toString(prestamo.getDni());
+//				servicioRegistro.insertarIngresos(cuotaitem, confirm.getIdPrestamo(), doc);
+		
+		if(saldo<pago1) {
+			return false;
+		}
+		if(saldo==pago1) {
+			prestamo.setSaldo(0.0);
+			prestamo.setEstado("pagado");
+			for(Cuota cuotaitem: cuotas) {
+				cuotaitem.setEstado(true);
+				cuotaitem.setCubierto(true);
+				cuotaitem.setFechaDePago(new Date());
+				servicioCuotaDao.modificarElCubierto(cuotaitem);			
+			}
+			return true;
+		}
+		if(saldo>pago1) {			
+			saldo-=pago1;
+			for(Cuota cuotaitem: cuotas) {
+				cuotaitem.setEstado(true);
+				cuotaitem.setCubierto(true);
+				cuotaitem.setFechaDePago(new Date());
+				servicioCuotaDao.modificarElCubierto(cuotaitem);
+			}
+			return true;
+		}
+		
 		return false;
-	}	
+	}
+
+	
 }

@@ -49,6 +49,7 @@
 					<div class="form-group">
 						<label>Insertar valor a pagar:</label>
 						<form:input path="pago" id="pago" type="text" class="form-control" />
+						<form:input path="idPrestamo" id="idPrestamo" type="text" class="form-control" value="${prestamo.idPrestamo} }"/>
 					</div>
 					<div>
 						<button type="submit" class="btn btn-success">Pagar</button>

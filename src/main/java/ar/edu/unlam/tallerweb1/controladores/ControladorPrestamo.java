@@ -113,9 +113,9 @@ public class ControladorPrestamo {
 	
 ///////////////////////////////////////////////////////////////7
 	@RequestMapping(path = "/pagarporvalor", method=RequestMethod.POST)
-	public ModelAndView pagarporvalor(Long pago) {
+	public ModelAndView pagarporvalor(Integer pago,Long idPrestamo) {
 		
-		boolean result=servicioCuota.pagarporinput(pago);
+		boolean result=servicioCuota.pagarporinput(pago,idPrestamo);
 		return new ModelAndView("redirect:/listarprestamos");
 	}
 	@RequestMapping(path = "/finalizarpagocuota", method=RequestMethod.POST)

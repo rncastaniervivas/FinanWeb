@@ -28,6 +28,6 @@ public interface ServicioCuota {
 
 	void pagarCuotaSeleccionada(Confirmpagocuota confirm);
 
-	boolean pagarporinput(Long pago);
+	boolean pagarporinput(Integer pago, Long idPrestamo);
 
 }
