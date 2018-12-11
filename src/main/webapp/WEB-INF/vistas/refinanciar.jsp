@@ -25,7 +25,7 @@
 			    <tr class="bg-danger">
 			      <th scope="col">Nro Cuota</th>
 			      <th scope="col">Fecha Vencimiento</th>
-			      <th scope="col">Monto Total</th>
+			      <th scope="col">Valor de cuota + interez</th>
 			    </tr>
 			  </thead>
 			  <!-- listar todos los afiados -->
@@ -34,7 +34,7 @@
 				    <tr class="table-danger">
 				      <th scope="row">${cuota.idCuota}</th>
 				      <td>${cuota.fechaDeVencimiento}</td>
-				      <td>${cuota.montoTotal}</td>
+				      <td>${cuota.monto}</td>
 				    </tr>
 				  </tbody>
 			  </c:forEach>
@@ -44,7 +44,7 @@
 		<div class="container">
 			<form method="POST">
 			  <input type="hidden" name="dni" value="${afiliado.dni}">
-			  <input type="hidden" name="idPrestamoRef" value="${idPrestamoRef}">
+			  <input type="hidden" name="idPrestamoRef" value="${prestamoARef.idPrestamo}">
 			  <div class="form-row">
 			    <div class="form-group col-md-6">
 			      <label >Nombre</label>
@@ -58,8 +58,8 @@
 			  <div class="form-row">
 			    <div class="form-group col-md-6">
 			      <label for="inputCity">Monto Total A Refinanciar</label>
-			      <input type="hidden" name="newCapital" value="${MontoARefinanciar}">
-			      <input type="text"  value="${MontoARefinanciar}" class="form-control" disabled>                      			      
+			      <!--input type="hidden" name="newCapital" value="${prestamoARef.saldo}"-->
+			      <input type="text"  value="${prestamoARef.saldo}" class="form-control" disabled>                      			      
 			    </div>
 			    <div class="form-group col-md-4">
 			      <label for="inputState">Cuotas</label>
@@ -70,14 +70,14 @@
 			      <select>
 			    </div>
 			    <div class="form-group row">
-					<label class="col-lg-2 control-label">Interes Extra (anual)</label>
+					<label class="col-lg-2 control-label">Nuevo interes anual</label>
 					<div class="col-lg-2 control-label">
-					  	<input name="interes" type="text" id="interes" value="0.05" class="form-control">
+					  	<input type="text" id="interes" value="35.5%" class="form-control" disabled>
 					</div>
 				</div>
 			  </div>
 			  <div class="form-group col-md-6">
-			  	<button type="submit" class="btn btn-primary" formaction="hacer-refinanciacion">Aceptar</button>
+			  	<button type="submit" class="btn btn-primary" formaction="verifica-refinanciacion">Aceptar</button>
 			  </div>
 			<form>
 		</div>

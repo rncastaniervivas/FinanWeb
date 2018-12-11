@@ -143,8 +143,9 @@ public class ControladorPrestamo {
 		servicioPrestamo.modificarPrestamo(prestamo0);
 		return new ModelAndView("redirect:/listarprestamos");
 	}
-		@RequestMapping(path = "/totalapagarcuota", method=RequestMethod.POST)
-		public ModelAndView totalapagarcuota(@ModelAttribute("confirm") Confirmpagocuota confirm) {
+	
+	@RequestMapping(path = "/totalapagarcuota", method=RequestMethod.POST)
+	public ModelAndView totalapagarcuota(@ModelAttribute("confirm") Confirmpagocuota confirm) {
 			
 		ModelMap modelo = new ModelMap();
 		
@@ -191,23 +192,37 @@ public class ControladorPrestamo {
 			return new ModelAndView("refinanciarerror",modelo);
 		}else{
 			List<Cuota> impagas=servicioRefinanciar.consultaCuota(idPrestamo);
-			Double montoTotalARefinanciar = servicioRefinanciar.montoARefinanciar(idPrestamo);
+			//Double montoTotalARefinanciar = servicioRefinanciar.montoARefinanciar(idPrestamo);
 			int cuotasRestante = impagas.size();
 			
 		    modelo.put("afiliado", afiliado);
-		    modelo.put("idPrestamoRef", idPrestamo);
+		    modelo.put("prestamoARef", prestamo);
 			modelo.put("cuotas", impagas);	
-			modelo.put("MontoARefinanciar", montoTotalARefinanciar);
+			//modelo.put("MontoARefinanciar", montoTotalARefinanciar);
 			modelo.put("cuotasRestante",cuotasRestante);
 			return new ModelAndView("refinanciar",modelo);
 		}
 	}
-
-	@RequestMapping(path = "/hacer-refinanciacion", method = RequestMethod.POST)
-	public ModelAndView refinanciarAlta(Long dni, Long idPrestamoRef, double newCapital, Integer cuotas, double interes) {
+	
+	@RequestMapping(path = "/verifica-refinanciacion", method = RequestMethod.POST)
+	public ModelAndView verificarRefinanciacion(Long dni, Long idPrestamoRef, Integer cuotas) {
 		ModelMap modelo = new ModelMap();
 		
-		servicioRefinanciar.refinanciar(dni, idPrestamoRef, newCapital, cuotas, interes);
+		Afiliado afiliado = servicioAfiliado.consultarAfiliadoDni(dni);
+		Prestamo prestamoARef = servicioPrestamo.consultarUnPrestamo(idPrestamoRef);
+		List<Cuota> listCuotas = servicioRefinanciar.generarCuotas(idPrestamoRef,cuotas);
+		
+		modelo.put("prestamoARef", prestamoARef);
+		modelo.put("afiliado", afiliado);
+		modelo.put("cuotas", listCuotas);
+		return new ModelAndView("listarcuotas",modelo);
+	}
+
+	@RequestMapping(path = "/hacer-refinanciacion", method = RequestMethod.POST)
+	public ModelAndView refinanciarAlta(Long dni, Long idPrestamoARef, Integer cuotas) {
+		ModelMap modelo = new ModelMap();
+		
+		servicioRefinanciar.refinanciar(dni, idPrestamoARef, cuotas);
 		
 		List<Prestamo> prestamos= servicioPrestamo.consultarPrestamo(dni);
 		modelo.put("prestamos", prestamos);

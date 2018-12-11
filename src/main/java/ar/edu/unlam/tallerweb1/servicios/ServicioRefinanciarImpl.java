@@ -46,9 +46,9 @@ public class ServicioRefinanciarImpl implements ServicioRefinanciar{
 	}
 
 	@Override
-	public void refinanciar(Long dni, Long idPrestamoRef, double newCapital, Integer cuotas, double interes) {
+	public void refinanciar(Long dni, Long idPrestamoRef, Integer cuotas) {
 		
-		Integer nCapital = (int)newCapital;
+		//Integer nCapital = (int)newCapital;
 
 		// Se modificar la clasificacion del Afiliado (Perdida).
 		Afiliado afiliado = servicioAfiliadoDao.consultarAfiliadoDni(dni);
@@ -56,44 +56,108 @@ public class ServicioRefinanciarImpl implements ServicioRefinanciar{
 		servicioAfiliadoDao.modificarAfiliado(afiliado);
 
 		// aqui tiene que estar el modificar el estado del prestamo (Refinanciado).
-		Prestamo prestamo = servicioPrestamoDao.consultarUnPrestamo(idPrestamoRef);
-		prestamo.setEstado("refinanciado");
-		servicioPrestamoDao.modificarPrestamo(prestamo);
+		Prestamo prestamoARef = servicioPrestamoDao.consultarUnPrestamo(idPrestamoRef);
+		prestamoARef.setEstado("refinanciado");
+		servicioPrestamoDao.modificarPrestamo(prestamoARef);
 		
-		Prestamo prestamoRef = new Prestamo();
-		prestamoRef.setValor(nCapital);
-		prestamoRef.setCuotas(cuotas);
-		prestamoRef.setInteres(interes);
-		prestamoRef.setAfiliado(afiliado);
-		prestamoRef.setPrestamoRef(prestamo);
-		prestamoRef.setEstado("activo");
-		prestamoRef.setDni(afiliado.getDni());
-		//prestamoRef.setCuota(cuotasRef);
+		double newInteres = 0.355;
+		int valor = (int) prestamoARef.getSaldo();
 		
-		// Creo un nuevo prestamo con sus respectivos cuotas.
+		Prestamo newPrestamo = new Prestamo();
+		newPrestamo.setValor(valor);
+		newPrestamo.setCuotas(cuotas);
+		newPrestamo.setInteres(newInteres);
+		newPrestamo.setEstado("activo");
+		newPrestamo.setAfiliado(afiliado);
+		newPrestamo.setDni(afiliado.getDni());
+		newPrestamo.setSaldo(valor);
+		//guarda la financiera del prestamo y modifica el monto capital
+//		newPrestamo.setFinanciera(miFinanciera);
+//		Integer montoCapital=miFinanciera.getMontoCapital();
+//		miFinanciera.setMontoCapital(montoCapital-valor);
+//		servicioFinancieraDao.modificarFinanciera(miFinanciera);
+		//
+		
+		
+		double cuota = fijarNumero(valor*((newInteres*Math.pow((1+newInteres), cuotas))/(Math.pow((1+newInteres), cuotas)-1)),2);
+		double salini=valor;
+		double interes = fijarNumero(salini*newInteres,2);
+		double amortizacion = fijarNumero(cuota-interes,2);
+		double salfin = salini-amortizacion;
+		
+		
 		Calendar fechven = Calendar.getInstance();
 		
-		List<Cuota> cuotasRef = new ArrayList<Cuota>();
+		List<Cuota> newCuotas = new ArrayList<Cuota>();	
 		
-		double montoMensual = nCapital/cuotas;
-		double valorInteres = (nCapital*interes)/12;
-		double total = montoMensual + valorInteres;
+		for(int i=0; i<newPrestamo.getCuotas(); i++){
+			
+			Cuota newCuota = new Cuota();
+			fechven.add(Calendar.DAY_OF_YEAR, 30);
+			newCuota.setMonto(cuota);
+			newCuota.setInteres(interes);
+			newCuota.setMontoTotal(amortizacion);
+			newCuota.setEstado(false);
+			newCuota.setFechaDeVencimiento(fechven.getTime());
+			newCuota.setPrestamo(newPrestamo);	
+			newCuotas.add(newCuota);
+			
+			salini=salfin;
+			interes = fijarNumero(salini*newInteres,2);
+			amortizacion = fijarNumero(cuota-interes,2);
+			salfin = fijarNumero(salini-amortizacion,2);
+			
+		}
+		servicioCuotaDao.insertarCuota(newCuotas);
+	}
+
+	@Override
+	public List<Cuota> generarCuotas(Long idPrestamoRef, Integer cuotas) {
+		Prestamo prestamoARef = servicioPrestamoDao.consultarUnPrestamo(idPrestamoRef);
+		List<Cuota> newCuotas = new ArrayList<Cuota>();
+		
+		double newInteres = 0.355;
+		double valor = prestamoARef.getSaldo();
+		
+		double cuota = fijarNumero(valor*((newInteres*Math.pow((1+newInteres), cuotas))/(Math.pow((1+newInteres), cuotas)-1)),2);
+		double salini = valor;
+		double interes = fijarNumero(salini*newInteres,2);
+		double amortizacion = fijarNumero(cuota-interes,2);
+		double salfin = salini-amortizacion;
+		
+		
+		Calendar fechven = Calendar.getInstance();	
 		
 		for(int i=0; i<cuotas; i++){
+			
+			Cuota newCuota = new Cuota();
 			fechven.add(Calendar.DAY_OF_YEAR, 30);
+			newCuota.setIdCuota((long) (i+1));
+			newCuota.setMonto(cuota);
+			newCuota.setInteres(interes);
+			newCuota.setMontoTotal(amortizacion);
+			newCuota.setEstado(false);
+			newCuota.setFechaDeVencimiento(fechven.getTime());
+			//newCuota.setPrestamo(newPrestamo);	
+			newCuotas.add(newCuota);
 			
-			Cuota ncuota = new Cuota();
+			salini=salfin;
+			interes = fijarNumero(salini*newInteres,2);
+			amortizacion = fijarNumero(cuota-interes,2);
+			salfin = fijarNumero(salini-amortizacion,2);
 			
-			ncuota.setMonto(montoMensual);
-			ncuota.setInteres(valorInteres);
-			ncuota.setMontoTotal(total);
-			ncuota.setEstado(false);
-			ncuota.setFechaDeVencimiento(fechven.getTime());
-			ncuota.setPrestamo(prestamoRef);
-
-			cuotasRef.add(ncuota);
 		}
-		servicioCuotaDao.insertarCuota(cuotasRef);
+		
+		return newCuotas;
 	}
+	
+	// esto es para hacer el truncamiento de un valor con decimal
+	public static double fijarNumero(double numero, int digitos) {
+        double resultado;
+        resultado = numero * Math.pow(10, digitos);
+        resultado = Math.round(resultado);
+        resultado = resultado/Math.pow(10, digitos);
+        return resultado;
+    }
 	
 }
