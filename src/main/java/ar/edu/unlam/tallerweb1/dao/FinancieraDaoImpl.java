@@ -60,5 +60,11 @@ public class FinancieraDaoImpl implements FinancieraDao {
 				.add(Restrictions.eq("nombre", nombreF))
 				.uniqueResult();
 	}
+
+	@Override
+	public Financiera buscarFinancieraPorIdPrestamo(Long idPrestamo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
