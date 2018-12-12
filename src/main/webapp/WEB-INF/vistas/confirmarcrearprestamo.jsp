@@ -1,115 +1,109 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Listar Cuotas</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Nuevo Prestamo</title>
 
-<!-- Bootstrap core CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<!-- Bootstrap theme -->
-<link href="css/bootstrap-theme.min.css" rel="stylesheet">
+	<!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" >
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 </head>
 <body>
-
+	
 	<div class="container">
-		<ul class="list-group">
-			<h3 class="list-group-item">Datos del Afiliado</h3>
-
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon">Nombre:</span>
-				<li class="list-group-item">${afiliado.nombre}</li>
+		<form:form action="confirmar-nuevo-prestamo" method="POST" modelAttribute="afiliado">
+		  <form:input type="hidden" path="dni" value="${afiliado.dni}"/>
+		  <div class="form-row">
+		    <div class="form-group col-md-6">
+		      <label >Nombre</label>
+		      <input type="text" class="form-control" value="${afiliado.nombre}" id="inputNombre" disabled>
+		    </div>
+		    <div class="form-group col-md-6">
+		      <label >Apellido</label>
+		      <input type="text" class="form-control" value="${afiliado.apellido}" id="inputApellido" disabled>
+		    </div>
+		    <div class="form-group col-md-4"></div>
+		    <div class="form-group col-md-4"></div>
+		    <div class="form-group col-md-6">
+		    	<label class="col-lg-2 control-label">Cuotas</label>
+				<div class="col-lg-10">
+					<select name="cuotas" id="cuotas" class="form-control">
+						<option value="${cuotas}">${cuotas}</option>
+					</select>
+				</div>
+		    </div>
+		    <div class="form-group col-md-6">
+		      <label >Nuevo Monto</label>
+		      <input name="valor" type="text" class="form-control" id="inputMonto" value="${valor}">
+		    </div>
+		     <div class="form-group col-md-6"></div>
+		     <div class="form-group col-md-6"></div>
+		     <div class="form-group col-md-6">
+		    	<label class="col-lg-2 control-label">Financieras</label>
+				<div class="col-lg-10">
+					<select name="nombreF" id="nombreF" class="form-control">
+						<option value="${nombreF}">${nombreF}</option>						
+					</select>
+				</div>
+			    </div>
+		    
+		    
+		    <div class="form-group col-md-10">
+			    <c:if test="${not empty error}">
+			        <h4><span>${error}</span></h4>
+			        <br>
+		        </c:if>
+		    </div>
+			    
+			   
+		    <div class="form-group col-md-4">
+		    	<button class="btn btn-info" type="submit">Dar Prestamo</button>
 			</div>
-
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon">Apellido:</span>
-				<li class="list-group-item">${afiliado.apellido}</li>
-			</div>
-
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon">Dni:</span>
-				<li class="list-group-item">${afiliado.dni}</li>
-			</div>
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon">Valor Total del prestamo:</span>
-				<li class="list-group-item">${prestamo.valor}</li>
-			</div>
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon">Valor restante a pagar:</span>
-				<li class="list-group-item">${prestamo.saldo}</li>
-			</div>
-		</ul>
+		  </div>
+		</form:form>
 	</div>
-	<h1 class="text-center">LISTA DE CUOTAS</h1>
-
-	<form:form action="totalapagarcuota" modelAttribute="confirm"
-		method="POST" role="form">
-		<div class="container">
-			<table class="table">
-				<thead class="thead-light">
-					<tr>
-						<th scope="col">Fecha de Vencimiento</th>
-						<th scope="col">Valor</th>
-						<th scope="col">Fecha De Pago</th>
-						<th scope="col">Seleccionar Cuotas a Pagar</th>
-
-					</tr>
-				</thead>
-				<!-- listar todos los afiados -->
-				<tbody>
-					<c:forEach items="${cuotaspagas}" var="cuotaspagas">
-						<tr>
-
-							<td scope="row">${cuotaspagas.fechaDeVencimiento}</td>
-							<td>${cuotaspagas.monto}</td>
-							<td>${cuotaspagas.fechaDePago}</td>
-							<td>Pagada</td>
-
-						</tr>
-					</c:forEach>
-
-					<c:forEach items="${cuotasnopagas}" var="cuotasnopagas">
-						<tr>
-							<td scope="row">${cuotasnopagas.fechaDeVencimiento}</td>
-							<td>${cuotasnopagas.monto}</td>
-							<td>Sin Pagar</td>
-							<td><input type="checkbox" id="check" class="" name="check"
-								value="${cuotasnopagas.idCuota}"></td>
-						</tr>
-					</c:forEach>
-
-				</tbody>
-			</table>
-		</div>
-		<input path="dni" type="text" id="dni" name="dni" class="form-control"
-			value="${afiliado.dni}" style="display: none" />
-		<input path="idPrestamo" type="text" id="idPrestamo" name="idPrestamo"
-			class="form-control" value="${prestamo.idPrestamo}"
-			style="display: none" />
-		<button type="submit" class="btn btn-success mb-2">Confirmar Creacion de Prestamo</button>
-	</form:form>
-
-	<br>
-	<a href="javascript:window.history.go(-1);"><button
-			class="btn btn-primary btn-lg">Regresar</button></a>
-	<br>
-	<br>
-	<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg"
-			type="submit">Inicio</button></a>
-	<br>
+	
+	<div class="container">
+		<h1 class="text-center">Lista de préstamos existentes</h1>
+		<table class="table">
+		  <thead class="thead-light">
+		    <tr>
+		      <th scope="col">Valor</th>
+		      <th scope="col">Cuotas</th>
+		      <th scope="col">Intereses</th>
+		      <th scope="col">Estado</th>
+		      
+		    </tr>
+		  </thead>
+		  <!-- listar todos los afiados -->
+		  <c:forEach items="${prestamos}" var="prestamos">
+			  <tbody>
+			    <tr>
+			      <th scope="row">${prestamos.valor}</th>
+			      <td>${prestamos.cuotas}</td>
+			      <td>${prestamos.interes}</td>
+			      <td>${prestamos.estado}</td>
+			    </tr>
+			  </tbody>
+		  </c:forEach>
+		</table>
+	</div>
+	
+		<br>
+		<a href="javascript:window.history.go(-1);"><button class="btn btn-primary btn-lg">Regresar</button></a>
+		<br>
+		<br>
+		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
+		<br>
+	
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
 	<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 	<script src="js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="" type="text/javascript">
-		$(document).ready(function(){
-			$(".pagado").css("display","none");
-		}
-		</script>
 
 </body>
 </html>

@@ -254,11 +254,15 @@ public class ControladorPrestamo {
 		
 		if(valor <= servicioPrestamo.prestamoDisponible(afiliado)){
 			Afiliado miafiliado = servicioAfiliado.consultarAfiliadoDni(afiliado.getDni());
-			servicioPrestamo.crearNuevoPrestamo(afiliado, valor, cuotas,nombreF);
-			List<Prestamo> prestamos = servicioPrestamo.consultarPrestamoActivos(miafiliado);
+			
+//			servicioPrestamo.crearNuevoPrestamo(afiliado, valor, cuotas,nombreF);
+//			List<Prestamo> prestamos = servicioPrestamo.consultarPrestamoActivos(miafiliado);
+			
 			modelo.put("afiliado", miafiliado);
-			modelo.put("prestamos", prestamos);
-			return new ModelAndView("/listarprestamos",modelo);
+			modelo.put("valor", valor);
+			modelo.put("cuotas", cuotas);
+			modelo.put("nombreF", nombreF);
+			return new ModelAndView("/confirmarcrearprestamo",modelo);
 		}else{
 			Afiliado miAfiliado = servicioAfiliado.consultarAfiliadoDni(afiliado.getDni());
 			List<Prestamo> prestamos = servicioPrestamo.consultarPrestamo(miAfiliado.getDni());
@@ -276,7 +280,21 @@ public class ControladorPrestamo {
 		}
 		
 	}
-
+	@RequestMapping(path = "/confirmar-nuevo-prestamo", method=RequestMethod.POST)
+	public ModelAndView irValidarConfirmarPrestamo(@ModelAttribute("afiliado") Afiliado afiliado, Integer valor, Integer cuotas,String nombreF) {
+		
+		ModelMap modelo=new ModelMap();
+		
+		Afiliado miAfiliado = servicioAfiliado.consultarAfiliadoDni(afiliado.getDni());
+		String nombreFinan=nombreF;
+		servicioPrestamo.crearNuevoPrestamo(miAfiliado, valor, cuotas,nombreFinan);
+		
+		List<Prestamo> prestamos = servicioPrestamo.consultarPrestamoActivos(miAfiliado);
+		
+		modelo.put("prestamos", prestamos);
+		
+		return new ModelAndView("listarprestamos",modelo);
+	}
 	public ServicioPrestamo getServicioPrestamo() {
 		return servicioPrestamo;
 	}
