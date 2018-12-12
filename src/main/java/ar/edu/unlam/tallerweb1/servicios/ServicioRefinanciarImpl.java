@@ -60,13 +60,12 @@ public class ServicioRefinanciarImpl implements ServicioRefinanciar{
 		prestamoARef.setEstado("refinanciado");
 		servicioPrestamoDao.modificarPrestamo(prestamoARef);
 		
-		double newInteres = 0.355;
 		int valor = (int) prestamoARef.getSaldo();
 		
 		Prestamo newPrestamo = new Prestamo();
 		newPrestamo.setValor(valor);
 		newPrestamo.setCuotas(cuotas);
-		newPrestamo.setInteres(newInteres);
+		newPrestamo.setInteres(0.355);
 		newPrestamo.setEstado("activo");
 		newPrestamo.setAfiliado(afiliado);
 		newPrestamo.setDni(afiliado.getDni());
@@ -77,7 +76,7 @@ public class ServicioRefinanciarImpl implements ServicioRefinanciar{
 //		miFinanciera.setMontoCapital(montoCapital-valor);
 //		servicioFinancieraDao.modificarFinanciera(miFinanciera);
 		//
-		
+		double newInteres = newPrestamo.getInteres()/12;
 		
 		double cuota = fijarNumero(valor*((newInteres*Math.pow((1+newInteres), cuotas))/(Math.pow((1+newInteres), cuotas)-1)),2);
 		double salini=valor;
@@ -116,7 +115,7 @@ public class ServicioRefinanciarImpl implements ServicioRefinanciar{
 		Prestamo prestamoARef = servicioPrestamoDao.consultarUnPrestamo(idPrestamoRef);
 		List<Cuota> newCuotas = new ArrayList<Cuota>();
 		
-		double newInteres = 0.355;
+		double newInteres = (prestamoARef.getInteres()+0.005)/12; // Por refinanciar le sumamos al interes un 0.5% de interes anual.
 		double valor = prestamoARef.getSaldo();
 		
 		double cuota = fijarNumero(valor*((newInteres*Math.pow((1+newInteres), cuotas))/(Math.pow((1+newInteres), cuotas)-1)),2);

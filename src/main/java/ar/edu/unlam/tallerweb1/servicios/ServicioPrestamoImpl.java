@@ -172,14 +172,15 @@ public class ServicioPrestamoImpl implements ServicioPrestamo {
 		newPrestamo.setDni(afiliado.getDni());
 		newPrestamo.setSaldo(valor);
 		//guarda la financiera del prestamo y modifica el monto capital
+		double porCientoInteres = newPrestamo.getInteres()/12;
 		newPrestamo.setFinanciera(miFinanciera);
 		Integer montoCapital=miFinanciera.getMontoCapital();
 		miFinanciera.setMontoCapital(montoCapital-valor);
 		servicioFinancieraDao.modificarFinanciera(miFinanciera);
 		//
-		double cuota = fijarNumero(valor*((0.35*Math.pow(1.35, cuotas))/(Math.pow(1.35, cuotas)-1)),2);
+		double cuota = fijarNumero(valor*((porCientoInteres*Math.pow(1+porCientoInteres, cuotas))/(Math.pow(1+porCientoInteres, cuotas)-1)),2);
 		double salini=valor;
-		double interes = fijarNumero(salini*0.35,2);
+		double interes = fijarNumero(salini*porCientoInteres,2);
 		double amortizacion = fijarNumero(cuota-interes,2);
 		double salfin = salini-amortizacion;
 		
@@ -201,7 +202,7 @@ public class ServicioPrestamoImpl implements ServicioPrestamo {
 			newCuotas.add(newCuota);
 			
 			salini=salfin;
-			interes = fijarNumero(salini*0.35,2);
+			interes = fijarNumero(salini*porCientoInteres,2);
 			amortizacion = fijarNumero(cuota-interes,2);
 			salfin = fijarNumero(salini-amortizacion,2);
 			
