@@ -135,22 +135,45 @@ public class ServicioCuotaImpl implements ServicioCuota{
 		if(saldo>pago1) {			
 			saldo-=pago1;
 			prestamo.setSaldo(saldo);
-			
-			double interes=0.35;
-			double meses=(double)listCuotas.size();
-			double v=(1+(interes/12));
-			double t=(-(meses/12)*12);
-			double cuota=(saldo*(interes/12))/(1-Math.pow(v, t));
-			
-			cuota=Math.round(cuota*100d)/100d;//redondear a dos decimales
+			//////////////////////////////////////////////////////////////////
+//			double interes=0.35;
+//			double meses=(double)listCuotas.size();
+//			double v=(1+(interes/12));
+//			double t=(-(meses/12)*12);
+//			double cuota=(saldo*(interes/12))/(1-Math.pow(v, t));
+//			
+//			cuota=Math.round(cuota*100d)/100d;//redondear a dos decimales
+//			
+//			for(Cuota cuotaitem:listCuotas){
+//				cuotaitem.setInteres(cuota*0.35);
+//				cuotaitem.setMonto(cuota);
+//				cuotaitem.setMontoTotal(cuota-cuotaitem.getInteres());//amortizacion
+//				
+//				servicioCuotaDao.modificarElCubierto(cuotaitem);
+//			}
+			/////////////////////////////////////////////////////////////////////////
+			int cuotas = listCuotas.size();
+			double porCientoInteres = prestamo.getInteres()/12;
+			double valor = saldo;
+			double cuota = fijarNumero(valor*((porCientoInteres*Math.pow(1+porCientoInteres, cuotas))/(Math.pow(1+porCientoInteres, cuotas)-1)),2);
+			double salini=valor;
+			double interes = fijarNumero(salini*porCientoInteres,2);
+			double amortizacion = fijarNumero(cuota-interes,2);
+			double salfin = salini-amortizacion;
 			
 			for(Cuota cuotaitem:listCuotas){
-				cuotaitem.setInteres(cuota*0.35);
+				cuotaitem.setInteres(interes);
 				cuotaitem.setMonto(cuota);
-				cuotaitem.setMontoTotal(cuota-cuotaitem.getInteres());//amortizacion
+				cuotaitem.setMontoTotal(amortizacion);//amortizacion
+				
+				salini=salfin;
+				interes = fijarNumero(salini*porCientoInteres,2);
+				amortizacion = fijarNumero(cuota-interes,2);
+				salfin = fijarNumero(salini-amortizacion,2);
 				
 				servicioCuotaDao.modificarElCubierto(cuotaitem);
 			}
+			/////////////////////////////////////////////////////////////////////////
 			return true;
 		}
 		
