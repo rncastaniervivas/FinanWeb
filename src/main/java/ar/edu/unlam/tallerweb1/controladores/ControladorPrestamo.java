@@ -98,7 +98,6 @@ public class ControladorPrestamo {
 		List<Cuota> cuotaspagas=servicioCuota.consultarCuotaPagada(idPrestamo1);
 		Prestamo prestamo0=servicioPrestamo.consultarUnPrestamo(idPrestamo1);
 		Afiliado afiliado0=prestamo0.getAfiliado();
-	
 		
 		modelo.put("prestamo", prestamo0);
 		

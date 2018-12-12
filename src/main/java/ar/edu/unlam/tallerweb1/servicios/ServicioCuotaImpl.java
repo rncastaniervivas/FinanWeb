@@ -135,23 +135,6 @@ public class ServicioCuotaImpl implements ServicioCuota{
 		if(saldo>pago1) {			
 			saldo-=pago1;
 			prestamo.setSaldo(saldo);
-			//////////////////////////////////////////////////////////////////
-//			double interes=0.35;
-//			double meses=(double)listCuotas.size();
-//			double v=(1+(interes/12));
-//			double t=(-(meses/12)*12);
-//			double cuota=(saldo*(interes/12))/(1-Math.pow(v, t));
-//			
-//			cuota=Math.round(cuota*100d)/100d;//redondear a dos decimales
-//			
-//			for(Cuota cuotaitem:listCuotas){
-//				cuotaitem.setInteres(cuota*0.35);
-//				cuotaitem.setMonto(cuota);
-//				cuotaitem.setMontoTotal(cuota-cuotaitem.getInteres());//amortizacion
-//				
-//				servicioCuotaDao.modificarElCubierto(cuotaitem);
-//			}
-			/////////////////////////////////////////////////////////////////////////
 			int cuotas = listCuotas.size();
 			double porCientoInteres = prestamo.getInteres()/12;
 			double valor = saldo;
@@ -173,14 +156,13 @@ public class ServicioCuotaImpl implements ServicioCuota{
 				
 				servicioCuotaDao.modificarElCubierto(cuotaitem);
 			}
-			/////////////////////////////////////////////////////////////////////////
 			return true;
 		}
 		
 		return false;
 	}
 
-	public static double fijarNumero(double numero, int digitos) {
+	public static double fijarNumero(double numero, int digitos) {// para fijar el numero dependiendo de los digitos que se manden
         double resultado;
         resultado = numero * Math.pow(10, digitos);
         resultado = Math.round(resultado);
