@@ -88,28 +88,33 @@ public class MockTestFinanWeb {
 	@Transactional
 	@Rollback (true)
 	public void testAgregadoAfiliadoExitoso() {
+		
+		ControladorAfiliado controladorAfiliado = new ControladorAfiliado(); 
 
-		ControladorAfiliado controller = new ControladorAfiliado();
+		ServicioPrestamo servicioPrestamoMock=mock(ServicioPrestamo.class);
+		ServicioAfiliado servicioAfiliadoMock=mock(ServicioAfiliado.class);
+		//
+		controladorAfiliado.setServicioAfiliado(servicioAfiliadoMock);
+		controladorAfiliado.setServicioPrestamo(servicioPrestamoMock);
+		//
+		Afiliado afiliadoMock=mock(Afiliado.class);
 		
-		ServicioAfiliado servicioAfiliadoMock = mock (ServicioAfiliado.class);
+		afiliadoMock.setApellido("ApellidoMock");
+		afiliadoMock.setAntiguedad("10años");
+		afiliadoMock.setDni(9L);
+		afiliadoMock.setSueldo(100000.00);
+		afiliadoMock.setClasificacion("cliente");
+		afiliadoMock.setNombre("NombreMock");
+		afiliadoMock.setNombre("NombreMock");
+		List<Afiliado> afiliados=new ArrayList<Afiliado>();
+		afiliados.add(afiliadoMock);
+		afiliados.add(afiliadoMock);
 		
-		controller.setServicioAfiliado(servicioAfiliadoMock);
-		
-		Afiliado afiliadoMock = mock (Afiliado.class);
-		
-		afiliadoMock.setNombre("AfiliadoPrueba");
-		afiliadoMock.setApellido("Perez");
-		afiliadoMock.setDni(30102103L);
-		afiliadoMock.setPuesto("Director");
-		afiliadoMock.setSueldo(40000.0);
-		afiliadoMock.setAntiguedad("23");
-		
-		servicioAfiliadoMock.guardarAfiliado(afiliadoMock);
-		
-		when(servicioAfiliadoMock.consultarAfiliadoDni(afiliadoMock.getDni())).thenReturn(afiliadoMock);
-		ModelAndView model = controller.agregadoAfiliadoExitoso(afiliadoMock);
-		
-		assertThat(model.getViewName()).isEqualTo("listarafiliados");	
+		when(servicioAfiliadoMock.guardarAfiliado(afiliadoMock)).thenReturn(true);
+		when(servicioAfiliadoMock.consultarAfiliado()).thenReturn(afiliados);
+		ModelAndView modeloagregadoExitosamente=controladorAfiliado.agregadoAfiliadoExitoso(afiliadoMock);
+		assertThat(modeloagregadoExitosamente.getViewName()).isEqualTo("listarafiliados");
+
 	}
 	
 	@Test
@@ -139,6 +144,36 @@ public class MockTestFinanWeb {
 	
 	}
 	
-	
+	@Test
+	@Transactional
+	@Rollback(true)
+	public void testListarCuotasImpagas(){
+		
+		ControladorPrestamo controladorPrestamo = new ControladorPrestamo();
+		
+		Prestamo prestamoMock = mock(Prestamo.class);
+		
+		ServicioAfiliado servicioAfiliadoMock = mock(ServicioAfiliado.class);
+		ServicioPrestamo servicioPrestamoMock = mock(ServicioPrestamo.class);
+		ServicioRefinanciar servicioRefinanciarMock = mock(ServicioRefinanciar.class);
+
+		controladorPrestamo.setServicioPrestamo(servicioPrestamoMock);
+		controladorPrestamo.setServicioAfiliado(servicioAfiliadoMock);
+		controladorPrestamo.setServicioRefinanciar(servicioRefinanciarMock);
+		
+		prestamoMock.setEstado("activo");
+		prestamoMock.setDni(9L);
+		
+		Long idPrestamo = 1L;
+		Long dni = 9L;
+		when(servicioPrestamoMock.consultarUnPrestamo(prestamoMock.getIdPrestamo())).thenReturn(prestamoMock);
+		when(servicioAfiliadoMock.consultarAfiliadoDni(dni)).thenReturn(null);
+		when(servicioRefinanciarMock.consultaCuota(idPrestamo)).thenReturn(null);
+		when(servicioRefinanciarMock.montoARefinanciar(idPrestamo)).thenReturn(null);
+		
+		ModelAndView modelo = controladorPrestamo.listaCuotasImpag(9L);
+		
+		//aca un assert  verificar que no exista esta cosa _> cuotas
+	}
 	
 }
