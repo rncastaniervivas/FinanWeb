@@ -36,18 +36,18 @@ public class ControladorAfiliado {
 	}
 	
 	@RequestMapping (path = "/afiliadoagregado", method = RequestMethod.POST)
-	public ModelAndView agregadoExitosamente (@ModelAttribute("afiliado") Afiliado agregarafiliado) {
+	public ModelAndView agregadoAfiliadoExitoso(@ModelAttribute("afiliado") Afiliado agregarafiliado) {
 		ModelMap modelo=new ModelMap();
 		Afiliado afiliado=new Afiliado();
 		modelo.put("afiliado", afiliado);
 		
 		if(servicioAfiliado.guardarAfiliado(agregarafiliado)) {
 			
-		List<Afiliado> lista =servicioAfiliado.consultarAfiliado();
-		
-		modelo.put("afiliados", lista);
-		
-		return new ModelAndView("listarafiliados",modelo);
+			List<Afiliado> lista =servicioAfiliado.consultarAfiliado();
+			
+			modelo.put("afiliados", lista);
+			
+			return new ModelAndView("listarafiliados",modelo);
 		
 		}else {
 			
@@ -102,6 +102,10 @@ public class ControladorAfiliado {
 
 		if(servicioAfiliado.eliminarAfiliado(afiliaeliminar) == false) {
 			modelo.put("error", "No se puede eliminar debido a que el afiliado tiene prestamo asignado");
+			
+			List<Prestamo> prestamos= servicioPrestamo.consultarPrestamo(afiliaeliminar.getDni());
+			modelo.put("prestamos", prestamos);
+			return new ModelAndView("listarprestamos",modelo);
 		}
 		
 		List<Afiliado> lista = servicioAfiliado.consultarAfiliado();
@@ -141,6 +145,14 @@ public class ControladorAfiliado {
 
 	public void setServicioAfiliado(ServicioAfiliado servicioAfiliado) {
 		this.servicioAfiliado = servicioAfiliado;
+	}
+
+	public ServicioPrestamo getServicioPrestamo() {
+		return servicioPrestamo;
+	}
+
+	public void setServicioPrestamo(ServicioPrestamo servicioPrestamo) {
+		this.servicioPrestamo = servicioPrestamo;
 	}
 	
 	

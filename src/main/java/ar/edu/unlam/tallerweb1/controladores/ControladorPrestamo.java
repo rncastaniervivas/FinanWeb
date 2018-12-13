@@ -37,7 +37,6 @@ public class ControladorPrestamo {
 	
 	@Inject
 	private ServicioAfiliado servicioAfiliado;
-	
 	@Inject
 	private ServicioRefinanciar servicioRefinanciar;
 	@Inject
