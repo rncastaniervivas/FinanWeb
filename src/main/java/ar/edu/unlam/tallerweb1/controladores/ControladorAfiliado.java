@@ -51,7 +51,7 @@ public class ControladorAfiliado {
 		
 		}else {
 			
-			modelo.put("error", "Ya El Afiliado con ese DNI");
+			modelo.put("error", "Ya existe un Afiliado con ese DNI");
 			
 		}
 		return new ModelAndView ("agregarafiliado",modelo);

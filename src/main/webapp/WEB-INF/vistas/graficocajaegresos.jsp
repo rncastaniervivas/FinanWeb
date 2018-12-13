@@ -4,11 +4,10 @@
 <html>
 <head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-<!-- Bootstrap core CSS -->
-	    <link href="css/bootstrap.min.css" rel="stylesheet" >
-	    <!-- Bootstrap theme -->
-	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+<title>Gráfico caja egresos</title>
+		<link href="css/bootstrap-theme.min.css" rel="stylesheet">
+	    <link href="css/xbootstrap.min.css" rel="stylesheet">
+    	<link href="css/xheroic-features.css" rel="stylesheet">
 </head>
 <body>
 			<div id="canvas-container" style="width:50%;">
