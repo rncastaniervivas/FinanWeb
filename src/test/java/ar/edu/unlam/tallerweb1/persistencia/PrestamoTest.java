@@ -31,16 +31,21 @@ public class PrestamoTest {
 	@Rollback (true)
 	public void testPruebaQueSeCreoUnPrestamo() {
 		
-		ControladorPrestamo controlador = new ControladorPrestamo();
+		ControladorAfiliado controladorAfiliado = new ControladorAfiliado();
+		ControladorCaja controladorCaja=new ControladorCaja();
+		ControladorFinanciera controladorFinanciera=new ControladorFinanciera();
+		ControladorPrestamo controladorPrestamo=new ControladorPrestamo(); 
 		
 		ServicioPrestamo servicioPrestamoMock=mock(ServicioPrestamo.class);
 		ServicioAfiliado servicioAfiliadoMock=mock(ServicioAfiliado.class);
+		ServicioCaja servicioCajaMock=mock(ServicioCaja.class);
+		ServicioCuota servicioCuotaMock=mock(ServicioCuota.class);
+		ServicioFinanciera servicioFinanciera=mock(ServicioFinanciera.class);
 		//
-		ServicioFinanciera servicioFinancieraMock=mock(ServicioFinanciera.class);
-		controlador.setServicioFinanciera(servicioFinancieraMock);
+
+		controladorAfiliado.setServicioAfiliado(servicioAfiliadoMock);
+		controladorAfiliado.setServicioPrestamo(servicioPrestamoMock);
 		//
-		controlador.setServicioAfiliado(servicioAfiliadoMock);
-		controlador.setServicioPrestamo(servicioPrestamoMock);
 		
 		Afiliado afiliadoMock=mock(Afiliado.class);
 		
@@ -50,15 +55,37 @@ public class PrestamoTest {
 		afiliadoMock.setSueldo(10000.00);
 		afiliadoMock.setClasificacion("cliente");
 		afiliadoMock.setNombre("NombreMock");
+		List<Afiliado> afiliados=new ArrayList<Afiliado>();
+		afiliados.add(afiliadoMock);
+		afiliados.add(afiliadoMock);
+//		when(servicioAfiliadoMock.consultarAfiliadoDni(afiliadoMock.getDni())).thenReturn(afiliadoMock);
+//		when(servicioPrestamoMock.prestamoDisponible(afiliadoMock)).thenReturn(3000.00);
 		
-		servicioAfiliadoMock.guardarAfiliado(afiliadoMock);
+		List<Prestamo> listaprestamovacia=new ArrayList<Prestamo>();
+		Prestamo prestamoMockvacio= mock(Prestamo.class);
+//		Prestamo prestamoMock= mock(Prestamo.class);
+//		prestamoMock.setAfiliado(afiliadoMock);
+//		prestamoMock.setCuotas(6);
+//		prestamoMock.setDni(1L);
+//		prestamoMock.setEstado("activo");
+//		prestamoMock.set
+		
+		when(servicioAfiliadoMock.guardarAfiliado(afiliadoMock)).thenReturn(true);
+		when(servicioAfiliadoMock.consultarAfiliado()).thenReturn(afiliados);
+		ModelAndView modeloagregadoExitosamente=controladorAfiliado.agregadoExitosamente(afiliadoMock);
+		assertThat(modeloagregadoExitosamente.getViewName()).isEqualTo("listarafiliados");
+		
+		when(servicioAfiliadoMock.eliminarAfiliado(afiliadoMock)).thenReturn(true);
+		ModelAndView modeloafiliadoEliminado=controladorAfiliado.afiliadoEliminado(afiliadoMock);
+		assertThat(modeloafiliadoEliminado.getViewName()).isEqualTo("listarafiliados");
+		
+//		Afiliado miAfiliado = servicioAfiliado.consultarAfiliadoDni(afiliado.getDni());
+//		List<Prestamo> prestamos = servicioPrestamo.consultarPrestamo(miAfiliado.getDni());
+//		double prestamoDisponible = servicioPrestamo.prestamoDisponible(miAfiliado);
 		
 		when(servicioAfiliadoMock.consultarAfiliadoDni(afiliadoMock.getDni())).thenReturn(afiliadoMock);
-		when(servicioPrestamoMock.prestamoDisponible(afiliadoMock)).thenReturn(3000.00);
+		when(servicioPrestamoMock.consultarPrestamo(afiliadoMock.getDni())).thenReturn(listaprestamovacia);
 		
-		ModelAndView modelo=controlador.irANuevoPrestamo(afiliadoMock);
-		
-		assertThat(modelo.getViewName()).isEqualTo("nuevoprestamo");
 		
 		
 	}
