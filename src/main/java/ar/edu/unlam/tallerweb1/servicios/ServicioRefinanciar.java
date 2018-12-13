@@ -13,4 +13,6 @@ public interface ServicioRefinanciar {
 	void refinanciar(Long dni, Long idPrestamoRef, Integer cuotas);
 	
 	List<Cuota> generarCuotas(Long idPrestamoRef, Integer cuotas);
+
+	List<Cuota> generarCuotasPrestamoNuevo(Integer valor, Integer cuotas);
 }

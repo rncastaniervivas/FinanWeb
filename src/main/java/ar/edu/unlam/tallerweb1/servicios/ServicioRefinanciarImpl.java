@@ -149,6 +149,43 @@ public class ServicioRefinanciarImpl implements ServicioRefinanciar{
 		
 		return newCuotas;
 	}
+	@Override
+	public List<Cuota> generarCuotasPrestamoNuevo(Integer valor0, Integer cuotas) {
+		List<Cuota> newCuotas = new ArrayList<Cuota>();
+		double valor=(double)valor0;
+		double newInteres = 0.35/12; // Por refinanciar le sumamos al interes un 0.5% de interes anual.
+		
+		double cuota = fijarNumero(valor*((newInteres*Math.pow((1+newInteres), cuotas))/(Math.pow((1+newInteres), cuotas)-1)),2);
+		double salini = valor;
+		double interes = fijarNumero(salini*newInteres,2);
+		double amortizacion = fijarNumero(cuota-interes,2);
+		double salfin = salini-amortizacion;
+		
+		
+		Calendar fechven = Calendar.getInstance();	
+		
+		for(int i=0; i<cuotas; i++){
+			
+			Cuota newCuota = new Cuota();
+			fechven.add(Calendar.DAY_OF_YEAR, 30);
+			newCuota.setIdCuota((long) (i+1));
+			newCuota.setMonto(cuota);
+			newCuota.setInteres(interes);
+			newCuota.setMontoTotal(amortizacion);
+			newCuota.setEstado(false);
+			newCuota.setFechaDeVencimiento(fechven.getTime());
+			//newCuota.setPrestamo(newPrestamo);	
+			newCuotas.add(newCuota);
+			
+			salini=salfin;
+			interes = fijarNumero(salini*newInteres,2);
+			amortizacion = fijarNumero(cuota-interes,2);
+			salfin = fijarNumero(salini-amortizacion,2);
+			
+		}
+		
+		return newCuotas;
+	}
 	
 	// esto es para hacer el truncamiento de un valor con decimal
 	public static double fijarNumero(double numero, int digitos) {
