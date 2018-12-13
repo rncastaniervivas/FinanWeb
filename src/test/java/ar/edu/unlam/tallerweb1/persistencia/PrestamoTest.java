@@ -40,7 +40,7 @@ public class PrestamoTest {
 		ServicioAfiliado servicioAfiliadoMock=mock(ServicioAfiliado.class);
 		ServicioCaja servicioCajaMock=mock(ServicioCaja.class);
 		ServicioCuota servicioCuotaMock=mock(ServicioCuota.class);
-		ServicioFinanciera servicioFinanciera=mock(ServicioFinanciera.class);
+		ServicioFinanciera servicioFinancieraMock=mock(ServicioFinanciera.class);
 		//
 
 		controladorAfiliado.setServicioAfiliado(servicioAfiliadoMock);
@@ -52,8 +52,9 @@ public class PrestamoTest {
 		afiliadoMock.setApellido("ApellidoMock");
 		afiliadoMock.setAntiguedad("10años");
 		afiliadoMock.setDni(9L);
-		afiliadoMock.setSueldo(10000.00);
+		afiliadoMock.setSueldo(100000.00);
 		afiliadoMock.setClasificacion("cliente");
+		afiliadoMock.setNombre("NombreMock");
 		afiliadoMock.setNombre("NombreMock");
 		List<Afiliado> afiliados=new ArrayList<Afiliado>();
 		afiliados.add(afiliadoMock);
@@ -79,12 +80,25 @@ public class PrestamoTest {
 		ModelAndView modeloafiliadoEliminado=controladorAfiliado.afiliadoEliminado(afiliadoMock);
 		assertThat(modeloafiliadoEliminado.getViewName()).isEqualTo("listarafiliados");
 		
-//		Afiliado miAfiliado = servicioAfiliado.consultarAfiliadoDni(afiliado.getDni());
-//		List<Prestamo> prestamos = servicioPrestamo.consultarPrestamo(miAfiliado.getDni());
-//		double prestamoDisponible = servicioPrestamo.prestamoDisponible(miAfiliado);
-		
+/*
+ if(valor <= servicioPrestamo.prestamoDisponible(afiliado)){
+			Afiliado miafiliado = servicioAfiliado.consultarAfiliadoDni(afiliado.getDni());
+			servicioPrestamo.crearNuevoPrestamo(afiliado, valor, cuotas,nombreF);
+			List<Prestamo> prestamos = servicioPrestamo.consultarPrestamoActivos(miafiliado);
+			modelo.put("afiliado", miafiliado);
+			modelo.put("prestamos", prestamos);
+			return new ModelAndView("/listarprestamos",modelo);
+ */
+		Integer valorprestamonuevo= 10000;
+		Integer cuotas=6;
+		String nombreF="Naranja";
 		when(servicioAfiliadoMock.consultarAfiliadoDni(afiliadoMock.getDni())).thenReturn(afiliadoMock);
-		when(servicioPrestamoMock.consultarPrestamo(afiliadoMock.getDni())).thenReturn(listaprestamovacia);
+		when(servicioPrestamoMock.prestamoDisponible(afiliadoMock)).thenReturn(30000.00);
+		when(servicioPrestamoMock.consultarPrestamoActivos(afiliadoMock)).thenReturn(listaprestamovacia);
+		
+		ModelAndView modelocrearPrestamo=controladorPrestamo.irValidarNuevoPrestamo(afiliadoMock, valorprestamonuevo, cuotas, nombreF);
+		assertThat(modelocrearPrestamo.getViewName()).isEqualTo("listarprestamos");
+		
 		
 		
 		
