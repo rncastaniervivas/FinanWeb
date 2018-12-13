@@ -36,18 +36,18 @@ public class ControladorAfiliado {
 	}
 	
 	@RequestMapping (path = "/afiliadoagregado", method = RequestMethod.POST)
-	public ModelAndView agregadoExitosamente (@ModelAttribute("afiliado") Afiliado agregarafiliado) {
+	public ModelAndView agregadoAfiliadoExitoso(@ModelAttribute("afiliado") Afiliado agregarafiliado) {
 		ModelMap modelo=new ModelMap();
 		Afiliado afiliado=new Afiliado();
 		modelo.put("afiliado", afiliado);
 		
 		if(servicioAfiliado.guardarAfiliado(agregarafiliado)) {
 			
-		List<Afiliado> lista =servicioAfiliado.consultarAfiliado();
-		
-		modelo.put("afiliados", lista);
-		
-		return new ModelAndView("listarafiliados",modelo);
+			List<Afiliado> lista =servicioAfiliado.consultarAfiliado();
+			
+			modelo.put("afiliados", lista);
+			
+			return new ModelAndView("listarafiliados",modelo);
 		
 		}else {
 			
