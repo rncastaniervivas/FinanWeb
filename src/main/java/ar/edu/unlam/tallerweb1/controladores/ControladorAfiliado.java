@@ -102,6 +102,7 @@ public class ControladorAfiliado {
 
 		if(servicioAfiliado.eliminarAfiliado(afiliaeliminar) == false) {
 			modelo.put("error", "No se puede eliminar debido a que el afiliado tiene prestamo asignado");
+			
 			List<Prestamo> prestamos= servicioPrestamo.consultarPrestamo(afiliaeliminar.getDni());
 			modelo.put("prestamos", prestamos);
 			return new ModelAndView("listarprestamos",modelo);
