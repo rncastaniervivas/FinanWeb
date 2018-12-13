@@ -44,7 +44,7 @@
 		<div class="container">
 			<form method="POST">
 			  <input type="hidden" name="dni" value="${afiliado.dni}">
-			  <input type="hidden" name="idAfiliado" value="${afiliado.id}">
+			  <input type="text" path="idAfiliado" id="idAfiliado" value="${afiliado.idAfiliado}">
 			  <div class="form-row">
 			    <div class="form-group col-md-6">
 			      <label >Nombre</label>
@@ -59,7 +59,10 @@
 			    <div class="form-group col-md-6">
 			      <label for="inputCity">Monto Total A Pagar</label>
 			      <!--input type="hidden" name="newCapital" value="${prestamoARef.saldo}"-->
-			      <input type="text"  value="${valor}" class="form-control" disabled>                      			      
+			      <input type="text" path="valor" name="valor" value="${valor}" class="form-control" disabled> 
+				  <input type="text" path="cantcuotas" name="cantcuotas" value="${cantcuotas}" class="form-control" disabled>
+				  <input type="text" path="nombreF" name="nombreF" value="${nombreF}" class="form-control" disabled>
+				  
 			    </div>
 			    <div class="form-group row">
 					<label class="col-lg-2 control-label">Interes anual</label>
@@ -69,7 +72,7 @@
 				</div>
 			  </div>
 			  <div class="form-group col-md-6">
-			  	<button type="submit" class="btn btn-primary" formaction="validar-nuevo-prestamo">Aceptar</button>
+			  	<button type="submit" class="btn btn-primary" formaction="confirmar-nuevo-prestamo">Aceptar</button>
 			  </div>
 			<form>
 		</div>

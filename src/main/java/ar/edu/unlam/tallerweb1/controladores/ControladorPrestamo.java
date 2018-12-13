@@ -248,16 +248,18 @@ public class ControladorPrestamo {
 	
 	@RequestMapping(path = "/validar-nuevo-prestamo", method=RequestMethod.POST)
 	public ModelAndView irValidarNuevoPrestamo(@ModelAttribute("afiliado") Afiliado afiliado, Integer valor, Integer cuotas,String nombreF) {
-		Afiliado nvo=servicioAfiliado.consultarIdAfiliado(afiliado.getIdAfiliado());
 		ModelMap modelo=new ModelMap();
+		Long dni=afiliado.getDni();
+//		System.out.println(dni);
+		Afiliado miafiliado = servicioAfiliado.consultarAfiliadoDni(dni);
 		
-		if(valor <= servicioPrestamo.prestamoDisponible(nvo)){
-			Afiliado miafiliado = servicioAfiliado.consultarAfiliadoDni(nvo.getDni());
+		if(valor <= servicioPrestamo.prestamoDisponible(miafiliado)){
 			List<Cuota> listCuotas = servicioRefinanciar.generarCuotasPrestamoNuevo(valor,cuotas);
 
 			modelo.put("afiliado", miafiliado);
 			modelo.put("valor", valor);
 			modelo.put("cuotas", listCuotas);
+			modelo.put("cantcuotas",listCuotas.size());
 			modelo.put("nombreF", nombreF);
 			return new ModelAndView("/confirmarprestamo",modelo);
 		}else{
@@ -278,13 +280,16 @@ public class ControladorPrestamo {
 		
 	}
 	@RequestMapping(path = "/confirmar-nuevo-prestamo", method=RequestMethod.POST)
-	public ModelAndView irValidarConfirmarPrestamo(@ModelAttribute("afiliado") Afiliado afiliado, Integer valor, Integer cuotas,String nombreF) {
+	public ModelAndView irValidarConfirmarPrestamo(@ModelAttribute("afiliado") Afiliado afiliado,Integer valor, Integer cantcuotas,String nombreF) {
 		
 		ModelMap modelo=new ModelMap();
+		System.out.println(valor);
+		System.out.println(cantcuotas);
+		System.out.println(nombreF);
 		
 		Afiliado miAfiliado = servicioAfiliado.consultarAfiliadoDni(afiliado.getDni());
 		String nombreFinan=nombreF;
-		servicioPrestamo.crearNuevoPrestamo(miAfiliado, valor, cuotas,nombreFinan);
+		servicioPrestamo.crearNuevoPrestamo(miAfiliado, valor, cantcuotas,nombreFinan);
 		
 		List<Prestamo> prestamos = servicioPrestamo.consultarPrestamoActivos(miAfiliado);
 		

@@ -17,6 +17,7 @@
 	<div class="container">
 		<form:form action="validar-nuevo-prestamo" method="POST" modelAttribute="afiliado">
 		  <form:input type="hidden" path="dni" value="${afiliado.dni}"/>
+		  <form:input type="hidden" path="idAfiliado" value="${afiliado.idAfiliado}"/>
 		  <div class="form-row">
 		    <div class="form-group col-md-6">
 		      <label >Nombre</label>
