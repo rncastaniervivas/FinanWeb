@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<!-- Bootstrap core CSS -->
-	    <link href="css/bootstrap.min.css" rel="stylesheet" >
-	    <!-- Bootstrap theme -->
+		<!-- Bootstrap theme -->
 	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-	    <link href="css/style.css" rel="stylesheet">
+	    <link href="css/xbootstrap.min.css" rel="stylesheet">
+    	<link href="css/xheroic-features.css" rel="stylesheet">
+    	<title>FinanWeb</title>
 	</head>
 	<body>
+	<jsp:include page="header.jsp" />
 		<div class = "container">
-			<h1>FinanWeb</h1>
-			
 			<div>
-				<h3>Prestamos</h3>
+				<a name="Prestamos" id="Prestamos"><h3>Prestamos</h3></a>
 					<form action="listarprestamos" method="POST">
 						<button type ="submit" class="btn btn-info">Listar todos los préstamos</button>
 					</form>
@@ -39,7 +38,7 @@
 			</div>
 			
 			<div>
-				<h3>Afiliado</h3>
+				<a name="Afiliados" id="Afiliados"><h3>Afiliados</h3></a>
 				<br>
 					<form action="buscarafiliado" method="POST" >
 						<input type="text" name="dni" placeholder="dni">
