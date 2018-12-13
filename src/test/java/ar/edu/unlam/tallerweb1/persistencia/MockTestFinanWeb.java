@@ -88,34 +88,57 @@ public class MockTestFinanWeb {
 	@Transactional
 	@Rollback (true)
 	public void testAgregadoAfiliadoExitoso() {
-		
-		ControladorAfiliado controladorAfiliado = new ControladorAfiliado(); 
 
-		ServicioPrestamo servicioPrestamoMock=mock(ServicioPrestamo.class);
-		ServicioAfiliado servicioAfiliadoMock=mock(ServicioAfiliado.class);
-		//
-		controladorAfiliado.setServicioAfiliado(servicioAfiliadoMock);
-		controladorAfiliado.setServicioPrestamo(servicioPrestamoMock);
-		//
-		Afiliado afiliadoMock=mock(Afiliado.class);
+		ControladorAfiliado controller = new ControladorAfiliado();
 		
-		afiliadoMock.setApellido("ApellidoMock");
-		afiliadoMock.setAntiguedad("10años");
-		afiliadoMock.setDni(9L);
-		afiliadoMock.setSueldo(100000.00);
-		afiliadoMock.setClasificacion("cliente");
-		afiliadoMock.setNombre("NombreMock");
-		afiliadoMock.setNombre("NombreMock");
-		List<Afiliado> afiliados=new ArrayList<Afiliado>();
-		afiliados.add(afiliadoMock);
-		afiliados.add(afiliadoMock);
+		ServicioAfiliado servicioAfiliadoMock = mock (ServicioAfiliado.class);
 		
-		when(servicioAfiliadoMock.guardarAfiliado(afiliadoMock)).thenReturn(true);
-		when(servicioAfiliadoMock.consultarAfiliado()).thenReturn(afiliados);
-		ModelAndView modeloagregadoExitosamente=controladorAfiliado.agregadoAfiliadoExitoso(afiliadoMock);
-		assertThat(modeloagregadoExitosamente.getViewName()).isEqualTo("listarafiliados");
-
+		controller.setServicioAfiliado(servicioAfiliadoMock);
+		
+		Afiliado afiliadoMock = mock (Afiliado.class);
+		
+		afiliadoMock.setNombre("AfiliadoPrueba");
+		afiliadoMock.setApellido("Perez");
+		afiliadoMock.setDni(30102103L);
+		afiliadoMock.setPuesto("Director");
+		afiliadoMock.setSueldo(40000.0);
+		afiliadoMock.setAntiguedad("23");
+		
+		servicioAfiliadoMock.guardarAfiliado(afiliadoMock);
+		
+		when(servicioAfiliadoMock.consultarAfiliadoDni(afiliadoMock.getDni())).thenReturn(afiliadoMock);
+		ModelAndView model = controller.agregadoAfiliadoExitoso(afiliadoMock);
+		
+		assertThat(model.getViewName()).isEqualTo("listarafiliados");	
 	}
+	
+	@Test
+	@Transactional
+	@Rollback (true)
+	public void testQueVerificaMontoCaja() {
+		ControladorCaja controlador=new ControladorCaja();
+		ServicioRegistro servicioRegistroMock=mock(ServicioRegistro.class);
+		
+		Double ingresos=500.0;
+		Double egresos=100.0;
+		controlador.setServicioRegistro(servicioRegistroMock);
+		
+		when(servicioRegistroMock.montoDeIngresos()).thenReturn(ingresos);
+		
+		when(servicioRegistroMock.montoDeEgresos()).thenReturn(egresos);
+		
+		when(servicioRegistroMock.montoCaja()).thenReturn(400.00);
+		
+		ModelAndView modelo=controlador.mostrarRegistrosCaja();
+		
+		assertThat(modelo.getModelMap().get("montoI")).isEqualTo(ingresos);
+		
+		assertThat(modelo.getModelMap().get("montoE")).isEqualTo(egresos);
+		
+		assertThat(modelo.getModelMap().get("caja")).isEqualTo(400.00);
+	
+	}
+	
 	
 	
 }
