@@ -234,18 +234,24 @@ public class ControladorPrestamo {
 	public ModelAndView irANuevoPrestamo(@ModelAttribute("afiliado") Afiliado afiliado) {
 		ModelMap modelo=new ModelMap();
 		Afiliado miAfiliado = servicioAfiliado.consultarAfiliadoDni(afiliado.getDni());
-		List<Prestamo> prestamos = servicioPrestamo.consultarPrestamo(miAfiliado.getDni());
 		
-		double prestamoDisponible = servicioPrestamo.prestamoDisponible(afiliado);
-		
-		modelo.put("disponible", prestamoDisponible);
-		modelo.put("prestamos", prestamos);
-		modelo.put("afiliado", afiliado);
-		//enviar financiera con disponible
-		List<Financiera> financieras=servicioFinanciera.consultarFinanciera();
-		modelo.put("financieras",financieras);
-		////
-		return new ModelAndView("nuevoprestamo",modelo);
+		if(Integer.parseInt(miAfiliado.getAntiguedad()) >= 1){
+			List<Prestamo> prestamos = servicioPrestamo.consultarPrestamo(miAfiliado.getDni());
+			
+			double prestamoDisponible = servicioPrestamo.prestamoDisponible(afiliado);
+			
+			modelo.put("disponible", prestamoDisponible);
+			modelo.put("prestamos", prestamos);
+			modelo.put("afiliado", afiliado);
+			//enviar financiera con disponible
+			List<Financiera> financieras=servicioFinanciera.consultarFinanciera();
+			modelo.put("financieras",financieras);
+			////
+			return new ModelAndView("nuevoprestamo",modelo);
+		} else {
+			modelo.put("error","El afiliado debe tener más de un año de antiguedad");
+			return new ModelAndView("listarafiliados", modelo);
+		}
 	}
 	
 	@RequestMapping(path = "/validar-nuevo-prestamo", method=RequestMethod.POST)

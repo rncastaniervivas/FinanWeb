@@ -163,6 +163,8 @@ public class ServicioPrestamoImpl implements ServicioPrestamo {
 		//busca financiera
 		Financiera miFinanciera=servicioFinancieraDao.buscarFinancieraPorNombre(nombreF);
 		//
+		
+		
 		Prestamo newPrestamo = new Prestamo();
 		newPrestamo.setValor(valor);
 		newPrestamo.setCuotas(cuotas);
