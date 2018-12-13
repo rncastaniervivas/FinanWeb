@@ -96,10 +96,12 @@
 								value="${afili.apellido}" />
 						</div>
 					</div>
-					<div class="col-lg-10">
-						<form:input path="dni" id="dni" class="" type="hidden"
-							value="${afili.dni}" />
-					</div>
+					<div class="form-group">
+						  <label class="col-lg-2 control-label">Dni:</label>
+						  <div class="col-lg-10">
+						  	<form:input path="dni" id="dni" class="" type="text" value="${afili.dni}" />
+						  </div>
+					  </div>
 			</div>
 
 			<div class="form-group">

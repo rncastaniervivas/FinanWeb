@@ -8,13 +8,42 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Listar Cuotas</title>
 
-		<link href="css/bootstrap-theme.min.css" rel="stylesheet">
-	    <link href="css/xbootstrap.min.css" rel="stylesheet">
-    	<link href="css/xheroic-features.css" rel="stylesheet">
+<link href="css/bootstrap-theme.min.css" rel="stylesheet">
+<link href="css/xbootstrap.min.css" rel="stylesheet">
+<link href="css/xheroic-features.css" rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 <body>
-
-	<div class="container">
+<script>
+		function PostForm() {
+			if (IsValid()) {
+				$("#lblErrorP").text("");
+				document.forms["frmPrestamo"].submit();
+			}
+		}
+		function IsValid() {
+			HideDivMessageP();
+			var field;
+			field = $("#saldo").val();
+			if (field.length == 0) {
+				$("#lblErrorP")
+						.text("Debe ingresar un valor para el prestamo.");
+				ShowDivMessageP();
+				return false;
+			}
+			return true;
+		}
+		function ShowDivMessageP() {
+			scroll(0, 0);
+			$("#divMessagesP").show("slow", function() {
+			});
+		}
+		function HideDivMessageP() {
+			$("#divMessagesP").hide();
+		}
+	</script>
+<div class="container">
 		<ul class="list-group">
 			<h3 class="list-group-item">Datos del Afiliado</h3>
 
@@ -43,20 +72,30 @@
 		</ul>
 	</div>
 	<h1 class="text-center">LISTA DE CUOTAS</h1>
-			<div>
-				<form:form role="form" action="pagarporvalor" method="Post" modelAttribute="prestamo">
-					<div class="form-group">
-						<label>Insertar valor a pagar:</label>
-						<form:input path="idPrestamo" id="idPrestamo" type="text" class="form-control" value="${prestamo.idPrestamo}" style="display:none"/>
-						<form:input path="saldo" id="saldo" type="text" class="form-control" value="0.0" />
-					</div>
-					<div>
-						<button type="submit" class="btn btn-success">Pagar</button>
-					</div>
-
-
-				</form:form>
+	<div>
+		<form:form role="form" action="pagarporvalor" method="Post"
+			modelAttribute="prestamo" name="frmPrestamo">
+			<div class="form-group">
+				<label>Insertar valor a pagar:</label>
+				<form:input path="idPrestamo" id="idPrestamo" type="text"
+					class="form-control" value="${prestamo.idPrestamo}"
+					style="display:none" />
+				<form:input path="saldo" id="saldo" type="text" class="form-control"/>
 			</div>
+			<div id="divMessagesP" style="display: none;">
+				<p align="left">
+				<div class="alert alert-danger" style="text-align: left;">
+					<label id="lblErrorP"
+						style="font-size: 12px; color: firebrick; font-weight: bold; margin-left: 5px;"></label>
+				</div>
+			</div>
+			<div>
+				<button onclick="PostForm(); return false;" type="submit" class="btn btn-success">Pagar</button>
+			</div>
+
+
+		</form:form>
+	</div>
 	<form:form action="totalapagarcuota" modelAttribute="confirm"
 		method="POST" role="form">
 		<div class="container">
