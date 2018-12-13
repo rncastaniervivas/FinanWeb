@@ -12,10 +12,36 @@
     	<link href="css/xheroic-features.css" rel="stylesheet">
 </head>
 <body>
-	
+	<script>
+    function PostForm() {
+        if (IsValid()) {
+            $("#lblErrorP").text("");
+            document.forms["frmPrestamo"].submit();
+        }
+    }
+    function IsValid() {
+        HideDivMessageP();
+        var field;
+        field = $("#valor").val();
+        if (field.length == 0) {
+            $("#lblErrorP").text("Debe ingresar un valor para el prestamo.");
+            ShowDivMessageP();
+            return false;
+        }
+        return true;
+    }
+    function ShowDivMessageP() {
+        scroll(0, 0);
+        $("#divMessagesP").show("slow", function () { });
+    }
+    function HideDivMessageP() {
+        $("#divMessagesP").hide();
+    }
+</script>
 	<div class="container">
-		<form:form action="validar-nuevo-prestamo" method="POST" modelAttribute="afiliado">
+		<form:form action="validar-nuevo-prestamo" method="POST" modelAttribute="afiliado" name="frmPrestamo">
 		  <form:input type="hidden" path="dni" value="${afiliado.dni}"/>
+		  <form:input type="hidden" path="idAfiliado" value="${afiliado.idAfiliado}"/>
 		  <div class="form-row">
 		    <div class="form-group col-md-6">
 		      <label >Nombre</label>
@@ -45,7 +71,7 @@
 		    </div>
 		    <div class="form-group col-md-6">
 		      <label >Nuevo Monto</label>
-		      <input name="valor" type="text" class="form-control" id="inputMonto">
+		      <input id="valor" name="valor" type="text" class="form-control" id="inputMonto">
 		    </div>
 		     <div class="form-group col-md-6"></div>
 		     <div class="form-group col-md-6"></div>
@@ -61,8 +87,13 @@
 					</select>
 				</div>
 			    </div>
-		    
-		    
+			    		     <div id="divMessagesP" style="display: none;">
+                        <p align="left">
+                            <div class="alert alert-danger" style="text-align: left;">
+                                <label id="lblErrorP" style="font-size: 12px; color: firebrick; font-weight: bold; margin-left: 5px;"></label>
+                            </div>
+                        </p>
+			 </div>
 		    <div class="form-group col-md-10">
 			    <c:if test="${not empty error}">
 			        <h4><span>${error}</span></h4>
@@ -72,7 +103,7 @@
 			    
 			   
 		    <div class="form-group col-md-4">
-		    	<button class="btn btn-info" type="submit">Dar Prestamo</button>
+		    	<button class="btn btn-info" type="submit" onclick="PostForm(); return false;">Dar Prestamo</button>
 			</div>
 		  </div>
 		</form:form>
