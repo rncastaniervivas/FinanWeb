@@ -17,8 +17,8 @@
 	<body>
 		
 	<jsp:include page="header.jsp" />
-		<div class="container">
-			<h1 class="text-center">Lista de cuotas de préstamos impagas</h1>
+		<div class="container"></br>
+			<h1 class="text-center">Lista de cuotas de préstamos impagas</h1></br>
 			<table class="table">
 			  <thead class="thead-light">
 			    <tr class="bg-danger">
@@ -60,7 +60,7 @@
 			      <!--input type="hidden" name="newCapital" value="${prestamoARef.saldo}"-->
 			      <input type="text"  value="${prestamoARef.saldo}" class="form-control" disabled>                      			      
 			    </div>
-			    <div class="form-group col-md-4">
+			    <div class="form-group col-md-3">
 			      <label for="inputState">Cuotas</label>
 			      <select name="cuotas" id="inputState" class="form-control">
 			        <c:forEach begin="1" end="12" varStatus="no">
@@ -68,25 +68,25 @@
 				    </c:forEach>
 			      <select>
 			    </div>
-			    <div class="form-group row">
-					<label class="col-lg-2 control-label">Nuevo interes anual</label>
-					<div class="col-lg-2 control-label">
-					  	<input type="text" id="interes" value="35.5%" class="form-control" disabled>
-					</div>
+			    <div class="form-group col-md-3">
+					<label for="nuevoInteresAnual">Nuevo interes anual</label>
+					<input type="text" id="interes" value="35.5%" class="form-control" disabled>
 				</div>
 			  </div>
 			  <div class="form-group col-md-6">
-			  	<button type="submit" class="btn btn-primary" formaction="verifica-refinanciacion">Aceptar</button>
+			  	<button type="submit" class="btn btn-success col-md-3" formaction="verifica-refinanciacion">Aceptar</button>
 			  </div>
 			<form>
 		</div>
-
-		<br>
-		<form><button type="submit" class="btn btn-primary  btn-lg" formaction="listarprestamos">Regresar</button></form>
-		<br>
-		<br>
+		
+		<div class="container">
+			<br>
+			<form><button type="submit" class="btn btn-primary  btn-lg" formaction="listarprestamos">Regresar</button></form>
+			<br>
+		</div>
+		<!-- br>
 		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg">Home</button></a>
-		<br>
+		<br-->
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
 		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>

@@ -12,13 +12,13 @@
 	</head>
 	<body>
 	<jsp:include page="header.jsp" />
-		<div class="container">
+		<div class="container"></br>
 			<h3>${afiliado.nombre} ${afiliado.apellido}</h3>
 		
 		</div>
-	
+		
 		<div class="container">
-			<h1 class="text-center">Listado de préstamos</h1>
+			<h1 class="text-center">Listado de préstamos</h1></br>
 			<table class="table">
 			  <thead class="thead-light">
 			    <tr>
@@ -75,12 +75,16 @@
 	        </c:if>
 			
 		</div>
-		<br>
-		<a href="javascript:window.history.go(-1);"><button class="btn btn-primary btn-lg">Regresar</button></a>
-		<br>
-		<br>
-		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
-		<br>
+		
+		<div class="container">
+			<br>
+			<a href="javascript:window.history.go(-1);"><button class="btn btn-primary btn-lg">Regresar</button></a>
+			<br>
+			<br>
+			<!-- a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a -->
+			<br>
+		</div>
+		
 
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>

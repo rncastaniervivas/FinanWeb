@@ -14,25 +14,27 @@
 <body class="container">
 
 <jsp:include page="header.jsp" />
-<h3>buscar financiera</h3>
-<div class="row">
-<div class="col-md-8">
-<form:form class="form" action="encontrado" mothod="Post" modelAttribute="financiera">
-<form:input type="text"  path="nombre" id="nombre" />
-<button type="submit" class="btn-success"><span class="glyphicon glyphicon-search"></span> buscar</button>
-</form:form>
-</div>
-<div class="col-md-4">
-<form:form class="form-inline d-iniline" action="agregarfinanciera">
-<br>
-<button class="btn btn-primary btn-lg" type="submit">nueva finaciera</button>
-</form:form>
-</div>
-</div>
-<h4><span>${ error}</span></h4>
 
-<div >
-<h3 >Mis Financieras</h3>
+<div ></br>
+<h1 class="text-center">Mis Financieras</h1></br>
+
+<div class="row">
+	<div class="col-md-7">
+		<form:form class="form-inline d-iniline" action="agregarfinanciera">
+		<button class="btn btn-primary" type="submit">nueva finaciera</button>
+		</form:form>
+	</div>
+	<h4><span>${error}</span></h4>
+	<div class="col-md-5">
+		<form:form class="form" action="encontrado" mothod="Post" modelAttribute="financiera">
+			<form:input type="text"  path="nombre" id="nombre" placeholder="Frances"/>
+			<button type="submit" class="btn-success"><span class="glyphicon glyphicon-search"></span> Buscar Financiera</button>
+		</form:form>
+	</div>
+</div>
+
+</br>
+
 <table class=" table">
 <thead class="thead-light">
 			    <tr>
@@ -66,9 +68,7 @@
 		<br>
 		<a href="javascript:window.history.go(-1);"><button class="btn btn-primary btn-lg">Regresar</button></a>
 		<br>
-		<br>
-		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
-		<br>
+		
 <!-- iconos https://www.glyphicons.com/  -->
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
