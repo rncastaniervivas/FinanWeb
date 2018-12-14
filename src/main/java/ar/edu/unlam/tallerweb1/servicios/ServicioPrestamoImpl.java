@@ -209,6 +209,12 @@ public class ServicioPrestamoImpl implements ServicioPrestamo {
 			salfin = fijarNumero(salini-amortizacion,2);
 			
 		}
+		
+		List<Prestamo> prestamos = miAfiliado.getPrestamo();
+		prestamos.add(newPrestamo);
+		miAfiliado.setPrestamo(prestamos);
+		
+		servicioAfiliadoDao.modificarAfiliado(miAfiliado);
 		servicioCuotaDao.insertarCuota(newCuotas);
 	}
 	

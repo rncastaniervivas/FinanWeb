@@ -162,7 +162,7 @@ public class ServicioRefinanciarImpl implements ServicioRefinanciar{
 	@Override
 	public boolean esPrestamoRefinanciado(Long idPrestamoARef) {
 		Prestamo prestamo = servicioPrestamoDao.consultarUnPrestamo(idPrestamoARef);
-		System.out.println(idPrestamoARef);
+		
 		if (prestamo.getEstado().contentEquals("refinanciado")) {
 			return true;
 		}else{
