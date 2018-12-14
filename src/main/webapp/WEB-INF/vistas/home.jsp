@@ -18,8 +18,8 @@
 			 <div class="list-group">
 			  <a href="#" class="list-group-item">
 			    <h4 class="list-group-item-heading">Préstamos</h4>
-			    <p class="list-group-item-text">Todos los préstamos</p>
-			    <p class="list-group-item-text">Préstamos de un afiliado</p>
+			    <p class="list-group-item-text">Otorgar préstamos a afiliados</p>
+			    <p class="list-group-item-text">Refinanciar préstamos ya otorgados</p>
 			  </a>
 			  <a href="#" class="list-group-item">
 			    <h4 class="list-group-item-heading">Afiliados</h4>
