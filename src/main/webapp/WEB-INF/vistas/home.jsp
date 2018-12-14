@@ -6,61 +6,49 @@
 	    <link href="css/xbootstrap.min.css" rel="stylesheet">
     	<link href="css/xheroic-features.css" rel="stylesheet">
     	<title>FinanWeb</title>
+    	
 	</head>
 	<body>
 	<jsp:include page="header.jsp" />
-		<div class = "container">
+	
+		<div class = "container">	
 			
-		<div id="myCarousel" class="carousel slide" data-ride="carousel">
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-  </ol>
-
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner">
-    <div class="item active">
-      <img src="foto1.jpg" alt="Chania">
-      <div class="carousel-caption">
-        <h3>Préstamos accesibles</h3>
-        <p>Te ofrecemos todas las garantias necesarias para tu próximo proyecto</p>
-      </div>
-    </div>
-
-    <div class="item">
-      <img src="foto2.jpg" alt="Chicago">
-      <div class="carousel-caption">
-        <h3>Solo con tu recibo de sueldo</h3>
-        <p>Descontamos tu cuota del préstamo de tu recibo de sueldo</p>
-      </div>
-    </div>
-
-    <div class="item">
-      <img src="foto3.jpg" alt="New York">
-      <div class="carousel-caption">
-        <h3>Beneficios exclusivos</h3>
-        <p>Servicio ofrecido para el personal del Servicio Penitenciario</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Left and right controls -->
-  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#myCarousel" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-
+			<h1>Bienvenido al sistema FinanWeb</h1>
+			<dl>Ofrecemos un manejo completo e integral sobre:</dl>
+			 <div class="list-group">
+			  <a href="#" class="list-group-item">
+			    <h4 class="list-group-item-heading">Préstamos</h4>
+			    <p class="list-group-item-text">Todos los préstamos</p>
+			    <p class="list-group-item-text">Préstamos de un afiliado</p>
+			  </a>
+			  <a href="#" class="list-group-item">
+			    <h4 class="list-group-item-heading">Afiliados</h4>
+			    <p class="list-group-item-text">Agregar nuevos afiliados</p>
+			    <p class="list-group-item-text">Modificar afiliados</p>
+			    <p class="list-group-item-text">Eliminar afiliados</p>
+			  </a>
+			  <a href="#" class="list-group-item">
+			    <h4 class="list-group-item-heading">Financieras</h4>
+			    <p class="list-group-item-text">Ver todas las financieras</p>
+			    <p class="list-group-item-text">Agregar nuevas financieras</p>
+			    <p class="list-group-item-text">Eliminar financieras</p>			    
+			  </a>
+			  <a href="#" class="list-group-item">
+			    <h4 class="list-group-item-heading">Caja</h4>
+			    <p class="list-group-item-text">Manejo de ingresos y egresos</p>			    
+			  </a>
+			  <a href="#" class="list-group-item">
+			    <h4 class="list-group-item-heading">Gráficos</h4>
+			    <p class="list-group-item-text">Estadisticas sobre préstamos, afiliados, financieras</p>			    
+			  </a>
+			</div> 
+			
 		</div>
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
 		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 		<script src="js/bootstrap.min.js" type="text/javascript"></script>
+		
+
 	</body>
 </html>

@@ -21,8 +21,10 @@
 
     <!--Excluye de las URL validas para Spring MVC los recursos estáticos de la aplicación Web: estilos, java script y fuentes-->
     <!--Si se agregaran, por ejemplo, imagenes, es; es necesario agregar ese path acá-->
+    <mvc:resources mapping="/img/**" location="/img/" />
     <mvc:resources mapping="/css/**" location="/css/" />
     <mvc:resources mapping="/js/**" location="/js/" />
     <mvc:resources mapping="/fonts/**" location="/fonts/" />
-    <mvc:resources mapping="/img/**" location="/img/" />
+
+
 </beans>
