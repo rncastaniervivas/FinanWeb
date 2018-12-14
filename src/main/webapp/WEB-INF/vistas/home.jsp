@@ -10,87 +10,52 @@
 	<body>
 	<jsp:include page="header.jsp" />
 		<div class = "container">
-			<div>
-				<a name="Prestamos" id="Prestamos"><h3>Prestamos</h3></a>
-					<form action="listarprestamos" method="POST">
-						<button type ="submit" class="btn btn-info">Listar todos los préstamos</button>
-					</form>
-					<br>
-				
-					<form action="top5afiliados" method="POST" >
-					  <button type="submit" class="btn btn-info" name="opcion" value="1">Top5AfiliadosConMayorPrestamo</button>
-					</form>
-					<br>
-					<form action="top5afiliados" method="POST" >
-					  <button type="submit" class="btn btn-info" name="opcion" value="2">Top5AfiliadosConMenorPrestamo</button>
-					</form>
-					<br>
-					<form action="top5financieras" method="POST" >
-					  <button type="submit" class="btn btn-info" name="opcion" value="3">Top5FinancierasConMayorPrestamo</button>
-					</form>
-					<br>
-					<form action="top5financieras" method="POST" >
-					  <button type="submit" class="btn btn-info" name="opcion" value="4">Top5FinancierasConMenorPrestamo</button>
-					</form>
-					<br>
-					
-					
-			</div>
 			
-			<div>
-				<a name="Afiliados" id="Afiliados"><h3>Afiliados</h3></a>
-				<br>
-					<form action="buscarafiliado" method="POST" >
-						<input type="text" name="dni" placeholder="dni">
-						<button type="submit">Buscar</button>
-					</form>
-				<br>
-				<form action="agregarafiliado" method ="POST">
-					<button type ="submit" class="btn btn-info">Agregar Afiliado</button>
-				</form>
-				<br>
-				<form action= "listarafiliados" method="POST">
-					<button type ="submit" class="btn btn-info">Listado de Afiliados</button>
-				</form>
-				<br>
-			</div>
-			
-			<div>
-				<h3>Financiera</h3>
-				<br>
-					<form action="encontrado" method="POST" >
-						<input type="text" name="nombre" placeholder="nombre">
-						<button type="submit">Buscar</button>
-					</form>
-				<br>
-					<form action="agregarfinanciera" method="POST">
-						<button type="submit" class="btn btn-info">Agregar financiera</button>
-					</form>
-				<br>
-					<form action="pagarfinancieras" method="POST">
-						<button type="submit" class="btn btn-info">Pagar a financiera</button>
-					</form>
-				<br>
-					<form action= "financiera" method="POST">
-						<button type ="submit" class="btn btn-info">Listado de Financieras</button>
-					</form>
-			</div>
-			<div>
-				<h3>Caja</h3>
-				<br>
-					<form action= "caja" method="POST">
-						<button type ="submit" class="btn btn-info">registros de Caja</button>
-					</form>
-					<br>
-					<form action="graficocaja" method="POST" >
-					  <button type="submit" class="btn btn-info" name="opcion" value="1">Grafico de Ingresos</button>
-					</form>
-					<br>
-					<form action="graficocaja" method="POST" >
-					  <button type="submit" class="btn btn-info" name="opcion" value="2">Grafico de Egresos</button>
-					</form>
-			
-			</div>
+		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item active">
+      <img src="foto1.jpg" alt="Chania">
+      <div class="carousel-caption">
+        <h3>Préstamos accesibles</h3>
+        <p>Te ofrecemos todas las garantias necesarias para tu próximo proyecto</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <img src="foto2.jpg" alt="Chicago">
+      <div class="carousel-caption">
+        <h3>Solo con tu recibo de sueldo</h3>
+        <p>Descontamos tu cuota del préstamo de tu recibo de sueldo</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <img src="foto3.jpg" alt="New York">
+      <div class="carousel-caption">
+        <h3>Beneficios exclusivos</h3>
+        <p>Servicio ofrecido para el personal del Servicio Penitenciario</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
 
 		</div>
 		<!-- Placed at the end of the document so the pages load faster -->

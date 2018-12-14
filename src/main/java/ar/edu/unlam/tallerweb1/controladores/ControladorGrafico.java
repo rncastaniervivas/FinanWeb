@@ -23,6 +23,12 @@ public class ControladorGrafico {
 	@Inject
 	private ServicioRegistro servicioRegistro;
 	
+	@RequestMapping(path="/graficos")
+	public ModelAndView mostrarTodosLosGraficos(){
+		
+		return new ModelAndView("graficos");
+	}
+	
 	@RequestMapping(path="/top5afiliados")
 	public ModelAndView top5afiliados(Integer opcion) {
 		ModelMap modelo = new ModelMap();

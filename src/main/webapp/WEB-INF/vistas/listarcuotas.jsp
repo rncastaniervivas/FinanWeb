@@ -13,7 +13,8 @@
 	</head>
 	
 	<body>
-		
+		<jsp:include page="header.jsp" />
+		<h1 class="text-center">Lista todas las cuotas</h1>
 		</br></br>
 		<div class="container">
 		  <div class="form-row">

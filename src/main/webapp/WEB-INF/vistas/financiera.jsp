@@ -12,6 +12,8 @@
 
 </head>
 <body class="container">
+
+<jsp:include page="header.jsp" />
 <h3>buscar financiera</h3>
 <div class="row">
 <div class="col-md-8">

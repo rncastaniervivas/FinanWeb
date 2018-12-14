@@ -11,8 +11,10 @@
 <title>Todos los afiliados</title>
 </head>
 <body>
+	<jsp:include page="header.jsp" />
+
 	<div class="container">
-			<h1 class="text-center">Lista de afiliados</h1>
+			<h1 class="text-center">Listado de todos los afiliados</h1>
 			<table class="table">
 			  <thead class="thead-light">
 			    <tr>
@@ -56,6 +58,13 @@
 				  </tbody>
 			  </c:forEach>
 			</table>
+		</div>
+		<br><br>
+		<div class="col-md-4">
+			<form:form class="form" action="buscarafiliado" mothod="Post" modelAttribute="afiliado">
+				<form:input type="text"  path="dni" id="dni" placeholder="DNI de afiliado" />
+				<button type="submit" class="btn-success"><span class="glyphicon glyphicon-search"></span> Buscar afiliado</button>
+			</form:form>
 		</div>
 		<br>
 		<form:form class="form-inline d-iniline" action="agregarafiliado">

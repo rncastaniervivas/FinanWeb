@@ -5,14 +5,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Caja</title>
 		<<link href="css/bootstrap-theme.min.css" rel="stylesheet">
 	    <link href="css/xbootstrap.min.css" rel="stylesheet">
     	<link href="css/xheroic-features.css" rel="stylesheet">
 </head>
 <body class="container">
+	<jsp:include page="header.jsp" />
 <div class="page-header">
-<h1>lista registro</h1>
+<h1 class="text-center">Registros de caja</h1>
 </div>
  <div class="table-responsive">
       <table class="table table-bordered table-hover table-striped">

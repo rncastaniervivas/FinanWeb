@@ -16,19 +16,19 @@
 	        <div class="collapse navbar-collapse" id="navbarResponsive">
 	          <ul class="navbar-nav ml-auto">
 	            <li class="nav-item">
-	              <a class="nav-link" href="#" id="Prestamos">Préstamos</a>
+	              <a class="nav-link" href="listarprestamos" id="prestamo">Préstamos</a>
 	            </li>
 	            <li class="nav-item">
-	              <a class="nav-link" href="#" id="Afiliados">Afiliados</a>
+	              <a class="nav-link" href="listarafiliados" id="afiliado">Afiliados</a>
 	            </li>
 	            <li class="nav-item">
-	              <a class="nav-link" href="Financieras">Financieras</a>
+	              <a class="nav-link" href="financiera">Financieras</a>
 	            </li>
 	            <li class="nav-item">
-	              <a class="nav-link" href="Caja">Caja</a>
+	              <a class="nav-link" href="caja">Caja</a>
 	            </li>
 	            <li class="nav-item">
-	              <a class="nav-link" href="Gráficos">Gráficos</a>
+	              <a class="nav-link" href="graficos">Gráficos</a>
 	            </li>
 	          </ul>
 	        </div>
