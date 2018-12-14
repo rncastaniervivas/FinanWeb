@@ -46,15 +46,8 @@ public class ServicioAfiliadoImpl implements ServicioAfiliado {
 		return servicioAfiliadoDao.consultarAfiliado();
 	}
 	@Override
-	public boolean modificarAfiliado(Afiliado afiliado) {
-		List<Afiliado> miafil=servicioAfiliadoDao.buscarAfiliado(afiliado);
-		if(miafil.size() != 0) {
-			return false;
-			}else {
-				servicioAfiliadoDao.modificarAfiliado(afiliado);
-		
-		return true;
-			}
+	public void modificarAfiliado(Afiliado afiliado) {
+		servicioAfiliadoDao.modificarAfiliado(afiliado);
 		}
 	
 	
