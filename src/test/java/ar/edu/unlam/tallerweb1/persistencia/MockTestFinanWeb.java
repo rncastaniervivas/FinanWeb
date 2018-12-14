@@ -148,41 +148,41 @@ public class MockTestFinanWeb {
 		assertThat(modelo.getViewName()).isEqualTo("refinanciarerror");
 	}
 	
-//	@Test
-//	@Transactional
-//	@Rollback(true)
-//	public void testNuevoPrestamo(){
-//
-//		ControladorPrestamo controladorPrestamo = new ControladorPrestamo();
-//		
-//		Afiliado afiliadoMock = mock(Afiliado.class);
-//		
-//		List<Financiera> financierasMock = mock(List.class);
-//		List<Prestamo> prestamosMock = mock(List.class);
-//		
-//		afiliadoMock.setAntiguedad("2");
-//		
-//		ServicioAfiliado servicioAfiliadoMock = mock(ServicioAfiliado.class);
-//		ServicioPrestamo servicioPrestamoMock = mock(ServicioPrestamo.class);
-//		ServicioFinanciera servicioFinancieraMock = mock(ServicioFinanciera.class);
-//		
-//		controladorPrestamo.setServicioPrestamo(servicioPrestamoMock);
-//		controladorPrestamo.setServicioAfiliado(servicioAfiliadoMock);
-//		controladorPrestamo.setServicioFinanciera(servicioFinancieraMock);
-//		
-//		double prestamoDisponible = 10.0;
-//		
-//		when(servicioAfiliadoMock.consultarAfiliadoDni(afiliadoMock.getDni())).thenReturn(afiliadoMock);
-//		when(servicioPrestamoMock.consultarPrestamo(afiliadoMock.getDni())).thenReturn(prestamosMock);
-//		when(servicioPrestamoMock.prestamoDisponible(afiliadoMock)).thenReturn(prestamoDisponible);
-//		when(servicioFinancieraMock.consultarFinanciera()).thenReturn(financierasMock);
-//		
-//		ModelAndView modelo = controladorPrestamo.NuevoPrestamo(afiliadoMock);
-//		
-//		assertThat(modelo.getViewName()).isEqualTo("nuevoprestamo");
-//		
-//		
-//	}
+	@Test
+	@Transactional
+	@Rollback(true)
+	public void testNuevoPrestamo(){
+
+		ControladorPrestamo controladorPrestamo = new ControladorPrestamo();
+		
+		Afiliado afiliadoMock = mock(Afiliado.class);
+		
+		List<Financiera> financierasMock = mock(List.class);
+		List<Prestamo> prestamosMock = mock(List.class);
+		
+		afiliadoMock.setAntiguedad("3");
+		
+		ServicioAfiliado servicioAfiliadoMock = mock(ServicioAfiliado.class);
+		ServicioPrestamo servicioPrestamoMock = mock(ServicioPrestamo.class);
+		ServicioFinanciera servicioFinancieraMock = mock(ServicioFinanciera.class);
+		
+		controladorPrestamo.setServicioPrestamo(servicioPrestamoMock);
+		controladorPrestamo.setServicioAfiliado(servicioAfiliadoMock);
+		controladorPrestamo.setServicioFinanciera(servicioFinancieraMock);
+		
+		double prestamoDisponible = 10.0;
+		
+		when(servicioAfiliadoMock.consultarAfiliadoDni(afiliadoMock.getDni())).thenReturn(afiliadoMock);
+		when(servicioPrestamoMock.consultarPrestamo(afiliadoMock.getDni())).thenReturn(prestamosMock);
+		when(servicioPrestamoMock.prestamoDisponible(afiliadoMock)).thenReturn(prestamoDisponible);
+		when(servicioFinancieraMock.consultarFinanciera()).thenReturn(financierasMock);
+		when(servicioAfiliadoMock.validarAfiliadoAntiguedad(afiliadoMock.getAntiguedad())).thenReturn(true);
+		ModelAndView modelo = controladorPrestamo.NuevoPrestamo(afiliadoMock);
+		
+		assertThat(modelo.getViewName()).isEqualTo("nuevoprestamo");
+		
+		
+	}
 	
 	
 }

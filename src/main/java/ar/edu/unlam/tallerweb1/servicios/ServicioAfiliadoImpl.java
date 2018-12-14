@@ -77,6 +77,13 @@ public class ServicioAfiliadoImpl implements ServicioAfiliado {
 	}
 	
 	@Override
+	public boolean validarAfiliadoAntiguedad(String antiguedad) {
+		if(Integer.parseInt(antiguedad) >= 1) {
+		return true;	
+		}
+		return false;
+	}
+	@Override
 	public Afiliado consultarAfiliadoDni (Long dni) {
 		return servicioAfiliadoDao.consultarAfiliadoDni(dni);
 	}

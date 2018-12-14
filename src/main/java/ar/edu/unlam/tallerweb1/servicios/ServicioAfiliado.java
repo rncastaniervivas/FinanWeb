@@ -22,5 +22,7 @@ public interface ServicioAfiliado {
 	Afiliado consultarIdAfiliado(Long id);
 
 	Boolean existeAfiliado(Afiliado afiliado);
+
+	boolean validarAfiliadoAntiguedad(String antiguedad);
 	
 }

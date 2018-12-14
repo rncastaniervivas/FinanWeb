@@ -235,7 +235,7 @@ public class ControladorPrestamo {
 		ModelMap modelo=new ModelMap();
 		Afiliado miAfiliado = servicioAfiliado.consultarAfiliadoDni(afiliado.getDni());
 		
-		if(Integer.parseInt(miAfiliado.getAntiguedad()) >= 1){
+		if(servicioAfiliado.validarAfiliadoAntiguedad(afiliado.getAntiguedad())){
 			List<Prestamo> prestamos = servicioPrestamo.consultarPrestamo(miAfiliado.getDni());
 			
 			double prestamoDisponible = servicioPrestamo.prestamoDisponible(afiliado);
