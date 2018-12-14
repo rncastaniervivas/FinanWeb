@@ -1,14 +1,7 @@
 
 package ar.edu.unlam.tallerweb1.persistencia;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.hibernate.SessionFactory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -21,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.controladores.*;
-import ar.edu.unlam.tallerweb1.dao.*;
 import ar.edu.unlam.tallerweb1.modelo.*;
 import ar.edu.unlam.tallerweb1.servicios.*;
 
@@ -41,47 +33,27 @@ public class MockTestFinanWeb {
 		controlador.setServicioPrestamo(servicioPrestamoMock);
 		
 		Afiliado afiliadoMock=mock(Afiliado.class);
-		
-		Prestamo prestamoMock=mock(Prestamo.class);
-		//
 		Financiera financieraMock=mock(Financiera.class);
-		financieraMock.setIdFinanciera(1l);
-		financieraMock.setNombre("Naranja");
-		financieraMock.setMontoCapital(1000000);
-		//
-		prestamoMock.setAfiliado(afiliadoMock);
-		prestamoMock.setCuotas(6);
-		prestamoMock.setDni(9L);
-		prestamoMock.setEstado("activo");
-		prestamoMock.setInteres(2.00);
-		prestamoMock.setValor(200);
-		prestamoMock.setCuota(null);
-		//
-		prestamoMock.setFinanciera(financieraMock);
+		List<Prestamo> prestamosMock=new ArrayList<Prestamo>();
 		
-		List<Prestamo> prestamos=new ArrayList<Prestamo>();
+		double valorPrestamoDisponible = 1000.0;
+		Integer valor = 500;
+		Integer cuotas = 6;
 		
-		prestamos.add(prestamoMock);
-		afiliadoMock.setApellido("ApellidoMock");
-		afiliadoMock.setAntiguedad("10años");
-		afiliadoMock.setDni(9L);
-		afiliadoMock.setSueldo(10000.00);
-		afiliadoMock.setClasificacion("cliente");
-		afiliadoMock.setNombre("NombreMock");
-		afiliadoMock.setPrestamo(prestamos);		
-		
-		servicioAfiliadoMock.guardarAfiliado(afiliadoMock);
+		when(servicioPrestamoMock.prestamoDisponible(afiliadoMock)).thenReturn(valorPrestamoDisponible);
 		
 		when(servicioAfiliadoMock.consultarAfiliadoDni(afiliadoMock.getDni())).thenReturn(afiliadoMock);
 		
-		when(servicioPrestamoMock.consultarPrestamo(afiliadoMock.getDni())).thenReturn(prestamos);
+		when(servicioPrestamoMock.consultarPrestamoActivos(afiliadoMock)).thenReturn(prestamosMock);
 		
-		when(servicioPrestamoMock.prestamoDisponible(afiliadoMock)).thenReturn(3000.00);
 		
-		ModelAndView modelo= controlador.irValidarNuevoPrestamo(afiliadoMock, 500,6, "Naranja");
+		ModelAndView modelo= controlador.irValidarNuevoPrestamo(afiliadoMock, valor,cuotas, financieraMock.getNombre());
+		
+		assertThat(modelo.getModelMap().get("afiliado")).isEqualTo(afiliadoMock);
 		
 		assertThat(modelo.getViewName()).isEqualTo("/listarprestamos");
-
+		
+		assertThat(modelo.getModelMap().get("prestamos")).isEqualTo(prestamosMock);
 	}
 	
 	@Test
@@ -98,22 +70,18 @@ public class MockTestFinanWeb {
 		controladorAfiliado.setServicioPrestamo(servicioPrestamoMock);
 		//
 		Afiliado afiliadoMock=mock(Afiliado.class);
-		
-		afiliadoMock.setApellido("ApellidoMock");
-		afiliadoMock.setAntiguedad("10años");
-		afiliadoMock.setDni(9L);
-		afiliadoMock.setSueldo(100000.00);
-		afiliadoMock.setClasificacion("cliente");
-		afiliadoMock.setNombre("NombreMock");
-		afiliadoMock.setNombre("NombreMock");
-		List<Afiliado> afiliados=new ArrayList<Afiliado>();
-		afiliados.add(afiliadoMock);
-		afiliados.add(afiliadoMock);
+
+		List<Afiliado> afiliadosMock=mock(List.class);
 		
 		when(servicioAfiliadoMock.guardarAfiliado(afiliadoMock)).thenReturn(true);
-		when(servicioAfiliadoMock.consultarAfiliado()).thenReturn(afiliados);
-		ModelAndView modeloagregadoExitosamente=controladorAfiliado.agregadoAfiliadoExitoso(afiliadoMock);
+		
+		when(servicioAfiliadoMock.consultarAfiliado()).thenReturn(afiliadosMock);
+		
+		ModelAndView modeloagregadoExitosamente = controladorAfiliado.agregadoAfiliadoExitoso(afiliadoMock);
+		
 		assertThat(modeloagregadoExitosamente.getViewName()).isEqualTo("listarafiliados");
+		
+		assertThat(modeloagregadoExitosamente.getModelMap().get("afiliados")).isEqualTo(afiliadosMock);
 
 	}
 	
@@ -126,6 +94,7 @@ public class MockTestFinanWeb {
 		
 		Double ingresos=500.0;
 		Double egresos=100.0;
+		
 		controlador.setServicioRegistro(servicioRegistroMock);
 		
 		when(servicioRegistroMock.montoDeIngresos()).thenReturn(ingresos);
@@ -133,6 +102,7 @@ public class MockTestFinanWeb {
 		when(servicioRegistroMock.montoDeEgresos()).thenReturn(egresos);
 		
 		when(servicioRegistroMock.montoCaja()).thenReturn(400.00);
+		
 		
 		ModelAndView modelo=controlador.mostrarRegistrosCaja();
 		
@@ -164,7 +134,9 @@ public class MockTestFinanWeb {
 		
 		
 		when(servicioPrestamoMock.consultarUnPrestamo(prestamoMock.getIdPrestamo())).thenReturn(prestamoMock);
+		
 		when(servicioAfiliadoMock.consultarAfiliado(prestamoMock.getIdPrestamo())).thenReturn(afiliadoMock);
+		
 		when(servicioRefinanciarMock.esPrestamoRefinanciado(prestamoMock.getIdPrestamo())).thenReturn(true);
 		
 		ModelAndView modelo = controladorPrestamo.listaCuotasImpag(afiliadoMock.getDni());
@@ -175,6 +147,43 @@ public class MockTestFinanWeb {
 		
 		assertThat(modelo.getViewName()).isEqualTo("refinanciarerror");
 	}
+	
+//	@Test
+//	@Transactional
+//	@Rollback(true)
+//	public void testNuevoPrestamo(){
+//
+//		ControladorPrestamo controladorPrestamo = new ControladorPrestamo();
+//		
+//		Afiliado afiliadoMock = mock(Afiliado.class);
+//		
+//		List<Financiera> financierasMock = mock(List.class);
+//		List<Prestamo> prestamosMock = mock(List.class);
+//		
+//		afiliadoMock.setAntiguedad("2");
+//		
+//		ServicioAfiliado servicioAfiliadoMock = mock(ServicioAfiliado.class);
+//		ServicioPrestamo servicioPrestamoMock = mock(ServicioPrestamo.class);
+//		ServicioFinanciera servicioFinancieraMock = mock(ServicioFinanciera.class);
+//		
+//		controladorPrestamo.setServicioPrestamo(servicioPrestamoMock);
+//		controladorPrestamo.setServicioAfiliado(servicioAfiliadoMock);
+//		controladorPrestamo.setServicioFinanciera(servicioFinancieraMock);
+//		
+//		double prestamoDisponible = 10.0;
+//		
+//		when(servicioAfiliadoMock.consultarAfiliadoDni(afiliadoMock.getDni())).thenReturn(afiliadoMock);
+//		when(servicioPrestamoMock.consultarPrestamo(afiliadoMock.getDni())).thenReturn(prestamosMock);
+//		when(servicioPrestamoMock.prestamoDisponible(afiliadoMock)).thenReturn(prestamoDisponible);
+//		when(servicioFinancieraMock.consultarFinanciera()).thenReturn(financierasMock);
+//		
+//		ModelAndView modelo = controladorPrestamo.NuevoPrestamo(afiliadoMock);
+//		
+//		assertThat(modelo.getViewName()).isEqualTo("nuevoprestamo");
+//		
+//		
+//	}
+	
 	
 }
 

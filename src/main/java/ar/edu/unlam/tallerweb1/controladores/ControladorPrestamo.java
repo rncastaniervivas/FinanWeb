@@ -231,7 +231,7 @@ public class ControladorPrestamo {
 //	}
 
 	@RequestMapping(path = "/nuevoprestamo", method=RequestMethod.POST)
-	public ModelAndView irANuevoPrestamo(@ModelAttribute("afiliado") Afiliado afiliado) {
+	public ModelAndView NuevoPrestamo(@ModelAttribute("afiliado") Afiliado afiliado) {
 		ModelMap modelo=new ModelMap();
 		Afiliado miAfiliado = servicioAfiliado.consultarAfiliadoDni(afiliado.getDni());
 		
