@@ -16,7 +16,7 @@
 	
 	<body>
 		
-	
+	<jsp:include page="header.jsp" />
 		<div class="container">
 			<h1 class="text-center">Lista de cuotas de préstamos impagas</h1>
 			<table class="table">

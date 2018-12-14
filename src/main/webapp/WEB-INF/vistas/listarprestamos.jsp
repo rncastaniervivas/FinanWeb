@@ -11,13 +11,14 @@
     	<link href="css/xheroic-features.css" rel="stylesheet">
 	</head>
 	<body>
+	<jsp:include page="header.jsp" />
 		<div class="container">
 			<h3>${afiliado.nombre} ${afiliado.apellido}</h3>
 		
 		</div>
 	
 		<div class="container">
-			<h1 class="text-center">Lista de préstamos</h1>
+			<h1 class="text-center">Listado de préstamos</h1>
 			<table class="table">
 			  <thead class="thead-light">
 			    <tr>
