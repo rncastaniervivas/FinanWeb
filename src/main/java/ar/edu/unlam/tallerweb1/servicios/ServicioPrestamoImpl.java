@@ -40,7 +40,7 @@ public class ServicioPrestamoImpl implements ServicioPrestamo {
 		List<Prestamo> prestamo= servicioPrestamoDao.consultarPrestamo();
 		List<Prestamo> prestamoresult= new ArrayList<Prestamo>();
 		for(Prestamo item: prestamo) {
-			if(item.getFinanciera()==null) {
+			if(item.getDni()!=null) {
 				prestamoresult.add(item);
 			}
 		}

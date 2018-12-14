@@ -38,7 +38,7 @@ public class ServicioCuotaImpl implements ServicioCuota{
 		String doc= Long.toString(confirm.getDni());
 		Cuota cuotaitem= new Cuota();
 		Prestamo prestamo0=servicioPrestamoDao.consultarUnPrestamo(confirm.getIdPrestamo());
-		double nuevosaldo=prestamo0.getSaldo();
+		double nuevosaldo=fijarNumero(prestamo0.getSaldo(),2);
 		for(String item: confirm.getCheck()) {
 			idCuotas.add(Long.parseLong(item));
 			
@@ -50,7 +50,7 @@ public class ServicioCuotaImpl implements ServicioCuota{
 			cuotaitem.setFechaDePago(new Date());
 			servicioCuotaDao.modificarElCubierto(cuotaitem);
 			servicioRegistro.insertarIngresos(cuotaitem, confirm.getIdPrestamo(), doc);
-			nuevosaldo-=cuotaitem.getMonto();
+			nuevosaldo-=fijarNumero(cuotaitem.getMonto(),2);
 			prestamo0.setSaldo(nuevosaldo);
 		}
 		
@@ -103,21 +103,20 @@ public class ServicioCuotaImpl implements ServicioCuota{
 
 	@Override
 	public boolean pagarporinput(double pago, Long idPrestamo) {
+		pago=fijarNumero(pago, 2);
 		Prestamo prestamo=servicioPrestamoDao.consultarUnPrestamo(idPrestamo);
 		
 		List<Cuota> listCuotas=servicioCuotaDao.consultarCuotaImpagas(idPrestamo);
 		
 		double saldo=prestamo.getSaldo();
 		
-		double pago1=pago;
+		String doc= Long.toString(prestamo.getDni());
 		
-//		String doc= Long.toString(prestamo.getDni());
-//				servicioRegistro.insertarIngresos(cuotaitem, confirm.getIdPrestamo(), doc);
-		
-		if(saldo<pago1) {
+		if(saldo<pago) {
 			return false;
 		}
-		if(saldo==pago1) {
+		if(saldo==pago) {
+			servicioRegistro.insertarIngresosPagoUnitario(pago, prestamo.getIdPrestamo(), doc);
 			prestamo.setSaldo(0.0);
 			prestamo.setEstado("pagado");
 			for(Cuota cuotaitem: listCuotas) {
@@ -128,26 +127,10 @@ public class ServicioCuotaImpl implements ServicioCuota{
 			}
 			return true;
 		}
-		if(saldo>pago1) {			
-			saldo-=pago1;
+		if(saldo>pago) {
+			servicioRegistro.insertarIngresosPagoUnitario(pago, prestamo.getIdPrestamo(), doc);
+			saldo-=pago;
 			prestamo.setSaldo(saldo);
-			//////////////////////////////////////////////////////////////////
-//			double interes=0.35;
-//			double meses=(double)listCuotas.size();
-//			double v=(1+(interes/12));
-//			double t=(-(meses/12)*12);
-//			double cuota=(saldo*(interes/12))/(1-Math.pow(v, t));
-//			
-//			cuota=Math.round(cuota*100d)/100d;//redondear a dos decimales
-//			
-//			for(Cuota cuotaitem:listCuotas){
-//				cuotaitem.setInteres(cuota*0.35);
-//				cuotaitem.setMonto(cuota);
-//				cuotaitem.setMontoTotal(cuota-cuotaitem.getInteres());//amortizacion
-//				
-//				servicioCuotaDao.modificarElCubierto(cuotaitem);
-//			}
-			/////////////////////////////////////////////////////////////////////////
 			int cuotas = listCuotas.size();
 			double porCientoInteres = prestamo.getInteres()/12;
 			double valor = saldo;

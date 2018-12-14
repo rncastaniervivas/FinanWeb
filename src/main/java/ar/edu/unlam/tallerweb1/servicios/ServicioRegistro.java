@@ -23,6 +23,8 @@ public interface ServicioRegistro {
 	
 	public Double montoCaja();
 
+	void insertarIngresosPagoUnitario(Double pago, Long idPrestamo, String nombreAfiliado);
+
 
 	
 	

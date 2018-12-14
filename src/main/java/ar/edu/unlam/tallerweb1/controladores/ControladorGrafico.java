@@ -25,7 +25,7 @@ public class ControladorGrafico {
 	
 	@RequestMapping(path="/graficos")
 	public ModelAndView mostrarTodosLosGraficos(){
-		
+
 		return new ModelAndView("graficos");
 	}
 	

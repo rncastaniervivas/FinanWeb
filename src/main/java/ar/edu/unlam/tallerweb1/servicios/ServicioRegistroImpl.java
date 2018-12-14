@@ -32,7 +32,7 @@ public class ServicioRegistroImpl implements ServicioRegistro {
 		Cuota miCuota=servicioCuotaDao.buscarCuota(cuotai);
 		Registro registroi=new Registro();
 		registroi.setCuota(miCuota.getIdCuota());
-		registroi.setIngreso(miCuota.getMonto());
+		registroi.setIngreso(fijarNumero(miCuota.getMonto(), 2) );
 		registroi.setPrestamo(idPrestamo);
 		registroi.setConcepto("cobro de cuotas");
 		registroi.setOrigen(nombreAfiliado);
@@ -43,15 +43,26 @@ public class ServicioRegistroImpl implements ServicioRegistro {
 	}
 
 	@Override
+	public void insertarIngresosPagoUnitario(Double pago,Long idPrestamo, String nombreAfiliado) {
+		Registro registroi=new Registro();
+		registroi.setCuota(0L);
+		registroi.setIngreso(fijarNumero(pago, 2));
+		registroi.setPrestamo(idPrestamo);
+		registroi.setConcepto("cobro unitario");
+		registroi.setOrigen(nombreAfiliado);		
+		registroi.setFecha(new Date());
+		servicioRegistroDao.agregarRegistro(registroi);
+
+	}
+	@Override
 	public void insertarEgresos(Cuota cuotae,Long idPrestamo,String nombreFinanciera) {
 		Cuota miCuota=servicioCuotaDao.buscarCuota(cuotae);
 		Registro registroe=new Registro();
 		registroe.setCuota(miCuota.getIdCuota());
-		registroe.setEgreso(miCuota.getMonto());
+		registroe.setEgreso(fijarNumero(miCuota.getMonto(), 2));
 		registroe.setPrestamo(idPrestamo);
 		registroe.setDestino(nombreFinanciera);
 		registroe.setConcepto("pago de cuotas a financiera");
-		
 		registroe.setFecha(new Date());
 		servicioRegistroDao.agregarRegistro(registroe);
 
@@ -71,7 +82,7 @@ public class ServicioRegistroImpl implements ServicioRegistro {
 			sumatoria+=i.getIngreso();
 			
 		}
-		
+		sumatoria=fijarNumero(sumatoria, 2);
 		return sumatoria;
 	}
 
@@ -82,7 +93,7 @@ public class ServicioRegistroImpl implements ServicioRegistro {
 		for(Registro i: egresos) {
 			sumatoria+=i.getEgreso();
 		}
-		
+		sumatoria=fijarNumero(sumatoria, 2);
 		return sumatoria;
 	}
 
@@ -96,7 +107,7 @@ public class ServicioRegistroImpl implements ServicioRegistro {
 	public Double montoCaja() {
 		Caja caja = servicioCajaDao.consultarCaja();
 		double montoCaja = caja.getMonto();
-		return montoCaja + this.montoDeIngresos()-this.montoDeEgresos();
+		return fijarNumero(montoCaja + this.montoDeIngresos()-this.montoDeEgresos(),2);
 	}
 
 	@Override
@@ -104,5 +115,12 @@ public class ServicioRegistroImpl implements ServicioRegistro {
 		
 		return servicioRegistroDao.consultarEgresos();
 	}
+	public static double fijarNumero(double numero, int digitos) {
+        double resultado;
+        resultado = numero * Math.pow(10, digitos);
+        resultado = Math.round(resultado);
+        resultado = resultado/Math.pow(10, digitos);
+        return  resultado;
+    }
 
 }
