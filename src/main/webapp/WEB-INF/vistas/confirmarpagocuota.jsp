@@ -7,7 +7,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Listar Cuotas</title>
-
 <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 <link href="css/xbootstrap.min.css" rel="stylesheet">
 <link href="css/xheroic-features.css" rel="stylesheet">
@@ -15,7 +14,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 <body>
-<script>
+	<script>
 		function PostForm() {
 			if (IsValid()) {
 				$("#lblErrorP").text("");
@@ -43,7 +42,33 @@
 			$("#divMessagesP").hide();
 		}
 	</script>
-<div class="container">
+		<script>
+		function PostFormCheck() {
+			if (IsValidCheck()) {
+				$("#lblErrorPCheck").text("");
+				document.forms["frmPrestamoCheck"].submit();
+			}
+		}
+		function IsValidCheck() {
+			HideDivMessagePCheck();
+			if (!($(".check").is(":checked"))) {
+				$("#lblErrorPCheck")
+						.text("Debe seleccionar alguna cuota a pagar.");
+				ShowDivMessagePCheck();
+				return false;
+			}
+			return true;
+		}
+		function ShowDivMessagePCheck() {
+			scroll(0, 0);
+			$("#divMessagesPCheck").show("slow", function() {
+			});
+		}
+		function HideDivMessagePCheck() {
+			$("#divMessagesPCheck").hide();
+		}
+	</script>
+	<div class="container">
 		<ul class="list-group">
 			<h3 class="list-group-item">Datos del Afiliado</h3>
 
@@ -80,7 +105,7 @@
 				<form:input path="idPrestamo" id="idPrestamo" type="text"
 					class="form-control" value="${prestamo.idPrestamo}"
 					style="display:none" />
-				<form:input path="saldo" id="saldo" type="text" class="form-control"/>
+				<form:input path="saldo" id="saldo" type="text" class="form-control" />
 			</div>
 			<div id="divMessagesP" style="display: none;">
 				<p align="left">
@@ -90,14 +115,15 @@
 				</div>
 			</div>
 			<div>
-				<button onclick="PostForm(); return false;" type="submit" class="btn btn-success">Pagar</button>
+				<button onclick="PostForm(); return false;" type="submit"
+					class="btn btn-success">Pagar</button>
 			</div>
 
 
 		</form:form>
 	</div>
 	<form:form action="totalapagarcuota" modelAttribute="confirm"
-		method="POST" role="form">
+		method="POST" role="form" name="frmPrestamoCheck">
 		<div class="container">
 			<table class="table">
 				<thead class="thead-light">
@@ -127,26 +153,34 @@
 							<td scope="row">${cuotasnopagas.fechaDeVencimiento}</td>
 							<td>${cuotasnopagas.monto}</td>
 							<td>Sin Pagar</td>
-							<td><input type="checkbox" id="check" class="" name="check"
+							<td><input type="checkbox" id="check" class="check" name="check"
 								value="${cuotasnopagas.idCuota}"></td>
 						</tr>
 					</c:forEach>
-
+					
 				</tbody>
 			</table>
+			<div id="divMessagesPCheck" style="display: none;">
+						<p align="left">
+						<div class="alert alert-danger" style="text-align: left;">
+							<label id="lblErrorPCheck"
+								style="font-size: 12px; color: firebrick; font-weight: bold; margin-left: 5px;"></label>
+						</div>
+					</div>
 		</div>
 		<input path="dni" type="text" id="dni" name="dni" class="form-control"
 			value="${afiliado.dni}" style="display: none" />
 		<input path="idPrestamo" type="text" id="idPrestamo" name="idPrestamo"
 			class="form-control" value="${prestamo.idPrestamo}"
 			style="display: none" />
-		<button type="submit" class="btn btn-success mb-2">Realizar
+
+		<button type="submit" class="btn btn-success mb-2" onclick="PostFormCheck(); return false;">Realizar
 			Pago</button>
 	</form:form>
 
 	<br>
 	<a href="javascript:window.history.go(-1);"><button
-			class="btn btn-primary btn-lg">Regresar</button></a>
+			class="btn btn-primary btn-lg" >Regresar</button></a>
 	<br>
 	<br>
 	<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg"
