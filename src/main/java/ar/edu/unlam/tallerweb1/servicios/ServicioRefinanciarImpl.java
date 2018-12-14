@@ -158,5 +158,17 @@ public class ServicioRefinanciarImpl implements ServicioRefinanciar{
         resultado = resultado/Math.pow(10, digitos);
         return resultado;
     }
+
+	@Override
+	public boolean esPrestamoRefinanciado(Long idPrestamoARef) {
+		Prestamo prestamo = servicioPrestamoDao.consultarUnPrestamo(idPrestamoARef);
+		System.out.println(idPrestamoARef);
+		if (prestamo.getEstado().contentEquals("refinanciado")) {
+			return true;
+		}else{
+			return false;
+		}
+	
+	}
 	
 }

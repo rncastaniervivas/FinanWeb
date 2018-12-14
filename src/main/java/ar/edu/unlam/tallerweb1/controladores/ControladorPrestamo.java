@@ -167,8 +167,8 @@ public class ControladorPrestamo {
 	public ModelAndView listaCuotasImpag(Long idPrestamo) {
 		ModelMap modelo=new ModelMap();
 		Prestamo prestamo = servicioPrestamo.consultarUnPrestamo(idPrestamo);
-		Afiliado afiliado = servicioAfiliado.consultarAfiliadoDni(prestamo.getDni());
-		if (prestamo.getEstado().contentEquals("refinanciado")) {
+		Afiliado afiliado = servicioAfiliado.consultarAfiliado(idPrestamo);
+		if (servicioRefinanciar.esPrestamoRefinanciado(idPrestamo)) {
 			modelo.put("afiliado", afiliado);
 			modelo.put("prestamo", prestamo);
 			return new ModelAndView("refinanciarerror",modelo);

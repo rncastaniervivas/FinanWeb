@@ -152,6 +152,7 @@ public class MockTestFinanWeb {
 		ControladorPrestamo controladorPrestamo = new ControladorPrestamo();
 		
 		Prestamo prestamoMock = mock(Prestamo.class);
+		Afiliado afiliadoMock = mock(Afiliado.class);
 		
 		ServicioAfiliado servicioAfiliadoMock = mock(ServicioAfiliado.class);
 		ServicioPrestamo servicioPrestamoMock = mock(ServicioPrestamo.class);
@@ -161,19 +162,21 @@ public class MockTestFinanWeb {
 		controladorPrestamo.setServicioAfiliado(servicioAfiliadoMock);
 		controladorPrestamo.setServicioRefinanciar(servicioRefinanciarMock);
 		
-		prestamoMock.setEstado("activo");
-		prestamoMock.setDni(9L);
 		
-		Long idPrestamo = 1L;
-		Long dni = 9L;
 		when(servicioPrestamoMock.consultarUnPrestamo(prestamoMock.getIdPrestamo())).thenReturn(prestamoMock);
-		when(servicioAfiliadoMock.consultarAfiliadoDni(dni)).thenReturn(null);
-		when(servicioRefinanciarMock.consultaCuota(idPrestamo)).thenReturn(null);
-		when(servicioRefinanciarMock.montoARefinanciar(idPrestamo)).thenReturn(null);
+		when(servicioAfiliadoMock.consultarAfiliado(prestamoMock.getIdPrestamo())).thenReturn(afiliadoMock);
+		when(servicioRefinanciarMock.esPrestamoRefinanciado(prestamoMock.getIdPrestamo())).thenReturn(true);
 		
-		ModelAndView modelo = controladorPrestamo.listaCuotasImpag(9L);
+		ModelAndView modelo = controladorPrestamo.listaCuotasImpag(afiliadoMock.getDni());
 		
-		//aca un assert  verificar que no exista esta cosa _> cuotas
+		assertThat(modelo.getModelMap().get("afiliado")).isEqualTo(afiliadoMock);
+		
+		assertThat(modelo.getModelMap().get("prestamo")).isEqualTo(prestamoMock);
+		
+		assertThat(modelo.getViewName()).isEqualTo("refinanciarerror");
 	}
 	
 }
+
+
+
