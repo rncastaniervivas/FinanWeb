@@ -67,27 +67,13 @@ public class ControladorAfiliado {
 		modelo.put("afiliado", afiliado);
 		return new ModelAndView("modificarafiliado", modelo);
 	}
-//	@RequestMapping(path="/modificarafiliado", method=RequestMethod.POST)
-//	public ModelAndView amodificar(@ModelAttribute("afiliado")Afiliado amAfiliado){
-//		ModelMap modelo=new ModelMap();
-//		Afiliado afiliado=new Afiliado();
-//		Afiliado amfinan=amAfiliado;
-//		modelo.put("afil", amfinan);
-//		modelo.put("afiliado", afiliado);
-//		return new ModelAndView("modificarfinanciera",modelo);
-//	}
-	
 	@RequestMapping(path="/amodificado", method=RequestMethod.POST)
 	public ModelAndView financieramodificada(@ModelAttribute("afiliado")Afiliado mafiliado) {
 		ModelMap modelo=new ModelMap();
 		Afiliado afiliado=new Afiliado();
 		modelo.put("afiliado", afiliado);
 		
-		if(servicioAfiliado.modificarAfiliado(mafiliado)==false) {
-		modelo.put("error","ya existe Afiliado");
-		modelo.put("afiliado", mafiliado);
-		return new ModelAndView ("modificarafiliado",modelo);
-		}
+		servicioAfiliado.modificarAfiliado(mafiliado);
 		
 		List<Afiliado> lista =servicioAfiliado.consultarAfiliado();
 		modelo.put("afiliados", lista);		

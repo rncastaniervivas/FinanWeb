@@ -8,7 +8,8 @@
 <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 <link href="css/xbootstrap.min.css" rel="stylesheet">
 <link href="css/xheroic-features.css" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Modificar afiliado</title>
 </head>
@@ -75,8 +76,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">Modificar afiliado</div>
 			<div class="panel-body">
-				<form:form 
-				role="form" action="amodificado" class="" method="POST"
+				<form:form role="form" action="amodificado" class="" method="POST"
 					modelAttribute="afiliado" name="frmAfiliado">
 
 					<form:input path="idAfiliado" id="idAfiliado" type="hidden"
@@ -96,12 +96,8 @@
 								value="${afili.apellido}" />
 						</div>
 					</div>
-					<div class="form-group">
-						  <label class="col-lg-2 control-label">Dni:</label>
-						  <div class="col-lg-10">
-						  	<form:input path="dni" id="dni" class="" type="text" value="${afili.dni}" />
-						  </div>
-					  </div>
+					<form:input path="dni" id="dni" class="" type="text"
+						value="${afili.dni}" style="display:none"/>
 			</div>
 
 			<div class="form-group">
@@ -128,16 +124,16 @@
 				</div>
 			</div>
 			<div id="divMessagesP" style="display: none;">
-					<p align="left">
-					<div class="alert alert-danger" style="text-align: left;">
-						<label id="lblErrorP"
-							style="font-size: 12px; color: firebrick; font-weight: bold; margin-left: 5px;"></label>
-					</div>
+				<p align="left">
+				<div class="alert alert-danger" style="text-align: left;">
+					<label id="lblErrorP"
+						style="font-size: 12px; color: firebrick; font-weight: bold; margin-left: 5px;"></label>
 				</div>
-					
-				<button onclick="PostForm(); return false;" type="submit"
-					class="btn btn-success">Modificar Afiliado</button>
-				<p>${error}</p>
+			</div>
+
+			<button onclick="PostForm(); return false;" type="submit"
+				class="btn btn-success">Modificar Afiliado</button>
+			<p>${error}</p>
 			</form:form>
 		</div>
 	</div>

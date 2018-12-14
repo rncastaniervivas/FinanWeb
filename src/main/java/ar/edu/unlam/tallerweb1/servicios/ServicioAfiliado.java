@@ -11,7 +11,7 @@ public interface ServicioAfiliado {
 	
 	boolean guardarAfiliado (Afiliado afiliado);
 	
-	boolean modificarAfiliado (Afiliado afiliado);
+	void modificarAfiliado (Afiliado afiliado);
 	
 	boolean eliminarAfiliado (Afiliado afiliado);
 	
