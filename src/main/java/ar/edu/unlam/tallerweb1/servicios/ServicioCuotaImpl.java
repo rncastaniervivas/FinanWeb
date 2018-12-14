@@ -1,7 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -23,10 +22,7 @@ public class ServicioCuotaImpl implements ServicioCuota{
 	private ServicioRegistro servicioRegistro;
 	@Inject
 	private PrestamoDao servicioPrestamoDao;
-	@Inject
-	private AfiliadoDao servicioAfiliadoDao;
-	@Inject
-	private FinancieraDao servicioFinancieraDao;
+
 	@Override
 	public Cuota consultarCuotaporId(Long idCuota){
 		return servicioCuotaDao.consultarCuotaporId(idCuota);

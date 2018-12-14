@@ -6,7 +6,6 @@ import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.test.annotation.Rollback;
@@ -19,6 +18,7 @@ import ar.edu.unlam.tallerweb1.servicios.*;
 
 public class MockTestFinanWeb {
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	@Transactional
 	@Rollback (true)
@@ -34,7 +34,8 @@ public class MockTestFinanWeb {
 		
 		Afiliado afiliadoMock=mock(Afiliado.class);
 		Financiera financieraMock=mock(Financiera.class);
-		List<Prestamo> prestamosMock=new ArrayList<Prestamo>();
+		
+		List<Prestamo> prestamosMock=mock(List.class);
 		
 		double valorPrestamoDisponible = 1000.0;
 		Integer valor = 500;
@@ -56,6 +57,7 @@ public class MockTestFinanWeb {
 		assertThat(modelo.getModelMap().get("prestamos")).isEqualTo(prestamosMock);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	@Transactional
 	@Rollback (true)
@@ -148,6 +150,7 @@ public class MockTestFinanWeb {
 		assertThat(modelo.getViewName()).isEqualTo("refinanciarerror");
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	@Transactional
 	@Rollback(true)
@@ -159,8 +162,6 @@ public class MockTestFinanWeb {
 		
 		List<Financiera> financierasMock = mock(List.class);
 		List<Prestamo> prestamosMock = mock(List.class);
-		
-		afiliadoMock.setAntiguedad("3");
 		
 		ServicioAfiliado servicioAfiliadoMock = mock(ServicioAfiliado.class);
 		ServicioPrestamo servicioPrestamoMock = mock(ServicioPrestamo.class);
@@ -181,7 +182,13 @@ public class MockTestFinanWeb {
 		
 		assertThat(modelo.getViewName()).isEqualTo("nuevoprestamo");
 		
+		assertThat(modelo.getModelMap().get("disponible")).isEqualTo(prestamoDisponible);
 		
+		assertThat(modelo.getModelMap().get("prestamos")).isEqualTo(prestamosMock);
+		
+		assertThat(modelo.getModelMap().get("afiliado")).isEqualTo(afiliadoMock);
+		
+		assertThat(modelo.getModelMap().get("financieras")).isEqualTo(financierasMock);
 	}
 	
 	

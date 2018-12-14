@@ -32,7 +32,7 @@ public class ServicioRegistroImpl implements ServicioRegistro {
 		Cuota miCuota=servicioCuotaDao.buscarCuota(cuotai);
 		Registro registroi=new Registro();
 		registroi.setCuota(miCuota.getIdCuota());
-		registroi.setIngreso(miCuota.getMontoTotal());
+		registroi.setIngreso(miCuota.getMonto());
 		registroi.setPrestamo(idPrestamo);
 		registroi.setConcepto("cobro de cuotas");
 		registroi.setOrigen(nombreAfiliado);

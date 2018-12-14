@@ -1,15 +1,12 @@
 package ar.edu.unlam.tallerweb1.dao;
 
 import ar.edu.unlam.tallerweb1.modelo.Afiliado;
-import ar.edu.unlam.tallerweb1.modelo.Prestamo;
-import ar.edu.unlam.tallerweb1.servicios.ServicioAfiliado;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;

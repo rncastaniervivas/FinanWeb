@@ -2,7 +2,6 @@ package ar.edu.unlam.tallerweb1.controladores;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -20,15 +19,6 @@ public class ControladorGrafico {
 	
 	@Inject
 	private ServicioPrestamo servicioPrestamo;
-	
-	@Inject
-	private ServicioCuota servicioCuota;
-	
-	@Inject
-	private ServicioAfiliado servicioAfiliado;
-	
-	@Inject
-	private ServicioRefinanciar servicioRefinanciar;
 	
 	@Inject
 	private ServicioRegistro servicioRegistro;

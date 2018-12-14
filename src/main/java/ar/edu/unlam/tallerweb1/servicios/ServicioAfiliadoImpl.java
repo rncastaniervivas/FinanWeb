@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ar.edu.unlam.tallerweb1.dao.AfiliadoDao;
 import ar.edu.unlam.tallerweb1.dao.PrestamoDao;
 import ar.edu.unlam.tallerweb1.modelo.Afiliado;
-import ar.edu.unlam.tallerweb1.modelo.Financiera;
 
 @Service("servicioAfiliado")
 @Transactional

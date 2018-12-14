@@ -1,6 +1,5 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
-import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;

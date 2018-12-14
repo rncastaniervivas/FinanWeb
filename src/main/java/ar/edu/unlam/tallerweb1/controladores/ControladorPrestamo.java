@@ -11,7 +11,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Afiliado;
@@ -115,7 +114,7 @@ public class ControladorPrestamo {
 	@RequestMapping(path = "/pagarporvalor", method=RequestMethod.POST)
 	public ModelAndView pagarporvalor(@ModelAttribute("confirm") Prestamo prestamo) {
 		
-		boolean result=servicioCuota.pagarporinput(prestamo.getSaldo(),prestamo.getIdPrestamo());
+		servicioCuota.pagarporinput(prestamo.getSaldo(),prestamo.getIdPrestamo());
 		return new ModelAndView("redirect:/listarprestamos");
 	}
 	

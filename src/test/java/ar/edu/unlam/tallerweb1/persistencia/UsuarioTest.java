@@ -1,9 +1,6 @@
 package ar.edu.unlam.tallerweb1.persistencia;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.hibernate.SessionFactory;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

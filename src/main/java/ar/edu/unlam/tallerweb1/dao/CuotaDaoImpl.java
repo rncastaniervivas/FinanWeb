@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Cuota;
 import ar.edu.unlam.tallerweb1.modelo.Financiera;
-import ar.edu.unlam.tallerweb1.modelo.Prestamo;
 
 @Repository("CuotaDao")
 public class CuotaDaoImpl implements CuotaDao{
@@ -98,7 +97,6 @@ public class CuotaDaoImpl implements CuotaDao{
 				.list());
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public Cuota consultarCuotaporId(Long idCuota) {
 		final Session session = sessionFactory.getCurrentSession();
