@@ -10,7 +10,13 @@
     	<link href="css/xheroic-features.css" rel="stylesheet">
 </head>
 <body>
-			<div id="canvas-container" style="width:50%;">
+
+	<jsp:include page="header.jsp" /></br></br>
+		
+	<div class="container">
+	
+
+		<div id="canvas-container" style="width:50%;">
 		<canvas id="bar-chart" width="500" height="350"></canvas>
 		</div>
 		<!-- Placed at the end of the document so the pages load faster -->
@@ -48,9 +54,14 @@
 	});
 	</script>
 
-<br>
-		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
-		<br>
+	<br>
+	<a href="javascript:window.history.go(-1);"><button class="btn btn-primary btn-lg">Regresar</button></a>
+	<br>
+	<br>
+	<!-- a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a-->
+	<br>
+	
+	</div>
 
 </body>
 </html>

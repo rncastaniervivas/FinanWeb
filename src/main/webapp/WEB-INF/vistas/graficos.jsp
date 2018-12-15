@@ -14,7 +14,7 @@
 <body>
 
 	<jsp:include page="header.jsp" />
-	<div>
+	<div class="container">
 		<h1 class="text-center">Gráficos de préstamos</h1>
 		<br><br>
 			<form action="top5afiliados" method="POST" >
@@ -35,7 +35,7 @@
 			<br>
 	</div>
 	
-	<div>
+	<div class="container">
 		<h1 class="text-center">Gráficos de caja</h1>
 		<br>
 			<form action="graficocaja" method="POST" >
@@ -47,8 +47,8 @@
 			</form>
 	</div>	
 	
-		<br>
+		<!-- br>
 		<a href="javascript:window.history.go(-1);"><button class="btn btn-primary btn-lg">Regresar</button></a>
-		<br>
+		<br-->
 </body>
 </html>
