@@ -22,6 +22,10 @@
 						</br>
 						<button class="btn btn-primary" type="submit">Nuevo afiliado</button>
 					</form:form>
+					<c:if test="${not empty error}">
+				        <h4><span>${error}</span></h4>
+				        <br>
+			        </c:if>
 					
 				</div>
 				<div class="col-md-4">
@@ -79,11 +83,6 @@
 			</table>
 		</div>
 		<br>
-		
-		<c:if test="${not empty error}">
-	        <h4><span>${error}</span></h4>
-	        <br>
-        </c:if>
         	
 		<div class="container"></br>
 			<a href="javascript:window.history.go(-1);"><button class="btn btn-primary btn-lg">Regresar</button></a>
