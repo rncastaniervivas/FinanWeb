@@ -14,6 +14,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 <body>
+	
+	<jsp:include page="header.jsp" /><br>
+
 	<script>
 		function PostForm() {
 			if (IsValid()) {
@@ -72,40 +75,46 @@
 		<ul class="list-group">
 			<h3 class="list-group-item">Datos del Afiliado</h3>
 
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon">Nombre:</span>
-				<li class="list-group-item">${afiliado.nombre}</li>
+			<div class="list-group-item">
+				<span ><b>Nombre:</b> ${afiliado.nombre}</span>
 			</div>
 
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon">Apellido:</span>
-				<li class="list-group-item">${afiliado.apellido}</li>
+			<div class="list-group-item">
+				<span ><b>Apellido:</b> ${afiliado.apellido}</span>
 			</div>
 
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon">Dni:</span>
-				<li class="list-group-item">${afiliado.dni}</li>
+			<div class="list-group-item">
+				<span ><b>Dni:</b> ${afiliado.dni}</span>
 			</div>
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon">Valor Total del prestamo:</span>
-				<li class="list-group-item">${prestamo.valor}</li>
-			</div>
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon">Valor restante a pagar:</span>
-				<li class="list-group-item">${prestamo.saldo}</li>
+			<!-- div class="list-group-item">
+				<span ><b>Valor Total del prestamo:</b> ${prestamo.valor}</span>
+			</div-->
+			<div class="list-group-item">
+				<span ><b>Valor restante a pagar:</b> ${prestamo.saldo} $</span>
 			</div>
 		</ul>
-	</div>
+	</div></br>
+	
 	<h1 class="text-center">LISTA DE CUOTAS</h1>
-	<div>
+	
+	<div class="container">
 		<form:form role="form" action="pagarporvalor" method="Post"
 			modelAttribute="prestamo" name="frmPrestamo">
-			<div class="form-group">
-				<label>Insertar valor a pagar:</label>
+			<div class="form-row">
+			  
+				<label class="form-group col-md-12">Ingrese el valor a pagar:</label>
+				<div class="form-group col-md-2">
 				<form:input path="idPrestamo" id="idPrestamo" type="text"
-					class="form-control" value="${prestamo.idPrestamo}"
+					class="form-control "
 					style="display:none" />
 				<form:input path="saldo" id="saldo" type="text" class="form-control" />
+  			  </div>
+  			  
+  			  <div class="form-group col-md-4">
+				<button onclick="PostForm(); return false;" type="submit"
+					class="btn btn-success">Pagar amortizacion</button>
+			  </div>
+  			  
 			</div>
 			<div id="divMessagesP" style="display: none;">
 				<p align="left">
@@ -114,12 +123,7 @@
 						style="font-size: 12px; color: firebrick; font-weight: bold; margin-left: 5px;"></label>
 				</div>
 			</div>
-			<div>
-				<button onclick="PostForm(); return false;" type="submit"
-					class="btn btn-success">Pagar</button>
-			</div>
-
-
+			
 		</form:form>
 	</div>
 	<form:form action="totalapagarcuota" modelAttribute="confirm"
@@ -151,7 +155,7 @@
 					<c:forEach items="${cuotasnopagas}" var="cuotasnopagas">
 						<tr>
 							<td scope="row">${cuotasnopagas.fechaDeVencimiento}</td>
-							<td>${cuotasnopagas.monto}</td>
+							<td>${cuotasnopagas.monto} $</td>
 							<td>Sin Pagar</td>
 							<td><input type="checkbox" id="check" class="check" name="check"
 								value="${cuotasnopagas.idCuota}"></td>
@@ -167,25 +171,29 @@
 								style="font-size: 12px; color: firebrick; font-weight: bold; margin-left: 5px;"></label>
 						</div>
 					</div>
-		</div>
-		<input path="dni" type="text" id="dni" name="dni" class="form-control"
-			value="${afiliado.dni}" style="display: none" />
-		<input path="idPrestamo" type="text" id="idPrestamo" name="idPrestamo"
-			class="form-control" value="${prestamo.idPrestamo}"
-			style="display: none" />
-
-		<button type="submit" class="btn btn-success mb-2" onclick="PostFormCheck(); return false;">Realizar
-			Pago</button>
+		
+			<input path="dni" type="text" id="dni" name="dni" class="form-control"
+				value="${afiliado.dni}" style="display: none" />
+			<input path="idPrestamo" type="text" id="idPrestamo" name="idPrestamo"
+				class="form-control" value="${prestamo.idPrestamo}"
+				style="display: none" />
+	
+			<button type="submit" class="btn btn-success mb-2" onclick="PostFormCheck(); return false;">Realizar
+				Pago</button>
+		</div>	
 	</form:form>
-
-	<br>
-	<a href="javascript:window.history.go(-1);"><button
-			class="btn btn-primary btn-lg" >Regresar</button></a>
-	<br>
-	<br>
-	<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg"
-			type="submit">Inicio</button></a>
-	<br>
+	
+	<div class="container">
+		<br>
+		<a href="javascript:window.history.go(-1);"><button
+				class="btn btn-primary btn-lg" >Regresar</button></a>
+		<br>
+		<br>
+		<!-- a href="/FinanWeb/home"><button class="btn btn-primary btn-lg"
+				type="submit">Inicio</button></a>
+		<br-->
+	</div>
+	
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

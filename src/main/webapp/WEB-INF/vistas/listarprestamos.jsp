@@ -23,7 +23,8 @@
 			  <thead class="thead-light">
 			    <tr>
 			      <th scope="col">DNI Afiliado</th>
-			      <th scope="col">Valor Del Préstamo</th>
+			      <th scope="col">Préstamo</th>
+			      <th scope="col">Saldo</th>
 			      <th scope="col">Cuotas</th>
 			      <th scope="col">Intereses</th>
 			      <th scope="col">Estado</th>
@@ -36,9 +37,10 @@
 				  <tbody>
 				    <tr>
 				      <th scope="row">${prestamos.dni}</th>
-				      <th>${prestamos.valor}</th>
+				      <th>${prestamos.valor} $</th>
+				      <th>${prestamos.saldo} $</th>
 				      <td>${prestamos.cuotas}</td>
-				      <td>${prestamos.interes}</td>
+				      <td>${prestamos.interes*100} %</td>
 				      <td>${prestamos.estado}</td>
 				      <!-- >td><form action="refinanciar" method="POST" >
 				      	  <button type="submit" class="btn btn-info ${prestamos.estado}" name="idPrestamo" value="${prestamos.idPrestamo}" >Refinanciar</button>

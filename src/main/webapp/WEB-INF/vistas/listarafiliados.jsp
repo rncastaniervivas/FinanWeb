@@ -59,7 +59,7 @@
 				      <td scope="col">${lista.nombre}</td>
 				      <td scope="col">${lista.apellido}</td>
 				      <td scope="col">${lista.dni}</td>
-				      <td scope="col">${lista.antiguedad}</td>
+				      <td scope="col">${lista.antiguedad} años</td>
 				      <td scope="col">${lista.sueldo}</td>
 				      <td scope="row">
 				      	<form:form action="eliminarafiliado" method="POST" modelAttribute="afiliado">

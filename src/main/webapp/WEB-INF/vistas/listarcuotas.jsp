@@ -58,7 +58,7 @@
 			  <% int cuotas = 0;%>
 			  <c:forEach items="${cuotas}" var="cuota">
 				  <tbody>
-				    <tr class="table-danger">
+				    <tr class="table-success">
 				      <th scope="row">${cuota.idCuota}</th>
 				      <td>${cuota.fechaDeVencimiento}</td>
 				      <td>${cuota.interes}</td>
@@ -70,19 +70,22 @@
 			  </c:forEach>
 			</table>
 		</div>
-		<form action="hacer-refinanciacion" method="POST">
-			<input type="hidden" name="cuotas" value="<%= cuotas %>">
-			<input type="hidden" name="idPrestamoARef" value="${prestamoARef.idPrestamo}">
-			<input type="hidden" name="dni" value="${afiliado.dni}">
-			<button type="submit" class="btn btn-success" name="refinanciar">Aceptar Refinanciacion</button>
-		</form>
 		
-		<br>
-		<a href="javascript:window.history.go(-1);"><button class="btn btn-primary btn-lg">Regresar</button></a>
-		<br>
-		<br>
+		<div class="container">
+			<form action="hacer-refinanciacion" method="POST">
+				<input type="hidden" name="cuotas" value="<%= cuotas %>">
+				<input type="hidden" name="idPrestamoARef" value="${prestamoARef.idPrestamo}">
+				<input type="hidden" name="dni" value="${afiliado.dni}">
+				<button type="submit" class="btn btn-success" name="refinanciar">Aceptar Refinanciacion</button>
+			</form>
+		
+			<br>
+			<a href="javascript:window.history.go(-1);"><button class="btn btn-primary btn-lg">Regresar</button></a>
+			<br><br><br>
+		</div>
+		<!-- br>
 		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
-		<br>
+		<br-->
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
 		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>

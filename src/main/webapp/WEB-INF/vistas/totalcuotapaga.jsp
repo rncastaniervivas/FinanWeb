@@ -13,31 +13,30 @@
 	</head>
 	<body>
 		
+		<jsp:include page="header.jsp" /></br>
+		
 		<div class="container">
 			<ul class="list-group">
 				<h3 class="list-group-item">Datos del Afiliado</h3>
 				
-				<div class="input-group input-group-sm">
-  					<span class="input-group-addon">Nombre:</span>
-  					<li class="list-group-item">${afiliado.nombre}</li>
+				<div class="list-group-item">
+  					<span ><b>Nombre:</b> ${afiliado.nombre}</span>
 				</div>
 				
-				<div class="input-group input-group-sm">
-  					<span class="input-group-addon">Apellido:</span>
-  					<li class="list-group-item">${afiliado.apellido}</li>
+				<div class="list-group-item">
+  					<span ><b>Apellido:</b> ${afiliado.apellido}</span>
 				</div>
 				
-				<div class="input-group input-group-sm">
-  					<span class="input-group-addon">Dni:</span>
-  					<li class="list-group-item">${afiliado.dni}</li>
+				<div class="list-group-item">
+  					<span ><b>Dni:</b> ${afiliado.dni}</span>
 				</div>
-				<div class="input-group input-group-sm">
-  					<span class="input-group-addon">Valor Total del prestamo:</span>
-  					<li class="list-group-item">${prestamo.valor}</li>
+				<div class="list-group-item">
+  					<span ><b>Valor Total del prestamo:</b> ${prestamo.valor}</span>
 				</div>
 			</ul>
-		</div>
-		<form:form action="finalizarpagocuota" modelAttribute="confirm" method="POST" role="form">
+		</div></br>
+		
+	<form:form action="finalizarpagocuota" modelAttribute="confirm" method="POST" role="form">
 		<div class="container">
 			<h1 class="text-center">Lista de préstamos</h1>
 			<table class="table">
@@ -65,22 +64,26 @@
 				  <td>${totalcuota}</td>
 				  </tbody>
 			</table>
+		
+			<input path="dni" type="text" id="dni" name="dni"class="form-control" value="${afiliado.dni}" style="display:none"/>
+			<input path="idPrestamo" type="text" id="idPrestamo" name="idPrestamo"class="form-control" value="${prestamo.idPrestamo}" style="display:none"/>
+					<c:if test="${not empty error}">
+				        <h4><span>${error}</span></h4>
+				        <br>
+			        </c:if>	
+			<button type="submit" class="btn btn-success mb-2">Confirmar Pago</button>
 		</div>
-		<input path="dni" type="text" id="dni" name="dni"class="form-control" value="${afiliado.dni}" style="display:none"/>
-		<input path="idPrestamo" type="text" id="idPrestamo" name="idPrestamo"class="form-control" value="${prestamo.idPrestamo}" style="display:none"/>
-				<c:if test="${not empty error}">
-			        <h4><span>${error}</span></h4>
-			        <br>
-		        </c:if>	
-		<button type="submit" class="btn btn-success mb-2">Confirmar Pago</button>
-</form:form>
+	</form:form>
+	
+	<div class="container">
 		<br>
 		<a href="javascript:window.history.go(-1);"><button class="btn btn-primary btn-lg">Regresar</button></a>
 		<br>
 		<br>
-		<a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
-		<br>
-
+		<!-- a href="/FinanWeb/home"><button class="btn btn-primary btn-lg" type ="submit">Inicio</button></a>
+		<br-->
+	</div>
+	
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
 		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
