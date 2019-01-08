@@ -12,6 +12,9 @@
 
 </head>
 <body class="container">
+
+	<jsp:include page="header.jsp" /></br>
+	
 	<div class="page-header">
 		<h1>Pagar a Financieras</h1>
 	</div>

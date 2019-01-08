@@ -49,22 +49,20 @@
 			<form:input type="hidden" path="idAfiliado"
 				value="${afiliado.idAfiliado}" />
 			<div class="form-row">
-				<div class="form-group col-md-6">
+				<div class="form-group col-md-12">
 					<label>Nombre</label> <input type="text" class="form-control"
 						value="${afiliado.nombre}" id="inputNombre" disabled>
 				</div>
-				<div class="form-group col-md-6">
+				<div class="form-group col-md-12">
 					<label>Apellido</label> <input type="text" class="form-control"
 						value="${afiliado.apellido}" id="inputApellido" disabled>
 				</div>
-				<div class="form-group col-md-6">
+				<div class="form-group col-md-12">
 					<label>Prestamo maximo disponible</label> <input type="text"
 						class="form-control" value="${disponible}" id="inputApellido"
 						disabled>
 				</div>
-				<div class="form-group col-md-4"></div>
-				<div class="form-group col-md-4"></div>
-				<div class="form-group col-md-6">
+				<div class="form-group col-md-12">
 					<label class="col-lg-2 control-label">Cuotas</label>
 					<div class="col-lg-10">
 						<select name="cuotas" id="cuotas" class="form-control">
@@ -80,9 +78,7 @@
 					<label>Nuevo Monto</label> <input id="valor" name="valor"
 						type="text" class="form-control" id="inputMonto">
 				</div>
-				<div class="form-group col-md-6"></div>
-				<div class="form-group col-md-6"></div>
-				<div class="form-group col-md-6">
+				<div class="form-group col-md-12">
 					<label class="col-lg-2 control-label">Financieras</label>
 					<div class="col-lg-10">
 						<select name="nombreF" id="nombreF" class="form-control">
@@ -113,8 +109,7 @@
 
 
 				<div class="form-group col-md-4">
-					<button class="btn btn-info" type="submit"
-						onclick="PostForm(); return false;">Dar Prestamo</button>
+					<button class="btn btn-info" type="submit">Dar Prestamo</button>
 				</div>
 			</div>
 		</form:form>

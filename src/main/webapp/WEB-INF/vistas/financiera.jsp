@@ -56,6 +56,7 @@
 						<form:input path="montoCapital" id="montoCapital" readonly="readonly" type="hidden" value="${lista.montoCapital}" />
 							<button class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-remove"></span> eliminar</button>
 							<button class="btn btn-info" type="submit" formaction="modificarfinanciera"><span class="glyphicon glyphicon-align-justify"></span> modificar</button>
+							<button class="btn btn-success" type="submit" formaction="pagarfinancieras"><span class=" glyphicon glyphicon-align-justify"></span> pagar</button>
 								</form:form>
 								</th>
 				    </tr>
